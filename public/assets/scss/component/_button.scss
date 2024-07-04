@@ -1,0 +1,147 @@
+.btn-icon-list {
+    padding: 15px 25px;
+    border-radius: 9px;
+    background-color: $black2;
+    color: $white ;
+    display: inline-block;
+    font-family: var(--font-main-family);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18.9px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+    & i {
+        margin-left: 12px;
+        display: inline-block;
+    }
+
+    &:hover {
+        color: $white;
+        background-color: $primary;
+    }
+}
+
+.btn-sell {
+    padding: 22px 32px;
+    background-color: $primary;
+    color: $white;
+    display: inline-block;
+    font-family: var(--font-btn-family);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20.8px;
+    text-transform: uppercase;
+
+    &:hover {
+        background-color: $white;
+        color: $primary;
+    }
+}
+
+.btn-read-more {
+    & .more-link {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 22px;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: $btn-blog;
+
+        & i {
+            margin-left: 15px;
+            display: inline-block;
+        }
+
+        &:hover {
+            & i {
+                animation: 0.3s link-icon linear;
+            }
+        }
+
+        &:hover {
+            color: $primary;
+        }
+    }
+}
+
+
+.btn-main {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    border-radius: 5px;
+
+    & .button_main_inner {
+        display: inline-block;
+        background: $primary;
+        color: $white;
+        font-size: 16px;
+        font-weight: normal;
+        text-align: center;
+        border-radius: 3px;
+        transition: 400ms;
+        padding: 15px 44px;
+
+        &:hover {
+            color: $white;
+            background: $black2 ;
+        }
+
+        & span {
+            position: relative;
+            z-index: 100;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: capitalize;
+
+            & i {
+                color: $white !important;
+                margin-left: 10px;
+
+            }
+
+        }
+
+    }
+
+}
+
+
+.btn-video {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+    border-radius: 100%;
+    position: relative;
+    cursor: pointer;
+
+    & i {
+        color: $primary;
+        font-size: 19px;
+    }
+
+    &::before {
+        content: "";
+        background-color: $white;
+        position: absolute;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+        pointer-events: none;
+        -webkit-animation: dot-animation 2s infinite;
+        animation: dot-animation 2s infinite;
+    }
+}

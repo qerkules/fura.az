@@ -1,0 +1,205 @@
+.footer-top {
+    padding-bottom: 34px;
+    & .title-footer-top {
+        color: $white;
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 60.48px;
+    }
+
+    & .icon-ft {
+        position: absolute;
+        width: auto;
+        right: 17%;
+        top: 70%;
+    }
+}
+
+.footer-main {
+    padding-top: 64.48px;
+    padding-bottom: 69.15px;
+    border-top: solid 1px $line3;
+    border-bottom: solid 1px $line3;
+    padding-left: 11px;
+    padding-right: 15px;
+
+    & .widget-info {
+        img {
+            width: 123px;
+            height: auto;
+            margin-bottom: 20.8px;
+            margin-left: 5px;
+        }
+
+        p {
+            color: $white2;
+            line-height: 29.5px;
+            margin-bottom: 19.5px;
+            margin-right: -3px;
+        }
+
+        ul {
+            li {
+                display: flex;
+                align-content: center;
+                align-items: flex-start;
+
+                i {
+                    color: $primary;
+                    width: 36px;
+                    margin-top: 7px;
+                }
+
+                p {
+                    margin-bottom: 9px;
+                    text-transform: capitalize;
+                    color: $white2;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    & .widget-menu {
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: $white2;
+            margin-bottom: 19.4px;
+            line-height: 27.72px;
+            margin-top: 6px;
+        }
+
+        ul.box-menu {
+            li {
+                a {
+                    color: $white2;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 42px;
+                    position: relative;
+
+                    &:hover {
+                        color: $primary;
+                        &::before {
+                            transform: scale3d(1, 1, 1);
+                        }
+                    }
+                    &::before {
+                        content: "";
+                        width: 100%;
+                        height: 1px;
+                        position: absolute;
+                        left: 0px;
+                        bottom: -10%;
+                        background: $primary;
+                        transition: transform 0.5s ease 0s;
+                        transform: scale3d(0, 1, 1);
+                        transform-origin: 0px 50%;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+    .widget-form {
+        & .email-footer-form {
+            margin-top: 65px;
+
+            & .tb-my-input {
+                background-color: transparent !important;
+                border: unset;
+                padding: 0px 30px 15px 0px;
+                border-bottom: 1px solid #2C2E34;
+                color: $text-input2 !important;
+                font-size: 17px;
+                font-weight: 400;
+                height: 45px;
+                border-radius: unset;
+            }
+
+            & .text-wrap {
+                position: relative;
+                margin-bottom: 21px;
+
+                & .btn-submit-email {
+                    display: inline-block;
+                    background-color: transparent;
+                    position: absolute;
+                    right: 0;
+                    width: auto;
+                    top: 0;
+                    padding: 5px;
+
+                    & i {
+                        color: $white2;
+                        font-size: 20px;
+                    }
+                }
+            }
+
+            & p {
+                color: $white2;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 42px;
+                margin-left: 7px;
+            }
+
+        }
+
+    }
+
+}
+.footer-bottom {
+    padding-top: 25px;
+    padding-bottom: 22px;
+    align-items: center;
+    & .bottom-bar-menu{
+        @include flex-end;
+        gap: 35px;
+
+        & a {
+            color: $text-footer-bt;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 26px;
+            &:hover{
+                color: $primary
+            }
+        }
+
+    }
+    .coppy-right {
+        font-weight: 500;
+        color: $text-footer-bt;
+        & a{
+            color: $text-footer-bt;
+
+            &:hover{
+                color: $primary
+            }
+        }
+    }
+
+}
+.shape-left {
+    width:50%;
+    position: absolute;
+    height:auto;
+    left: -37%;
+    bottom: -19%;
+}
+.shape-right {
+    width:46%;
+    position: absolute;
+    height: auto;
+    right: -32%;
+    bottom: -12%;
+}

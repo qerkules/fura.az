@@ -1,0 +1,95 @@
+.icon-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    height: 100%;
+    & li {
+        &:not(:first-child) {
+            margin-left: 20px;
+        }
+
+        & a>i {
+            color: $white;
+
+            &:hover {
+                color: $black;
+            }
+        }
+    }
+}
+
+ul.social-icon {
+    @include flex-center;
+
+    & li {
+        & a {
+            & i {
+                color: $white2;
+                font-size: 16px;
+                width: 40px;
+                height: 40px;
+                background-color: rgba(255, 255, 255, 0.04);
+                text-align: center;
+                line-height: 40px;
+                border-radius: 50%;
+                margin: 0 10px;
+                display: block;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $primary;
+                }
+
+            }
+        }
+    }
+}
+
+.icon-share {
+    & li>a>i {
+        background-color: $bg-icon-2 !important;
+        color: $black !important;
+        margin: 0 5px !important;
+
+        &:hover {
+            color: $white !important;
+            background-color: $primary !important;
+        }
+    }
+}
+
+.social-blog-dt ul {
+    @include flex-center;
+
+    & li {
+        & a {
+            & i {
+                color: $text-icon;
+                font-size: 16px;
+                width: 45px;
+                height: 43px;
+                background-color: transparent;
+                text-align: center;
+                line-height: 43px;
+                border: 1px solid $border4 ;
+                margin: 0 7px;
+                display: block;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $primary;
+                    color: $white;
+                }
+
+            }
+        }
+    }
+}

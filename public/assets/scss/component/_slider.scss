@@ -1,0 +1,646 @@
+/*------------ Slider ---------------- */
+.widget-tf-slider {
+    position: relative;
+    overflow: hidden;
+
+    & .slider-wrap {
+
+        & .tf-slide-item {
+            & .slide-item-image {
+                & img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    object-fit: cover;
+                }
+
+                & .overlay {
+                    @include absolute;
+                    background-color: rgba(3, 14, 111, 0.23);
+                }
+            }
+
+            & .slide-item-content {
+                display: flex;
+                justify-content: space-between;
+                padding-top: 93px;
+                padding-bottom: 165px;
+                padding-left: 14%;
+                position: relative;
+                z-index: 1;
+
+                &>.box {
+                    position: absolute;
+                    left: 8.5%;
+                    rotate: -90deg;
+                    top: 0;
+                    bottom: 0;
+                    display: flex;
+                    width: 100%;
+                    max-width: 615px;
+                    justify-content: space-between;
+                    z-index: -1;
+
+                    & span {
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 20.16px;
+                        letter-spacing: 0.03em;
+                        color: $white;
+                    }
+                }
+
+
+                & .slide-content {
+                    max-width: 550px;
+                    width: 100%;
+                    padding-top: 129px;
+
+                    & .sub-title {
+                        font-size: 16px;
+                        font-weight: 700;
+                        line-height: 30px;
+                        letter-spacing: 0.11em;
+                        color: $white;
+                        text-transform: uppercase;
+                        position: relative;
+                        display: inline-block;
+                        margin-bottom: 8px;
+                        padding-left: 5px;
+
+                        &::after {
+
+                            position: absolute;
+                            content: '';
+                            bottom: 1px;
+                            left: 0;
+                            right: 0;
+                            background-color: rgba(255, 255, 255, 0.19);
+                            width: 100%;
+                            height: 2px;
+                        }
+                    }
+
+                    & .title-slide {
+                        font-size: 76px;
+                        line-height: 83px;
+                        text-transform: capitalize !important;
+                        color: $white;
+                        margin-bottom: 28px;
+                    }
+
+                    & .description {
+                        font-size: 18px;
+                        line-height: 32px;
+                        font-weight: 400;
+                        color: $white;
+                        margin-bottom: 40px;
+                        text-transform: capitalize;
+                        margin-left: 5px;
+                        letter-spacing: 0.005em;
+
+                    }
+
+                    & .box {
+                        display: flex;
+                        align-items: center;
+                        padding-left: 5px;
+                    }
+                }
+
+
+                & .slide-image {
+                    position: relative;
+
+                    & .icon-shape {
+                        position: absolute;
+                        top: 29%;
+                        bottom: 0;
+                        left: -33px;
+                        width: 65px;
+                        height: auto;
+                    }
+
+                    & .box-car {
+                        position: relative;
+
+                        & img {
+                            max-width: 963px;
+                            width: 100%;
+                            margin-right: -29px;
+
+                        }
+
+                        & .dot-car {
+
+
+                            & .dot {
+                                position: absolute;
+                                cursor: pointer;
+                                display: block;
+                                width: max-content;
+                                left: 32.9%;
+                                bottom: 15.1%;
+
+
+
+                                & i {
+                                    font-size: 15px;
+                                    color: $primary;
+                                    padding: 15px;
+                                    background-color: $white;
+                                    border-radius: 100%;
+                                    display: inline-block;
+                                    -webkit-transition: -webkit-transform .5s ease-in-out;
+                                    transition: transform .5s ease-in-out;
+
+                                    &.active {
+                                        transform: rotate(45deg);
+                                    }
+                                }
+
+                                & .content-price {
+                                    background-color: rgba(0, 0, 0, 0.95);
+                                    padding: 32px;
+                                    max-width: 413px;
+                                    width: max-content;
+                                    position: absolute;
+                                    top: -88%;
+                                    left: 150px;
+                                    visibility: hidden;
+                                    opacity: 0;
+                                    webkit-transition: all 0.3s ease;
+                                    -moz-transition: all 0.3s ease;
+                                    -ms-transition: all 0.3s ease;
+                                    -o-transition: all 0.3s ease;
+                                    transition: all 0.3s ease;
+
+                                    &.active {
+                                        visibility: visible !important;
+                                        opacity: 1 !important;
+                                        left: 75px;
+                                    }
+
+
+                                    & .proflile {
+                                        margin-bottom: 17px;
+                                        @include space-between;
+
+                                        & span {
+                                            font-size: 22px;
+                                            font-weight: 600;
+                                            line-height: 30px;
+                                            letter-spacing: 0.02em;
+                                            text-transform: capitalize;
+                                            color: $white;
+                                        }
+
+                                        & .price {
+                                            color: $primary;
+                                        }
+
+                                    }
+
+                                    & p {
+                                        font-size: 18px;
+                                        font-weight: 400;
+                                        line-height: 30px;
+                                        letter-spacing: -0.02em;
+                                        color: rgba(255, 255, 255, 0.61);
+                                        text-transform: capitalize;
+
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+
+
+
+                    & .box-offer {
+                        width: 113px;
+                        height: 115px;
+                        background-image: url(./../images/slide/offer.png);
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        padding: 29px 26px 26px 23px;
+                        position: absolute;
+                        top: 19.5%;
+                        bottom: 0;
+                        left: 9%;
+
+                        & p {
+                            font-size: 34px;
+                            font-weight: 700;
+                            color: $white2;
+                            display: flex;
+                            align-items: flex-end;
+                            margin-bottom: 3px;
+                        }
+
+                        & span {
+                            font-size: 15px;
+                            font-weight: 600;
+                            line-height: 22px;
+                            color: $white2;
+                            text-transform: uppercase;
+                            text-align: center;
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+/*------------ Slider-v2 ---------------- */
+.widget-tf-slider-v2 {
+    position: relative;
+    overflow: hidden;
+
+    & .slider-wrap {
+        & .tf-slider-item {
+            & .shape2 {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: auto;
+            }
+
+            & .slide-item-image {
+                & img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    object-fit: cover;
+                }
+
+            }
+
+            & .slide-content {
+                padding-top: 216px;
+                padding-bottom: 263px;
+                position: relative;
+                max-width: 700px;
+                width: 100%;
+                margin: 0 auto;
+
+                & .sub-title {
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 30px;
+                    margin-bottom: 21px;
+                    letter-spacing: 0.11em;
+                    color: $white;
+                    position: relative;
+                    display: inline-block;
+                    text-transform: uppercase;
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        bottom: 0px;
+                        right: 0;
+                        left: 0;
+                        height: 2px;
+                        width: 100%;
+                        background: repeating-linear-gradient(270deg, $black 0px, $black 2px, $primary 2px, $primary 4px)
+                    }
+
+                }
+
+                & .title-slide {
+                    font-size: 80px;
+                    line-height: 90px;
+                    color: $white;
+                    margin-bottom: 22px;
+                    text-transform: capitalize;
+                }
+
+                & .description {
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 32px;
+                    color: $white;
+                    font-family: var(--font-btn-family);
+                    margin-bottom: 43px;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    }
+}
+
+/*------------ Slider form ---------------- */
+.tf-slide-form {
+    padding: 147px 0 193px 0;
+    background-image: url(./../images/page/bg4.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    animation: shrink 7s infinite alternate;
+
+    & .slide-form {
+        &>span {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 22px;
+            color: $black;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+
+            &:before {
+                position: absolute;
+                content: '';
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: $black;
+                width: 100%;
+                height: 1px;
+            }
+
+        }
+
+        & h1 {
+            font-size: 63px;
+            line-height: 90px;
+            color: $black-primary;
+            margin-bottom: 11px;
+        }
+
+        & p {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 28.8px;
+            color: $black;
+            margin-bottom: 48px;
+        }
+    }
+
+}
+
+/*------------ Slider form V2---------------- */
+.tf-slide-form-v2 {
+    position: relative;
+    overflow: hidden;
+
+    & .slide-form-v2 {
+        padding: 85px 0px 75px 0px;
+
+        & .slide-form-item {
+            & .slide-image {
+                & img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    object-fit: cover;
+                }
+
+                & .overlay {
+                    @include absolute;
+                    background-color: rgba(30, 41, 63, 0.84);
+                }
+            }
+        }
+
+        & .slider-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-left: 32px;
+            padding-right: 11px;
+
+            & .slide-content {
+                max-width: 500px;
+                width: 100%;
+                padding-top: 106px;
+
+                & .sub-title {
+                    font-size: 15px;
+                    font-weight: 700;
+                    line-height: 30px;
+                    letter-spacing: 0.11em;
+                    color: $white;
+                    text-transform: uppercase;
+                    position: relative;
+                    display: inline-block;
+                    margin-bottom: 14px;
+                    margin-left: 3px;
+
+                    &::after {
+
+                        position: absolute;
+                        content: '';
+                        bottom: 1px;
+                        left: 0;
+                        right: 0;
+                        background-color: rgba(255, 255, 255, 0.19);
+                        width: 100%;
+                        height: 2px;
+                    }
+                }
+
+                & h1 {
+                    font-size: 52px;
+                    font-weight: 600;
+                    line-height: 67px;
+                    margin-bottom: 15.2px;
+                    letter-spacing: 0.046em;
+                    text-transform: uppercase;
+                    color: $white;
+
+                }
+
+                & .price {
+                    font-size: 32px;
+                    font-weight: 500;
+                    line-height: 53px;
+                    margin-bottom: 34.8px;
+                    color: $white;
+                    display: block;
+
+                    & .price-sale {
+                        font-size: 22px;
+                    }
+                }
+
+            }
+
+            & .slide-box-form {
+                max-width: 438px;
+                width: 100%;
+                background-color: $white;
+                border-radius: 13px;
+                padding: 34px 40px 38px 40px;
+
+            }
+        }
+    }
+}
+
+/*------------ Slider form V2---------------- */
+
+
+/*------------ Slider form V3---------------- */
+.tf-slider-v3 {
+    padding: 173px 0 297px 0;
+    background-image: url(./../images/page/bg6.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+
+    // animation: shrink 7s infinite alternate;
+    &::before {
+        content: '';
+        @include absolute;
+        background-color: rgba(2, 11, 46, 0.65);
+    }
+
+    & .slider-v3 {
+        &>span {
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 22px;
+            color: $white;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+
+            & span:before {
+                position: absolute;
+                content: "";
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: $white;
+                width: 100%;
+                height: 1px;
+            }
+
+        }
+
+        & h1 {
+            font-size: 63px;
+            line-height: 90px;
+            text-transform: capitalize;
+            color: $white;
+            margin-bottom: 11px;
+        }
+
+        & p {
+            font-size: 17px;
+            line-height: 28.8px;
+            color: $white;
+            margin-bottom: 69px;
+        }
+
+        & .group-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+    }
+}
+
+/*------------ Slider form V3---------------- */
+
+/*------------ Slider V4---------------- */
+.tf-slide-v4 {
+    & .slide-v4 {
+        & .slide-v4-content {
+
+            padding-left: 22.7%;
+            padding-top: 20.1%;
+
+            &>.sub-title {
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 30px;
+                letter-spacing: 0.11em;
+                color: $black4;
+                display: inline-block;
+                margin-bottom: 3px;
+                text-transform: uppercase;
+            }
+
+            & h1 {
+                font-size: 70px;
+                line-height: 90px;
+                text-transform: capitalize;
+                color: $black-primary;
+                margin-bottom: 23px;
+            }
+
+            & p {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 32px;
+                color: $text-des2;
+                margin-bottom: 38px;
+                text-transform: capitalize;
+            }
+
+            & .browse {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 30px;
+                display: block;
+                color: $black4;
+                margin-top: 36px;
+                margin-bottom: 22px;
+            }
+
+            .icon-car {
+                margin-bottom: 26px;
+                gap: 14px;
+                flex-wrap: wrap;
+
+                & li {
+                    padding: 2px 16px;
+                    border: solid 1px #E4E4E4;
+                    border-radius: 100px;
+                    color: #0D1637;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 8px;
+
+                    & span {
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 30px;
+                        font-family: var(--font-main-family);
+
+                    }
+                }
+            }
+
+        }
+
+        & .slide-v4-image {
+            margin-left: -71px;
+
+            & img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
+
+/*------------ Slider V4---------------- */

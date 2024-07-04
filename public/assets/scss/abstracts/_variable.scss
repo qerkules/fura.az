@@ -1,0 +1,114 @@
+//settings
+$font-main-size: 16px;
+$font-main-line: 28.8px;
+$font-main-family: "Plus Jakarta Sans", sans-serif;
+$font-title-family: "Plus Jakarta Sans", sans-serif;
+$font-btn-family: "DM Sans", sans-serif;
+$fontIcon: "icomoon";
+
+:root {
+    --font-main-family: $font-main-family;
+    --font-title-family: --font-main-family;
+    --font-btn-family: $font-btn-family;
+}
+
+
+
+$h1-fs: 63px;
+$h1-lh: 90px;
+$h2-fs: 52px;
+$h2-lh: 60px;
+$h3-fs: 32px;
+$h3-lh: 44.2px;
+$h4-fs: 24px;
+$h4-lh: 36px;
+$h5-fs: 20px;
+$h5-lh: 34px;
+$h6-fs: 18px;
+$h6-lh: 30px;
+
+// color
+$primary: #D01818;
+$black-primary: #0D1637;
+$black1: #23272D;
+$black2: #0A1426;
+$black3: #0A1C26;
+$black4: #595960;
+$black5: #26232A;
+$black6: #343447;
+
+$gray: #EBEBEB;
+$gray2: #888B95;
+$gray3: #A2A4A8;
+$gray4: #CFCFD0;
+
+$background: #F2F5FB;
+$background2: #171F2F;
+$background3: #F8F8F8;
+$background4: #F3F5F7;
+$background5: #151514;
+$background6: #F2F5FB;
+$background7: #F4F5F9;
+$bg-icon-2: #F2F6F7;
+$bg-footer: #08080A;
+$bg-footer2: #090A0A;
+
+$bg-date: #060C12;
+$line: #86898E;
+$line2: #E0E5EF;
+$line3: #18181A;
+$line4: #E8EBED;
+$border: #EAEAEA;
+$border2: #F1F1F1;
+$border3: #ECECEC;
+$border4: #E9E9E9;
+$border5: #D4DCE0;
+$text-tab: #77787B;
+$dot: #C1C3C6;
+$text-name: #848790;
+$text-des: #5E5F63;
+$text-des2: #9E9E9E;
+$text-des2: #5C6066;
+$text-input: #949392;
+$text-input2: #B4B4B4;
+$text-footer: #6C727B;
+$text-phone: #828A8D;
+$text-form: #555555;
+$text-form2: #838287;
+$text-des2: #5C6066;
+$text-beta: #83827F;
+$title-form: #08151F;
+$counter: #1D2122;
+$btn-blog: #2D2B26;
+$btn-more: #00205C;
+$text-footer-bt: #D1D1D1;
+$price: #F5F5F5;
+$text-icon: #45494F;
+$text-form: #838383;
+$date-comment: #949392;
+
+
+$white: #ffffff;
+$white2: #FFFEFE;
+$black: #000000;
+$icon: #BBBBBB;
+$star: #FBAD17;
+$bg-form-comment: #F8F8F9;
+
+//rgba colors
+$shadow: rgba(0, 0, 0, 0.07);
+$shadow-button: rgba(0, 0, 0, 0.03);
+$shadow-box: rgba(0, 0, 0, 0.04);
+$bg-model: rgba(2, 2, 3, 0.9);
+$shadow-model: rgba(0, 0, 0, 0.06);
+$button-nav: rgba(255, 255, 255, 0.06);
+$line-partner: rgba(217, 217, 217, 0.56);
+$shadow-find: rgba(38, 48, 73, 0.05);
+$boder-box: rgba(65, 74, 79, 0.11);
+$border-nav: rgba(0, 0, 0, 0.28);
+$header-top: rgba(255, 255, 255, 0.08);
+$bg-slide: rgba(255, 255, 255, 0.28);
+$shadow-search: rgba(208, 24, 24, 0.35);
+$shawdow-avata: rgba(0, 0, 0, 0.14);
+$border-line: rgba(112, 116, 128, 0.08);
+$bg-quote: rgba(0, 0, 0, 0.58);

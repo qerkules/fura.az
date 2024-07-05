@@ -10169,7 +10169,7 @@ a.mapboxgl-ctrl-logo {
     justify-content: center;
   }
   .price {
-    font-size: 14px;
+    font-size: 14px!important;
   }
   .mobile-left-icon {
     position: absolute;
@@ -10729,7 +10729,6 @@ a.mapboxgl-ctrl-logo {
   .tf-car-service .image {
     height: 200px;
   }
-
   .tf-car-service .image .listing-images {
     height: 200px;
   }
@@ -10770,7 +10769,7 @@ a.mapboxgl-ctrl-logo {
     font-size: 16px;
   }
   .price {
-    font-size: 12px;
+    font-size: 12px!important;
   }
 }
 @media only screen and (max-width: 400px) {

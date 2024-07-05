@@ -10162,22 +10162,25 @@ a.mapboxgl-ctrl-logo {
   #header3.main-header .header-style2 {
     justify-content: center;
   }
-  .mobile-left-icon{
+  .price {
+    font-size: 14px;
+  }
+  .mobile-left-icon {
     position: absolute;
     left: 25px;
     top: 22px;
-    display: block!important;
+    display: block !important;
     color: #000;
   }
-  .mobile-right-icon{
+  .mobile-right-icon {
     position: absolute;
     right: 25px;
     top: 22px;
-    display: block!important;
+    display: block !important;
   }
 
   .mobile-right-icon svg,
-  .mobile-left-icon svg{
+  .mobile-left-icon svg {
     font-size: 28px;
   }
 
@@ -10757,8 +10760,11 @@ a.mapboxgl-ctrl-logo {
     li.listing-information:not(:last-child) {
     margin-right: 5px;
   }
-  .image-icon{
+  .image-icon {
     font-size: 16px;
+  }
+  .price {
+    font-size: 12px;
   }
 }
 @media only screen and (max-width: 400px) {
@@ -10768,10 +10774,10 @@ a.mapboxgl-ctrl-logo {
     font-size: 12px;
     line-height: 15px;
   }
-  h6{
+  h6 {
     margin-bottom: -7px;
   }
-  .tf-car-service .content .sub-title{
+  .tf-car-service .content .sub-title {
     font-size: 10px;
   }
   .tf-car-service .image {
@@ -10806,7 +10812,7 @@ a.mapboxgl-ctrl-logo {
   .tf-car-service .image .stm-badge-top {
     top: 5px;
   }
-  .image-icon{
+  .image-icon {
     font-size: 12px;
   }
 }
@@ -11275,13 +11281,13 @@ ul#navbar-mobile-bottom li {
   border-top-right-radius: 10px;
   background-position: calc((100vw - 72px) / 2);
 }
-.sc-bottom-bar li svg{
+.sc-bottom-bar li svg {
   color: black;
   padding-bottom: 5px;
   font-size: 32px;
 }
-.navbar-add{
-  bottom: 8px!important;
+.navbar-add {
+  bottom: 8px !important;
 }
 .sc-menu-item {
   color: black;
@@ -11302,9 +11308,8 @@ ul#navbar-mobile-bottom li {
 
 .new-ad-mobile-icon {
   font-size: 40px !important;
-  padding-bottom: 0px!important;
+  padding-bottom: 0px !important;
   color: #fff !important;
-
 }
 .new-ad-mobile {
   position: relative;
@@ -11422,16 +11427,16 @@ ul#navbar-mobile-bottom li {
 }
 
 .mobile-left-icon,
-.mobile-right-icon{
+.mobile-right-icon {
   display: none;
 }
 
-.price{
+.price {
   position: absolute;
   bottom: 2px;
   background-color: #000;
   color: white;
-  font-size: 12px;
+  font-size: 16px;
   padding: 0px 10px;
   border-top-right-radius: 10px;
   z-index: 100;

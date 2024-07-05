@@ -5,7 +5,7 @@ function RangeSlider({ title }) {
     const [value, setValue] = useState([17000, 24000]);
 
     const renderThumb = (props, state) => (
-        <div {...props}>{state.valueNow}</div>
+        <div key={state}>{state.valueNow}</div>
     );
 
     const handleChange = (newValue) => {

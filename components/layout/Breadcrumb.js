@@ -10,7 +10,6 @@ export default function Breadcrumb({ breadcrumbTitle }) {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

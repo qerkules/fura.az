@@ -17,7 +17,6 @@ export default function BackToTop() {
         <>
             {hasScrolled && (
                 <a href="#wrapper" className="button-go show"></a>
-
             )}
         </>
     )

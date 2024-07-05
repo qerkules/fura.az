@@ -1,5 +1,5 @@
 {
-    "name": "motorx",
+    "name": "fura.az",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -10,6 +10,10 @@
         "sass": "sass --watch public/assets/scss/app.scss:public/assets/css/style.css"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@emotion/styled": "^11.11.5",
+        "@mui/icons-material": "^5.15.21",
+        "@mui/material": "^5.15.21",
         "chart.js": "^4.4.2",
         "next": "14.0.1",
         "react": "18.2.0",

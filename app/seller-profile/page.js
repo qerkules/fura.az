@@ -45,8 +45,8 @@ export default function Error() {
                                                 </div>
                                                 <div className="dealer-content-info-box">
                                                     <p className="label-dealer-content">Dealer Email</p>
-                                                    <Link className="dealer-title" href="/mailto:contact@motorx.com">
-                                                        contact@motorx.com</Link>
+                                                    <Link className="dealer-title" href="#">
+                                                        contact@test.com</Link>
                                                 </div>
                                             </div>
                                             <div className="dealer-author-item">

@@ -5,8 +5,6 @@ export default function Preloader() {
                 <div className="middle">
                 </div>
             </div>
-
-
         </>
     )
 }

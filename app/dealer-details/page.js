@@ -40,8 +40,8 @@ export default function DealerDetails() {
                                                 </div>
                                                 <div className="dealer-content-info-box">
                                                     <p className="label-dealer-content">Email Address</p>
-                                                    <Link className="dealer-title" href="/mailto:contact@motorx.com">
-                                                        contact@motorx.com </Link>
+                                                    <Link className="dealer-title" href="#'">
+                                                        contact@test.com </Link>
                                                 </div>
                                             </div>
                                             <div className="dealer-author-item">
@@ -59,7 +59,7 @@ export default function DealerDetails() {
                                                 </div>
                                                 <div className="dealer-content-info-box">
                                                     <p className="label-dealer-content">Website</p>
-                                                    <Link className="dealer-title" href="/#" target="_blank">www.motorx.com </Link>
+                                                    <Link className="dealer-title" href="/#" target="_blank">www.fura.az </Link>
                                                 </div>
                                             </div>
                                         </div>

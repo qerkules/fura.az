@@ -831,7 +831,7 @@
 .box-car-wrap {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    align-items: end;
+    align-items: flex-end;
     grid-gap: 16px;
     align-items: stretch;
 
@@ -2900,7 +2900,7 @@
 
 /*------------ Widget car service ---------------- */
 .widget-car-service {
-    padding-top: 125px;
+    padding-top:    25px;
     padding-bottom: 137px;
 
     & .header-section {

@@ -1,10 +1,11 @@
 import React from "react";
-import AddIcon from '@mui/icons-material/Add';
-import LoginIcon from '@mui/icons-material/Login';
-import MenuIcon from '@mui/icons-material/Menu';
-import HomeIcon from '@mui/icons-material/Home';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-export default function MobileNavbar() {
+import AddIcon from "@mui/icons-material/Add";
+import LoginIcon from "@mui/icons-material/Login";
+import MenuIcon from "@mui/icons-material/Menu";
+import HomeIcon from "@mui/icons-material/Home";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
+export default function MobileNavbar({handleMobileMenu}) {
   return (
     <section id="header-mobile-bottom" className="mobile-nav-menu">
       {/* <div className="off-screen-menu">
@@ -32,33 +33,36 @@ export default function MobileNavbar() {
         <div className="sc-bottom-bar">
           <li>
             <a className="sc-menu-item" href="/home/index">
-            <HomeIcon/>
+              <HomeIcon />
               <span className="text">Home</span>
             </a>
           </li>
           <li id="wshlst-bottom">
             <a className="sc-menu-item" href="/account/wishlist">
-            <FavoriteBorderIcon/>
+              <FavoriteBorderIcon />
               <span className="text">Favorites</span>
             </a>
           </li>
           <li>
             <a className="sc-menu-item navbar-add" href="/create/list">
               <div className="new-ad-mobile">
-              <AddIcon className="new-ad-mobile-icon"/>
+                <AddIcon className="new-ad-mobile-icon" />
               </div>
               <span className="text">New Ad</span>
             </a>
           </li>
           <li>
             <a className="sc-menu-item" href="/account/welcome">
-              <LoginIcon/>
+              <LoginIcon />
               <span className="text">Sign in</span>
             </a>
           </li>
           <li id="barbottom">
             <a className="sc-menu-item">
-              <MenuIcon/>
+              <MenuIcon
+                className="mobile-nav-toggler mobile-button"
+                onClick={handleMobileMenu}
+              />
               <span className="text">More</span>
             </a>
           </li>

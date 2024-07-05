@@ -14,15 +14,16 @@ export default function AdCard() {
           <div className="bottom-btn-wrap">
             <div className="btn-group">
               <a href="#" className="icon-service">
-                <BalanceIcon className="image-icon"/>
+                <BalanceIcon className="image-icon" />
               </a>
               <a href="#" className="icon-service">
-                <FavoriteBorderIcon className="image-icon"/>
+                <FavoriteBorderIcon className="image-icon" />
               </a>
             </div>
           </div>
         </div>
         <div className="listing-images">
+          <span className="price">$50,000</span>
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
@@ -73,12 +74,9 @@ export default function AdCard() {
         </div>
       </div>
       <div className="content">
+        <h6 className="title">Scania R500</h6>
         <span className="sub-title">Standart Tractor</span>
-        <h6 className="title">
-          <Link href="/listing-details" />
-          <Link href="/listing-details">Scania R500</Link>
-        </h6>
-        <span className="price">$50,000</span>
+
         <div className="description">
           <ul>
             <li className="listing-information transmission">

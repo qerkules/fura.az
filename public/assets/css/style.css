@@ -1655,7 +1655,7 @@ body.modal-open {
 }
 .mobile-menu .menu-box {
   position: absolute;
-  left: -300px;
+  left: 100vw;
   top: 0px;
   width: 100%;
   height: 100%;
@@ -1811,50 +1811,10 @@ body.modal-open {
 
 .mobile-button {
   display: none;
-  position: absolute;
-  width: 26px;
-  height: 26px;
-  float: right;
-  top: 50%;
-  right: 15px;
-  background-color: transparent;
-  cursor: pointer;
   transition: all 0s ease;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
+  font-size: 25px;
 }
-.mobile-button::before,
-.mobile-button::after,
-.mobile-button span {
-  background-color: #d01818;
-  -webkit-transition: all ease 0.3s;
-  -moz-transition: all ease 0.3s;
-  transition: all ease 0.3s;
-}
-.mobile-button::before,
-.mobile-button::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  height: 2px;
-  width: 100%;
-  left: 0;
-  top: 50%;
-  -webkit-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-}
-.mobile-button span {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  left: 0;
-  top: 50%;
-  overflow: hidden;
-  text-indent: 200%;
-}
+
 .mobile-button::before {
   -webkit-transform: translate3d(0, -9px, 0);
   -moz-transform: translate3d(0, -9px, 0);
@@ -10199,6 +10159,31 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 767px) {
+  #header3.main-header .header-style2 {
+    justify-content: center;
+  }
+  .mobile-left-icon{
+    position: absolute;
+    left: 25px;
+    top: 22px;
+    display: block!important;
+    color: #000;
+  }
+  .mobile-right-icon{
+    position: absolute;
+    right: 25px;
+    top: 22px;
+    display: block!important;
+  }
+
+  .mobile-right-icon svg,
+  .mobile-left-icon svg{
+    font-size: 28px;
+  }
+
+  .mobile-nav-menu {
+    visibility: visible;
+  }
   .widget-tf-slider .slider-wrap .tf-slide-item .slide-item-content {
     padding-top: 5em;
   }
@@ -10759,11 +10744,11 @@ a.mapboxgl-ctrl-logo {
     top: 7px;
   }
   .tf-car-service .content {
-    padding: 5px 10px;
+    padding: 10px;
   }
-
   .tf-car-service .content .description ul {
     font-size: 8px;
+    justify-content: flex-start;
   }
   .tf-car-service
     .content
@@ -10782,6 +10767,12 @@ a.mapboxgl-ctrl-logo {
   .tf-car-service .content .price {
     font-size: 12px;
     line-height: 15px;
+  }
+  h6{
+    margin-bottom: -7px;
+  }
+  .tf-car-service .content .sub-title{
+    font-size: 10px;
   }
   .tf-car-service .image {
     height: 150px;
@@ -10822,10 +10813,6 @@ a.mapboxgl-ctrl-logo {
 @media only screen and (max-width: 480px) {
   .preload-container .middle {
     width: 150px;
-  }
-
-  .mobile-nav-menu {
-    visibility: visible;
   }
   .wrap-car-review .listing-customer-review .overall-rating-detail {
     grid-template-columns: 1fr;
@@ -11271,13 +11258,12 @@ ul#navbar-mobile-bottom li {
   display: flex;
   padding: 16px 0px;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  height: 60px;
-  font-size: 26px;
   background-image: radial-gradient(
     circle at 36px 6px,
     transparent 36px,
@@ -11289,7 +11275,14 @@ ul#navbar-mobile-bottom li {
   border-top-right-radius: 10px;
   background-position: calc((100vw - 72px) / 2);
 }
-
+.sc-bottom-bar li svg{
+  color: black;
+  padding-bottom: 5px;
+  font-size: 32px;
+}
+.navbar-add{
+  bottom: 8px!important;
+}
 .sc-menu-item {
   color: black;
   transition: ease-in-out 0.5s;
@@ -11307,20 +11300,18 @@ ul#navbar-mobile-bottom li {
   transform: translate3d(0px, -22px, 0px);
 }
 
-.navbar-add {
-  bottom: 20px !important;
-}
-
 .new-ad-mobile-icon {
-  font-size: 40px;
+  font-size: 40px !important;
+  padding-bottom: 0px!important;
+  color: #fff !important;
+
 }
 .new-ad-mobile {
   position: relative;
   bottom: 15px;
-  padding: 5px;
+  padding: 10px;
   background-color: red;
   border-radius: 100%;
-  color: #fff !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11367,37 +11358,15 @@ ul#navbar-mobile-bottom li {
 .sl-nav li:hover ul {
   position: absolute;
   top: 29px;
-  right: -15px;
+  left: -37px;
   display: block;
   background: #fff;
-  width: 120px;
+  width: 140px;
   padding-top: 0px;
   z-index: 1;
   border-radius: 5px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
-.sl-nav li:hover .triangle {
-  position: absolute;
-  top: 15px;
-  right: -10px;
-  z-index: 10;
-  height: 14px;
-  overflow: hidden;
-  width: 30px;
-  background: transparent;
-}
-.sl-nav li:hover .triangle:after {
-  content: "";
-  display: block;
-  z-index: 20;
-  width: 15px;
-  transform: rotate(45deg) translateY(0px) translatex(10px);
-  height: 15px;
-  background: #fff;
-  border-radius: 2px 0px 0px 0px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-}
-
 .sl-nav li ul li:hover {
   background-color: lightgray;
 }
@@ -11450,4 +11419,20 @@ ul#navbar-mobile-bottom li {
 .upheader-item a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+.mobile-left-icon,
+.mobile-right-icon{
+  display: none;
+}
+
+.price{
+  position: absolute;
+  bottom: 2px;
+  background-color: #000;
+  color: white;
+  font-size: 12px;
+  padding: 0px 10px;
+  border-top-right-radius: 10px;
+  z-index: 100;
 }

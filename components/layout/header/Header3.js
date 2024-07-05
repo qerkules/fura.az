@@ -68,7 +68,7 @@ export default function Header3({
                       <LanguageIcon />
                       <ul>
                         <li>
-                          <b>Deutsch</b>{" "}
+                          <b>Eng</b>{" "}
                           <i
                             className="fa fa-angle-down"
                             aria-hidden="true"
@@ -128,6 +128,52 @@ export default function Header3({
             <div className="row">
               <div className="col-lg-12">
                 <div className="header-style2 flex justify-space align-center">
+                  <div className="mobile-right-icon">
+                    <a
+                      data-bs-toggle="modal"
+                      role="button"
+                      className="flex align-center"
+                    >
+                      <ContrastIcon />
+                    </a>
+                  </div>
+
+                  <div className="mobile-left-icon">
+                    <div className="nav-wrapper">
+                      <div className="sl-nav">
+                        <LanguageIcon />
+                        <ul>
+                          <li>
+                            <b>Eng</b>{" "}
+                            <i
+                              className="fa fa-angle-down"
+                              aria-hidden="true"
+                            ></i>
+                            <ul>
+                              <li>
+                                <i className="sl-flag flag-usa">
+                                  <div id="germany"></div>
+                                </i>
+                                <span className="active">Eng</span>
+                              </li>
+                              <li>
+                                <i className="sl-flag flag-usa">
+                                  <div id="germany"></div>
+                                </i>
+                                <span>Ru</span>
+                              </li>
+                              <li>
+                                <i className="sl-flag flag-usa">
+                                  <div id="germany"></div>
+                                </i>
+                                <span>Az</span>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                   {/* Logo Box */}
                   <div className="logo-box flex">
                     <div className="logo">
@@ -161,12 +207,6 @@ export default function Header3({
                         <i className="icon-add-button-1" />
                       </Link>
                     </div>
-                  </div>
-                  <div
-                    className="mobile-nav-toggler mobile-button"
-                    onClick={handleMobileMenu}
-                  >
-                    <span />
                   </div>
                 </div>
               </div>
@@ -204,13 +244,13 @@ export default function Header3({
               <div className="help-bar-mobie compare">
                 <Link href="/#" className="fw-7 font-2">
                   <BalanceIcon />
-                  Compare
+                  <span> Compare</span>
                 </Link>
               </div>
             </div>
           </nav>
         </div>
-        <MobileNavbar />
+        <MobileNavbar handleMobileMenu={handleMobileMenu} />
 
         {/* End Mobile Menu */}
       </header>

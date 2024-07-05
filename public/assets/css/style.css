@@ -10159,6 +10159,18 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 767px) {
+  .cat-container button {
+    height: 90px!important;
+    display: flex;
+    justify-content: flex-start!important;
+  }
+
+  .cat-container button img {
+    height: 60%!important;
+    margin-left: 5px;
+  }
+
+
   .desktop-hider{
     display: block!important;
   }
@@ -11448,7 +11460,7 @@ ul#navbar-mobile-bottom li {
 }
 
 .swiper-slide-box {
-  width: 70% !important;
+  width: 50% !important;
 }
 
 .desktop-hider{

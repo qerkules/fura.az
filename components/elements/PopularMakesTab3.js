@@ -57,7 +57,6 @@ export default function PopularMakesTab3() {
           pagination={{
             clickable: true,
           }}
-          modules={[Pagination]}
           className="mySwiper"
         >
           <SwiperSlide className="swiper-slide-box">

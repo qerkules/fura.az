@@ -10160,28 +10160,27 @@ a.mapboxgl-ctrl-logo {
 }
 @media only screen and (max-width: 767px) {
   .cat-container button {
-    height: 90px!important;
+    height: 90px !important;
     display: flex;
-    justify-content: flex-start!important;
+    justify-content: flex-start !important;
   }
 
   .cat-container button img {
-    height: 60%!important;
+    height: 60% !important;
     margin-left: 5px;
   }
 
-
-  .desktop-hider{
-    display: block!important;
+  .desktop-hider {
+    display: block !important;
   }
-  .mobile-hider{
-    display: none!important;
+  .mobile-hider {
+    display: none !important;
   }
   #header3.main-header .header-style2 {
     justify-content: center;
   }
   .price {
-    font-size: 14px!important;
+    font-size: 14px !important;
   }
   .mobile-left-icon {
     position: absolute;
@@ -10781,7 +10780,7 @@ a.mapboxgl-ctrl-logo {
     font-size: 16px;
   }
   .price {
-    font-size: 12px!important;
+    font-size: 12px !important;
   }
 }
 @media only screen and (max-width: 400px) {
@@ -11463,10 +11462,39 @@ ul#navbar-mobile-bottom li {
   width: 50% !important;
 }
 
-.desktop-hider{
+.desktop-hider {
   display: none;
 }
 
-.mobile-hider{
+.mobile-hider {
   display: flex;
+}
+
+.ad-banner {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.ad-banner img {
+  border-radius: 15px;
+  min-height: 58px;
+  height: auto;
+  object-fit: cover;
+  max-height: 108px;
+}
+
+.tab-content-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tab-content-title,
+.tab-content-filter{
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.tab-content-filter{
+  margin-right: 5px;
 }

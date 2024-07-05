@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -50,6 +51,9 @@ export default function PopularMakesTab3() {
           </li>
         </ul>
       </div> */}{" "}
+      <div className="ad-banner">
+        <img src="/assets/images/ads/ad-banner.jpg" />
+      </div>
       <div className="cat-container desktop-hider">
         <Swiper
           slidesPerView={"auto"}
@@ -60,53 +64,49 @@ export default function PopularMakesTab3() {
           className="mySwiper"
         >
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="truck75">
+            <button className="index-slider-items" id="truck75">
               <label htmlFor="truck75">Truck</label>
               <img src="/assets/images/categories/n1.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="truck">
+            <button className="index-slider-items" id="truck">
               <label htmlFor="truck">Semi-trailer truck</label>
               <img src="/assets/images/categories/n2.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button
-              
-              className="index-slider-items"
-              id="semi-trailer"
-            >
+            <button className="index-slider-items" id="semi-trailer">
               <label htmlFor="semi-trailer">Semi-trailer</label>
               <img src="/assets/images/categories/n3.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="cm">
+            <button className="index-slider-items" id="cm">
               <label htmlFor="cm">Construction machinery</label>
               <img src="/assets/images/categories/n4.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="av">
+            <button className="index-slider-items" id="av">
               <label htmlFor="av">Agricultural vehicle</label>
               <img src="/assets/images/categories/n5.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="bus">
+            <button className="index-slider-items" id="bus">
               <label htmlFor="bus">Bus</label>
               <img src="/assets/images/categories/n6.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="forklift">
+            <button className="index-slider-items" id="forklift">
               <label htmlFor="forklift">Forklift</label>
               <img src="/assets/images/categories/n7.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button  className="index-slider-items" id="sp">
+            <button className="index-slider-items" id="sp">
               <label htmlFor="sp">Spare parts</label>
               <img src="/assets/images/categories/n8.png" alt="" />
             </button>
@@ -115,57 +115,59 @@ export default function PopularMakesTab3() {
       </div>
       <div className="cat-container mobile-hider ">
         <a href="/list/trucko75#searchbar">
-          <button  className="index-slider-items" id="truck75">
+          <button className="index-slider-items" id="truck75">
             <label htmlFor="truck75">Truck</label>
             <img src="/assets/images/categories/n1.png" alt="" />
           </button>
         </a>
         <a href="/list/trucks#searchbar">
-          <button  className="index-slider-items" id="truck">
+          <button className="index-slider-items" id="truck">
             <label htmlFor="truck">Semi-trailer truck</label>
             <img src="/assets/images/categories/n2.png" alt="" />
           </button>
         </a>
         <a href="/list/semi-trailer#searchbar">
-          <button
-            
-            className="index-slider-items"
-            id="semi-trailer"
-          >
+          <button className="index-slider-items" id="semi-trailer">
             <label htmlFor="semi-trailer">Semi-trailer</label>
             <img src="/assets/images/categories/n3.png" alt="" />
           </button>
         </a>
         <a href="/list/constructionmachinery#searchbar">
-          <button  className="index-slider-items" id="cm">
+          <button className="index-slider-items" id="cm">
             <label htmlFor="cm">Construction machinery</label>
             <img src="/assets/images/categories/n4.png" alt="" />
           </button>
         </a>
         <a href="/list/agriculturalvehicle#searchbar">
-          <button  className="index-slider-items" id="av">
+          <button className="index-slider-items" id="av">
             <label htmlFor="av">Agricultural vehicle</label>
             <img src="/assets/images/categories/n5.png" alt="" />
           </button>
         </a>
         <a href="/list/bus#searchbar">
-          <button  className="index-slider-items" id="bus">
+          <button className="index-slider-items" id="bus">
             <label htmlFor="bus">Bus</label>
             <img src="/assets/images/categories/n6.png" alt="" />
           </button>
         </a>
         <a href="/list/forklift#searchbar">
-          <button  className="index-slider-items" id="forklift">
+          <button className="index-slider-items" id="forklift">
             <label htmlFor="forklift">Forklift</label>
             <img src="/assets/images/categories/n7.png" alt="" />
           </button>
         </a>
         <a href="/list/spareparts#searchbar">
-          <button  className="index-slider-items" id="sp">
+          <button className="index-slider-items" id="sp">
             <label htmlFor="sp">Spare parts</label>
             <img src="/assets/images/categories/n8.png" alt="" />
           </button>
         </a>
+      </div>
+      <div className="tab-content-header">
+        <span className="tab-content-title">Todays Ads</span>
+        <span className="tab-content-title">
+          Filtirleme <ExpandMoreIcon />
+        </span>
       </div>
       <div className="tab-content" id="pills-tabContent">
         <div className={"tab-pane fade show active"}>

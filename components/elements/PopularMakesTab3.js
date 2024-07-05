@@ -60,20 +60,20 @@ export default function PopularMakesTab3() {
           className="mySwiper"
         >
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="truck75">
+            <button  className="index-slider-items" id="truck75">
               <label htmlFor="truck75">Truck</label>
               <img src="/assets/images/categories/n1.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="truck">
+            <button  className="index-slider-items" id="truck">
               <label htmlFor="truck">Semi-trailer truck</label>
               <img src="/assets/images/categories/n2.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
             <button
-              type="submit"
+              
               className="index-slider-items"
               id="semi-trailer"
             >
@@ -82,31 +82,31 @@ export default function PopularMakesTab3() {
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="cm">
+            <button  className="index-slider-items" id="cm">
               <label htmlFor="cm">Construction machinery</label>
               <img src="/assets/images/categories/n4.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="av">
+            <button  className="index-slider-items" id="av">
               <label htmlFor="av">Agricultural vehicle</label>
               <img src="/assets/images/categories/n5.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="bus">
+            <button  className="index-slider-items" id="bus">
               <label htmlFor="bus">Bus</label>
               <img src="/assets/images/categories/n6.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="forklift">
+            <button  className="index-slider-items" id="forklift">
               <label htmlFor="forklift">Forklift</label>
               <img src="/assets/images/categories/n7.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
-            <button type="submit" className="index-slider-items" id="sp">
+            <button  className="index-slider-items" id="sp">
               <label htmlFor="sp">Spare parts</label>
               <img src="/assets/images/categories/n8.png" alt="" />
             </button>
@@ -115,20 +115,20 @@ export default function PopularMakesTab3() {
       </div>
       <div className="cat-container mobile-hider ">
         <a href="/list/trucko75#searchbar">
-          <button type="submit" className="index-slider-items" id="truck75">
+          <button  className="index-slider-items" id="truck75">
             <label htmlFor="truck75">Truck</label>
             <img src="/assets/images/categories/n1.png" alt="" />
           </button>
         </a>
         <a href="/list/trucks#searchbar">
-          <button type="submit" className="index-slider-items" id="truck">
+          <button  className="index-slider-items" id="truck">
             <label htmlFor="truck">Semi-trailer truck</label>
             <img src="/assets/images/categories/n2.png" alt="" />
           </button>
         </a>
         <a href="/list/semi-trailer#searchbar">
           <button
-            type="submit"
+            
             className="index-slider-items"
             id="semi-trailer"
           >
@@ -137,31 +137,31 @@ export default function PopularMakesTab3() {
           </button>
         </a>
         <a href="/list/constructionmachinery#searchbar">
-          <button type="submit" className="index-slider-items" id="cm">
+          <button  className="index-slider-items" id="cm">
             <label htmlFor="cm">Construction machinery</label>
             <img src="/assets/images/categories/n4.png" alt="" />
           </button>
         </a>
         <a href="/list/agriculturalvehicle#searchbar">
-          <button type="submit" className="index-slider-items" id="av">
+          <button  className="index-slider-items" id="av">
             <label htmlFor="av">Agricultural vehicle</label>
             <img src="/assets/images/categories/n5.png" alt="" />
           </button>
         </a>
         <a href="/list/bus#searchbar">
-          <button type="submit" className="index-slider-items" id="bus">
+          <button  className="index-slider-items" id="bus">
             <label htmlFor="bus">Bus</label>
             <img src="/assets/images/categories/n6.png" alt="" />
           </button>
         </a>
         <a href="/list/forklift#searchbar">
-          <button type="submit" className="index-slider-items" id="forklift">
+          <button  className="index-slider-items" id="forklift">
             <label htmlFor="forklift">Forklift</label>
             <img src="/assets/images/categories/n7.png" alt="" />
           </button>
         </a>
         <a href="/list/spareparts#searchbar">
-          <button type="submit" className="index-slider-items" id="sp">
+          <button  className="index-slider-items" id="sp">
             <label htmlFor="sp">Spare parts</label>
             <img src="/assets/images/categories/n8.png" alt="" />
           </button>

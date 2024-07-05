@@ -11456,7 +11456,7 @@ ul#navbar-mobile-bottom li {
   font-size: 16px;
   padding: 0px 10px;
   border-top-right-radius: 10px;
-  z-index: 100;
+  z-index: 7;
 }
 
 .swiper-slide-box {

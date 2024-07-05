@@ -53,19 +53,6 @@ export default function Layout({
       <TabList />
       <div id="wrapper">
         <div id="page" className="clearfix">
-          {!headerStyle && (
-            <Header1
-              scroll={scroll}
-              isMobileMenu={isMobileMenu}
-              handleMobileMenu={handleMobileMenu}
-              handleToggle1={handleToggle1}
-              isToggled1={isToggled1}
-              handleToggle2={handleToggle2}
-              isToggled2={isToggled2}
-              handleToggle3={handleToggle3}
-              isToggled3={isToggled3}
-            />
-          )}
           <Header3
             scroll={scroll}
             isMobileMenu={isMobileMenu}

@@ -14,10 +14,10 @@ export default function AdCard() {
           <div className="bottom-btn-wrap">
             <div className="btn-group">
               <a href="#" className="icon-service">
-                <BalanceIcon />
+                <BalanceIcon className="image-icon"/>
               </a>
               <a href="#" className="icon-service">
-                <FavoriteBorderIcon />
+                <FavoriteBorderIcon className="image-icon"/>
               </a>
             </div>
           </div>

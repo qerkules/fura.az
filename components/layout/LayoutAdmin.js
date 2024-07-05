@@ -28,10 +28,10 @@ export default function LayoutAdmin({ headerStyle, footerStyle, headTitle, bread
             <div id="wrapper">
                 <div id="page" className="clearfix">
                     <Sidebar />
-                    <div class="has-dashboard">
-                        <main id="main-content" class="site-main-dashboard">
-                            <div class="page-dashboard-wrap">
-                                <div class="dashboard">
+                    <div className="has-dashboard">
+                        <main id="main-content" className="site-main-dashboard">
+                            <div className="page-dashboard-wrap">
+                                <div className="dashboard">
                                     {children}
                                 </div>
                             </div>

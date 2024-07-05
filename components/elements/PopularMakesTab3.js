@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import AdCard from "../layout/AdCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -45,8 +49,72 @@ export default function PopularMakesTab3() {
             </button>
           </li>
         </ul>
-      </div> */}
-      <div id="box" className="cat-container ">
+      </div> */}{" "}
+      <div className="cat-container desktop-hider">
+        <Swiper
+          slidesPerView={"auto"}
+          spaceBetween={30}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+        >
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="truck75">
+              <label htmlFor="truck75">Truck</label>
+              <img src="/assets/images/categories/n1.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="truck">
+              <label htmlFor="truck">Semi-trailer truck</label>
+              <img src="/assets/images/categories/n2.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button
+              type="submit"
+              className="index-slider-items"
+              id="semi-trailer"
+            >
+              <label htmlFor="semi-trailer">Semi-trailer</label>
+              <img src="/assets/images/categories/n3.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="cm">
+              <label htmlFor="cm">Construction machinery</label>
+              <img src="/assets/images/categories/n4.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="av">
+              <label htmlFor="av">Agricultural vehicle</label>
+              <img src="/assets/images/categories/n5.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="bus">
+              <label htmlFor="bus">Bus</label>
+              <img src="/assets/images/categories/n6.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="forklift">
+              <label htmlFor="forklift">Forklift</label>
+              <img src="/assets/images/categories/n7.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
+            <button type="submit" className="index-slider-items" id="sp">
+              <label htmlFor="sp">Spare parts</label>
+              <img src="/assets/images/categories/n8.png" alt="" />
+            </button>
+          </SwiperSlide>
+        </Swiper>
+      </div>
+      <div className="cat-container mobile-hider ">
         <a href="/list/trucko75#searchbar">
           <button type="submit" className="index-slider-items" id="truck75">
             <label htmlFor="truck75">Truck</label>

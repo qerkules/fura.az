@@ -26,7 +26,7 @@
         "react-slider": "^2.0.6",
         "react-visibility-sensor": "^5.1.1",
         "sass": "^1.69.5",
-        "swiper": "^11.0.7",
+        "swiper": "^11.1.4",
         "wowjs": "^1.1.3"
     }
 }

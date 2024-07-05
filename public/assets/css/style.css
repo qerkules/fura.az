@@ -10159,6 +10159,12 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 767px) {
+  .desktop-hider{
+    display: block!important;
+  }
+  .mobile-hider{
+    display: none!important;
+  }
   #header3.main-header .header-style2 {
     justify-content: center;
   }
@@ -11440,4 +11446,16 @@ ul#navbar-mobile-bottom li {
   padding: 0px 10px;
   border-top-right-radius: 10px;
   z-index: 100;
+}
+
+.swiper-slide-box {
+  width: 70% !important;
+}
+
+.desktop-hider{
+  display: none;
+}
+
+.mobile-hider{
+  display: flex;
 }

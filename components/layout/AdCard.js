@@ -1,5 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import BalanceIcon from "@mui/icons-material/Balance";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+
 export default function AdCard() {
   return (
     <div className="tf-car-service">
@@ -11,10 +14,10 @@ export default function AdCard() {
           <div className="bottom-btn-wrap">
             <div className="btn-group">
               <a href="#" className="icon-service">
-                <i className="icon-shuffle-2-11" />
+                <BalanceIcon />
               </a>
               <a href="#" className="icon-service">
-                <i className="icon-heart-1-1" />
+                <FavoriteBorderIcon />
               </a>
             </div>
           </div>

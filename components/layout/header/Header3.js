@@ -6,15 +6,9 @@ import ContrastIcon from "@mui/icons-material/Contrast";
 import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
 export default function Header3({
-  scroll,
-  isMobileMenu,
   handleMobileMenu,
   handleToggle1,
-  isToggled1,
   handleToggle2,
-  isToggled2,
-  handleToggle3,
-  isToggled3,
 }) {
   return (
     <>
@@ -69,13 +63,41 @@ export default function Header3({
                 </div>
 
                 <div className="upheader-item">
-                  <a
-                    data-bs-toggle="modal"
-                    role="button"
-                    className="flex align-center"
-                  >
-                    <LanguageIcon /> Eng
-                  </a>
+                  <div className="nav-wrapper">
+                    <div className="sl-nav">
+                      <LanguageIcon />
+                      <ul>
+                        <li>
+                          <b>Deutsch</b>{" "}
+                          <i
+                            className="fa fa-angle-down"
+                            aria-hidden="true"
+                          ></i>
+                          <div className="triangle"></div>
+                          <ul>
+                            <li>
+                              <i className="sl-flag flag-usa">
+                                <div id="germany"></div>
+                              </i>
+                              <span className="active">Eng</span>
+                            </li>
+                            <li>
+                              <i className="sl-flag flag-usa">
+                                <div id="germany"></div>
+                              </i>
+                              <span>Ru</span>
+                            </li>
+                            <li>
+                              <i className="sl-flag flag-usa">
+                                <div id="germany"></div>
+                              </i>
+                              <span>Az</span>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="col-md-2 flex-end">
@@ -188,8 +210,8 @@ export default function Header3({
             </div>
           </nav>
         </div>
-        <MobileNavbar/>
-        
+        <MobileNavbar />
+
         {/* End Mobile Menu */}
       </header>
     </>

@@ -24,6 +24,9 @@ export default function AdCard({ premium }) {
         </div>
         <div className="listing-images">
           <span className="ad-price">$50,000</span>
+          {premium && <span className="ad-premium">
+                <img src="/assets/images/icon-box/premium-icon.svg"/>
+            </span>}
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">

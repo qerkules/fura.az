@@ -6148,7 +6148,7 @@ ul.social-icon li a i:hover {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   position: relative;
 }
 
@@ -11542,6 +11542,24 @@ ul#navbar-mobile-bottom li {
   position: absolute;
   right: 15px;
   width: auto;
-  bottom: -10px;
+  bottom: 7px;
 }
 
+
+.trailer-container{
+  background-color:#EEF2F6;
+  margin-left: -5%;
+  margin-right: -5%;
+  padding: 30px 5% 50px;
+}
+.trailer-container button{
+  bottom: 7px!important;
+}
+.divider-header.trailer{
+  background-color: #EEF2F6;
+  margin-left: -5%;
+  margin-right: -5%;
+  margin-top: 0px;
+  margin-bottom: -1px;
+  padding: 30px 5% 0px;
+}

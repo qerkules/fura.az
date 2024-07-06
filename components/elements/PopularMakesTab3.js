@@ -9,6 +9,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AdCardSparepart from "../layout/AdCardSparepart";
+import AdCardTrailer from "../layout/AdCardTrailer";
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -65,6 +66,12 @@ export default function PopularMakesTab3() {
           className="mySwiper"
         >
           <SwiperSlide className="swiper-slide-box">
+            <button className="index-slider-items" id="semi-trailer">
+              <label htmlFor="semi-trailer">Semi-trailer</label>
+              <img src="/assets/images/categories/n3.png" alt="" />
+            </button>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-box">
             <button className="index-slider-items" id="truck75">
               <label htmlFor="truck75">Truck</label>
               <img src="/assets/images/categories/n1.png" alt="" />
@@ -74,12 +81,6 @@ export default function PopularMakesTab3() {
             <button className="index-slider-items" id="truck">
               <label htmlFor="truck">Semi-trailer truck</label>
               <img src="/assets/images/categories/n2.png" alt="" />
-            </button>
-          </SwiperSlide>
-          <SwiperSlide className="swiper-slide-box">
-            <button className="index-slider-items" id="semi-trailer">
-              <label htmlFor="semi-trailer">Semi-trailer</label>
-              <img src="/assets/images/categories/n3.png" alt="" />
             </button>
           </SwiperSlide>
           <SwiperSlide className="swiper-slide-box">
@@ -115,6 +116,12 @@ export default function PopularMakesTab3() {
         </Swiper>
       </div>
       <div className="cat-container mobile-hider ">
+        <a href="/list/semi-trailer#searchbar">
+          <button className="index-slider-items" id="semi-trailer">
+            <label htmlFor="semi-trailer">Semi-trailer</label>
+            <img src="/assets/images/categories/n3.png" alt="" />
+          </button>
+        </a>
         <a href="/list/trucko75#searchbar">
           <button className="index-slider-items" id="truck75">
             <label htmlFor="truck75">Truck</label>
@@ -125,12 +132,6 @@ export default function PopularMakesTab3() {
           <button className="index-slider-items" id="truck">
             <label htmlFor="truck">Semi-trailer truck</label>
             <img src="/assets/images/categories/n2.png" alt="" />
-          </button>
-        </a>
-        <a href="/list/semi-trailer#searchbar">
-          <button className="index-slider-items" id="semi-trailer">
-            <label htmlFor="semi-trailer">Semi-trailer</label>
-            <img src="/assets/images/categories/n3.png" alt="" />
           </button>
         </a>
         <a href="/list/constructionmachinery#searchbar">
@@ -164,19 +165,32 @@ export default function PopularMakesTab3() {
           </button>
         </a>
       </div>
-      <div className="tab-content-header">
+      {/* <div className="tab-content-header">
         <span className="tab-content-title">Todays Ads</span>
         <span className="tab-content-title">
           Filtirleme <ExpandMoreIcon />
         </span>
-      </div>
+      </div> */}
       <div className="tab-content" id="pills-tabContent">
         <div className={"tab-pane fade show active"}>
+          <div className="divider-header">Trailers Exclusive</div>
+          <div className="car-list-item ">
+            <AdCardTrailer />
+            <AdCardTrailer />
+            <AdCardTrailer />
+            <AdCardTrailer />
+            <button>See All Ads</button>
+          </div>
+          <div className="ad-banner">
+            <img src="/assets/images/ads/ad-banner.jpg" />
+          </div>
+          <div className="divider-header">Todays Ads Exclusive</div>
           <div className="car-list-item">
             <AdCard />
             <AdCard />
             <AdCard />
             <AdCard />
+            <button>See All Ads</button>
           </div>
           <div className="ad-banner">
             <img src="/assets/images/ads/ad-banner.jpg" />
@@ -187,6 +201,7 @@ export default function PopularMakesTab3() {
             <AdCardSparepart />
             <AdCardSparepart />
             <AdCardSparepart />
+            <button>See All Ads</button>
           </div>
         </div>
         <div

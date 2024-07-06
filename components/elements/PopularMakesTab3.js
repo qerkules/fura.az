@@ -8,6 +8,7 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AdCardSparepart from "../layout/AdCardSparepart";
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
 
@@ -176,6 +177,16 @@ export default function PopularMakesTab3() {
             <AdCard />
             <AdCard />
             <AdCard />
+          </div>
+          <div className="ad-banner">
+            <img src="/assets/images/ads/ad-banner.jpg" />
+          </div>
+          <div className="divider-header">Spare Parts</div>
+          <div className="car-list-item">
+            <AdCardSparepart />
+            <AdCardSparepart />
+            <AdCardSparepart />
+            <AdCardSparepart />
           </div>
         </div>
         <div

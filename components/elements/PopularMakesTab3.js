@@ -183,6 +183,9 @@ export default function PopularMakesTab3() {
             <AdCard premium={true} />
             <button>See All Ads</button>
           </div>
+          <div className="ad-banner">
+            <img src="/assets/images/ads/ad-banner.jpg" />
+          </div>
           <div className="divider-header">Todays Ads Exclusive</div>
           <div className="car-list-item">
             <AdCard />
@@ -190,6 +193,9 @@ export default function PopularMakesTab3() {
             <AdCard />
             <AdCard />
             <button>See All Ads</button>
+          </div>
+          <div className="ad-banner">
+            <img src="/assets/images/ads/ad-banner.jpg" />
           </div>
           <div className="divider-header full-background">
             Trailers Exclusive

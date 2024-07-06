@@ -4653,8 +4653,9 @@ ul.social-icon li a i:hover {
   right: 14px;
   left: 14px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
   z-index: 10;
 }
 .tf-car-service .image .stm-badge-top .feature {

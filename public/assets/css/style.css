@@ -10178,10 +10178,13 @@ a.mapboxgl-ctrl-logo {
   .mobile-hider {
     display: none !important;
   }
+  .mobile-hider-trailer{
+    display: none!important;
+  }
   #header3.main-header .header-style2 {
     justify-content: center;
   }
-  .price {
+  .ad-price {
     font-size: 14px !important;
   }
   .mobile-left-icon {
@@ -10784,14 +10787,14 @@ a.mapboxgl-ctrl-logo {
   .image-icon {
     font-size: 16px;
   }
-  .price {
+  .ad-price {
     font-size: 12px !important;
   }
 }
 @media only screen and (max-width: 400px) {
   h6,
   .tf-car-service .content .sub-title,
-  .tf-car-service .content .price {
+  .tf-car-service .content .ad-price {
     font-size: 12px;
     line-height: 15px;
   }
@@ -11452,7 +11455,7 @@ ul#navbar-mobile-bottom li {
   display: none;
 }
 
-.price {
+.ad-price {
   position: absolute;
   bottom: 2px;
   background-color: #000;
@@ -11473,6 +11476,10 @@ ul#navbar-mobile-bottom li {
 
 .mobile-hider {
   display: flex;
+}
+
+.mobile-hider-trailer{
+  display: block;
 }
 
 .ad-banner {

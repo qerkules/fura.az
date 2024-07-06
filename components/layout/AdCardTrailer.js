@@ -3,9 +3,13 @@ import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function AdCardTrailer() {
+export default function AdCardTrailer({ hide }) {
   return (
-    <div className="tf-car-service trailer-card">
+    <div
+      className={`tf-car-service trailer-card ${
+        hide === true && "mobile-hider-trailer"
+      }`}
+    >
       <div className="image">
         <div className="stm-badge-top">
           <div className="feature">
@@ -23,7 +27,7 @@ export default function AdCardTrailer() {
           </div>
         </div>
         <div className="listing-images">
-          <span className="price">$50,000</span>
+          <span className="ad-price">$50,000</span>
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">

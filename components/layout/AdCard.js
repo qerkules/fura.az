@@ -23,7 +23,7 @@ export default function AdCard() {
           </div>
         </div>
         <div className="listing-images">
-          <span className="price">$50,000</span>
+          <span className="ad-price">$50,000</span>
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">

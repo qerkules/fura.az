@@ -175,10 +175,10 @@ export default function PopularMakesTab3() {
         <div className={"tab-pane fade show active"}>
           <div className="divider-header">Trailers Exclusive</div>
           <div className="car-list-item ">
-            <AdCardTrailer />
-            <AdCardTrailer />
-            <AdCardTrailer />
-            <AdCardTrailer />
+            <AdCardTrailer hide={false}/>
+            <AdCardTrailer hide={false}/>
+            <AdCardTrailer hide={true}/>
+            <AdCardTrailer hide={true} />
             <button>See All Ads</button>
           </div>
           <div className="ad-banner">

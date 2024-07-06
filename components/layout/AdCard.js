@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 export default function AdCard({ premium }) {
   return (
     <div className={`tf-car-service ${premium ? "premium" : ""}`}>
@@ -24,9 +24,11 @@ export default function AdCard({ premium }) {
         </div>
         <div className="listing-images">
           <span className="ad-price">$50,000</span>
-          {premium && <span className="ad-premium">
-                <img src="/assets/images/icon-box/premium-icon.svg"/>
-            </span>}
+          {premium && (
+            <span className="ad-premium">
+              <img src="/assets/images/icon-box/premium-icon.svg" />
+            </span>
+          )}
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
@@ -84,6 +86,9 @@ export default function AdCard({ premium }) {
           <ul>
             <li className="listing-information transmission">
               <div className="inner">
+                {/* <div className="information-icon">
+                  <CalendarMonthIcon />
+                </div> */}
                 <span>Year</span>
                 <p>2020</p>
               </div>

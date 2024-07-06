@@ -4722,7 +4722,6 @@ ul.social-icon li a i:hover {
 .tf-car-service .content .description ul {
   display: flex;
   align-items: flex-start;
-  justify-content: center;
   border-bottom: 1px solid #efefef;
   padding: 10px 0px;
 }
@@ -4808,10 +4807,11 @@ ul.social-icon li a i:hover {
 }
 
 .icon-service {
-  background: white;
+  background: #081e2a;
   padding: 10px;
   border-radius: 100%;
   font-size: 20px;
+  color: white;
 }
 
 .icon-service:first-child {
@@ -11468,8 +11468,8 @@ ul#navbar-mobile-bottom li {
   right: 5px;
   position: absolute;
   bottom: 7px;
-  background-color: #fff;
-  padding: 2px 5px;
+  background-color: #081e2a;
+  padding: 5px;
   border-radius: 7px;
   z-index: 7;
   line-height: 0px;
@@ -11561,19 +11561,28 @@ ul#navbar-mobile-bottom li {
 
 .full-background {
   background-color: #eef2f6;
-  margin-left: -5%;
-  margin-right: -5%;
-  padding: 30px 5% 50px;
+  margin-left: -4%;
+  margin-right: -4%;
+  padding: 30px 4% 50px;
 }
 .divider-header.full-background {
   background-color: #eef2f6;
-  margin-left: -5%;
-  margin-right: -5%;
+  margin-left: -4%;
+  margin-right: -4%;
   margin-top: 0px;
   margin-bottom: -1px;
-  padding: 30px 5% 0px;
+  padding: 30px 4% 0px;
 }
 
 .tf-car-service.premium {
   border: 1px solid #f0e68c;
 }
+
+.information-icon{
+  display: flex;
+  justify-content: center;
+}
+.information-icon svg{
+  font-size: 20px;
+}
+

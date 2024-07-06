@@ -4,18 +4,17 @@ import Image from "next/image";
 import { useState } from "react";
 import AdCard from "../layout/AdCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/free-mode";
+import { FreeMode, Pagination } from "swiper/modules";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AdCardSparepart from "../layout/AdCardSparepart";
 import AdCardTrailer from "../layout/AdCardTrailer";
+
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
 
-  const handleOnClick = (index) => {
-    setActiveIndex(index);
-  };
   return (
     <>
       {/* <div className="header-section tab-car-service">
@@ -58,11 +57,13 @@ export default function PopularMakesTab3() {
       </div>
       <div className="cat-container desktop-hider">
         <Swiper
-          slidesPerView={"auto"}
+          slidesPerView={1}
           spaceBetween={30}
+          freeMode={true}
           pagination={{
             clickable: true,
           }}
+          modules={[FreeMode, Pagination]}
           className="mySwiper"
         >
           <SwiperSlide className="swiper-slide-box">
@@ -173,9 +174,7 @@ export default function PopularMakesTab3() {
       </div> */}
       <div className="tab-content" id="pills-tabContent">
         <div className={"tab-pane fade show active"}>
-          <div className="divider-header full-background">
-            Premium Ads
-          </div>
+          <div className="divider-header full-background">Premium Ads</div>
           <div className="car-list-item full-background">
             <AdCard premium={true} />
             <AdCardSparepart premium={true} />

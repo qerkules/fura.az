@@ -13,12 +13,9 @@ export default function AdCard({ premium }) {
           </div>
           <div className="bottom-btn-wrap">
             <div className="btn-group">
-              <a href="#" className="icon-service">
-                <BalanceIcon className="image-icon" />
-              </a>
-              <a href="#" className="icon-service">
-                <FavoriteBorderIcon className="image-icon" />
-              </a>
+                <div className="rent-button">
+                  RENT
+                </div>
             </div>
           </div>
         </div>
@@ -79,6 +76,14 @@ export default function AdCard({ premium }) {
         </div>
       </div>
       <div className="content">
+        <div className="icon-group">
+          <a href="#" className="icon-service">
+            <BalanceIcon className="image-icon" />
+          </a>
+          <a href="#" className="icon-service">
+            <FavoriteBorderIcon className="image-icon" />
+          </a>
+        </div>
         <h6 className="title">Scania R500</h6>
         <span className="sub-title">Standart Tractor</span>
 

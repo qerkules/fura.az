@@ -13,17 +13,17 @@ export default function AdCardSparepart({ premium }) {
           </div>
           <div className="bottom-btn-wrap">
             <div className="btn-group">
-              <a href="#" className="icon-service">
-                <FavoriteBorderIcon className="image-icon" />
-              </a>
+              <div className="rent-button">RENT</div>
             </div>
           </div>
         </div>
         <div className="listing-images">
           <span className="ad-price">$50,000</span>
-          {premium && <span className="ad-premium">
-                <img src="/assets/images/icon-box/premium-icon.svg"/>
-            </span>}
+          {premium && (
+            <span className="ad-premium">
+              <img src="/assets/images/icon-box/premium-icon.svg" />
+            </span>
+          )}
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
@@ -74,6 +74,11 @@ export default function AdCardSparepart({ premium }) {
         </div>
       </div>
       <div className="content">
+        <div className="icon-group">
+          <a href="#" className="icon-service">
+            <FavoriteBorderIcon className="image-icon" />
+          </a>
+        </div>
         <h6 className="title">Bosch</h6>
         <span className="sub-title">Crane Arm Support</span>
 

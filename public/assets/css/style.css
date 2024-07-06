@@ -10735,6 +10735,9 @@ a.mapboxgl-ctrl-logo {
   h6 {
     line-height: 24px;
   }
+  .cat-container label{
+    font-size: 12px !important;
+  }
   .tf-car-service .content .bottom-btn-wrap {
     font-size: 8px;
     margin-top: 0px;
@@ -11461,7 +11464,7 @@ ul#navbar-mobile-bottom li {
 }
 
 .swiper-slide-box {
-  width: 50% !important;
+  width: 55% !important;
 }
 
 .desktop-hider {

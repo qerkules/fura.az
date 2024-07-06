@@ -181,7 +181,6 @@ export default function PopularMakesTab3() {
             <AdCardSparepart premium={true} />
             <AdCardTrailer premium={true} />
             <AdCard premium={true} />
-            <button>See All Ads</button>
           </div>
           <div className="ad-banner">
             <img src="/assets/images/ads/ad-banner.jpg" />

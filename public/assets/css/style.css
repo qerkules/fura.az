@@ -11546,20 +11546,21 @@ ul#navbar-mobile-bottom li {
 }
 
 
-.trailer-container{
+.full-background{
   background-color:#EEF2F6;
   margin-left: -5%;
   margin-right: -5%;
   padding: 30px 5% 50px;
 }
-.trailer-container button{
-  bottom: 7px!important;
-}
-.divider-header.trailer{
+.divider-header.full-background{
   background-color: #EEF2F6;
   margin-left: -5%;
   margin-right: -5%;
   margin-top: 0px;
   margin-bottom: -1px;
   padding: 30px 5% 0px;
+}
+
+.tf-car-service.premium{
+  border: 2px solid gold;
 }

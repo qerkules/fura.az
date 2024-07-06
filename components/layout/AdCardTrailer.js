@@ -3,13 +3,9 @@ import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function AdCardTrailer({ hide }) {
+export default function AdCardTrailer({ premium }) {
   return (
-    <div
-      className={`tf-car-service trailer-card ${
-        hide === true && "mobile-hider-trailer"
-      }`}
-    >
+    <div className={`tf-car-service ${premium ? "premium" : ""}`}>
       <div className="image">
         <div className="stm-badge-top">
           <div className="feature">

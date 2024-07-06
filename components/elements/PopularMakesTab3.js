@@ -173,6 +173,16 @@ export default function PopularMakesTab3() {
       </div> */}
       <div className="tab-content" id="pills-tabContent">
         <div className={"tab-pane fade show active"}>
+          <div className="divider-header full-background">
+            Premium Ads
+          </div>
+          <div className="car-list-item full-background">
+            <AdCard premium={true} />
+            <AdCardSparepart premium={true} />
+            <AdCardTrailer premium={true} />
+            <AdCard premium={true} />
+            <button>See All Ads</button>
+          </div>
           <div className="divider-header">Todays Ads Exclusive</div>
           <div className="car-list-item">
             <AdCard />
@@ -181,12 +191,14 @@ export default function PopularMakesTab3() {
             <AdCard />
             <button>See All Ads</button>
           </div>
-          <div className="divider-header trailer">Trailers Exclusive</div>
-          <div className="car-list-item trailer-container">
-            <AdCardTrailer hide={false} />
-            <AdCardTrailer hide={false} />
-            <AdCardTrailer hide={true} />
-            <AdCardTrailer hide={true} />
+          <div className="divider-header full-background">
+            Trailers Exclusive
+          </div>
+          <div className="car-list-item full-background">
+            <AdCardTrailer />
+            <AdCardTrailer />
+            <AdCardTrailer />
+            <AdCardTrailer />
             <button>See All Ads</button>
           </div>
           <div className="ad-banner">

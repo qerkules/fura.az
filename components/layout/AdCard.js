@@ -3,9 +3,9 @@ import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export default function AdCard() {
+export default function AdCard({ premium }) {
   return (
-    <div className="tf-car-service">
+    <div className={`tf-car-service ${premium ? "premium" : ""}`}>
       <div className="image">
         <div className="stm-badge-top">
           <div className="feature">

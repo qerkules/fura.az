@@ -10227,13 +10227,13 @@ a.mapboxgl-ctrl-logo {
   .mobile-right-icon {
     position: absolute;
     right: 25px;
-    top: 22px;
+    top: 25px;
     display: block !important;
   }
 
   .mobile-right-icon svg,
   .mobile-left-icon svg {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   .mobile-nav-menu {
@@ -11422,7 +11422,7 @@ ul#navbar-mobile-bottom li {
 .sl-nav li:hover ul {
   position: absolute;
   top: 29px;
-  left: -37px;
+  left: -10px;
   display: block;
   background: #fff;
   width: 140px;
@@ -11432,7 +11432,7 @@ ul#navbar-mobile-bottom li {
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 .sl-nav li ul li:hover {
-  background-color: lightgray;
+  background-color: #e3e3e3;
 }
 .sl-nav li ul li {
   position: relative;
@@ -11442,6 +11442,9 @@ ul#navbar-mobile-bottom li {
   z-index: 2;
   font-size: 15px;
   color: #3c3c3c;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 .sl-nav li ul li span {
   padding-left: 5px;
@@ -11449,6 +11452,9 @@ ul#navbar-mobile-bottom li {
 .sl-nav li ul li span:hover,
 .sl-nav li ul li span.active {
   color: #146c78;
+}
+.language-shower{
+  margin-left: 5px;
 }
 .sl-flag {
   display: inline-block;

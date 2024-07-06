@@ -5,6 +5,8 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
+import ReactCountryFlag from "react-country-flag";
+
 export default function Header3({
   handleMobileMenu,
   handleToggle1,
@@ -141,31 +143,25 @@ export default function Header3({
                   <div className="mobile-left-icon">
                     <div className="nav-wrapper">
                       <div className="sl-nav">
-                        <LanguageIcon />
                         <ul>
                           <li>
-                            <b>Eng</b>{" "}
+                            <ReactCountryFlag countryCode="US" svg />
+                            <span className="language-shower">Eng</span>{" "}
                             <i
                               className="fa fa-angle-down"
                               aria-hidden="true"
                             ></i>
                             <ul>
                               <li>
-                                <i className="sl-flag flag-usa">
-                                  <div id="germany"></div>
-                                </i>
+                                <ReactCountryFlag countryCode="US" svg />
                                 <span className="active">Eng</span>
                               </li>
                               <li>
-                                <i className="sl-flag flag-usa">
-                                  <div id="germany"></div>
-                                </i>
+                                <ReactCountryFlag countryCode="RU" svg />
                                 <span>Ru</span>
                               </li>
                               <li>
-                                <i className="sl-flag flag-usa">
-                                  <div id="germany"></div>
-                                </i>
+                                <ReactCountryFlag countryCode="AZ" svg />
                                 <span>Az</span>
                               </li>
                             </ul>

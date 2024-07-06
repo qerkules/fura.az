@@ -10178,8 +10178,8 @@ a.mapboxgl-ctrl-logo {
   .mobile-hider {
     display: none !important;
   }
-  .mobile-hider-trailer{
-    display: none!important;
+  .mobile-hider-trailer {
+    display: none !important;
   }
   #header3.main-header .header-style2 {
     justify-content: center;
@@ -10738,7 +10738,7 @@ a.mapboxgl-ctrl-logo {
   h6 {
     line-height: 24px;
   }
-  .cat-container label{
+  .cat-container label {
     font-size: 12px !important;
   }
   .tf-car-service .content .bottom-btn-wrap {
@@ -11454,7 +11454,6 @@ ul#navbar-mobile-bottom li {
 .mobile-right-icon {
   display: none;
 }
-
 .ad-price {
   position: absolute;
   bottom: 2px;
@@ -11464,6 +11463,21 @@ ul#navbar-mobile-bottom li {
   padding: 0px 10px;
   border-top-right-radius: 10px;
   z-index: 7;
+}
+.ad-premium {
+  right: 5px;
+  position: absolute;
+  bottom: 7px;
+  background-color: #fff;
+  padding: 2px 5px;
+  border-radius: 7px;
+  z-index: 7;
+  line-height: 0px;
+}
+
+.ad-premium img {
+  width: 20px;
+  height: 17px;
 }
 
 .swiper-slide-box {
@@ -11478,7 +11492,7 @@ ul#navbar-mobile-bottom li {
   display: flex;
 }
 
-.mobile-hider-trailer{
+.mobile-hider-trailer {
   display: block;
 }
 
@@ -11545,15 +11559,14 @@ ul#navbar-mobile-bottom li {
   bottom: 7px;
 }
 
-
-.full-background{
-  background-color:#EEF2F6;
+.full-background {
+  background-color: #eef2f6;
   margin-left: -5%;
   margin-right: -5%;
   padding: 30px 5% 50px;
 }
-.divider-header.full-background{
-  background-color: #EEF2F6;
+.divider-header.full-background {
+  background-color: #eef2f6;
   margin-left: -5%;
   margin-right: -5%;
   margin-top: 0px;
@@ -11561,6 +11574,6 @@ ul#navbar-mobile-bottom li {
   padding: 30px 5% 0px;
 }
 
-.tf-car-service.premium{
-  border: 2px solid gold;
+.tf-car-service.premium {
+  border: 1px solid #f0e68c;
 }

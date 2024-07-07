@@ -1,27 +1,40 @@
-import { useEffect, useState } from "react"
-
+"use client";
+import { useEffect, useState } from "react";
+import ModeNightIcon from "@mui/icons-material/ModeNight";
+import LightModeIcon from "@mui/icons-material/LightMode";
 export default function ThemeSwitch() {
-    const [togglETHeme, setTogglETHeme] = useState(
-        () => JSON.parse(localStorage.getItem("togglETHeme")) || "light-theme"
-    )
-    useEffect(() => {
-        localStorage.setItem("togglETHeme", JSON.stringify(togglETHeme))
-        document.body.classList.add(togglETHeme)
-        return () => {
-            document.body.classList.remove(togglETHeme)
-        }
-    }, [togglETHeme])
+  const [togglETHeme, setTogglETHeme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("togglETHeme") || "";
+    }
+  });
 
-    return (
-        <>
-            <nav className="switcher__tab"
-                onClick={() => togglETHeme === "light-theme" ? setTogglETHeme("dark-theme") : setTogglETHeme("light-theme")
-                }
-            >
-                <span className="switcher__btn light-mode"><i className="flaticon-sun" /></span>
-                <span className="switcher__mode" />
-                <span className="switcher__btn dark-mode"><i className="flaticon-moon" /></span>
-            </nav>
-        </>
-    )
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("togglETHeme", JSON.stringify("dark"));
+    }
+    document.body.classList.add("dark");
+    return () => {
+      document.body.classList.remove("dark");
+    };
+  }, [togglETHeme]);
+
+  return (
+    <>
+      <nav
+        className="switcher__tab"
+        onClick={() =>
+          togglETHeme === "" ? setTogglETHeme("dark") : setTogglETHeme("")
+        }
+      >
+        <span className="switcher__btn light-mode">
+          <LightModeIcon />
+        </span>
+        <span className="switcher__mode" />
+        <span className="switcher__btn dark-mode">
+          <ModeNightIcon />
+        </span>
+      </nav>
+    </>
+  );
 }

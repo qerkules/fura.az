@@ -11745,3 +11745,97 @@ input[type="number"] {
 .full-background .themesflat-container {
   padding: 0px;
 }
+
+.expand-more-btn {
+  color: red;
+  text-align: end;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.expand-more-btn:hover {
+  opacity: 0.7;
+}
+.expanded-search {
+}
+
+.expanded-search-box {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  max-height: 95vh;
+  padding: 20px;
+}
+
+.expanded-search-box .search-filter-listing-car {
+  width: 100%;
+  border: 0px;
+  display: flex;
+  gap: 20px;
+  padding: 0px 0px 20px;
+}
+
+.modal-title{
+  font-size: 24px;
+  text-align: start;
+  margin-bottom: 15px;
+
+}
+
+.w-48{
+  width: 48%;
+}
+
+.modal-close-btn{
+  position: fixed;
+  right: 15px;
+  top: 10px;
+}
+
+.modal-finish-btn{
+  width: 100%;
+  background-color: var(--red);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.filter-button-container-title{
+  color: #000;
+  font-size: 22px;
+  padding:0px 0px 15px 0px;
+  padding-top: 0px;
+}
+.filter-button-container{
+  display: flex;
+  margin-bottom: 30px;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-button-select{
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+}
+
+.filter-button-select:hover{
+  background-color: red;
+  color: white;
+  border-color: transparent;
+  cursor: pointer;
+  box-shadow: 0px 0px 2px 0.5px red;
+}
+
+.filter-button-select.selected{
+  background-color: red;
+  color: white;
+  border-color: transparent;
+}

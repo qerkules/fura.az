@@ -4,14 +4,12 @@ import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
 import Link from "next/link";
-import {  useState } from "react";
+import { useState } from "react";
 export default function CarList() {
   const [activeIndex, setActiveIndex] = useState(1);
   const handleOnClick = (index) => {
     setActiveIndex(index);
   };
-
-  
 
   return (
     <>
@@ -29,7 +27,7 @@ export default function CarList() {
 
           {/* car-listing-list */}
           <div className="widget-car-listing-list">
-            <Categories />
+            <Categories currentIndex={true} />
             <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">

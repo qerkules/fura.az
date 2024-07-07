@@ -21,7 +21,7 @@ export default function PopularMakesTab3() {
         </div>
       </div>
       <div className="widget-car-service">
-        <Categories />
+        <Categories currentIndex={false}/>
         {/* <div className="header-section tab-car-service">
         <div className="heading-section">
           <span className="sub-title mb-6 wow fadeInUp">

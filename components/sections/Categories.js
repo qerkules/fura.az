@@ -5,8 +5,7 @@ import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import { FreeMode, Pagination } from "swiper/modules";
 
-
-const Categories = ({currentIndex}) => {
+const Categories = ({ currentIndex }) => {
   return (
     <div className="themesflat-container">
       <div className="ad-banner">
@@ -25,8 +24,12 @@ const Categories = ({currentIndex}) => {
         >
           <SwiperSlide className="swiper-slide-box">
             <a href="/car-list">
-              {/* <button className={`index-slider-items ${activeIndex === 1 ? "active":""}`} id="semi-trailer"> */}
-              <button className={`index-slider-items active`} id="semi-trailer">
+              <button
+                className={`index-slider-items ${
+                  currentIndex === true ? "active" : ""
+                }`}
+                id="semi-trailer"
+              >
                 <label htmlFor="semi-trailer">Semi-trailer</label>
                 <img src="/assets/images/categories/n3.png" alt="" />
               </button>
@@ -92,7 +95,12 @@ const Categories = ({currentIndex}) => {
       </div>
       <div className="cat-container mobile-hider ">
         <a href="/car-list">
-          <button className="index-slider-items active" id="semi-trailer">
+          <button
+            className={`index-slider-items ${
+              currentIndex === true ? "active" : ""
+            }`}
+            id="semi-trailer"
+          >
             <label htmlFor="semi-trailer">Semi-trailer</label>
             <img src="/assets/images/categories/n3.png" alt="" />
           </button>

@@ -11714,7 +11714,7 @@ ul#navbar-mobile-bottom li {
 }
 
 .mb-15 {
-  margin-bottom: 15px !important;
+  margin-bottom: 20px !important;
 }
 
 .input-title .css-1rxz5jq-MuiSelect-select-MuiInputBase-input-MuiInput-input {
@@ -11740,4 +11740,8 @@ input[type="number"] {
 
 .index-slider-items.active label {
   color: white !important;
+}
+
+.full-background .themesflat-container {
+  padding: 0px;
 }

@@ -1,24 +1,17 @@
 "use client";
-import RangeSlider from "@/components/elements/RangeSlider";
 import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
+import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 export default function CarList() {
   const [activeIndex, setActiveIndex] = useState(1);
   const handleOnClick = (index) => {
     setActiveIndex(index);
   };
 
+  
 
   return (
     <>
@@ -33,8 +26,10 @@ export default function CarList() {
               </div>
             </div>
           </div>
+
           {/* car-listing-list */}
           <div className="widget-car-listing-list">
+            <Categories />
             <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
@@ -117,7 +112,7 @@ export default function CarList() {
                       </div>
                     </div>
                   </form>
-                  
+
                   <div className="tab-content" id="nav-listing-car">
                     <div
                       className={
@@ -126,9 +121,7 @@ export default function CarList() {
                           : "tab-pane fade"
                       }
                     >
-                      <div className="divider-header ">
-                        Premium Ads
-                      </div>
+                      <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
                         <AdCard premium={true} />
                         <AdCard premium={true} />

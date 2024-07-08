@@ -71,10 +71,10 @@ export default function PopularMakesTab3() {
               <div className="themesflat-container">
                 <div className="divider-header ">Premium Ads</div>
                 <div className="car-list-item ">
-                  <AdCard premium={true} />
+                  <AdCard path={"/listing-details"} premium={true} />
                   <AdCardSparepart premium={true} />
                   <AdCardTrailer premium={true} />
-                  <AdCard premium={true} />
+                  <AdCard path={"/listing-details"} premium={true} />
                 </div>
               </div>
             </div>
@@ -84,10 +84,10 @@ export default function PopularMakesTab3() {
               </div>
               <div className="divider-header">Todays Ads Exclusive</div>
               <div className="car-list-item">
-                <AdCard />
-                <AdCard />
-                <AdCard />
-                <AdCard />
+                <AdCard path={"/listing-details"}/>
+                <AdCard path={"/listing-details"}/>
+                <AdCard path={"/listing-details"}/>
+                <AdCard path={"/listing-details"}/>
                 <button>See All Ads</button>
               </div>
               <div className="ad-banner">

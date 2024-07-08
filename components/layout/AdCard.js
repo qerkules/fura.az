@@ -1,12 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-export default function AdCard({ premium }) {
+import { useRouter } from "next/navigation";
+
+export default function AdCard({ premium,path }) {
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    // Check if window is defined
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+    }
+  }, []);
+
+  const handleClick = (path) => {
+    if (isClient) {
+      router.push(path);
+    }
+  };
   return (
-    <div className={`tf-car-service ${premium ? "premium" : ""}`}>
-      <div className="image">
+    <div className={`tf-car-service ${premium ? "premium" : ""}`} >
+      <div className="image" onClick={() => handleClick(path)}>
         <div className="stm-badge-top">
           <div className="feature">
             <span>NEW</span>
@@ -26,7 +42,7 @@ export default function AdCard({ premium }) {
               <img src="/assets/images/icon-box/premium-icon.svg" />
             </span>
           )}
-          <div className="hover-listing-image">
+          <div className="hover-listing-image" >
             <div className="wrap-hover-listing">
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
@@ -49,14 +65,15 @@ export default function AdCard({ premium }) {
               <div
                 className="listing-item view-gallery"
                 title="Lexus LC Hybrid 2024"
+              
               >
-                <div className="images">
+                    <div className="images" >
                   <img
                     src="./assets/images/car-list/car12.webp"
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
-                  <div className="overlay-limit">
+                  <div className="overlay-limit" >
                     <img
                       src="./assets/images/car-list/img.png"
                       className="icon-img"
@@ -84,10 +101,10 @@ export default function AdCard({ premium }) {
             <FavoriteBorderIcon className="image-icon" />
           </a>
         </div>
-        <h6 className="title">Scania R500</h6>
-        <span className="sub-title">Standart Tractor</span>
+        <h6 className="title" onClick={() => handleClick(path)}>Scania R500</h6>
+        <span className="sub-title" onClick={() => handleClick(path)}>Standart Tractor</span>
 
-        <div className="description">
+        <div className="description" onClick={() => handleClick(path)}>
           <ul>
             <li className="listing-information transmission">
               <div className="inner">

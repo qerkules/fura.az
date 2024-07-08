@@ -6,6 +6,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import DefaultFormControl from "../elements/DefaultFormControl";
 import ExtraFormControl from "../elements/ExtraFormControl";
+import useIsMobile from "../elements/UseIsMobile";
+import DefaultFormMobile from "../elements/DefaultFormMobile";
 
 const SearchFilter = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +34,7 @@ const SearchFilter = () => {
         : [...prevSelectedArray, value]
     );
   };
-
+  const isMobile = useIsMobile();
   const isSelected = (value) => selectedArray.includes(value);
 
   return (
@@ -40,16 +42,17 @@ const SearchFilter = () => {
       <div className="filter-header-list">
         <h6 className="title-filter">Search by Filter</h6>
         <div className="btn-filter">
-          <i className="icon-Grid-view"  />
+          <i className="icon-Grid-view" />
         </div>
       </div>
-      {/* <Tabs /> */}
-      <DefaultFormControl/>
-      <div
-        className="expand-more-btn mobile-hider-trailer"
-        onClick={handleOpen}
-      >
-        Expand more <ArrowRightIcon />
+      {isMobile ? <DefaultFormMobile /> : <DefaultFormControl />}
+      <div className="filter-extra-btns">
+        <div className="expand-more-btn" onClick={handleOpen}>
+          Expand more <ArrowRightIcon />
+        </div>
+        <div className="filter-form-finish-btn">
+          Search
+        </div>
       </div>
       <Modal
         open={open}

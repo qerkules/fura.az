@@ -76,10 +76,6 @@ const DefaultFormControl = () => {
               onChange={(e) => setBrand(e.target.value)}
             >
               <MenuItem value={"DAF"}>
-                <img
-                  className="brand-logo"
-                  src="/assets/images/logos/daf.webp"
-                />
                 <span>Daf</span>
               </MenuItem>
               <MenuItem value={"SCANIA"}>Scania</MenuItem>

@@ -9949,6 +9949,18 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 991px) {
+  .listing-list-car-wrap .showing {
+    margin-top: 20px;
+  }
+  .expanded-search-box {
+    width: 100%!important;
+    max-height: 100vh!important;
+    border-radius: 0px!important;
+
+  }
+  .search-filter-listing-car{
+    flex-direction: column;
+  }
   #header3.main-header .header-style2 {
     padding: 20px;
   }
@@ -9997,12 +10009,12 @@ a.mapboxgl-ctrl-logo {
   }
   .search-filter-listing-car {
     padding: 10px 14px 10px 14px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
   }
   .search-filter-listing-car .filter-header-list {
     margin-bottom: 0px;
   }
-  .search-filter-listing-car .list-filter {
+  /* .search-filter-listing-car .list-filter {
     position: absolute;
     background-color: #ffffff;
     left: 0px;
@@ -10013,7 +10025,7 @@ a.mapboxgl-ctrl-logo {
     box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.07);
     border-radius: 10px;
     display: none;
-  }
+  } */
   .tf-widget-add-cart {
     padding-top: 50px;
     padding-bottom: 100px;
@@ -11756,9 +11768,6 @@ input[type="number"] {
 .expand-more-btn:hover {
   opacity: 0.7;
 }
-.expanded-search {
-}
-
 .expanded-search-box {
   background-color: white;
   position: absolute;
@@ -11838,4 +11847,24 @@ input[type="number"] {
   background-color: red;
   color: white;
   border-color: transparent;
+}
+
+.mobile-list-filter{
+  width: 100%;
+  margin-top: 10px;
+}
+
+.filter-form-finish-btn{
+  background-color: red;
+  padding: 5px 15px;
+  width: auto;
+  color: white;
+  border-radius: 5px;
+}
+
+.filter-extra-btns{
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
 }

@@ -46,7 +46,6 @@ const ExtraFormControl = () => {
     <FormControl
       id="filter-list-car-side-bar"
       className="list-filter"
-      style={{ display: `${isToggled ? "block" : "none"}` }}
     >
       <div className="form-group-wrap">
         <div className="form-group">

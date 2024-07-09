@@ -10,9 +10,7 @@ import Breadcrumb from "./Breadcrumb";
 import Footer1 from "./footer/Footer1";
 import Header3 from "./header/Header3";
 export default function Layout({
-  headerStyle,
   footerStyle,
-  headTitle,
   breadcrumbTitle,
   children,
 }) {

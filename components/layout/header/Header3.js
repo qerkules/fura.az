@@ -128,7 +128,7 @@ export default function Header3({
         <div className="header-lower">
           <div className="themesflat-container">
             <div className="row">
-              <div className="col-lg-12">
+              <div className="col-lg-12 mobile-header-bar">
                 <div className="header-style2 flex justify-space align-center">
                   <div className="mobile-right-icon">
                     <a

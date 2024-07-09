@@ -21,7 +21,7 @@ export default function PopularMakesTab3() {
         </div>
       </div>
       <div className="widget-car-service">
-        <Categories currentIndex={false}/>
+        <Categories currentIndex={false} />
         {/* <div className="header-section tab-car-service">
         <div className="heading-section">
           <span className="sub-title mb-6 wow fadeInUp">
@@ -57,7 +57,6 @@ export default function PopularMakesTab3() {
           </li>
         </ul>
       </div> */}
-
         {/* <div className="tab-content-header">
         <span className="tab-content-title">Todays Ads</span>
         <span className="tab-content-title">
@@ -84,10 +83,10 @@ export default function PopularMakesTab3() {
               </div>
               <div className="divider-header">Todays Ads Exclusive</div>
               <div className="car-list-item">
-                <AdCard path={"/listing-details"}/>
-                <AdCard path={"/listing-details"}/>
-                <AdCard path={"/listing-details"}/>
-                <AdCard path={"/listing-details"}/>
+                <AdCard path={"/listing-details"} />
+                <AdCard path={"/listing-details"} />
+                <AdCard path={"/listing-details"} />
+                <AdCard path={"/listing-details"} />
                 <button>See All Ads</button>
               </div>
               <div className="ad-banner">

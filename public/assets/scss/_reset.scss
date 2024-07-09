@@ -353,32 +353,6 @@ input[type="submit"] {
     @include transition3;
 }
 
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"] {
-    font-family: var(--font-main-family);
-    width: 100%;
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 400;
-    color: $black;
-    border: 1px solid $gray;
-    border-radius: 5px;
-    padding: 15px 25px;
-}
 
 textarea {
     height: 140px;

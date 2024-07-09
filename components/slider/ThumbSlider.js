@@ -1,113 +1,87 @@
+"use client";
+import React, { useEffect, useRef } from 'react';
+import '@splidejs/react-splide/css';
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/splide/css';
 
+const ThumbSlider = () => {
+  const mainRef = useRef();
+  const thumbsRef = useRef();
 
-'use client'
-import { useState } from 'react'
-import 'swiper/css/free-mode'
-import 'swiper/css/thumbs'
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+  useEffect(() => {
+    if (mainRef.current && thumbsRef.current) {
+      const mainSplide = mainRef.current.splide;
+      const thumbsSplide = thumbsRef.current.splide;
 
-export default function ThumbSlider() {
-    const [thumbsSwiper, setThumbsSwiper] = useState(null)
+      mainSplide.sync(thumbsSplide);
+    }
+  }, []);
 
-    return (
-        <>
-            <div className="swiper property-gallary2">
-                <Swiper
-                    spaceBetween={10}
-                    thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    navigation={{
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    }}
-                    className="swiper-wrapper">
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/slide1.jpg" alt="Image" />
-                    </SwiperSlide>
-                </Swiper>
-                <div className="swiper-button-next" />
-                <div className="swiper-button-prev" />
-            </div >
-            <div className="swiper property-gallary">
-                <Swiper
-                    onSwiper={setThumbsSwiper}
-                    spaceBetween={20}
-                    slidesPerView={7}
-                    freeMode={true}
-                    watchSlidesProgress={true}
-                    modules={[FreeMode, Navigation, Thumbs]}
-                    breakpoints={{
-                        0: {
-                            slidesPerView: 3,
-                        },
-                        480: {
-                            slidesPerView: 3,
-                        },
-                        767: {
-                            slidesPerView: 5,
-                        },
-                    }}
-                    className="swiper-wrapper">
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum1.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum2.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum3.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum4.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum5.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum6.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum7.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum5.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum2.jpg" alt="Image" />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <img src="./assets/images/gallary/thum3.jpg" alt="Image" />
-                    </SwiperSlide>
-                </Swiper>
-            </div>
-        </>
-    )
-}
+  return (
+    <div>
+      <Splide
+        options={{
+          type: 'fade',
+          heightRatio: 0.5,
+          pagination: false,
+          arrows: false,
+          cover: true,
+        }}
+        ref={mainRef}
+        className='main-slider'
+      >
+        <SplideSlide className='main-slider-image'>
+          <img src="/assets/images/car-list/car1.webp" alt="Image 1" />
+        </SplideSlide>
+        <SplideSlide className='main-slider-image'>
+          <img src="/assets/images/car-list/car11.webp" alt="Image 2" />
+        </SplideSlide>
+        <SplideSlide className='main-slider-image'>
+          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
+        </SplideSlide>
+        <SplideSlide className='main-slider-image'>
+          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
+        </SplideSlide>
+        <SplideSlide className='main-slider-image'>
+          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
+        </SplideSlide>
+      </Splide>
+
+      <Splide
+        options={{
+          fixedWidth: 100,
+          fixedHeight: 64,
+          isNavigation: true,
+          gap: 10,
+          pagination: false,
+          cover: true,
+          breakpoints: {
+            600: {
+              fixedWidth: 66,
+              fixedHeight: 40,
+            },
+          },
+        }}
+        ref={thumbsRef}
+      >
+        <SplideSlide>
+          <img src="/assets/images/car-list/car1.webp" alt="Thumbnail 1" />
+        </SplideSlide>
+        <SplideSlide>
+          <img src="/assets/images/car-list/car11.webp" alt="Thumbnail 2" />
+        </SplideSlide>
+        <SplideSlide>
+          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
+        </SplideSlide>
+        <SplideSlide>
+          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
+        </SplideSlide>
+        <SplideSlide>
+          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
+        </SplideSlide>
+      </Splide>
+    </div>
+  );
+};
+
+export default ThumbSlider;

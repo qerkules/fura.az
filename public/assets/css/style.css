@@ -419,33 +419,6 @@ input[type="submit"] {
   transition: all 0.3s ease;
 }
 
-select,
-textarea,
-input[type="text"],
-input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="date"],
-input[type="month"],
-input[type="time"],
-input[type="week"],
-input[type="number"],
-input[type="email"],
-input[type="url"],
-input[type="search"],
-input[type="tel"],
-input[type="color"] {
-  font-family: var(--font-main-family);
-  width: 100%;
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
-  color: #000000;
-  border: 1px solid #ebebeb;
-  border-radius: 5px;
-  padding: 15px 25px;
-}
-
 textarea {
   height: 140px;
   resize: none;
@@ -3274,6 +3247,12 @@ ul.social-icon li a i:hover {
   .price
   .price-sale {
   font-size: 22px;
+}
+
+.price-sale {
+  font-size: 20px;
+  font-weight: 600;
+  color: #090a0b;
 }
 .tf-slide-form-v2 .slide-form-v2 .slider-wrap .slide-box-form {
   max-width: 438px;
@@ -7752,6 +7731,7 @@ a.mapboxgl-ctrl-logo {
   margin-bottom: 40px;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: flex-end;
 }
 .wrap-property-car .box-1 .icon-box-info .info-sale > .sale {
   font-size: 14px;
@@ -7801,10 +7781,14 @@ a.mapboxgl-ctrl-logo {
 .wrap-property-car .box-1 .text-address i {
   color: #d01818;
 }
+.box-2.t-al-right {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
 .box-2 .icon-boxs {
   gap: 20px;
   align-items: center;
-  margin-bottom: 30px;
 }
 .icon-boxs > a {
   font-size: 14px;
@@ -7881,7 +7865,7 @@ a.mapboxgl-ctrl-logo {
 }
 
 .post-property .wrap-style {
-  margin-bottom: 75px;
+  margin-bottom: 35px;
 }
 .post-property .title {
   margin-bottom: 10px;
@@ -7903,8 +7887,6 @@ a.mapboxgl-ctrl-logo {
   color: #83827f;
 }
 .post-property .wrap-car-overview {
-  padding-bottom: 70px;
-  border-bottom: 1px solid #e9e9e9;
 }
 .post-property .wrap-car-overview .listing-info .item:not(:last-child) {
   margin-bottom: 15px;
@@ -7968,7 +7950,7 @@ a.mapboxgl-ctrl-logo {
 }
 .post-property .wrap-car-feature .tf-listing-info #tf-features {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
 .post-property
@@ -8374,46 +8356,41 @@ a.mapboxgl-ctrl-logo {
   background-color: #f8f8f8;
   border-radius: 10px;
 }
-.author-contact-listing-wrap .author-contact-wrap {
+.author-contact-wrap {
   display: flex;
-  margin-bottom: 40px;
+  align-items: center;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
-.author-contact-listing-wrap .author-contact-wrap .author-contact-avatar {
-  width: 68px;
-  height: 68px;
+.author-contact-wrap .author-contact-avatar svg {
+  width: 58px;
+  height: 55px;
+}
+.author-contact-wrap .author-contact-avatar {
   border-radius: 100%;
   margin-right: 25px;
 }
-.author-contact-listing-wrap .author-contact-wrap .author-contact-avatar img {
-  border-radius: 100%;
-}
-.author-contact-listing-wrap .author-contact-wrap .author-contact-info .name {
+
+.author-contact-wrap .author-contact-info .name {
   font-size: 16px;
   text-transform: uppercase;
   line-height: 20.16px;
   margin-bottom: 3px;
 }
-.author-contact-listing-wrap .author-contact-wrap .author-contact-info .desc {
+.author-contact-wrap .author-contact-info .desc {
   font-size: 14px;
   font-weight: 400;
   color: #83827f;
   line-height: 19px;
 }
-.author-contact-listing-wrap
-  .author-contact-wrap
-  .author-contact-info
-  .number-phone {
+.author-contact-wrap .author-contact-info .number-phone {
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
   color: #312323;
   text-transform: uppercase;
 }
-.author-contact-listing-wrap
-  .author-contact-wrap
-  .author-contact-info
-  .number-phone
-  i {
+.author-contact-wrap .author-contact-info .number-phone i {
   color: #d01818;
   margin-right: 8px;
 }
@@ -9952,16 +9929,16 @@ a.mapboxgl-ctrl-logo {
     margin-top: 20px;
   }
   .expanded-search-box {
-    width: 100%!important;
-    max-height: 100vh!important;
-    border-radius: 0px!important;
-    padding-top: 70px!important;
-    padding-bottom: 70px!important;
+    width: 100% !important;
+    max-height: 100vh !important;
+    border-radius: 0px !important;
+    padding-top: 70px !important;
+    padding-bottom: 70px !important;
   }
-  .modal-close-btn{
-    top: 60px!important;
+  .modal-close-btn {
+    top: 60px !important;
   }
-  .search-filter-listing-car{
+  .search-filter-listing-car {
     flex-direction: column;
   }
   #header3.main-header .header-style2 {
@@ -11792,27 +11769,26 @@ input[type="number"] {
   padding: 0px 0px 20px;
 }
 
-.modal-title{
+.modal-title {
   font-size: 24px;
   text-align: start;
   margin-bottom: 15px;
-
 }
 
-.w-48{
+.w-48 {
   width: 48%;
 }
 
-.modal-close-btn{
+.modal-close-btn {
   position: fixed;
   right: 15px;
   top: 10px;
 }
-.modal-close-btn svg{
+.modal-close-btn svg {
   font-size: 40px;
 }
 
-.modal-finish-btn{
+.modal-finish-btn {
   width: 100%;
   background-color: var(--red);
   color: white;
@@ -11821,27 +11797,27 @@ input[type="number"] {
   border-radius: 15px;
 }
 
-.filter-button-container-title{
+.filter-button-container-title {
   color: #000;
   font-size: 22px;
-  padding:0px 0px 15px 0px;
+  padding: 0px 0px 15px 0px;
   padding-top: 0px;
 }
-.filter-button-container{
+.filter-button-container {
   display: flex;
   margin-bottom: 30px;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.filter-button-select{
+.filter-button-select {
   padding: 5px 10px;
   font-size: 14px;
   border: 1px solid rgba(0, 0, 0, 0.23);
   border-radius: 4px;
 }
 @media only screen and (min-width: 991px) {
-  .filter-button-select:hover{
+  .filter-button-select:hover {
     background-color: red;
     color: white;
     border-color: transparent;
@@ -11850,18 +11826,18 @@ input[type="number"] {
   }
 }
 
-.filter-button-select.selected{
+.filter-button-select.selected {
   background-color: red;
   color: white;
   border-color: transparent;
 }
 
-.mobile-list-filter{
+.mobile-list-filter {
   width: 100%;
   margin-top: 10px;
 }
 
-.filter-form-finish-btn{
+.filter-form-finish-btn {
   background-color: red;
   padding: 5px 15px;
   width: auto;
@@ -11869,9 +11845,433 @@ input[type="number"] {
   border-radius: 5px;
 }
 
-.filter-extra-btns{
+.filter-extra-btns {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 20px;
+}
+
+.main-slider-image {
+  max-height: 600px;
+  background-size: contain !important;
+}
+
+.main-slider {
+  margin-bottom: 20px;
+  background-color: #000;
+  border-radius: 10px;
+}
+.converted-price:first-child {
+  margin-top: 10px;
+}
+.converted-price {
+  font-size: 14px;
+  line-height: 14px;
+  text-align: start;
+}
+.price-sale {
+  font-size: 24px;
+  font-weight: 600;
+  color: #090a0b;
+  text-align: start;
+}
+
+.gp-15 {
+  gap: 15px;
+}
+
+.ad-details {
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.ad-details svg {
+  margin-right: 5px;
+  font-size: 18px;
+}
+
+.ad-owner-details {
+}
+.ad-owner-details p {
+  color: #000;
+}
+
+.ad-owner-contact-number {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  text-align: center;
+
+  /* color: #fff; */
+  /* background-color: #0E9100; */
+}
+
+.icon-Group-14 {
+  color: red;
+  margin-right: 5px;
+}
+.sticky-section {
+  position: sticky;
+  top: 150px;
+}
+
+.disabled-icon {
+  color: white !important;
+  background-color: gray !important;
+  border-radius: 100%;
+  font-size: 10px;
+  padding: 3.5px 3px 2px 3px;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.modal-title-container {
+  display: flex;
+}
+
+.modal-title-container .title {
+  font-size: 16px;
+  font-weight: 600;
+  width: 50%;
+  text-align: center;
+}
+
+.modal-title-container .title:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+}
+
+.modal-title-container .title.active {
+  border-bottom: 1px solid red;
+}
+
+.title-privacy {
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.title-privacy p a {
+  color: #00205c !important;
+  text-decoration: underline !important;
+}
+
+.sign-background {
+  background-color: var(--feature-bg);
+  width: 100%;
+  padding: 50px 0px;
+}
+
+.sign-template {
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  min-height: 550px;
+  max-width: 1000px;
+  margin: 0px auto;
+  display: flex;
+  background-color: white;
+}
+
+.sign-details {
+  width: 50%;
+  padding: 50px 70px;
+}
+
+.sign-details-header {
+}
+
+.sign-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sign-categories {
+  display: flex;
+  padding: 0px 30px;
+}
+
+.sign-category {
+  font-size: 16px;
+  font-weight: 500;
+  width: 50%;
+  text-align: center;
+  padding-bottom: 5px;
+  cursor: pointer;
+}
+
+.sign-category:hover {
+  background-color: var(--feature-bg);
+}
+
+.sign-category.active {
+  border-bottom: 1px solid var(--red);
+  color: var(--red);
+}
+
+.sign-image {
+  width: 50%;
+  background-image: url("/assets/images/slide/bg-sign.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.sign-image img {
+  width: 100%;
+  height: auto;
+}
+
+.sign-inputs {
+  padding: 30px 0px;
+}
+.sign-input {
+  margin-bottom: 10px;
+  padding: 15px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  display: flex;
+}
+.sign-input input::placeholder {
+  font-size: 14px;
+  color: #86898e;
+}
+.sign-input input {
+  width: 100%;
+  outline: none;
+  border: none;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.login-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.register-suggest-button {
+  border: 1px solid var(--red);
+  color: var(--text-color);
+  width: 50%;
+}
+
+.default-sign-button {
+  padding: 5px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.register-button {
+  background-color: var(--red);
+  color: var(--text-wht-color);
+  width: 100%;
+}
+
+.login-button {
+  width: 50%;
+  background-color: var(--red);
+  color: var(--text-wht-color);
+}
+
+.login-forgot-button {
+  font-size: 12px;
+  text-align: right;
+  margin: 10px 10px 20px;
+  text-decoration: underline;
+}
+
+.login-tip,
+.terms-privacy-text {
+  margin: 20px 0px;
+  line-height: 14px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.login-tip a,
+.terms-privacy-text a {
+  text-decoration: underline !important;
+  color: #00205c !important;
+}
+
+.register .sign-input input {
+  margin-left: 0px !important;
+}
+
+.salon-template .sign-details {
+  width: 100% !important;
+}
+
+.salon-template .sign-inputs {
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.sign-input-image {
+  width: 50%;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-input-banner-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-input-banner {
+  border-radius: 10px;
+  width: 150px;
+  height: 100px;
+  background-color: var(--feature-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-input-banner svg {
+  font-size: 80px;
+}
+.space-around {
+  justify-content: space-around;
+}
+
+.sign-input-logo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.sign-input-logo {
+  border-radius: 10px;
+  width: 150px;
+  height: 100px;
+  background-color: var(--feature-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-input-logo svg {
+  font-size: 80px;
+}
+
+.sign-input-subtitle {
+  font-size: 12px;
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.sign-input-subtitle svg {
+  font-size: 12px;
+}
+
+.extra-info {
+  display: none;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  position: absolute;
+  top: 100%; /* Positions the extra info below the button */
+  left: -70px;
+  width: 270px;
+  z-index: 1000; /* Ensures the extra info is above other elements */
+  border-radius: 10px;
+}
+
+.sign-input-subtitle:hover .extra-info,
+.extra-info:hover {
+  display: block;
+}
+
+.sign-salon-flex {
+  display: flex;
+}
+
+.sign-background-image {
+  background-image: url("/assets/images/slide/bg-sign.png");
+  background-size: cover;
+  background-position: center;
+  height: 210px;
+  margin-bottom: -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-image-title{
+  background-color: white;
+  text-align: center;
+  padding: 10px 25px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+  font-weight: 600;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+@media only screen and (max-width: 970px) {
+  .mobile-header-bar{
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+  }
+  .sign-background {
+    padding: 0px;
+  }
+  .sign-details{
+    padding: 20px;
+  }
+  .sign-template{
+    display: block;
+  }
+  .sign-categories{
+    padding: 0px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+  .sign-category{
+    padding: 10px;
+    background-color: var(--feature-bg);
+  }
+  .sign-category.left{
+    border-top-left-radius: 30px;
+  }
+  .sign-category.right{
+    border-top-right-radius: 30px;
+  }
+  
+  .sign-category.active{
+    border-bottom: 0px;
+    background-color: white;
+  }
+  .sign-salon-flex{
+    flex-direction: column;
+  }
+
+  .sign-details,
+  .sign-inputs,
+  .sign-input-image{
+    width: 100%!important;
+  }
+
+  .sign-input-image{
+    padding-top: 0px;
+  }
+  .salon-template .sign-inputs{
+    padding-bottom: 0px;
+  }
 }

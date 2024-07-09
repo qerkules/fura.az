@@ -107,15 +107,9 @@ export default function Header3({
                   <div className="flex align-center">
                     <a
                       data-bs-toggle="modal"
-                      onClick={handleToggle1}
                       role="button"
-                    >
-                      Register /
-                    </a>
-                    <a
-                      data-bs-toggle="modal"
-                      onClick={handleToggle2}
-                      role="button"
+                      href="/sign-in"
+                      className="header-login-text"
                     >
                       &nbsp;Login
                     </a>
@@ -229,7 +223,7 @@ export default function Header3({
               <div className="help-bar-mobie login-box">
                 <a
                   data-bs-toggle="modal"
-                  onClick={handleToggle1}
+                  href="/sign-in"
                   role="button"
                   className="fw-7 category"
                 >

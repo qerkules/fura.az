@@ -5,7 +5,7 @@ import { useState } from "react";
 import RegisterDetails from "@/components/elements/RegisterDetails";
 import LoginDetails from "@/components/elements/LoginDetails";
 const page = () => {
-  const [signOption, setSignOption] = useState("register");
+  const [signOption, setSignOption] = useState("login");
 
   return (
     <Layout headerStyle={1} footerStyle={1}>

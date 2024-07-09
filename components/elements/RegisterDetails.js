@@ -291,7 +291,10 @@ const RegisterDetails = ({ setSignOption }) => {
                 <LockIcon />
                 <input placeholder="Enter Your Password" />
               </div>
-
+              <div className="login-tip">
+              Already Have Account?
+              <a onClick={() => setSignOption("login")}> Log in</a>
+            </div>
               <div className="login-buttons">
                 <div className="default-sign-button register-button">
                   Register
@@ -440,6 +443,10 @@ const RegisterDetails = ({ setSignOption }) => {
                   <input placeholder="Enter Your Password" />
                 </div>
               </div>
+            </div>
+            <div className="login-tip">
+              Already Have Account?
+              <a onClick={() => setSignOption("login")}> Log in</a>
             </div>
             <div className="login-buttons">
               <div className="default-sign-button register-button">

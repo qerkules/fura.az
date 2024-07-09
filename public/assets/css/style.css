@@ -12275,3 +12275,7 @@ input[type="number"] {
     padding-bottom: 0px;
   }
 }
+
+.header-login-text{
+  color: white;
+}

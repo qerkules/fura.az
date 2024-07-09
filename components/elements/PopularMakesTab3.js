@@ -15,7 +15,7 @@ export default function PopularMakesTab3() {
         <div className="slider-wrap swiper-wrapper">
           <div className="tf-slide-item swiper-slide">
             <div className="slide-item-image">
-              <img src="/assets/images/slide/bg.png" alt="" />
+              <img src="/assets/images/slide/bg-sign.png" alt="" />
             </div>
           </div>
         </div>

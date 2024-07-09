@@ -12274,6 +12274,9 @@ input[type="number"] {
   .salon-template .sign-inputs {
     padding-bottom: 0px;
   }
+  .widget-tf-slider{
+    top: 0px;
+  }
 }
 
 .header-login-text {

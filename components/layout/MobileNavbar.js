@@ -4,8 +4,9 @@ import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Badge } from "@mui/material";
 
-export default function MobileNavbar({handleMobileMenu}) {
+export default function MobileNavbar({ handleMobileMenu }) {
   return (
     <section id="header-mobile-bottom" className="mobile-nav-menu">
       {/* <div className="off-screen-menu">
@@ -39,7 +40,9 @@ export default function MobileNavbar({handleMobileMenu}) {
           </li>
           <li id="wshlst-bottom">
             <a className="sc-menu-item" href="/account/wishlist">
-              <FavoriteBorderIcon />
+              <Badge badgeContent={4} color="success">
+                <FavoriteBorderIcon />
+              </Badge>
               <span className="text">Favorites</span>
             </a>
           </li>

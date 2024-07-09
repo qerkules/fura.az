@@ -6,6 +6,7 @@ import ContrastIcon from "@mui/icons-material/Contrast";
 import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
 import ReactCountryFlag from "react-country-flag";
+import { Badge } from "@mui/material";
 
 export default function Header3({
   handleMobileMenu,
@@ -42,7 +43,9 @@ export default function Header3({
                     role="button"
                     className="flex align-center"
                   >
-                    <FavoriteBorderIcon />
+                    <Badge badgeContent={4} color="success">
+                      <FavoriteBorderIcon />
+                    </Badge>
                   </a>
                 </div>
                 <div className="upheader-item">

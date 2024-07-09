@@ -11383,7 +11383,7 @@ ul#navbar-mobile-bottom li {
 .sc-bottom-bar li svg {
   color: black;
   padding-bottom: 5px;
-  font-size: 32px;
+  font-size: 25px;
 }
 .navbar-add {
   bottom: 8px !important;
@@ -12213,7 +12213,7 @@ input[type="number"] {
   justify-content: center;
 }
 
-.sign-image-title{
+.sign-image-title {
   background-color: white;
   text-align: center;
   padding: 10px 25px;
@@ -12225,57 +12225,66 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 970px) {
-  .mobile-header-bar{
-    padding-left: 0px!important;
-    padding-right: 0px!important;
+  .mobile-header-bar {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
   .sign-background {
     padding: 0px;
   }
-  .sign-details{
+  .sign-details {
     padding: 20px;
   }
-  .sign-template{
+  .sign-template {
     display: block;
   }
-  .sign-categories{
+  .sign-categories {
     padding: 0px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
   }
-  .sign-category{
+  .sign-category {
     padding: 10px;
     background-color: var(--feature-bg);
   }
-  .sign-category.left{
+  .sign-category.left {
     border-top-left-radius: 30px;
   }
-  .sign-category.right{
+  .sign-category.right {
     border-top-right-radius: 30px;
   }
-  
-  .sign-category.active{
+
+  .sign-category.active {
     border-bottom: 0px;
     background-color: white;
   }
-  .sign-salon-flex{
+  .sign-salon-flex {
     flex-direction: column;
   }
 
   .sign-details,
   .sign-inputs,
-  .sign-input-image{
-    width: 100%!important;
+  .sign-input-image {
+    width: 100% !important;
   }
 
-  .sign-input-image{
+  .sign-input-image {
     padding-top: 0px;
   }
-  .salon-template .sign-inputs{
+  .salon-template .sign-inputs {
     padding-bottom: 0px;
   }
 }
 
-.header-login-text{
+.header-login-text {
+  color: white;
+}
+
+.css-zghsfl-MuiBadge-badge {
+  min-width: 15px !important;
+  width: 15px !important;
+  height: 15px !important;
+  font-size: 9px !important;
+  background: red;
   color: white;
 }

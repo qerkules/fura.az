@@ -51,7 +51,7 @@ export default function MobileNavbar({ handleMobileMenu }) {
       <ul id="navbar-mobile-bottom" style={{ display: "block" }}>
         <div className="sc-bottom-bar">
           <li>
-            <a className="sc-menu-item" href="/home/index">
+            <a className="sc-menu-item" href="/">
               <HomeIcon />
               <span className="text">Home</span>
             </a>

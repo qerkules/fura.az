@@ -12237,6 +12237,7 @@ input[type="number"] {
   }
   .sign-template {
     display: block;
+    border: 0px;
   }
   .sign-categories {
     padding: 0px;

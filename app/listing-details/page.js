@@ -83,10 +83,26 @@ const featuresArray3 = [
 ];
 
 export default function ListingDetails() {
-  const [isToggled4, setToggled4] = useState(false);
-  const handleToggle4 = () => setToggled4(!isToggled4);
-  const [isToggled5, setToggled5] = useState(false);
-  const handleToggle5 = () => setToggled5(!isToggled5);
+  const data = {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  };
+
   return (
     <>
       <Layout headerStyle={1} footerStyle={1}>
@@ -180,7 +196,13 @@ export default function ListingDetails() {
                             {featuresArray1.map((data, index) => {
                               return (
                                 <div className="listing-feature-wrap">
-                                          <i className={` ${index === 3 ? "icon-Vector-5 disabled-icon" : "icon-Vector-32"}`} />
+                                  <i
+                                    className={` ${
+                                      index === 3
+                                        ? "icon-Vector-5 disabled-icon"
+                                        : "icon-Vector-32"
+                                    }`}
+                                  />
                                   {data.value}
                                 </div>
                               );
@@ -190,7 +212,13 @@ export default function ListingDetails() {
                             {featuresArray2.map((data, index) => {
                               return (
                                 <div className="listing-feature-wrap">
-                                                <i className={` ${index === 3 ? "icon-Vector-5 disabled-icon" : "icon-Vector-32"}`} />
+                                  <i
+                                    className={` ${
+                                      index === 3
+                                        ? "icon-Vector-5 disabled-icon"
+                                        : "icon-Vector-32"
+                                    }`}
+                                  />
                                   {data.value}
                                 </div>
                               );
@@ -200,7 +228,13 @@ export default function ListingDetails() {
                             {featuresArray3.map((data, index) => {
                               return (
                                 <div className="listing-feature-wrap">
-                                  <i className={` ${index === 3 ? "icon-Vector-5 disabled-icon" : "icon-Vector-32"}`} />
+                                  <i
+                                    className={` ${
+                                      index === 3
+                                        ? "icon-Vector-5 disabled-icon"
+                                        : "icon-Vector-32"
+                                    }`}
+                                  />
                                   {data.value}
                                 </div>
                               );
@@ -260,19 +294,19 @@ export default function ListingDetails() {
               <div className="related-single-listing swiper">
                 <Swiper {...swiperOptions} className="swiper-wrapper">
                   <SwiperSlide className="listing-grid-item swiper-slide">
-                    <AdCard />
+                    <AdCard data={data} />
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
-                    <AdCard />
+                    <AdCard data={data} />
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
-                    <AdCard />
+                    <AdCard data={data} />
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
-                    <AdCard />
+                    <AdCard data={data} />
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
-                    <AdCard />
+                    <AdCard data={data} />
                   </SwiperSlide>
                 </Swiper>
                 <div className="swiper-pagination" />

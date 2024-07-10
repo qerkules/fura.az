@@ -12291,3 +12291,23 @@ input[type="number"] {
   background: red;
   color: white;
 }
+
+.image-icon.active{
+  color: red!important;
+}
+
+.page-banner{
+  width: 100%;
+  background-image: url("/assets/images/slide/bg-sign.png");
+  background-size: cover;
+  background-position: center;
+  height: 210px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.favorite-page .divider-header{
+  margin-bottom: 30px;
+}

@@ -1,12 +1,15 @@
+"use client";
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useRouter } from "next/navigation";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function AdCard({ premium,path }) {
+export default function AdCard({ path, data }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
+  const [isFavouriteClicked, setFavouriteClicked] = useState(false);
 
   useEffect(() => {
     // Check if window is defined
@@ -20,60 +23,85 @@ export default function AdCard({ premium,path }) {
       router.push(path);
     }
   };
+
+  useEffect(() => {
+    let cookieValues =
+      hasCookie("favorites") && JSON.parse(getCookie("favorites"));
+    if (cookieValues && cookieValues.includes(data.id)) {
+      setFavouriteClicked(true);
+    }
+  }, []);
+
+  const updateFavourite = () => {
+    let cookieValues = hasCookie("favorites")
+      ? JSON.parse(getCookie("favorites"))
+      : [];
+    if (isFavouriteClicked) {
+      cookieValues = cookieValues.filter((i) => i != data.id);
+      setCookie("favorites", JSON.stringify(cookieValues));
+      localStorage.setItem("favorites", JSON.stringify(cookieValues));
+      window.dispatchEvent(new CustomEvent("cookie-change"));
+    } else {
+      cookieValues.push(data.id);
+      setCookie("favorites", JSON.stringify(cookieValues));
+      localStorage.setItem("favorites", JSON.stringify(cookieValues));
+      window.dispatchEvent(new CustomEvent("cookie-change"));
+    }
+    setFavouriteClicked(!isFavouriteClicked);
+  };
   return (
-    <div className={`tf-car-service ${premium ? "premium" : ""}`} >
+    <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
       <div className="image" onClick={() => handleClick(path)}>
         <div className="stm-badge-top">
           <div className="feature">
             <span>NEW</span>
           </div>
-          <div className="bottom-btn-wrap">
-            <div className="btn-group">
-                <div className="rent-button">
-                  RENT
-                </div>
+          {data.saleOrRent === "rent" && (
+            <div className="bottom-btn-wrap">
+              <div className="btn-group">
+                <div className="rent-button">RENT</div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">$50,000</span>
-          {premium && (
+          <span className="ad-price">{(data.priceCurrency, data.price)}</span>
+          {data.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
             </span>
           )}
-          <div className="hover-listing-image" >
+          <div className="hover-listing-image">
             <div className="wrap-hover-listing">
-              <div className="listing-item active" title="Lexus LC Hybrid 2024">
-                <div className="images">
-                  <img
-                    src="./assets/images/car-list/car1.webp"
-                    className="swiper-image tfcl-light-gallery"
-                    alt="images"
-                  />
-                </div>
-              </div>
-              <div className="listing-item" title="Lexus LC Hybrid 2024">
-                <div className="images">
-                  <img
-                    src="./assets/images/car-list/car11.webp"
-                    className="swiper-image lazy tfcl-light-gallery"
-                    alt="images"
-                  />
-                </div>
-              </div>
               <div
-                className="listing-item view-gallery"
+                className={`listing-item active"}`}
                 title="Lexus LC Hybrid 2024"
-              
               >
-                    <div className="images" >
+                <div className="images">
                   <img
-                    src="./assets/images/car-list/car12.webp"
+                    src={data.images[0]}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
-                  <div className="overlay-limit" >
+                </div>
+              </div>
+              <div className={`listing-item`} title="Lexus LC Hybrid 2024">
+                <div className="images">
+                  <img
+                    src={data.images[1]}
+                    className="swiper-image tfcl-light-gallery"
+                    alt="images"
+                  />
+                </div>
+              </div>
+              <div className="listing-item view-gallery">
+                <div className="images">
+                  <img
+                    src={data.images[2]}
+                    className="swiper-image tfcl-light-gallery"
+                    alt="images"
+                  />
+                  <div className="overlay-limit">
                     <img
                       src="./assets/images/car-list/img.png"
                       className="icon-img"
@@ -97,12 +125,20 @@ export default function AdCard({ premium,path }) {
           <a href="#" className="icon-service">
             <BalanceIcon className="image-icon" />
           </a>
-          <a href="#" className="icon-service">
-            <FavoriteBorderIcon className="image-icon" />
+          <a className="icon-service" onClick={() => updateFavourite()}>
+            {isFavouriteClicked ? (
+              <FavoriteIcon className="image-icon active" />
+            ) : (
+              <FavoriteBorderIcon className="image-icon" />
+            )}
           </a>
         </div>
-        <h6 className="title" onClick={() => handleClick(path)}>Scania R500</h6>
-        <span className="sub-title" onClick={() => handleClick(path)}>Standart Tractor</span>
+        <h6 className="title" onClick={() => handleClick(path)}>
+          {`${data.brand} ${data.model}`}
+        </h6>
+        <span className="sub-title" onClick={() => handleClick(path)}>
+          {data.category}
+        </span>
 
         <div className="description" onClick={() => handleClick(path)}>
           <ul>
@@ -112,26 +148,26 @@ export default function AdCard({ premium,path }) {
                   <CalendarMonthIcon />
                 </div> */}
                 <span>Year</span>
-                <p>2020</p>
+                <p>{data.year}</p>
               </div>
             </li>
             <li className="listing-information fuel">
               <div className="inner">
                 <span>HorsePower</span>
-                <p>500 hp</p>
+                <p>{data.horsePower}</p>
               </div>
             </li>
             <li className="listing-information size-engine">
               <div className="inner">
                 <span>Mileage</span>
-                <p>200500km</p>
+                <p>{data.distance}</p>
               </div>
             </li>
           </ul>
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
-          <span>6/30/2024 3:09:24 PM</span>
+          <span>{data.createDate}</span>
         </div>
       </div>
     </div>

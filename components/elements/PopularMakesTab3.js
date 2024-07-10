@@ -8,6 +8,44 @@ import Categories from "../sections/Categories";
 
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
+  const data = {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  };
+  const data2 = {
+    id: 2,
+    saleOrRent: "sale",
+    price: "20.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "DAF",
+    model: "DX470",
+    category: "Standart Tractor",
+    year: 2000,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  };
 
   return (
     <>
@@ -70,10 +108,10 @@ export default function PopularMakesTab3() {
               <div className="themesflat-container">
                 <div className="divider-header ">Premium Ads</div>
                 <div className="car-list-item ">
-                  <AdCard path={"/listing-details"} premium={true} />
+                  <AdCard path={"/listing-details"} data={data} />
                   <AdCardSparepart premium={true} />
                   <AdCardTrailer premium={true} />
-                  <AdCard path={"/listing-details"} premium={true} />
+                  <AdCard path={"/listing-details"} data={data} />
                 </div>
               </div>
             </div>
@@ -83,10 +121,10 @@ export default function PopularMakesTab3() {
               </div>
               <div className="divider-header">Todays Ads Exclusive</div>
               <div className="car-list-item">
-                <AdCard path={"/listing-details"} />
-                <AdCard path={"/listing-details"} />
-                <AdCard path={"/listing-details"} />
-                <AdCard path={"/listing-details"} />
+                <AdCard path={"/listing-details"} data={data2}/>
+                <AdCard path={"/listing-details"} data={data}/>
+                <AdCard path={"/listing-details"} data={data}/>
+                <AdCard path={"/listing-details"} data={data}/>
                 <button>See All Ads</button>
               </div>
               <div className="ad-banner">

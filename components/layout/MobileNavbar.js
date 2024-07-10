@@ -1,12 +1,30 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Badge } from "@mui/material";
+import { getCookie, hasCookie } from "cookies-next";
 
 export default function MobileNavbar({ handleMobileMenu }) {
+  const [favoriteCurrentCount, setFavouriteCount] = useState(0);
+  useEffect(() => {
+    if (hasCookie("favorites")) {
+      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+    }
+
+    const handleStorageChange = (event) => {
+      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+    };
+
+    window.addEventListener("cookie-change", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
   return (
     <section id="header-mobile-bottom" className="mobile-nav-menu">
       {/* <div className="off-screen-menu">
@@ -39,8 +57,8 @@ export default function MobileNavbar({ handleMobileMenu }) {
             </a>
           </li>
           <li id="wshlst-bottom">
-            <a className="sc-menu-item" href="/account/wishlist">
-              <Badge badgeContent={4} color="success">
+            <a className="sc-menu-item" href="/favorites">
+              <Badge badgeContent={favoriteCurrentCount} color="success">
                 <FavoriteBorderIcon />
               </Badge>
               <span className="text">Favorites</span>
@@ -55,7 +73,7 @@ export default function MobileNavbar({ handleMobileMenu }) {
             </a>
           </li>
           <li>
-            <a className="sc-menu-item" href="/account/welcome">
+            <a className="sc-menu-item" href="/sign-in">
               <LoginIcon />
               <span className="text">Sign in</span>
             </a>

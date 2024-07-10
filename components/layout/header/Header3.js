@@ -1,5 +1,5 @@
+"use client";
 import Link from "next/link";
-import MobileMenu from "../MobileMenu";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContrastIcon from "@mui/icons-material/Contrast";
@@ -7,12 +7,26 @@ import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
 import ReactCountryFlag from "react-country-flag";
 import { Badge } from "@mui/material";
+import { getCookie, hasCookie } from "cookies-next";
+import { useEffect, useState } from "react";
 
-export default function Header3({
-  handleMobileMenu,
-  handleToggle1,
-  handleToggle2,
-}) {
+export default function Header3({ handleMobileMenu }) {
+  const [favoriteCurrentCount, setFavouriteCount] = useState(0);
+  useEffect(() => {
+    if (hasCookie("favorites")) {
+      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+    }
+
+    const handleStorageChange = (event) => {
+      setFavouriteCount(JSON.parse(getCookie("favorites")).length)
+    };
+
+    window.addEventListener("cookie-change", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
   return (
     <>
       <header id="header3" className="main-header header header-fixed ">
@@ -42,8 +56,9 @@ export default function Header3({
                     data-bs-toggle="modal"
                     role="button"
                     className="flex align-center"
+                    href="/favorites"
                   >
-                    <Badge badgeContent={4} color="success">
+                    <Badge badgeContent={favoriteCurrentCount} color="success">
                       <FavoriteBorderIcon />
                     </Badge>
                   </a>

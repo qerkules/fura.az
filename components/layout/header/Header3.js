@@ -9,7 +9,7 @@ import ReactCountryFlag from "react-country-flag";
 import { Badge } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { useEffect, useState } from "react";
-
+import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
 export default function Header3({ handleMobileMenu }) {
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function Header3({ handleMobileMenu }) {
     }
 
     const handleStorageChange = (event) => {
-      setFavouriteCount(JSON.parse(getCookie("favorites")).length)
+      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
     };
 
     window.addEventListener("cookie-change", handleStorageChange);
@@ -253,6 +253,12 @@ export default function Header3({ handleMobileMenu }) {
                 <Link href="/#" className="fw-7 font-2">
                   <BalanceIcon />
                   <span> Compare</span>
+                </Link>
+              </div>
+              <div className="help-bar-mobie saloons">
+                <Link href="/saloons" className="fw-7 font-2">
+                  <EmojiTransportationIcon />
+                  <span>Saloons</span>
                 </Link>
               </div>
             </div>

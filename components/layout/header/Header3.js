@@ -199,7 +199,7 @@ export default function Header3({ handleMobileMenu }) {
                       >
                         <ul className="navigation clearfix">
                           <li>
-                            <Link href="/contact-us">Contact us </Link>
+                            <Link href="/saloons">Saloons </Link>
                           </li>
                           <li>
                             <Link href="/contact-us">Services</Link>
@@ -210,7 +210,7 @@ export default function Header3({ handleMobileMenu }) {
                     {/* Main Menu End*/}
 
                     <div className="flat-bt-top sc-btn-top ml--20 ">
-                      <Link className="btn-icon-list" href="#">
+                      <Link className="btn-icon-list" href="/create-ad">
                         <span>Create Ad</span>
                         <i className="icon-add-button-1" />
                       </Link>

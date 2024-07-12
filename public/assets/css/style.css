@@ -9871,6 +9871,10 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 1024px) {
+  .salon-card-container {
+    grid-template-columns: 1fr !important;
+  }
+
   .widget-dealer-single
     .dealer-single
     .dealer-customer-review
@@ -12275,7 +12279,7 @@ input[type="number"] {
   .salon-template .sign-inputs {
     padding-bottom: 0px;
   }
-  .widget-tf-slider{
+  .widget-tf-slider {
     top: 0px;
   }
 }
@@ -12293,11 +12297,11 @@ input[type="number"] {
   color: white;
 }
 
-.image-icon.active{
-  color: red!important;
+.image-icon.active {
+  color: red !important;
 }
 
-.page-banner{
+.page-banner {
   width: 100%;
   background-image: url("/assets/images/slide/bg-sign.png");
   background-size: cover;
@@ -12309,6 +12313,404 @@ input[type="number"] {
   align-items: center;
 }
 
-.favorite-page .divider-header{
+.favorite-page .divider-header {
   margin-bottom: 30px;
+}
+
+.comparison-parameters {
+  flex: 2;
+  padding: 20px 0px;
+}
+.ad-parameters {
+  flex: 4;
+  padding: 20px 0px;
+}
+
+.comparison-container {
+  display: flex;
+}
+
+.comparison-image {
+  width: auto;
+  height: 250px;
+}
+
+.comparison-li {
+  padding: 5px 10px;
+  border: 1px solid #ededed;
+  color: #000;
+}
+.back-gr {
+  background-color: var(--feature-bg) !important;
+}
+.comparison-li.title.divider {
+  background-color: red;
+  color: white;
+}
+.comparison-li.title {
+  color: #86898e;
+}
+
+.create-ad-categories {
+  max-width: 700px;
+  min-height: 80vh;
+  margin: 0px auto;
+  padding: 50px 0px;
+}
+
+.create-ad-title {
+  font-size: 28px;
+  text-align: center;
+  color: #000;
+  margin-bottom: 40px;
+}
+
+.create-ad-container {
+  padding: 30px;
+}
+
+.create-ad-template {
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  flex-direction: row !important;
+}
+
+.create-ad-template > div {
+  width: 30%;
+}
+
+.prefix-select {
+  width: 100px !important;
+}
+.prefix-select > div > div > div {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.prefix-input {
+  width: 20% !important;
+}
+.mt-15 {
+  margin-top: 15px;
+}
+
+.form-image-input {
+  width: 100% !important;
+  background-color: var(--feature-bg);
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 30px;
+}
+
+.form-image-input-box {
+  width: 250px !important;
+  height: 190px;
+  width: 15%;
+  background-color: #709ac8;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.image-item {
+  display: flex;
+  justify-content: center;
+  background-color: #709ac88a;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.image-item img {
+  width: auto;
+  height: 100%;
+  max-width: 250px;
+}
+.form-image-input-box svg {
+  font-size: 100px;
+  color: white;
+  text-align: center;
+}
+
+.form-image-input-box p {
+  text-align: center;
+  color: white;
+  font-size: 10px;
+}
+
+.salon-card-container {
+  gap: 20px;
+  padding: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.salon-card {
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0px 0px 5px 0.1px lightgray;
+  border-radius: 20px;
+  display: flex;
+  min-height: 200px;
+}
+.salon-official {
+  color: #0074ba;
+  border: 1px solid lightblue;
+  padding: 2px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  margin-left: 10px;
+  position: relative;
+}
+.salon-official svg {
+  font-size: 12px;
+  position: absolute;
+  top: 4px;
+  left: 3.5px;
+  color: #0074ba;
+}
+
+.salon-card-title {
+  font-size: 28px;
+  margin-top: 40px;
+  padding-left: 20px;
+  color: #000;
+}
+
+.salon-image {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  border-right: 1px solid lightgray;
+  padding-right: 20px;
+  flex: 4;
+}
+
+.salon-details {
+  color: #000;
+  padding: 0px 20px;
+  flex: 8;
+  padding-right: 0px;
+}
+.salon-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.salon-description {
+  font-size: 14px;
+  line-height: 1.2;
+  margin: 10px 0px;
+  max-height: 50px;
+  display: -webkit-box; /* Required for webkit-based browsers */
+  -webkit-box-orient: vertical; /* Required for webkit-based browsers */
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  overflow: hidden; /* Hide the overflowing text */
+  text-overflow: ellipsis;
+}
+.salon-info {
+  padding: 20px;
+}
+
+.salon-contact {
+  padding-left: 17px;
+  color: #9b9b9b;
+  font-size: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+.salon-contact-numbers {
+  padding-left: 17px;
+  color: #9b9b9b;
+  font-size: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.salon-contact-numbers div {
+}
+
+.salon-contact div {
+  font-size: 12px;
+}
+
+.salon-contact svg,
+.salon-contact-numbers svg {
+  color: #0074ba;
+  font-size: 15px;
+}
+
+.salon-ad-count {
+  text-decoration: underline;
+  color: #0074ba;
+  font-size: 12px;
+}
+
+.salon-page-container {
+  margin-bottom: 40px;
+  background-image: url("/assets/images/slide/bg-sign.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.salon-header {
+  width: 100%;
+  height: 325px;
+}
+.salon-header img {
+  height: 100%;
+}
+
+.salon-header-image {
+}
+
+.salon-header-description {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.display-none {
+  display: none;
+}
+.display-block {
+  display: block;
+}
+
+.salon-logo {
+  width: 250px;
+  height: auto;
+  padding: 20px;
+}
+.salon-header-bottom {
+  display: grid;
+  grid-template-columns: 1fr 4fr 4fr;
+  padding: 20px;
+}
+
+.salon-page-title {
+  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.salon-page-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.salon-address {
+  font-size: 12px;
+}
+
+.phone-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.phone-icon svg {
+  color: #0074ba;
+  font-size: 40px;
+}
+.phone-numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 14px;
+  color: white;
+}
+.working-hours {
+  font-size: 14px;
+  color: white;
+}
+.phone-numbers > div:first-child,
+.phone-numbers > div:nth-child(2) {
+  margin-right: 30px;
+}
+
+.salon-address svg {
+  color: #0074ba;
+}
+
+.image-item {
+  width: 250px;
+  height: 190px;
+  position: relative;
+}
+
+.uploaded-remove-btn div {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 12px;
+  background-color: #000000a3;
+  padding: 2.5px 13px;
+  border-radius: 100%;
+  color: white;
+}
+
+.form-image-input-box img {
+  height: 60%;
+  width: auto;
+}
+
+.first-icon-image {
+  height: 60%;
+  display: flex;
+  align-items: center;
+}
+
+.first-icon-image img {
+  height: 80%;
+}
+
+@media only screen and (max-width: 660px) {
+  .create-ad-template {
+    flex-direction: column !important;
+  }
+  .create-ad-template > div {
+    width: auto !important;
+  }
+  .salon-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .salon-logo img {
+    width: 150px;
+  }
+  .salon-header {
+    height: 0px;
+  }
+  .salon-page-title {
+    font-size: 18px;
+  }
+  .salon-page-description {
+    font-size: 9px;
+  }
+  .salon-header-bottom {
+    grid-template-columns: 1fr;
+  }
+  .salon-info {
+    padding: 0px;
+  }
+  .salon-card-container{
+    padding: 20px;
+  }
+  .salon-contact-numbers{
+    display: none;
+  }
+  .salon-card{
+    min-height: 170px;
+  }
 }

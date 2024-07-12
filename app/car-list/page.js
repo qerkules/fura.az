@@ -1,10 +1,28 @@
 "use client";
+import { useState } from "react";
 import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
-import Link from "next/link";
-import { useState } from "react";
+const data = {
+  id: 1,
+  saleOrRent: "sale",
+  price: "50.000",
+  priceCurrency: "$",
+  isPremium: true,
+  images: [
+    "./assets/images/car-list/car1.webp",
+    "./assets/images/car-list/car11.webp",
+    "./assets/images/car-list/car12.webp",
+  ],
+  brand: "Scania",
+  model: "R500",
+  category: "Standart Tractor",
+  year: 2020,
+  horsePower: "500 hp",
+  distance: "200500km",
+  createDate: "6/30/2024 3:09:24 PM<",
+};
 export default function CarList() {
   const [activeIndex, setActiveIndex] = useState(1);
   const handleOnClick = (index) => {
@@ -121,23 +139,25 @@ export default function CarList() {
                     >
                       <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
-                        <AdCard premium={true} />
-                        <AdCard premium={true} />
-                        <AdCard premium={true} />
-                        <AdCard premium={true} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
                       </div>
                       <div className="ad-banner">
                         <img src="/assets/images/ads/ad-banner.jpg" />
                       </div>
                       <div className="car-list-item ">
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
-                        <AdCard />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
+                        <AdCard data={data} />
                       </div>
                       <div className="tf-pagination">
                         <a className="prev page-numbers" href="#">

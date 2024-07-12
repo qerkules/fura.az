@@ -53,7 +53,6 @@ export default function MobileMenu() {
                     <ul style={{ display: `${isActive.key == 3 ? "block" : "none"}` }}>
                         <li className={pathname == "/dashboard" ? "current" : ""}><Link href="/dashboard">Dashboard</Link></li>
                         <li className={pathname == "/my-inventory" ? "current" : ""}><Link href="/my-inventory">My Inventory</Link></li>
-                        <li className={pathname == "/addcart" ? "current" : ""}><Link href="/addcart">Add car</Link></li>
                         <li className={pathname == "/seller-profile" ? "current" : ""}><Link href="/seller-profile">Seller Profile</Link></li>
                         <li className={pathname == "/dealer-details" ? "current" : ""}><Link href="/dealer-details">Dealer Detail</Link></li>
                         <li className={pathname == "/404" ? "current" : ""}><Link href="/404">404</Link></li>

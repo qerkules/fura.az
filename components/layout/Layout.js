@@ -10,7 +10,6 @@ import Breadcrumb from "./Breadcrumb";
 import Footer1 from "./footer/Footer1";
 import Header3 from "./header/Header3";
 export default function Layout({
-  footerStyle,
   breadcrumbTitle,
   children,
 }) {
@@ -66,9 +65,7 @@ export default function Layout({
           {breadcrumbTitle && <Breadcrumb breadcrumbTitle={breadcrumbTitle} />}
 
           {children}
-
-          {!footerStyle && <Footer1 />}
-          {footerStyle == 1 ? <Footer1 /> : null}
+         <Footer1 />
         </div>
       </div>
       {/* <BackToTop /> */}

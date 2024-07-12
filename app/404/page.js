@@ -6,7 +6,7 @@ export default function Home() {
     return (
         <>
 
-            <Layout headerStyle={1} footerStyle={1} breadcrumbTitle="404 Not Found">
+            <Layout breadcrumbTitle="404 Not Found">
                 <div className="widget-error-404">
                     <div className="themesflat-container">
                         <div className="error-404 t-al-center">

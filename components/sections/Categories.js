@@ -8,9 +8,6 @@ import { FreeMode, Pagination } from "swiper/modules";
 const Categories = ({ currentIndex }) => {
   return (
     <div className="themesflat-container">
-      <div className="ad-banner">
-        <img src="/assets/images/ads/ad-banner.jpg" />
-      </div>
       <div className="cat-container desktop-hider">
         <Swiper
           slidesPerView={1}

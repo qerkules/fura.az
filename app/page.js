@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <DarkModeProvider>
-        <Layout headerStyle={3} footerStyle={1}>
+        <Layout>
           <TabCarService />
         </Layout>
       </DarkModeProvider>

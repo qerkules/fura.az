@@ -65,7 +65,7 @@ export default function MobileNavbar({ handleMobileMenu }) {
             </a>
           </li>
           <li>
-            <a className="sc-menu-item navbar-add" href="/create/list">
+            <a className="sc-menu-item navbar-add" href="/create-ad">
               <div className="new-ad-mobile">
                 <AddIcon className="new-ad-mobile-icon" />
               </div>

@@ -10805,6 +10805,9 @@ a.mapboxgl-ctrl-logo {
   }
 }
 
+/* .cat-container .splide__list:first-child{
+  margin-left: 15px!important;
+} */
 @media only screen and (max-width: 500px) {
   .widget-tf-slider .slider-wrap .tf-slide-item .slide-item-image {
     height: 400px;
@@ -10815,11 +10818,7 @@ a.mapboxgl-ctrl-logo {
   .cat-container label {
     font-size: 12px !important;
   }
-  .cat-container{
-    margin-top: 83px;
-  }
   .tf-car-service .content .bottom-btn-wrap {
-    font-size: 8px;
     margin-top: 0px;
   }
   .tf-car-service .image {
@@ -12232,10 +12231,10 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 970px) {
-
-  .splide--draggable:first-child{
+  .splide--draggable ul:first-child {
+    margin-left: 15px;
   }
-  .widget-car-service .cat-container{
+  .widget-car-service .cat-container {
     margin-top: 83px;
   }
   .mobile-header-bar {
@@ -12713,13 +12712,13 @@ input[type="number"] {
   .salon-info {
     padding: 0px;
   }
-  .salon-card-container{
+  .salon-card-container {
     padding: 20px;
   }
-  .salon-contact-numbers{
+  .salon-contact-numbers {
     display: none;
   }
-  .salon-card{
+  .salon-card {
     min-height: 170px;
   }
 }

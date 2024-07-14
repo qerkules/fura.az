@@ -171,7 +171,7 @@ export default function CarList() {
                 </div>
               </div>
             </div>
-            <Pagination pageCount={3} onPageChange={onPageclick}/>
+            <Pagination pageCount={30} onPageChange={onPageclick}/>
           </div>
         </div>
       </Layout>

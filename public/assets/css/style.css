@@ -9884,9 +9884,6 @@ a.mapboxgl-ctrl-logo {
   .post-property .wrap-car-review .reviews-list {
     padding-right: 0px;
   }
-  .widget-car-listing-list {
-    padding: 80px 0px;
-  }
   .special-car-counter .special-image {
     max-width: 100%;
   }
@@ -10811,6 +10808,10 @@ a.mapboxgl-ctrl-logo {
 
 .splide__pagination{
   bottom: -20px!important;
+}
+
+.splide__pagination__page.is-active{
+  background-color: var(--secondary-color)!important;
 }
 
 @media only screen and (max-width: 500px) {

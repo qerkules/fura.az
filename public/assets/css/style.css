@@ -10815,6 +10815,9 @@ a.mapboxgl-ctrl-logo {
   .cat-container label {
     font-size: 12px !important;
   }
+  .cat-container{
+    margin-top: 83px;
+  }
   .tf-car-service .content .bottom-btn-wrap {
     font-size: 8px;
     margin-top: 0px;
@@ -12229,6 +12232,9 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 970px) {
+  .cat-container{
+    margin-top: 83px;
+  }
   .mobile-header-bar {
     padding-left: 0px !important;
     padding-right: 0px !important;

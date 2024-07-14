@@ -1,0 +1,32 @@
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+  width: 35px !important;
+}
+
+.pagination a {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  width: 35px !important;
+  display: inline-block;
+  text-align: center;
+}
+
+.pagination a:hover {
+  color: red;
+}
+
+.pagination .active a:hover {
+  color: white;
+}
+
+.pagination .active a {
+  background-color: var(--red);
+  color: white;
+}

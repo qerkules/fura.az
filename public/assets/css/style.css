@@ -10814,6 +10814,10 @@ a.mapboxgl-ctrl-logo {
   background-color: var(--secondary-color)!important;
 }
 
+ul[aria-label="Pagination"] {
+  justify-content: center;
+}
+
 @media only screen and (max-width: 500px) {
   .widget-tf-slider .slider-wrap .tf-slide-item .slide-item-image {
     height: 400px;

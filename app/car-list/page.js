@@ -4,6 +4,7 @@ import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
+import Pagination from "@/components/elements/Pagination";
 const data = {
   id: 1,
   saleOrRent: "sale",
@@ -25,8 +26,14 @@ const data = {
 };
 export default function CarList() {
   const [activeIndex, setActiveIndex] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
+
   const handleOnClick = (index) => {
     setActiveIndex(index);
+  };
+
+  const onPageclick = (event) => {
+    setCurrentPage(event.selected);
   };
 
   return (
@@ -159,31 +166,12 @@ export default function CarList() {
                         <AdCard data={data} />
                         <AdCard data={data} />
                       </div>
-                      <div className="tf-pagination">
-                        <a className="prev page-numbers" href="#">
-                          <i className="icon-3" />
-                        </a>
-                        <a className="page-numbers" href="#">
-                          1
-                        </a>
-                        <a className="page-numbers active" href="#">
-                          2
-                        </a>
-                        <a className="page-numbers" href="#">
-                          3
-                        </a>
-                        <a className="page-numbers" href="#">
-                          ...
-                        </a>
-                        <a className="next page-numbers" href="#">
-                          <i className="icon--1" />
-                        </a>
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <Pagination pageCount={3} onPageChange={onPageclick}/>
           </div>
         </div>
       </Layout>

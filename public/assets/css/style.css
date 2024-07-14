@@ -10808,6 +10808,11 @@ a.mapboxgl-ctrl-logo {
 /* .cat-container .splide__list:first-child{
   margin-left: 15px!important;
 } */
+
+.splide__pagination{
+  bottom: -20px!important;
+}
+
 @media only screen and (max-width: 500px) {
   .widget-tf-slider .slider-wrap .tf-slide-item .slide-item-image {
     height: 400px;
@@ -12231,9 +12236,6 @@ input[type="number"] {
 }
 
 @media only screen and (max-width: 970px) {
-  .splide--draggable ul:first-child {
-    margin-left: 15px;
-  }
   .widget-car-service .cat-container {
     margin-top: 83px;
   }

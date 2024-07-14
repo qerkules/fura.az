@@ -11,7 +11,7 @@ const Categories = ({ currentIndex }) => {
             perPage: 2,
             drag: "free",
             gap: "1rem",
-            pagination: false,
+            pagination: true,
             arrows: false,
           }}
         >

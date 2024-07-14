@@ -7132,15 +7132,18 @@ a.mapboxgl-ctrl-logo {
   color: #0074ba;
 }
 
+.banner-car-listing .title{
+  position: relative;
+  z-index: 10;
+}
+
 .widget-banner-car-listing {
   padding: 120px 15px 140px 15px;
   text-align: center;
-  position: relative;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  z-index: 10;
 }
 .widget-banner-car-listing::before {
   top: 0;

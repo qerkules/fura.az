@@ -430,7 +430,7 @@ export default function CarList() {
   const ITEMS_PER_PAGE = 10;
   const [activeIndex, setActiveIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageCount, setPageCount] = useState(Math.ceil(data.length / ITEMS_PER_PAGE));
+  const [pageCount, setPageCount] = useState(1);
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
@@ -445,12 +445,12 @@ export default function CarList() {
       // Replace `data` with the actual data fetching logic
       // For example, if using `axios`: const result = await axios.get('/api/data');
       // const data = result.data;
-
+      console.log(data.length / ITEMS_PER_PAGE)
       setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
     };
 
     fetchData();
-  }, []);
+  }, [data.length]);
 
   const offset = currentPage * ITEMS_PER_PAGE;
   const currentPageData = data.slice(offset, offset + ITEMS_PER_PAGE);

@@ -430,7 +430,7 @@ export default function CarList() {
   const ITEMS_PER_PAGE = 10;
   const [activeIndex, setActiveIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(Math.ceil(data.length / ITEMS_PER_PAGE));
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
@@ -442,8 +442,10 @@ export default function CarList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // const result = await axios.get('/api/data'); // Replace with your data endpoint
-      // setPageCount(Math.ceil(result.data.length / ITEMS_PER_PAGE));
+      // Replace `data` with the actual data fetching logic
+      // For example, if using `axios`: const result = await axios.get('/api/data');
+      // const data = result.data;
+
       setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
     };
 

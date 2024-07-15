@@ -7132,7 +7132,7 @@ a.mapboxgl-ctrl-logo {
   color: #0074ba;
 }
 
-.banner-car-listing .title{
+.banner-car-listing .title {
   position: relative;
   z-index: 10;
 }
@@ -10811,12 +10811,12 @@ a.mapboxgl-ctrl-logo {
   margin-left: 15px!important;
 } */
 
-.splide__pagination{
-  bottom: -20px!important;
+.splide__pagination {
+  bottom: -20px !important;
 }
 
-.splide__pagination__page.is-active{
-  background-color: var(--secondary-color)!important;
+.splide__pagination__page.is-active {
+  background-color: var(--secondary-color) !important;
 }
 
 ul[aria-label="Pagination"] {
@@ -10824,7 +10824,7 @@ ul[aria-label="Pagination"] {
 }
 
 .widget-banner-car-listing.banner-car-listing-list::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -10835,14 +10835,12 @@ ul[aria-label="Pagination"] {
   pointer-events: none; /* Allow interaction with underlying elements */
 }
 
-.widget-banner-car-listing.banner-car-listing-list{
+.widget-banner-car-listing.banner-car-listing-list {
   background: url("/assets/images/slide/bg-sign.png");
   background-position: center;
   background-size: cover;
   color: white;
 }
-
-
 
 @media only screen and (max-width: 500px) {
   .widget-tf-slider .slider-wrap .tf-slide-item .slide-item-image {
@@ -12756,15 +12754,16 @@ input[type="number"] {
   }
 }
 
-nav[aria-label="pagination navigation"] >ul {
+nav[aria-label="pagination navigation"] > ul {
   justify-content: center;
   gap: 5px;
 }
 
-.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected {
   color: white;
   background-color: var(--red);
 }
-.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover{
+
+nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover{
   background-color: var(--red);
 }

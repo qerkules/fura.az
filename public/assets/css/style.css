@@ -12755,3 +12755,16 @@ input[type="number"] {
     min-height: 170px;
   }
 }
+
+nav[aria-label="pagination navigation"] >ul {
+  justify-content: center;
+  gap: 5px;
+}
+
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+  color: white;
+  background-color: var(--red);
+}
+.css-19xm0h7-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover{
+  background-color: var(--red);
+}

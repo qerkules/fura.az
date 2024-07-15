@@ -4,7 +4,7 @@ import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
-import Pagination from "@/components/elements/Pagination";
+import { Pagination, Stack } from "@mui/material";
 const data = [
   {
     id: 1,
@@ -445,7 +445,7 @@ export default function CarList() {
       // Replace `data` with the actual data fetching logic
       // For example, if using `axios`: const result = await axios.get('/api/data');
       // const data = result.data;
-      console.log(data.length / ITEMS_PER_PAGE)
+      console.log(data.length / ITEMS_PER_PAGE);
       setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
     };
 
@@ -585,7 +585,16 @@ export default function CarList() {
                 </div>
               </div>
             </div>
-            <Pagination pageCount={pageCount} onPageChange={onPageclick} />
+            {/* <Pagination pageCount={pageCount} onPageChange={onPageclick} /> */}
+            <Stack spacing={2} alignItems="center" mt={2}>
+              <Pagination
+                count={pageCount} // Set the total number of pages
+                page={currentPage + 1} // MUI Pagination uses 1-based index, so add 1 to `currentPage`
+                onChange={(event, page) => setCurrentPage(page - 1)} // Subtract 1 to get 0-based index
+                variant="outlined"
+                shape="rounded"
+              />
+            </Stack>
           </div>
         </div>
       </Layout>

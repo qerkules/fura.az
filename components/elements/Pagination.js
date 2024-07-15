@@ -3,6 +3,7 @@ import ReactPaginate from 'react-paginate';
 import styles from './Pagination.module.css'; // You can create your own CSS module
 
 const Pagination = ({ pageCount, onPageChange }) => {
+    console.log(pageCount)
   return (
     <ReactPaginate
       previousLabel={'<'}

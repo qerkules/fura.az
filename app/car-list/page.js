@@ -1,32 +1,436 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
 import Pagination from "@/components/elements/Pagination";
-const data = {
-  id: 1,
-  saleOrRent: "sale",
-  price: "50.000",
-  priceCurrency: "$",
-  isPremium: true,
-  images: [
-    "./assets/images/car-list/car1.webp",
-    "./assets/images/car-list/car11.webp",
-    "./assets/images/car-list/car12.webp",
-  ],
-  brand: "Scania",
-  model: "R500",
-  category: "Standart Tractor",
-  year: 2020,
-  horsePower: "500 hp",
-  distance: "200500km",
-  createDate: "6/30/2024 3:09:24 PM<",
-};
+const data = [
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 19,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 20,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+  {
+    id: 20,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM<",
+  },
+];
+
 export default function CarList() {
+  const ITEMS_PER_PAGE = 10;
   const [activeIndex, setActiveIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
+  const [pageCount, setPageCount] = useState(0);
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
@@ -35,6 +439,19 @@ export default function CarList() {
   const onPageclick = (event) => {
     setCurrentPage(event.selected);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // const result = await axios.get('/api/data'); // Replace with your data endpoint
+      // setPageCount(Math.ceil(result.data.length / ITEMS_PER_PAGE));
+      setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE));
+    };
+
+    fetchData();
+  }, []);
+
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const currentPageData = data.slice(offset, offset + ITEMS_PER_PAGE);
 
   return (
     <>
@@ -107,7 +524,7 @@ export default function CarList() {
                             }
                             onClick={() => handleOnClick(2)}
                           >
-                            New <span className="number-list">(29)</span>
+                            Sale <span className="number-list">(29)</span>
                           </a>
                           <a
                             className={
@@ -117,7 +534,7 @@ export default function CarList() {
                             }
                             onClick={() => handleOnClick(3)}
                           >
-                            Used <span className="number-list">(29)</span>
+                            Rent <span className="number-list">(29)</span>
                           </a>
                         </div>
                       </div>
@@ -146,32 +563,27 @@ export default function CarList() {
                     >
                       <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
+                        <AdCard data={data[0]} />
+                        <AdCard data={data[0]} />
+                        <AdCard data={data[0]} />
+                        <AdCard data={data[0]} />
+                        <AdCard data={data[0]} />
+                        <AdCard data={data[0]} />
                       </div>
                       <div className="ad-banner">
                         <img src="/assets/images/ads/ad-banner.jpg" />
                       </div>
                       <div className="car-list-item ">
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
-                        <AdCard data={data} />
+                        {currentPageData.map((val, index) => {
+                          return <AdCard key={index} data={val} />;
+                        })}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <Pagination pageCount={30} onPageChange={onPageclick}/>
+            <Pagination pageCount={pageCount} onPageChange={onPageclick} />
           </div>
         </div>
       </Layout>

@@ -23,7 +23,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -42,7 +43,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -61,7 +63,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -80,7 +83,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -99,7 +103,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -118,7 +123,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -137,7 +143,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -156,7 +163,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -175,7 +183,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -194,7 +203,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -213,7 +223,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -232,7 +243,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -251,7 +263,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -270,7 +283,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -289,7 +303,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -308,7 +323,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -327,7 +343,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -346,7 +363,8 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
     id: 1,
@@ -365,10 +383,11 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
-    id: 19,
+    id: 1,
     saleOrRent: "sale",
     price: "50.000",
     priceCurrency: "$",
@@ -384,10 +403,11 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
-    id: 20,
+    id: 1,
     saleOrRent: "sale",
     price: "50.000",
     priceCurrency: "$",
@@ -403,10 +423,11 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
   {
-    id: 20,
+    id: 1,
     saleOrRent: "sale",
     price: "50.000",
     priceCurrency: "$",
@@ -422,8 +443,50 @@ const data = [
     year: 2020,
     horsePower: "500 hp",
     distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
   },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
+  },
+  {
+    id: 1,
+    saleOrRent: "sale",
+    price: "50.000",
+    priceCurrency: "$",
+    isPremium: true,
+    images: [
+      "./assets/images/car-list/car1.webp",
+      "./assets/images/car-list/car11.webp",
+      "./assets/images/car-list/car12.webp",
+    ],
+    brand: "Scania",
+    model: "R500",
+    category: "Standart Tractor",
+    year: 2020,
+    horsePower: "500 hp",
+    distance: "200500km",
+    createDate: "6/30/2024 3:09:24 PM",
+    path: "listing-details"
+  },
+  
 ];
 
 export default function CarList() {

@@ -10,6 +10,7 @@ import { Badge } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
+import LanguageSwitcher from "@/components/elements/LanguageSwitcher";
 export default function Header3({ handleMobileMenu }) {
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   useEffect(() => {
@@ -153,34 +154,7 @@ export default function Header3({ handleMobileMenu }) {
                   </div>
 
                   <div className="mobile-left-icon">
-                    <div className="nav-wrapper">
-                      <div className="sl-nav">
-                        <ul>
-                          <li>
-                            <ReactCountryFlag countryCode="US" svg />
-                            <span className="language-shower">Eng</span>{" "}
-                            <i
-                              className="fa fa-angle-down"
-                              aria-hidden="true"
-                            ></i>
-                            <ul>
-                              <li>
-                                <ReactCountryFlag countryCode="US" svg />
-                                <span className="active">Eng</span>
-                              </li>
-                              <li>
-                                <ReactCountryFlag countryCode="RU" svg />
-                                <span>Ru</span>
-                              </li>
-                              <li>
-                                <ReactCountryFlag countryCode="AZ" svg />
-                                <span>Az</span>
-                              </li>
-                            </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                    <LanguageSwitcher />
                   </div>
                   {/* Logo Box */}
                   <div className="logo-box flex">

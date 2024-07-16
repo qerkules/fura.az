@@ -1,6 +1,7 @@
 "use client";
 import DefaultAVCreate from "@/components/elements/DefaultAVCreate";
 import DefaultFormMobile from "@/components/elements/DefaultFormMobile";
+import DefaultSTCreate from "@/components/elements/DefaultST";
 import DefaultTruckCreate from "@/components/elements/DefaultTruckCreate";
 import useIsMobile from "@/components/elements/UseIsMobile";
 import Layout from "@/components/layout/Layout";
@@ -12,7 +13,7 @@ const page = () => {
     <Layout>
       <div className="themesflat-container create-ad-container ">
         {/* {isMobile ? <DefaultFormMobile /> : <DefaultTruckCreate />} */}
-        <DefaultAVCreate />
+        <DefaultSTCreate />
       </div>
     </Layout>
   );

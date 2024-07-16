@@ -32,7 +32,7 @@ const features = [
   "Retarder",
   "Intarder",
 ];
-const DefaultTruckCreate = () => {
+const DefaultSTTruckCreate = () => {
   const [category, setCategory] = useState("");
   const [price, setMinPrice] = useState("");
   const [rentType, setRentType] = useState("");
@@ -602,4 +602,4 @@ const DefaultTruckCreate = () => {
   );
 };
 
-export default DefaultTruckCreate;
+export default DefaultSTTruckCreate;

@@ -10,7 +10,7 @@ const page = () => {
         <div className="create-ad-title">Select category:</div>
         <div className="themesflat-container">
           <div className="cat-container mobile-hider ">
-            <a href="/car-list">
+            <a href="/create-trailer">
               <button className={`index-slider-items`} id="semi-trailer">
                 <label htmlFor="semi-trailer">Semi-trailer</label>
                 <img src="/assets/images/categories/n3.png" alt="" />
@@ -22,7 +22,7 @@ const page = () => {
                 <img src="/assets/images/categories/n1.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-semi-truck">
               <button className="index-slider-items" id="truck">
                 <label htmlFor="truck">Semi-trailer truck</label>
                 <img src="/assets/images/categories/n2.png" alt="" />
@@ -34,7 +34,7 @@ const page = () => {
                 <img src="/assets/images/categories/n4.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-av">
               <button className="index-slider-items" id="av">
                 <label htmlFor="av">Agricultural vehicle</label>
                 <img src="/assets/images/categories/n5.png" alt="" />

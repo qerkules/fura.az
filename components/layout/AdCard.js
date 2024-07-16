@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function AdCard({ path, data }) {
+export default function AdCard({  data }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
@@ -51,7 +51,7 @@ export default function AdCard({ path, data }) {
   };
   return (
     <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
-      <div className="image" onClick={() => handleClick(path)}>
+      <div className="image" onClick={() => handleClick(data.path)}>
         <div className="stm-badge-top">
           <div className="feature">
             <span>NEW</span>
@@ -133,14 +133,14 @@ export default function AdCard({ path, data }) {
             )}
           </a>
         </div>
-        <h6 className="title" onClick={() => handleClick(path)}>
+        <h6 className="title" onClick={() => handleClick(data.path)}>
           {`${data.brand} ${data.model}`}
         </h6>
-        <span className="sub-title" onClick={() => handleClick(path)}>
+        <span className="sub-title" onClick={() => handleClick(data.path)}>
           {data.category}
         </span>
 
-        <div className="description" onClick={() => handleClick(path)}>
+        <div className="description" onClick={() => handleClick(data.path)}>
           <ul>
             <li className="listing-information transmission">
               <div className="inner">

@@ -11,42 +11,34 @@ import {
 import React, { useState } from "react";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ImageUploading from "react-images-uploading";
-import Textarea from "@mui/joy/Textarea";
 import ImageUpload from "./ImageUpload";
+import { Textarea } from "@mui/joy";
 const features = [
+  "Trailer Hitch Fixed",
   "Cabin",
-  "Front Jack",
-  "Front Hydraulics",
-  "New",
-  "ABS",
-  "Auxiliary Heating",
-  "Four Wheel Drive",
   "Hydrolic Wheel",
+  "Protection Ceiling",
   "Damaged Vehicles",
+  "New",
 ];
-const DefaultSTCreate = () => {
+const DefaultForkliftCreate = () => {
   const [category, setCategory] = useState("");
   const [price, setMinPrice] = useState("");
+  const [rentType, setRentType] = useState("");
   const [adType, setAdtype] = useState("");
   const [year, setYear] = useState("");
-  const [opHours, setOpHours] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [currency, setCurrency] = useState("₼AZN");
+  const [gearbox, setGearbox] = useState("");
+  const [operation, setOperation] = useState("");
+  const [liftingCapacity, setLiftingCapacity] = useState("");
+  const [liftHeight, setLiftHeight] = useState("hp");
+  const [equipmentHeight, setEquipmentHeight] = useState("");
   const [vin, setVin] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
   const [description, setDescription] = useState("");
-  const [gvw, setGVW] = useState("");
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
-  const [loadCapacity, setLoadCapacity] = useState("");
-  const [volume, setVolume] = useState("");
-  const [length, setLength] = useState("");
-  const [loadWidth, setLoadWith] = useState("");
-  const [loadHeight, setLoadHeight] = useState("");
-  const [axles, setAxles] = useState("");
+  const [fuelType, setFuelType] = useState("");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
@@ -195,184 +187,37 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="input-search-list">
-            <FormControl fullWidth>
-              <InputLabel id="axles-label">Axles</InputLabel>
-              <Select
-                fullWidth
-                id="axles-select"
-                labelId="axles-label"
-                label="Axles"
-                variant="outlined"
-                value={axles}
-                onChange={(e) => setAxles(e.target.value)}
-              >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Operation Hours"
-                id="opHours"
-                type="number"
-                placeholder="0"
-                value={opHours}
-                onChange={(e) => setOpHours(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Permissible Gross Vehicle Weight (GVW)"
-                id="gvw"
-                type="number"
-                placeholder="0"
-                value={gvw}
-                onChange={(e) => setGVW(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Load Capacity (kg)"
-                id="loadCapacity"
-                type="number"
-                placeholder="0"
-                value={loadCapacity}
-                onChange={(e) => setLoadCapacity(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Vehicle Width (mm)"
-                id="width"
-                type="number"
-                placeholder="0"
-                value={width}
-                onChange={(e) => setWidth(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Vehicle Height (mm)"
-                id="height"
-                type="number"
-                placeholder="0"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Internal Volume (m³)"
-                id="volume"
-                type="number"
-                placeholder="0"
-                value={volume}
-                onChange={(e) => setVolume(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Space Length (mm)"
-                id="length"
-                type="number"
-                placeholder="0"
-                value={length}
-                onChange={(e) => setLength(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Area Width (mm)"
-                id="load-width"
-                type="number"
-                placeholder="0"
-                value={loadWidth}
-                onChange={(e) => setLoadWith(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Area Height (mm)"
-                id="load-height"
-                type="number"
-                placeholder="0"
-                value={loadHeight}
-                onChange={(e) => setLoadHeight(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
 
-        <div className="prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="hp/kw">Hp/Kw</InputLabel>
-            <Select
-              id="hp/kw-select"
-              labelId="hp/kw-label"
-              label="hp/kw"
-              value={enginePowerType}
-              onChange={(e) => setEnginePowerType(e.target.value)}
-            >
-              <MenuItem value={"hp"}>HP</MenuItem>
-              <MenuItem value={"kw"}>KW</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="form-group prefix-input">
+        <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
               <TextField
-                label="Engine Power"
-                id="engine-power-min"
+                label="Lift Height"
+                id="liheight"
+                value={liftHeight}
                 type="number"
-                placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
+                onChange={(e) => setLiftHeight(e.target.value)}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"mm"}</InputAdornment>
+                  ),
+                }}
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Lifting Capacity"
+                id="eqheight"
+                value={liftingCapacity}
+                type="number"
+                onChange={(e) => setLiftingCapacity(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">{"kq"}</InputAdornment>
                   ),
                 }}
               />
@@ -403,21 +248,70 @@ const DefaultSTCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="emission-sticker-label">
-                Emission Sticker
-              </InputLabel>
+              <InputLabel id="fuel-type-label">Fuel Type</InputLabel>
               <Select
                 fullWidth
-                id="emission-sticker-select"
-                labelId="emission-sticker-label"
+                id="fuel-type-select"
+                labelId="fuel-type-label"
                 variant="outlined"
-                label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                label="Fuel Type"
+                value={fuelType}
+                onChange={(e) => setFuelType(e.target.value)}
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                <MenuItem value={"petrol"}>Petrol</MenuItem>
+                <MenuItem value={"diesel"}>Diesel</MenuItem>
               </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="gearbox-label">Gearbox</InputLabel>
+              <Select
+                fullWidth
+                id="gearbox-select"
+                labelId="gearbox-label"
+                variant="outlined"
+                label="Gearbox"
+                value={gearbox}
+                onChange={(e) => setGearbox(e.target.value)}
+              >
+                <MenuItem value={"automatic"}>Automatic</MenuItem>
+                <MenuItem value={"manual"}>Manual</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Hours of Operation"
+                id="operation"
+                value={operation}
+                type="number"
+                onChange={(e) => setOperation(e.target.value)}
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Equipment Height"
+                id="eqheight"
+                value={equipmentHeight}
+                type="number"
+                onChange={(e) => setEquipmentHeight(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">{"mm"}</InputAdornment>
+                  ),
+                }}
+              />
             </FormControl>
           </div>
         </div>
@@ -426,7 +320,7 @@ const DefaultSTCreate = () => {
             <FormControl fullWidth>
               <TextField
                 label="Vin"
-                id="engine-power-min"
+                id="vin"
                 type="number"
                 placeholder="0"
                 value={vin}
@@ -435,7 +329,9 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group ">
+      </FormControl>
+      <div className="create-description">
+        <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
               <FormLabel>Description:</FormLabel>
@@ -448,7 +344,7 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-      </FormControl>
+      </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
         {features.map((value) => (
@@ -467,4 +363,4 @@ const DefaultSTCreate = () => {
   );
 };
 
-export default DefaultSTCreate;
+export default DefaultForkliftCreate;

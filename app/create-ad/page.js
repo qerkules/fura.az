@@ -28,7 +28,7 @@ const page = () => {
                 <img src="/assets/images/categories/n2.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-co-ma">
               <button className="index-slider-items" id="cm">
                 <label htmlFor="cm">Construction machinery</label>
                 <img src="/assets/images/categories/n4.png" alt="" />
@@ -40,19 +40,19 @@ const page = () => {
                 <img src="/assets/images/categories/n5.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-bus">
               <button className="index-slider-items" id="bus">
                 <label htmlFor="bus">Bus</label>
                 <img src="/assets/images/categories/n6.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-forklift">
               <button className="index-slider-items" id="forklift">
                 <label htmlFor="forklift">Forklift</label>
                 <img src="/assets/images/categories/n7.png" alt="" />
               </button>
             </a>
-            <a href="/car-list">
+            <a href="/create-sp">
               <button className="index-slider-items" id="sp">
                 <label htmlFor="sp">Spare parts</label>
                 <img src="/assets/images/categories/n8.png" alt="" />

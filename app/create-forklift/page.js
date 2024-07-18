@@ -1,5 +1,8 @@
 "use client";
-import DefaultCoMaCreate from "@/components/elements/DefaultCoMa";
+import DefaultAVCreate from "@/components/elements/DefaultAVCreate";
+import DefaultForkliftCreate from "@/components/elements/DefaultForklift";
+import DefaultFormMobile from "@/components/elements/DefaultFormMobile";
+import DefaultTruckCreate from "@/components/elements/DefaultTruckCreate";
 import useIsMobile from "@/components/elements/UseIsMobile";
 import Layout from "@/components/layout/Layout";
 import React from "react";
@@ -10,7 +13,7 @@ const page = () => {
     <Layout>
       <div className="themesflat-container create-ad-container ">
         {/* {isMobile ? <DefaultFormMobile /> : <DefaultTruckCreate />} */}
-        <DefaultCoMaCreate />
+        <DefaultForkliftCreate />
       </div>
     </Layout>
   );

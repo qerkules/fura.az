@@ -11,44 +11,33 @@ import {
 import React, { useState } from "react";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ImageUploading from "react-images-uploading";
-import Textarea from "@mui/joy/Textarea";
+import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
 const features = [
-  "Cabin",
-  "Front Jack",
-  "Front Hydraulics",
-  "New",
   "ABS",
-  "Auxiliary Heating",
-  "Four Wheel Drive",
-  "Hydrolic Wheel",
+  "Four Whee Drive",
+  "Particle Filter",
+  "Quick Change Part",
+  "BSS",
+  "NEW",
+  "Central lubricant application",
   "Damaged Vehicles",
 ];
-const DefaultSTCreate = () => {
+const DefaultCoMaCreate = () => {
   const [category, setCategory] = useState("");
   const [price, setMinPrice] = useState("");
+  const [rentType, setRentType] = useState("");
   const [adType, setAdtype] = useState("");
+  const [operation, setOperation] = useState("");
   const [year, setYear] = useState("");
-  const [opHours, setOpHours] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
   const [vin, setVin] = useState("");
+  const [currency, setCurrency] = useState("₼AZN");
   const [emissionSticker, setEmissionSticker] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [description, setDescription] = useState("");
-  const [gvw, setGVW] = useState("");
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
-  const [loadCapacity, setLoadCapacity] = useState("");
-  const [volume, setVolume] = useState("");
-  const [length, setLength] = useState("");
-  const [loadWidth, setLoadWith] = useState("");
-  const [loadHeight, setLoadHeight] = useState("");
-  const [axles, setAxles] = useState("");
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
+  const [description, setDescription] = useState("");
   const maxNumber = 20;
   const onUploadImage = (imageList) => {
     setImages(imageList);
@@ -155,7 +144,25 @@ const DefaultSTCreate = () => {
           images={images}
           setImages={setImages}
         />
-
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="year-min-label">Year</InputLabel>
+              <Select
+                fullWidth
+                id="year-min-select"
+                labelId="year-min-label"
+                variant="outlined"
+                label="Min"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+              >
+                <MenuItem value={"1999"}>1999</MenuItem>
+                <MenuItem value={"2000"}>2000</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
         <div className="form-group prefix-select">
           <FormControl fullWidth>
             <InputLabel id="currency-label">Currency</InputLabel>
@@ -195,186 +202,16 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="input-search-list">
-            <FormControl fullWidth>
-              <InputLabel id="axles-label">Axles</InputLabel>
-              <Select
-                fullWidth
-                id="axles-select"
-                labelId="axles-label"
-                label="Axles"
-                variant="outlined"
-                value={axles}
-                onChange={(e) => setAxles(e.target.value)}
-              >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Operation Hours"
-                id="opHours"
-                type="number"
-                placeholder="0"
-                value={opHours}
-                onChange={(e) => setOpHours(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Permissible Gross Vehicle Weight (GVW)"
-                id="gvw"
-                type="number"
-                placeholder="0"
-                value={gvw}
-                onChange={(e) => setGVW(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Load Capacity (kg)"
-                id="loadCapacity"
-                type="number"
-                placeholder="0"
-                value={loadCapacity}
-                onChange={(e) => setLoadCapacity(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Vehicle Width (mm)"
-                id="width"
-                type="number"
-                placeholder="0"
-                value={width}
-                onChange={(e) => setWidth(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Vehicle Height (mm)"
-                id="height"
-                type="number"
-                placeholder="0"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Internal Volume (m³)"
-                id="volume"
-                type="number"
-                placeholder="0"
-                value={volume}
-                onChange={(e) => setVolume(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Space Length (mm)"
-                id="length"
-                type="number"
-                placeholder="0"
-                value={length}
-                onChange={(e) => setLength(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Area Width (mm)"
-                id="load-width"
-                type="number"
-                placeholder="0"
-                value={loadWidth}
-                onChange={(e) => setLoadWith(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Loading Area Height (mm)"
-                id="load-height"
-                type="number"
-                placeholder="0"
-                value={loadHeight}
-                onChange={(e) => setLoadHeight(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
 
-        <div className="prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="hp/kw">Hp/Kw</InputLabel>
-            <Select
-              id="hp/kw-select"
-              labelId="hp/kw-label"
-              label="hp/kw"
-              value={enginePowerType}
-              onChange={(e) => setEnginePowerType(e.target.value)}
-            >
-              <MenuItem value={"hp"}>HP</MenuItem>
-              <MenuItem value={"kw"}>KW</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="form-group prefix-input">
+        <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
               <TextField
-                label="Engine Power"
-                id="engine-power-min"
+                label="Hours of Operation"
+                id="operation"
+                value={operation}
                 type="number"
-                placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
+                onChange={(e) => setOperation(e.target.value)}
               />
             </FormControl>
           </div>
@@ -383,19 +220,13 @@ const DefaultSTCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <TextField
+                label="Vin"
+                id="vin"
+                value={vin}
+                type="number"
+                onChange={(e) => setVin(e.target.value)}
+              />
             </FormControl>
           </div>
         </div>
@@ -421,20 +252,8 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Vin"
-                id="engine-power-min"
-                type="number"
-                placeholder="0"
-                value={vin}
-                onChange={(e) => setVin(e.target.value)}
-              />
-            </FormControl>
-          </div>
-        </div>
+      </FormControl>
+      <div className="create-description">
         <div className="form-group ">
           <div className="group-select">
             <FormControl fullWidth>
@@ -448,7 +267,7 @@ const DefaultSTCreate = () => {
             </FormControl>
           </div>
         </div>
-      </FormControl>
+      </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
         {features.map((value) => (
@@ -467,4 +286,4 @@ const DefaultSTCreate = () => {
   );
 };
 
-export default DefaultSTCreate;
+export default DefaultCoMaCreate;

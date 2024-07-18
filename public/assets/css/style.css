@@ -12767,3 +12767,8 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected {
 nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover{
   background-color: var(--red);
 }
+
+.create-description{
+  width: 30%;
+  margin-top: 20px;
+}

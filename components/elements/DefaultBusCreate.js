@@ -1,6 +1,7 @@
 "use client";
 import {
   FormControl,
+  FormLabel,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -10,6 +11,8 @@ import {
 import React, { useState } from "react";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ImageUploading from "react-images-uploading";
+import ImageUpload from "./ImageUpload";
+import { Textarea } from "@mui/joy";
 const features = [
   "ABS",
   "ESP",
@@ -56,6 +59,9 @@ const DefaultBusCreate = () => {
   const [axles, setAxles] = useState("");
   const [airCond, setAirCond] = useState("");
   const [hydrEqui, setHydrEqui] = useState("");
+  const [vin, setVin] = useState("");
+  const [description, setDescription] = useState("");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
@@ -159,70 +165,11 @@ const DefaultBusCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-image-input">
-          <ImageUploading
-            multiple
-            value={images}
-            onChange={onUploadImage}
-            maxNumber={maxNumber}
-            dataURLKey="data_url"
-            acceptType={["jpg"]}
-          >
-            {({ onImageUpload, dragProps, onImageRemove, isDragging }) => (
-              <>
-                <div
-                  className={`form-image-input-box ${
-                    images.length > 0 ? "display-none" : "flex"
-                  }`}
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  <div className="first-icon-image">
-                    <img src="/assets/images/icon-box/truck-front.png" />
-                  </div>
-                  <p>* Upload Front Image</p>
-                </div>
-                <div
-                  onClick={onImageUpload}
-                  {...dragProps}
-                  className={`form-image-input-box ${
-                    images.length > 0 ? "display-none" : "flex"
-                  }`}
-                >
-                  <img src="/assets/images/icon-box/truck-back.svg" />
-                  <p>* Upload Back Image</p>
-                </div>
-                <div
-                  onClick={onImageUpload}
-                  {...dragProps}
-                  className={`form-image-input-box ${
-                    images.length > 0 ? "display-none" : "flex"
-                  }`}
-                >
-                  <img src="/assets/images/icon-box/truck-interior.svg" />
-
-                  <p>* Upload interior Image</p>
-                </div>
-                {images.map((image, index) => (
-                  <div key={index} className="image-item">
-                    <img src={image.data_url} alt="" width="100" />
-                    <div className="uploaded-remove-btn">
-                      <div onClick={() => onImageRemove(index)}>X</div>
-                    </div>
-                  </div>
-                ))}
-                <div
-                  className="form-image-input-box"
-                  onClick={onImageUpload}
-                  {...dragProps}
-                >
-                  <AddPhotoAlternateIcon />
-                  <p>Upload Image</p>
-                </div>
-              </>
-            )}
-          </ImageUploading>
-        </div>
+        <ImageUpload
+          maxNumber={maxNumber}
+          images={images}
+          setImages={setImages}
+        />
 
         <div className="form-group prefix-select">
           <FormControl fullWidth>
@@ -569,7 +516,36 @@ const DefaultBusCreate = () => {
             </FormControl>
           </div>
         </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Vin"
+                id="vin"
+                type="number"
+                placeholder="0"
+                value={vin}
+                onChange={(e) => setVin(e.target.value)}
+              />
+            </FormControl>
+          </div>
+        </div>
       </FormControl>
+      <div className="create-description">
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <FormLabel>Description:</FormLabel>
+              <Textarea
+                minRows={5}
+                placeholder="Type in here..."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </FormControl>
+          </div>
+        </div>
+      </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
         {features.map((value) => (

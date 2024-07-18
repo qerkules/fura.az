@@ -17,6 +17,7 @@
         "@mui/material": "^5.16.0",
         "@splidejs/react-splide": "^0.7.12",
         "@splidejs/splide": "^4.1.4",
+        "axios": "^1.7.2",
         "chart.js": "^4.4.2",
         "cookies-next": "^4.2.1",
         "i18next": "^23.12.1",

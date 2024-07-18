@@ -8,11 +8,11 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
+import React, { useEffect, useState } from "react";
 import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
+import axios from "axios";
+
 const features = [
   "ABS",
   "ESP",
@@ -44,8 +44,8 @@ const DefaultSTTruckCreate = () => {
   const [year, setYear] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [distanceType, setDistanceType] = useState("km");
+  const [currency, setCurrency] = useState("");
+  const [distanceType, setDistanceType] = useState("");
   const [emissionClass, setEmissionClass] = useState("");
   const [emissionSticker, setEmissionSticker] = useState("");
   const [fuelType, setFuelType] = useState("");
@@ -63,11 +63,23 @@ const DefaultSTTruckCreate = () => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const [vin, setVin] = useState("");
+  const [cyVolume, setCyVolume] = useState("");
+  const [steering, setSteering] = useState("");
+
+  const [gearboxes, setGearboxes] = useState([]);
+  const [aircotypes, setAircotypes] = useState([]);
+  const [currTypes, setCurrTypes] = useState([]);
+  const [fuelTypes, setFuelTypes] = useState([]);
+  const [wheelTypes, setWheelTypes] = useState([]);
+  const [distanceunittypes, setDistanceunittypes] = useState([]);
+  const [emissionclasses, setEmissionClasses] = useState([]);
+  const [emissionstickers, setEmissionStickers] = useState([]);
+  const [paints, setPaints] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+
+  const categoryId = "65c26fe7-95d3-49ec-ad05-6d68e6a3ac79";
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
-    console.log(images);
-  };
 
   const handleSelected = (value) => {
     setSelectedArray((prevSelectedArray) =>
@@ -77,6 +89,157 @@ const DefaultSTTruckCreate = () => {
     );
   };
   const isSelected = (value) => selectedArray.includes(value);
+  useEffect(() => {
+    const fetchData = async (path, setter) => {
+      const response = await axios.get(
+        `https://furaapi.aifdigital.com.tr/api/GetOptions/${path}`
+      );
+      setter(response.data.$values);
+    };
+
+    const fetchCategories = async () => {
+      const response = await axios.get(
+        `https://furaapi.aifdigital.com.tr/api/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
+      );
+      setCategories(response.data.categories.$values);
+    };
+    const fetchBrands = async () => {
+      const response = await axios.get(
+        `https://furaapi.aifdigital.com.tr/api/Brand/GetBrandsByProductTypeId?ProductTypeId=${categoryId}`
+      );
+      setBrands(response.data.brands.$values);
+    };
+
+    fetchBrands();
+
+    fetchCategories();
+
+    fetchData("gearboxtypes", setGearboxes);
+    fetchData("airconditioningtypes", setAircotypes);
+    fetchData("currencytypes", setCurrTypes);
+    fetchData("fueltypes", setFuelTypes);
+    fetchData("wheelformulatypes", setWheelTypes);
+    fetchData("distanceunittypes", setDistanceunittypes);
+    fetchData("emissionclasstypes", setEmissionClasses);
+    fetchData("emissionstickertypes", setEmissionStickers);
+    fetchData("painttypes", setPaints);
+  }, []);
+
+  const handleSubmit = async () => {
+    try {
+      // const response = await axios.post(
+      //   "https://furaapi.aifdigital.com.tr/api/SemiTrailerTruck/CreateSemiTrailerTruckAd",
+      //   JSON.stringify({
+      //     Steering: "value1",
+      //     EnginePowerKW: 200,
+      //     EnginePowerHP: 120,
+      //     CylinderVolume: 10000,
+      //     VehicleWidth: 1000,
+      //     VehicleHeight: 1000,
+      //     FuelTank: "70",
+      //     LicencedWeight: "200",
+      //     Paint: 2,
+      //     Axles: 4,
+      //     Retarder: true,
+      //     Intarder: true,
+      //     ParkingHeater: true,
+      //     AirConditioning: 2,
+      //     EmissionClass: 2,
+      //     EmissionsSticker: 1,
+      //     AlloyWheels: false,
+      //     WholeBody: true,
+      //     Metallic: true,
+      //     DrivingCabin: "Long Road",
+      //     ABS: true,
+      //     ESP: true,
+      //     EBS: true,
+      //     AuxiliaryHeating: true,
+      //     Compressor: true,
+      //     CruiseControl: true,
+      //     AdaptiveCruiseControl: true,
+      //     FourWheelDrive: true,
+      //     ParticleFilter: true,
+      //     NavigationSystem: true,
+      //     CrashStatus: false,
+      //     CategoryId: "B7F35174-3124-4082-85C8-01B2E8E8FC00",
+      //     ModelId: "8CFCD50B-9155-4694-B73F-997D2A941A0C",
+      //     GearBox: 3,
+      //     FuelType: 2,
+      //     Year: 2020,
+      //     VinCode: "AES142341SFAS",
+      //     SaleOrRent: "Sale",
+      //     Distance: 200000,
+      //     Price: 65000,
+      //     Currency: 2,
+      //     IsNew: false,
+      //     AdDetails: "The car is beatufil i love it",
+      //     RentType: 2,
+      //     // AdImage: images,
+      //   })
+      // );
+      const formData = objectToFormData({
+        price: 1000,
+        currency: "USD",
+        isNew: true,
+        adDetails: "Description of the ad",
+        rentType: "Monthly",
+        adImage: [],
+        categoryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        modelId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        gearBox: "Automatic",
+        fuelType: "Petrol",
+        crashStatus: false,
+        year: 2022,
+        vinCode: "1HGCM82633A123456",
+        saleOrRent: "Sale",
+        distance: 15000,
+        distanceMeasurementUnit: "KM",
+        liftingCapacity: "500kg",
+        liftWeight: "200kg",
+        equipmentHeight: "3m",
+        hoursOfOperation: 120,
+      });
+
+      console.log("first");
+
+      // const response = await axios.post(
+      //   "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
+      //   formData,
+      //   { headers: { "Content-Type": "multipart/form-data" } }
+      // );
+
+      fetch("https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+        .catch((error) => console.error("Error:", error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  function objectToFormData(obj, form, namespace) {
+    const formData = form || new FormData();
+
+    for (let property in obj) {
+      if (obj.hasOwnProperty(property)) {
+        const key = namespace ? `${namespace}[${property}]` : property;
+
+        if (
+          typeof obj[property] === "object" &&
+          !(obj[property] instanceof File)
+        ) {
+          objectToFormData(obj[property], formData, key);
+        } else {
+          formData.append(key, obj[property]);
+        }
+      }
+    }
+
+    return formData;
+  }
 
   return (
     <div>
@@ -116,10 +279,11 @@ const DefaultSTTruckCreate = () => {
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -137,10 +301,11 @@ const DefaultSTTruckCreate = () => {
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {brands.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -181,9 +346,11 @@ const DefaultSTTruckCreate = () => {
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
             >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+              {currTypes.map((val, index) => (
+                <MenuItem key={index} value={val.index}>
+                  {val.value}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -221,8 +388,11 @@ const DefaultSTTruckCreate = () => {
               value={distanceType}
               onChange={(e) => setDistanceType(e.target.value)}
             >
-              <MenuItem value={"km"}>Km</MenuItem>
-              <MenuItem value={"miles"}>Miles</MenuItem>
+              {distanceunittypes.map((val, index) => (
+                <MenuItem key={index} value={val.index}>
+                  {val.value}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -314,8 +484,11 @@ const DefaultSTTruckCreate = () => {
                 value={emissionClass}
                 onChange={(e) => setEmissionClass(e.target.value)}
               >
-                <MenuItem value={"euro1"}>EURO 1</MenuItem>
-                <MenuItem value={"euro2"}>EURO 2</MenuItem>
+                {emissionclasses.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -335,8 +508,11 @@ const DefaultSTTruckCreate = () => {
                 value={emissionSticker}
                 onChange={(e) => setEmissionSticker(e.target.value)}
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {emissionstickers.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -354,8 +530,11 @@ const DefaultSTTruckCreate = () => {
                 value={fuelType}
                 onChange={(e) => setFuelType(e.target.value)}
               >
-                <MenuItem value={"petrol"}>Petrol</MenuItem>
-                <MenuItem value={"diesel"}>Diesel</MenuItem>
+                {fuelTypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -373,8 +552,11 @@ const DefaultSTTruckCreate = () => {
                 value={gearbox}
                 onChange={(e) => setGearbox(e.target.value)}
               >
-                <MenuItem value={"automatic"}>Automatic</MenuItem>
-                <MenuItem value={"manual"}>Manual</MenuItem>
+                {gearboxes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -392,8 +574,11 @@ const DefaultSTTruckCreate = () => {
                 value={paint}
                 onChange={(e) => setPaint(e.target.value)}
               >
-                <MenuItem value={"red"}>Red</MenuItem>
-                <MenuItem value={"blue"}>Blue</MenuItem>
+                {paints.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -411,8 +596,11 @@ const DefaultSTTruckCreate = () => {
                 value={wheelFormula}
                 onChange={(e) => setWheelFormula(e.target.value)}
               >
-                <MenuItem value={"4x2"}>4x2</MenuItem>
-                <MenuItem value={"4x4"}>4x4</MenuItem>
+                {wheelTypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -488,8 +676,11 @@ const DefaultSTTruckCreate = () => {
                 value={airCond}
                 onChange={(e) => setAirCond(e.target.value)}
               >
-                <MenuItem value={"no-air"}>No Air</MenuItem>
-                <MenuItem value={"manual-air"}>Manual Air</MenuItem>
+                {aircotypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -521,10 +712,35 @@ const DefaultSTTruckCreate = () => {
               <TextField
                 label="Vin"
                 id="vin"
-                type="number"
-                placeholder="0"
                 value={vin}
                 onChange={(e) => setVin(e.target.value)}
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Cylinder Volume"
+                id="cyVolume"
+                type="number"
+                placeholder="0"
+                value={cyVolume}
+                onChange={(e) => setCyVolume(e.target.value)}
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Steering"
+                id="steering"
+                placeholder="0"
+                value={steering}
+                onChange={(e) => setSteering(e.target.value)}
               />
             </FormControl>
           </div>
@@ -560,6 +776,8 @@ const DefaultSTTruckCreate = () => {
           </div>
         ))}
       </div>
+
+      <div onClick={() => handleSubmit()}>Submit </div>
     </div>
   );
 };

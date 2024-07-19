@@ -9,7 +9,7 @@ const page = () => {
       <div className="create-ad-categories">
         <div className="create-ad-title">Select category:</div>
         <div className="themesflat-container">
-          <div className="cat-container mobile-hider ">
+          <div className="cat-container">
             <a href="/create-trailer">
               <button className={`index-slider-items`} id="semi-trailer">
                 <label htmlFor="semi-trailer">Semi-trailer</label>

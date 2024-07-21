@@ -9,14 +9,13 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
 import { GetFeatures } from "../tools/GetFeatures";
 import { GetPath } from "../tools/GetPath";
+import ImageUpload from "./ImageUpload";
 
 const DefaultForkliftCreate = () => {
-  const path = GetPath();
-  const currentCategory = path[path.length - 1];
+  const currentCategory = GetPath().last
 
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);

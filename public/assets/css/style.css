@@ -10234,6 +10234,11 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 767px) {
+  .cat-container a {
+    display: inline-block;
+    padding: 0px 15px;
+    width: 100% !important;
+  }
   .index-slider-items {
     height: 90px !important;
     display: flex;
@@ -10605,7 +10610,7 @@ a.mapboxgl-ctrl-logo {
     margin-bottom: 10px;
   }
   .banner-car-listing .title {
-    font-size: 40px;
+    font-size: 35px;
     line-height: 55px;
   }
   .widget-banner-car-listing {
@@ -10836,7 +10841,6 @@ ul[aria-label="Pagination"] {
 }
 
 .widget-banner-car-listing.banner-car-listing-list {
-  background: url("/assets/images/slide/bg-sign.png");
   background-position: center;
   background-size: cover;
   color: white;
@@ -12764,11 +12768,50 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected {
   background-color: var(--red);
 }
 
-nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover{
+nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover {
   background-color: var(--red);
 }
 
-.create-description{
+.create-description {
   width: 30%;
   margin-top: 20px;
+}
+
+.stt-bg {
+  background: url("/assets/images/slide/bg-sign.png");
+}
+
+.co-ma-bg {
+  background: url("/assets/images/page-list/co-ma.webp");
+}
+
+.co-ma-bg {
+  background-position-y: 80% !important;
+  background-repeat: no-repeat;
+}
+
+.av-bg {
+  background: url("/assets/images/page-list/av.webp");
+}
+
+.bus-bg {
+  background: url("/assets/images/page-list/bus.webp");
+}
+
+.forklift-bg{
+  background: url("/assets/images/page-list/forklift.webp");
+}
+
+.services-bg{
+  background: url("/assets/images/page-list/transport.webp");
+}
+
+.truckUnder-bg{
+  background: url("/assets/images/page-list/truckunder.webp");
+}
+.sp-bg{
+  background: url("/assets/images/page-list/sp.webp");
+}
+.trailer-bg{
+  background: url("/assets/images/page-list/trailer.webp");
 }

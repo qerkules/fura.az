@@ -8,36 +8,19 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
 import axios from "axios";
+import https from "https";
+import { objectToFormData } from "./ObjectToForm";
+import { GetTypes } from "../tools/GetTypes";
+import { GetFeatures } from "../tools/GetFeatures";
 
-const features = [
-  "ABS",
-  "ESP",
-  "EBS",
-  "Auxiliary Heating",
-  "Compressor",
-  "Cruise Control",
-  "Adaptive Cruise Control",
-  "Four Wheel Drive",
-  "Particle Filter",
-  "Navigation System",
-  "Parking heater",
-  "Trailer Hitch Fixed",
-  "Damaged Vehicles",
-  "Metallic",
-  "New",
-  "Alloy wheels",
-  "Tailgate Load Platform",
-  "Crane",
-  "Retarder",
-  "Intarder",
-];
 const DefaultSTTruckCreate = () => {
+  const features = GetFeatures("stt");
   const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
+  const [price, setMinPrice] = useState();
   const [rentType, setRentType] = useState("");
   const [adType, setAdtype] = useState("");
   const [dist, setDist] = useState("");
@@ -66,20 +49,30 @@ const DefaultSTTruckCreate = () => {
   const [cyVolume, setCyVolume] = useState("");
   const [steering, setSteering] = useState("");
 
-  const [gearboxes, setGearboxes] = useState([]);
-  const [aircotypes, setAircotypes] = useState([]);
-  const [currTypes, setCurrTypes] = useState([]);
-  const [fuelTypes, setFuelTypes] = useState([]);
-  const [wheelTypes, setWheelTypes] = useState([]);
-  const [distanceunittypes, setDistanceunittypes] = useState([]);
-  const [emissionclasses, setEmissionClasses] = useState([]);
-  const [emissionstickers, setEmissionStickers] = useState([]);
-  const [paints, setPaints] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
-
-  const categoryId = "65c26fe7-95d3-49ec-ad05-6d68e6a3ac79";
+  const {
+    gearboxes,
+    aircotypes,
+    currTypes,
+    fuelTypes,
+    wheelTypes,
+    distanceunittypes,
+    emissionclasses,
+    emissionstickers,
+    paints,
+    categories,
+    brands,
+  } = GetTypes();
   const maxNumber = 20;
+
+  const [formData, setFormData] = useState({});
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
   const handleSelected = (value) => {
     setSelectedArray((prevSelectedArray) =>
@@ -89,41 +82,6 @@ const DefaultSTTruckCreate = () => {
     );
   };
   const isSelected = (value) => selectedArray.includes(value);
-  useEffect(() => {
-    const fetchData = async (path, setter) => {
-      const response = await axios.get(
-        `https://furaapi.aifdigital.com.tr/api/GetOptions/${path}`
-      );
-      setter(response.data.$values);
-    };
-
-    const fetchCategories = async () => {
-      const response = await axios.get(
-        `https://furaapi.aifdigital.com.tr/api/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
-      );
-      setCategories(response.data.categories.$values);
-    };
-    const fetchBrands = async () => {
-      const response = await axios.get(
-        `https://furaapi.aifdigital.com.tr/api/Brand/GetBrandsByProductTypeId?ProductTypeId=${categoryId}`
-      );
-      setBrands(response.data.brands.$values);
-    };
-
-    fetchBrands();
-
-    fetchCategories();
-
-    fetchData("gearboxtypes", setGearboxes);
-    fetchData("airconditioningtypes", setAircotypes);
-    fetchData("currencytypes", setCurrTypes);
-    fetchData("fueltypes", setFuelTypes);
-    fetchData("wheelformulatypes", setWheelTypes);
-    fetchData("distanceunittypes", setDistanceunittypes);
-    fetchData("emissionclasstypes", setEmissionClasses);
-    fetchData("emissionstickertypes", setEmissionStickers);
-    fetchData("painttypes", setPaints);
-  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -178,7 +136,7 @@ const DefaultSTTruckCreate = () => {
       //   })
       // );
       const formData = objectToFormData({
-        price: 1000,
+        price: 100,
         currency: "USD",
         isNew: true,
         adDetails: "Description of the ad",
@@ -200,18 +158,17 @@ const DefaultSTTruckCreate = () => {
         hoursOfOperation: 120,
       });
 
-      console.log("first");
-
       // const response = await axios.post(
       //   "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
       //   formData,
       //   { headers: { "Content-Type": "multipart/form-data" } }
       // );
 
-      fetch("https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd", {
-        method: "POST",
-        body: formData,
-      })
+      const response = await axios
+        .post(
+          "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
+          formData
+        )
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));
@@ -219,27 +176,6 @@ const DefaultSTTruckCreate = () => {
       console.log(error);
     }
   };
-
-  function objectToFormData(obj, form, namespace) {
-    const formData = form || new FormData();
-
-    for (let property in obj) {
-      if (obj.hasOwnProperty(property)) {
-        const key = namespace ? `${namespace}[${property}]` : property;
-
-        if (
-          typeof obj[property] === "object" &&
-          !(obj[property] instanceof File)
-        ) {
-          objectToFormData(obj[property], formData, key);
-        } else {
-          formData.append(key, obj[property]);
-        }
-      }
-    }
-
-    return formData;
-  }
 
   return (
     <div>

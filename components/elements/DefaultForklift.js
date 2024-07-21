@@ -9,42 +9,23 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
 import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
-const features = [
-  "Trailer Hitch Fixed",
-  "Cabin",
-  "Hydrolic Wheel",
-  "Protection Ceiling",
-  "Damaged Vehicles",
-  "New",
-];
-const DefaultForkliftCreate = () => {
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [rentType, setRentType] = useState("");
-  const [adType, setAdtype] = useState("");
-  const [year, setYear] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [gearbox, setGearbox] = useState("");
-  const [operation, setOperation] = useState("");
-  const [liftingCapacity, setLiftingCapacity] = useState("");
-  const [liftHeight, setLiftHeight] = useState("hp");
-  const [equipmentHeight, setEquipmentHeight] = useState("");
-  const [vin, setVin] = useState("");
-  const [description, setDescription] = useState("");
-  const [fuelType, setFuelType] = useState("");
+import { objectToFormData } from "./ObjectToForm";
 
+
+const DefaultForkliftCreate = () => {
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
-    console.log(images);
+  const [formData, setFormData] = useState({});
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSelected = (value) => {
@@ -54,7 +35,22 @@ const DefaultForkliftCreate = () => {
         : [...prevSelectedArray, value]
     );
   };
+
   const isSelected = (value) => selectedArray.includes(value);
+
+  const handleSubmit = () => {
+    selectedArray.forEach((value) => {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [value]: true,
+      }));
+    });
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ["adImage"]: images,
+    }));
+    console.log(objectToFormData(formData));
+  };
 
   return (
     <div>
@@ -72,8 +68,9 @@ const DefaultForkliftCreate = () => {
                 labelId="adtype-label"
                 label="Ad Type"
                 variant="outlined"
-                value={adType}
-                onChange={(e) => setAdtype(e.target.value)}
+                name="saleOrRent"
+                // onChange={(e) => setAdtype(e.target.value)}
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
@@ -91,8 +88,8 @@ const DefaultForkliftCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="categoryId"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"standart-tractor"}>
                   Standart Tractor (5)
@@ -112,8 +109,8 @@ const DefaultForkliftCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                name="brandId"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"DAF"}>
                   <span>Daf</span>
@@ -133,8 +130,8 @@ const DefaultForkliftCreate = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                name="modelId"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"R500"}>R 500</MenuItem>
                 <MenuItem value={"DX470"}>DX 470</MenuItem>
@@ -156,12 +153,12 @@ const DefaultForkliftCreate = () => {
               id="currency-select"
               labelId="currency-label"
               label="Currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
+              name="currency"
+              onChange={(e) => handleInputChange(e)}
             >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+              <MenuItem value={"USD"}>$ USD</MenuItem>
+              <MenuItem value={"EURO"}>€ EURO</MenuItem>
+              <MenuItem value={"AZN"}>₼ AZN</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -174,12 +171,12 @@ const DefaultForkliftCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
+                name="price"
+                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      {currency[0]}
+                      {formData.currency && formData.currency[0]}
                     </InputAdornment>
                   ),
                 }}
@@ -194,9 +191,9 @@ const DefaultForkliftCreate = () => {
               <TextField
                 label="Lift Height"
                 id="liheight"
-                value={liftHeight}
                 type="number"
-                onChange={(e) => setLiftHeight(e.target.value)}
+                name="liftHeight"
+                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"mm"}</InputAdornment>
@@ -212,9 +209,9 @@ const DefaultForkliftCreate = () => {
               <TextField
                 label="Lifting Capacity"
                 id="eqheight"
-                value={liftingCapacity}
                 type="number"
-                onChange={(e) => setLiftingCapacity(e.target.value)}
+                name="liftingCapacity"
+                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"kq"}</InputAdornment>
@@ -234,9 +231,9 @@ const DefaultForkliftCreate = () => {
                 id="year-min-select"
                 labelId="year-min-label"
                 variant="outlined"
-                label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
+                label="Year"
+                name="year"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"1999"}>1999</MenuItem>
                 <MenuItem value={"2000"}>2000</MenuItem>
@@ -255,8 +252,8 @@ const DefaultForkliftCreate = () => {
                 labelId="fuel-type-label"
                 variant="outlined"
                 label="Fuel Type"
-                value={fuelType}
-                onChange={(e) => setFuelType(e.target.value)}
+                name="fuelType"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"petrol"}>Petrol</MenuItem>
                 <MenuItem value={"diesel"}>Diesel</MenuItem>
@@ -274,8 +271,8 @@ const DefaultForkliftCreate = () => {
                 labelId="gearbox-label"
                 variant="outlined"
                 label="Gearbox"
-                value={gearbox}
-                onChange={(e) => setGearbox(e.target.value)}
+                name="gaerbox"
+                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"automatic"}>Automatic</MenuItem>
                 <MenuItem value={"manual"}>Manual</MenuItem>
@@ -290,9 +287,9 @@ const DefaultForkliftCreate = () => {
               <TextField
                 label="Hours of Operation"
                 id="operation"
-                value={operation}
                 type="number"
-                onChange={(e) => setOperation(e.target.value)}
+                name="hoursOfOperation"
+                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>
@@ -303,9 +300,9 @@ const DefaultForkliftCreate = () => {
               <TextField
                 label="Equipment Height"
                 id="eqheight"
-                value={equipmentHeight}
                 type="number"
-                onChange={(e) => setEquipmentHeight(e.target.value)}
+                name="equipmentHeight"
+                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"mm"}</InputAdornment>
@@ -323,8 +320,8 @@ const DefaultForkliftCreate = () => {
                 id="vin"
                 type="number"
                 placeholder="0"
-                value={vin}
-                onChange={(e) => setVin(e.target.value)}
+                name="vinCode"
+                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>
@@ -338,8 +335,8 @@ const DefaultForkliftCreate = () => {
               <Textarea
                 minRows={5}
                 placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="adDetails"
+                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>
@@ -359,6 +356,7 @@ const DefaultForkliftCreate = () => {
           </div>
         ))}
       </div>
+      <div onClick={handleSubmit}>Submit</div>
     </div>
   );
 };

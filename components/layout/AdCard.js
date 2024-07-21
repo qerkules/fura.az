@@ -103,7 +103,7 @@ export default function AdCard({  data }) {
                   />
                   <div className="overlay-limit">
                     <img
-                      src="./assets/images/car-list/img.png"
+                      src="/assets/images/car-list/img.png"
                       className="icon-img"
                       alt="icon-map"
                     />

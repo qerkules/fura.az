@@ -15,9 +15,9 @@ export default function PopularMakesTab3() {
     priceCurrency: "$",
     isPremium: true,
     images: [
-      "./assets/images/car-list/car1.webp",
-      "./assets/images/car-list/car11.webp",
-      "./assets/images/car-list/car12.webp",
+      "/assets/images/car-list/car1.webp",
+      "/assets/images/car-list/car11.webp",
+      "/assets/images/car-list/car12.webp",
     ],
     brand: "Scania",
     model: "R500",
@@ -34,9 +34,9 @@ export default function PopularMakesTab3() {
     priceCurrency: "$",
     isPremium: true,
     images: [
-      "./assets/images/car-list/car1.webp",
-      "./assets/images/car-list/car11.webp",
-      "./assets/images/car-list/car12.webp",
+      "/assets/images/car-list/car1.webp",
+      "/assets/images/car-list/car11.webp",
+      "/assets/images/car-list/car12.webp",
     ],
     brand: "DAF",
     model: "DX470",
@@ -200,7 +200,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car1.jpg"
+                              src="/assets/images/car-list/car1.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -212,7 +212,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -224,13 +224,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -334,7 +334,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car2.jpg"
+                              src="/assets/images/car-list/car2.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -346,7 +346,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -358,13 +358,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -468,7 +468,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car3.jpg"
+                              src="/assets/images/car-list/car3.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -480,7 +480,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -492,13 +492,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -602,7 +602,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car4.jpg"
+                              src="/assets/images/car-list/car4.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -614,7 +614,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -626,13 +626,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -736,7 +736,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car5.jpg"
+                              src="/assets/images/car-list/car5.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -748,7 +748,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -760,13 +760,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -870,7 +870,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car6.jpg"
+                              src="/assets/images/car-list/car6.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -882,7 +882,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -894,13 +894,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1014,7 +1014,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car1.jpg"
+                              src="/assets/images/car-list/car1.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1026,7 +1026,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1038,13 +1038,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1148,7 +1148,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car2.jpg"
+                              src="/assets/images/car-list/car2.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1160,7 +1160,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1172,13 +1172,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1282,7 +1282,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car3.jpg"
+                              src="/assets/images/car-list/car3.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1294,7 +1294,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1306,13 +1306,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1416,7 +1416,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car4.jpg"
+                              src="/assets/images/car-list/car4.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1428,7 +1428,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1440,13 +1440,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1550,7 +1550,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car5.jpg"
+                              src="/assets/images/car-list/car5.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1562,7 +1562,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1574,13 +1574,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />
@@ -1684,7 +1684,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car6.jpg"
+                              src="/assets/images/car-list/car6.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
@@ -1696,7 +1696,7 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car11.jpg"
+                              src="/assets/images/car-list/car11.jpg"
                               className="swiper-image lazy tfcl-light-gallery"
                               alt="images"
                             />
@@ -1708,13 +1708,13 @@ export default function PopularMakesTab3() {
                         >
                           <div className="images">
                             <img
-                              src="./assets/images/car-list/car12.jpg"
+                              src="/assets/images/car-list/car12.jpg"
                               className="swiper-image tfcl-light-gallery"
                               alt="images"
                             />
                             <div className="overlay-limit">
                               <img
-                                src="./assets/images/car-list/img.png"
+                                src="/assets/images/car-list/img.png"
                                 className="icon-img"
                                 alt="icon-map"
                               />

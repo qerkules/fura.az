@@ -1,154 +1,77 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 
 const Categories = ({ currentIndex }) => {
+  const splideRef = useRef(null);
+  const categories = [
+    { path: "trailer", index: 0, name: "Trailer", image: "n3" },
+    { path: "truck", index: 1, name: "Truck", image: "n1" },
+    { path: "semi-truck", index: 2, name: "Semi Trailer Truck", image: "n2" },
+    { path: "truck-under", index: 3, name: "Transporter Truck", image: "n1" },
+    { path: "av", index: 4, image: "n5", name: "Agriculture Machineary" },
+    { path: "bus", index: 5, image: "n6", name: "Bus" },
+    { path: "co-ma", index: 6, image: "n4", name: "Construction Machineary" },
+    { path: "forklift", index: 7, image: "n7", name: "Forklift" },
+    { path: "sparepart", index: 8, image: "n8", name: "Spare part" },
+    { path: "services", index: 9, image: "n2", name: "Logistic Service" },
+  ];
+
+  useEffect(() => {
+    if (splideRef.current) {
+      splideRef.current.go(currentIndex);
+    }
+  }, [currentIndex]);
+
   return (
     <>
       <div className="cat-container desktop-hider">
         <Splide
           options={{
-            perPage: 2,
+            perPage: 1,
             drag: "free",
-            gap: "1rem",
+            gap: "0px",
             pagination: true,
             arrows: false,
           }}
+          ref={splideRef}
         >
-          <SplideSlide>
-            <a href="/car-list">
-              <button
-                className={`index-slider-items ${
-                  currentIndex === true ? "active" : ""
-                }`}
-                id="semi-trailer"
-              >
-                <label htmlFor="semi-trailer">Semi-trailer</label>
-                <img src="/assets/images/categories/n3.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="truck75">
-                <label htmlFor="truck75">Truck</label>
-                <img src="/assets/images/categories/n1.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="truck">
-                <label htmlFor="truck">Semi-trailer truck</label>
-                <img src="/assets/images/categories/n2.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="truck75">
-                <label htmlFor="truck75">Truck</label>
-                <img src="/assets/images/categories/n1.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="cm">
-                <label htmlFor="cm">Construction machinery</label>
-                <img src="/assets/images/categories/n4.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="av">
-                <label htmlFor="av">Agricultural vehicle</label>
-                <img src="/assets/images/categories/n5.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="bus">
-                <label htmlFor="bus">Bus</label>
-                <img src="/assets/images/categories/n6.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="forklift">
-                <label htmlFor="forklift">Forklift</label>
-                <img src="/assets/images/categories/n7.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
-          <SplideSlide>
-            <a href="/car-list">
-              <button className="index-slider-items" id="sp">
-                <label htmlFor="sp">Spare parts</label>
-                <img src="/assets/images/categories/n8.png" alt="" />
-              </button>
-            </a>
-          </SplideSlide>
+          {categories.map((val) => (
+            <SplideSlide>
+              <a href={`/list/${val.path}`}>
+                <button
+                  className={`index-slider-items ${
+                    currentIndex === val.index ? "active" : ""
+                  }`}
+                >
+                  <label>{val.name}</label>
+                  <img
+                    src={`/assets/images/categories/${val.image}.png`}
+                    alt={val.name}
+                  />
+                </button>
+              </a>
+            </SplideSlide>
+          ))}
         </Splide>
       </div>
       <div className="themesflat-container">
         <div className="cat-container mobile-hider ">
-          <a href="/car-list">
-            <button
-              className={`index-slider-items ${
-                currentIndex === true ? "active" : ""
-              }`}
-              id="semi-trailer"
-            >
-              <label htmlFor="semi-trailer">Semi-trailer</label>
-              <img src="/assets/images/categories/n3.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="truck75">
-              <label htmlFor="truck75">Truck</label>
-              <img src="/assets/images/categories/n1.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="truck">
-              <label htmlFor="truck">Semi-trailer truck</label>
-              <img src="/assets/images/categories/n2.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="cm">
-              <label htmlFor="cm">Construction machinery</label>
-              <img src="/assets/images/categories/n4.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="av">
-              <label htmlFor="av">Agricultural vehicle</label>
-              <img src="/assets/images/categories/n5.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="bus">
-              <label htmlFor="bus">Bus</label>
-              <img src="/assets/images/categories/n6.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="forklift">
-              <label htmlFor="forklift">Forklift</label>
-              <img src="/assets/images/categories/n7.png" alt="" />
-            </button>
-          </a>
-          <a href="/car-list">
-            <button className="index-slider-items" id="sp">
-              <label htmlFor="sp">Spare parts</label>
-              <img src="/assets/images/categories/n8.png" alt="" />
-            </button>
-          </a>
+          {categories.map((val) => (
+            <a href={`/list-${val.path}`}>
+              <button
+                className={`index-slider-items ${
+                  currentIndex === val.index ? "active" : ""
+                }`}
+              >
+                <label>{val.name}</label>
+                <img
+                  src={`/assets/images/categories/${val.image}.png`}
+                  alt={val.image}
+                />
+              </button>
+            </a>
+          ))}
         </div>
       </div>
     </>

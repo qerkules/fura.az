@@ -184,7 +184,7 @@ export default function Header3({ handleMobileMenu }) {
                     {/* Main Menu End*/}
 
                     <div className="flat-bt-top sc-btn-top ml--20 ">
-                      <Link className="btn-icon-list" href="/create-ad">
+                      <Link className="btn-icon-list" href="/create">
                         <span>Create Ad</span>
                         <i className="icon-add-button-1" />
                       </Link>

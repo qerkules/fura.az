@@ -29,7 +29,7 @@ export default function AdCardTrailer({ premium }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="./assets/images/car-list/trailer.jpg"
+                    src="/assets/images/car-list/trailer.jpg"
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -38,7 +38,7 @@ export default function AdCardTrailer({ premium }) {
               <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="./assets/images/car-list/trailer.jpg"
+                    src="/assets/images/car-list/trailer.jpg"
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
                   />
@@ -50,13 +50,13 @@ export default function AdCardTrailer({ premium }) {
               >
                 <div className="images">
                   <img
-                    src="./assets/images/car-list/trailer.jpg"
+                    src="/assets/images/car-list/trailer.jpg"
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
                   <div className="overlay-limit">
                     <img
-                      src="./assets/images/car-list/img.png"
+                      src="/assets/images/car-list/img.png"
                       className="icon-img"
                       alt="icon-map"
                     />

@@ -28,7 +28,7 @@ const Categories = ({ currentIndex }) => {
       <div className="cat-container desktop-hider">
         <Splide
           options={{
-            perPage: 1,
+            perPage: 2,
             drag: "free",
             gap: "0px",
             pagination: true,

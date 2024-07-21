@@ -9,9 +9,8 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
 import Textarea from "@mui/joy/Textarea";
+import ImageUpload from "./ImageUpload";
 
 const features = [
   "Disc Brake",

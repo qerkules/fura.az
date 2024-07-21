@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
 import { objectToFormData } from "./ObjectToForm";
-
+import { GetFeatures } from "../tools/GetFeatures";
 
 const DefaultForkliftCreate = () => {
   const [selectedArray, setSelectedArray] = useState([]);
@@ -51,6 +51,8 @@ const DefaultForkliftCreate = () => {
     }));
     console.log(objectToFormData(formData));
   };
+
+  const features = GetFeatures("forklift");
 
   return (
     <div>

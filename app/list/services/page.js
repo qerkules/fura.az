@@ -17,10 +17,6 @@ export default function CarList() {
     setActiveIndex(index);
   };
 
-  const onPageclick = (event) => {
-    setCurrentPage(event.selected);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       // Replace `data` with the actual data fetching logic

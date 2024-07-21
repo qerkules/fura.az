@@ -9931,6 +9931,9 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 991px) {
+  .banner-car-listing .title{
+    font-size: 40px;
+  }
   .listing-list-car-wrap .showing {
     margin-top: 20px;
   }
@@ -9940,6 +9943,8 @@ a.mapboxgl-ctrl-logo {
     border-radius: 0px !important;
     padding-top: 70px !important;
     padding-bottom: 70px !important;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
   }
   .modal-close-btn {
     top: 60px !important;
@@ -11805,18 +11810,17 @@ input[type="number"] {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
+  width: 600px;
   border-radius: 10px;
   overflow-y: scroll;
   max-height: 95vh;
-  padding: 20px;
+  padding: 20px 40px;
 }
 
 .expanded-search-box .search-filter-listing-car {
   width: 100%;
   border: 0px;
-  display: flex;
-  gap: 20px;
+  display: grid;
   padding: 0px 0px 20px;
 }
 
@@ -12784,8 +12788,8 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover {
   margin-top: 20px;
 }
 
-.stt-bg {
-  background: url("/assets/images/slide/bg-sign.png");
+.truck-bg {
+  background: url("/assets/images/page-list/truck.webp");
 }
 
 .co-ma-bg {

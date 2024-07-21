@@ -99,18 +99,18 @@ export const GetFeatures = (category) => {
     "Separation wall",
   ];
 
-  if (category === "av") {
-    return av;
-  }
-  if (category === "bus") {
-    return bus;
-  }
-  if (category === "co-ma") {
-    return coma;
-  }
-  if (category === "forklift") {
-    return forklift;
-  }
+  const sparepart = ["New"];
+
+  if (category === "av") return av;
+
+  if (category === "sparepart") return sparepart;
+
+  if (category === "bus") return bus;
+
+  if (category === "co-ma") return coma;
+
+  if (category === "forklift") return forklift;
+
   if (
     category === "semi-truck" ||
     category === "truck" ||
@@ -118,10 +118,8 @@ export const GetFeatures = (category) => {
   ) {
     return truck;
   }
-  if (category === "trailer") {
-    return trailer;
-  }
-  if (category === "trailer-refrigator") {
-    return trailerRefrigator;
-  }
+
+  if (category === "trailer") return trailer;
+
+  if (category === "trailer-refrigator") return trailerRefrigator;
 };

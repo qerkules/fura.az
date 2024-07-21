@@ -1,8 +1,11 @@
 "use client";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
+import { GetPath } from "../tools/GetPath";
 
 const DefaultFormMobile = () => {
+  const currentCategory = GetPath().last;
+
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
@@ -54,25 +57,29 @@ const DefaultFormMobile = () => {
           </FormControl>
         </div>
       </div>
-      <div className="form-group">
-        <div className="group-select">
-          <FormControl fullWidth>
-            <InputLabel id="model-label">Model</InputLabel>
-            <Select
-              fullWidth
-              id="model-select"
-              labelId="model-label"
-              variant="outlined"
-              label="Model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-            >
-              <MenuItem value={"R500"}>R 500</MenuItem>
-              <MenuItem value={"DX470"}>DX 470</MenuItem>
-            </Select>
-          </FormControl>
+      {currentCategory !== "spare-part" ? (
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="model-label">Model</InputLabel>
+              <Select
+                fullWidth
+                id="model-select"
+                labelId="model-label"
+                variant="outlined"
+                label="Model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+              >
+                <MenuItem value={"R500"}>R 500</MenuItem>
+                <MenuItem value={"DX470"}>DX 470</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </FormControl>
   );
 };

@@ -9,14 +9,14 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-const ExtraFormControl = () => {
+const BusControl = () => {
   const [emissionClass, setEmissionClass] = useState("");
   const [emissionSticker, setEmissionSticker] = useState("");
   const [fuelType, setFuelType] = useState("");
   const [paint, setPaint] = useState("");
   const [gearbox, setGearbox] = useState("");
-  const [wheelFormula, setWheelFormula] = useState("");
-  const [drivingCabin, setDrivingCabin] = useState("");
+  const [minSeats, setMinSeats] = useState("");
+  const [maxSeats, setMaxSeats] = useState("");
   const [enginePowerType, setEnginePowerType] = useState("hp");
   const [minEnginePower, setMinEnginePower] = useState("");
   const [maxEnginePower, setMaxEnginePower] = useState("");
@@ -128,42 +128,34 @@ const ExtraFormControl = () => {
           </div>
         </div>
       </div>
+      <span className="input-title mb-15">Number of Seats:</span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="wheel-formula-label">Wheel Formula</InputLabel>
-              <Select
-                fullWidth
-                id="wheel-formula-select"
-                labelId="wheel-formula-label"
-                variant="outlined"
-                label="Wheel Formula"
-                value={wheelFormula}
-                onChange={(e) => setWheelFormula(e.target.value)}
-              >
-                <MenuItem value={"4x2"}>4x2</MenuItem>
-                <MenuItem value={"4x4"}>4x4</MenuItem>
-              </Select>
+              <TextField
+                label="Min"
+                id="number-seats-min"
+                type="number"
+                placeholder="0"
+                value={minSeats}
+                onChange={(e) => setMinSeats(e.target.value)}
+              />
             </FormControl>
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="driving-cabin-label">Driving Cabin</InputLabel>
-              <Select
-                fullWidth
-                id="driving-cabin-select"
-                labelId="driving-cabin-label"
+              <TextField
                 variant="outlined"
-                label="Driving Cabin"
-                value={drivingCabin}
-                onChange={(e) => setDrivingCabin(e.target.value)}
-              >
-                <MenuItem value={"Long road"}>Long Road</MenuItem>
-                <MenuItem value={"Local"}>Local</MenuItem>
-              </Select>
+                placeholder="10000"
+                label="Max"
+                type="number"
+                id="number-seats-max"
+                value={maxSeats}
+                onChange={(e) => setMaxSeats(e.target.value)}
+              />
             </FormControl>
           </div>
         </div>
@@ -314,4 +306,4 @@ const ExtraFormControl = () => {
   );
 };
 
-export default ExtraFormControl;
+export default BusControl;

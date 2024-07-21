@@ -11,12 +11,12 @@ import React, { useEffect, useState } from "react";
 import { GetPath } from "../tools/GetPath";
 
 const DefaultFormControl = () => {
-  const path = GetPath();
-  const currentCategory = path[path.length - 1];
+  const currentCategory = GetPath().last;
 
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
+  const [product, setProduct] = useState("");
 
   const [currency, setCurrency] = useState("₼AZN");
   const [minPrice, setMinPrice] = useState("");
@@ -90,25 +90,47 @@ const DefaultFormControl = () => {
           </FormControl>
         </div>
       </div>
-      <div className="form-group">
-        <div className="group-select">
-          <FormControl fullWidth>
-            <InputLabel id="model-label">Model</InputLabel>
-            <Select
-              fullWidth
-              id="model-select"
-              labelId="model-label"
-              variant="outlined"
-              label="Model"
-              value={model}
-              onChange={(e) => setModel(e.target.value)}
-            >
-              <MenuItem value={"R500"}>R 500</MenuItem>
-              <MenuItem value={"DX470"}>DX 470</MenuItem>
-            </Select>
-          </FormControl>
+      {currentCategory !== "sparepart" ? (
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="model-label">Model</InputLabel>
+              <Select
+                fullWidth
+                id="model-select"
+                labelId="model-label"
+                variant="outlined"
+                label="Model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+              >
+                <MenuItem value={"R500"}>R 500</MenuItem>
+                <MenuItem value={"DX470"}>DX 470</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="product-label">Product Name (Code)</InputLabel>
+              <Select
+                fullWidth
+                id="product-select"
+                labelId="product-label"
+                variant="outlined"
+                label="Product"
+                value={product}
+                onChange={(e) => setProduct(e.target.value)}
+              >
+                <MenuItem value={"R500"}>R 500</MenuItem>
+                <MenuItem value={"DX470"}>DX 470</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+      )}
       <span className="input-title mb-15">
         Currency:
         <FormControl variant="standard">
@@ -170,47 +192,53 @@ const DefaultFormControl = () => {
           </div>
         </div>
       </div>
-      <span className="input-title">Year:</span>
-      <div className="form-group-wrap">
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="year-min-label">Min</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                value={minYear}
-                onChange={(e) => setMinYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
-            </FormControl>
+      {currentCategory !== "sparepart" ? (
+        <>
+          <span className="input-title">Year:</span>
+          <div className="form-group-wrap">
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <InputLabel id="year-min-label">Min</InputLabel>
+                  <Select
+                    fullWidth
+                    id="year-min-select"
+                    labelId="year-min-label"
+                    variant="outlined"
+                    label="Min"
+                    value={minYear}
+                    onChange={(e) => setMinYear(e.target.value)}
+                  >
+                    <MenuItem value={"1999"}>1999</MenuItem>
+                    <MenuItem value={"2000"}>2000</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <InputLabel id="year-max-label">Max</InputLabel>
+                  <Select
+                    fullWidth
+                    id="year-max-select"
+                    labelId="year-max-label"
+                    variant="outlined"
+                    label="Max"
+                    value={maxYear}
+                    onChange={(e) => setMaxYear(e.target.value)}
+                  >
+                    <MenuItem value={"1999"}>1999</MenuItem>
+                    <MenuItem value={"2000"}>2000</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="year-max-label">Max</InputLabel>
-              <Select
-                fullWidth
-                id="year-max-select"
-                labelId="year-max-label"
-                variant="outlined"
-                label="Max"
-                value={maxYear}
-                onChange={(e) => setMaxYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        ""
+      )}
       {currentCategory === "truck" ||
       currentCategory === "semi-truck" ||
       currentCategory === "semi-truck" ||

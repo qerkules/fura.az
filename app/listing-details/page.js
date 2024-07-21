@@ -1,10 +1,7 @@
 "use client";
-import ModalOfferPrice from "@/components/elements/ModalOfferPrice";
-import ModalTestDriver from "@/components/elements/ModalTestDriver";
 import Layout from "@/components/layout/Layout";
 import ThumbSlider from "@/components/slider/ThumbSlider";
 import Link from "next/link";
-import { useState } from "react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";

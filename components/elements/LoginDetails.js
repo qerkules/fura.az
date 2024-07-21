@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockIcon from "@mui/icons-material/Lock";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
-import useIsMobile from "./UseIsMobile";
+import useIsMobile from "../tools/UseIsMobile";
 const LoginDetails = ({ setSignOption }) => {
   const [currentLogin, setCurrentLogin] = useState("email");
   const isMobile = useIsMobile();

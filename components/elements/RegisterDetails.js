@@ -10,7 +10,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ImageUploading from "react-images-uploading";
-import useIsMobile from "./UseIsMobile";
+import useIsMobile from "../tools/UseIsMobile";
 
 const RegisterDetails = ({ setSignOption }) => {
   const [currentRegister, setCurrentRegister] = useState("salon");

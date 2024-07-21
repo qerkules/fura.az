@@ -13,12 +13,12 @@ import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
 import axios from "axios";
 import https from "https";
-import { objectToFormData } from "./ObjectToForm";
+import { objectToFormData } from "../tools/ObjectToForm";
 import { GetTypes } from "../tools/GetTypes";
 import { GetFeatures } from "../tools/GetFeatures";
 
 const DefaultSTTruckCreate = () => {
-  const features = GetFeatures("stt");
+  const features = GetFeatures.truck;
   const [category, setCategory] = useState("");
   const [price, setMinPrice] = useState();
   const [rentType, setRentType] = useState("");

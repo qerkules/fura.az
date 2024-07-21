@@ -8,18 +8,25 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { GetPath } from "../tools/GetPath";
 
 const DefaultFormControl = () => {
+  const path = GetPath();
+  const currentCategory = path[path.length - 1];
+
   const [category, setCategory] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minDist, setMinDist] = useState("");
-  const [maxDist, setMaxDist] = useState("");
-  const [minYear, setMinYear] = useState("");
-  const [maxYear, setMaxYear] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
+
   const [currency, setCurrency] = useState("₼AZN");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
+  const [minDist, setMinDist] = useState("");
+  const [maxDist, setMaxDist] = useState("");
+
+  const [minYear, setMinYear] = useState("");
+  const [maxYear, setMaxYear] = useState("");
 
   const [isToggled, setToggled] = useState(true);
 
@@ -204,45 +211,54 @@ const DefaultFormControl = () => {
           </div>
         </div>
       </div>
-      <span className="input-title">Distance:</span>
-      <div className="form-group-wrap">
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Min"
-                id="distance-min"
-                value={minDist}
-                type="number"
-                onChange={(e) => setMinDist(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">{"km"}</InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
+      {currentCategory === "truck" ||
+      currentCategory === "semi-truck" ||
+      currentCategory === "semi-truck" ||
+      currentCategory === "bus" ? (
+        <>
+          <span className="input-title">Distance:</span>
+          <div className="form-group-wrap">
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <TextField
+                    label="Min"
+                    id="distance-min"
+                    value={minDist}
+                    type="number"
+                    onChange={(e) => setMinDist(e.target.value)}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{"km"}</InputAdornment>
+                      ),
+                    }}
+                  />
+                </FormControl>
+              </div>
+            </div>
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <TextField
+                    label="Max"
+                    id="distance-max"
+                    value={maxDist}
+                    onChange={(e) => setMaxDist(e.target.value)}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">{"km"}</InputAdornment>
+                      ),
+                    }}
+                  />
+                </FormControl>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Max"
-                id="distance-max"
-                value={maxDist}
-                onChange={(e) => setMaxDist(e.target.value)}
-                type="number"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">{"km"}</InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
-      </div>
+        </>
+      ) : (
+        <></>
+      )}
     </FormControl>
   );
 };

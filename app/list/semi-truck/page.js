@@ -26,7 +26,7 @@ export default function CarList() {
       // Replace `data` with the actual data fetching logic
       // For example, if using `axios`: const result = await axios.get('/api/data');
       // const data = result.data;
-      console.log(sttData.length / ITEMS_PER_PAGE);
+      (sttData.length / ITEMS_PER_PAGE);
       setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
     };
 

@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Box, Modal } from "@mui/material";
-import Tabs from "../elements/Tabs";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import DefaultFormControl from "../elements/DefaultFormControl";
-import ExtraFormControl from "../elements/ExtraFormControl";
-import useIsMobile from "../elements/UseIsMobile";
+import ExtraFormControl from "../elements/TruckFormControl";
+import useIsMobile from "../tools/UseIsMobile";
 import DefaultFormMobile from "../elements/DefaultFormMobile";
 
 const SearchFilter = () => {

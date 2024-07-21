@@ -11,10 +11,13 @@ import {
 import React, { useState } from "react";
 import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
-import { objectToFormData } from "./ObjectToForm";
 import { GetFeatures } from "../tools/GetFeatures";
+import { GetPath } from "../tools/GetPath";
 
 const DefaultForkliftCreate = () => {
+  const path = GetPath();
+  const currentCategory = path[path.length - 1];
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
@@ -49,10 +52,9 @@ const DefaultForkliftCreate = () => {
       ...prevFormData,
       ["adImage"]: images,
     }));
-    console.log(objectToFormData(formData));
   };
 
-  const features = GetFeatures("forklift");
+  const features = GetFeatures(currentCategory);
 
   return (
     <div>

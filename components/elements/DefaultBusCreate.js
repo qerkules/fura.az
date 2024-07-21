@@ -67,7 +67,6 @@ const DefaultBusCreate = () => {
   const maxNumber = 20;
   const onUploadImage = (imageList) => {
     setImages(imageList);
-    console.log(images);
   };
 
   const handleSelected = (value) => {

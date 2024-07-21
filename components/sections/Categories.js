@@ -42,6 +42,13 @@ const Categories = ({ currentIndex }) => {
                 <button
                   className={`index-slider-items ${
                     currentIndex === val.index ? "active" : ""
+                  }
+                  ${
+                    currentIndex === 0
+                      ? "pad-left"
+                      : currentIndex === 9
+                      ? "pad-right"
+                      : ""
                   }`}
                 >
                   <label>{val.name}</label>
@@ -56,22 +63,41 @@ const Categories = ({ currentIndex }) => {
         </Splide>
       </div>
       <div className="themesflat-container">
-        <div className="cat-container mobile-hider ">
-          {categories.map((val) => (
-            <a href={`/list/${val.path}`} key={val.index}>
-              <button
-                className={`index-slider-items ${
-                  currentIndex === val.index ? "active" : ""
-                }`}
-              >
-                <label>{val.name}</label>
-                <img
-                  src={`/assets/images/categories/${val.image}.png`}
-                  alt={val.image}
-                />
-              </button>
-            </a>
-          ))}
+        <div className="cat-container mobile-hider-trailer">
+          <Splide
+            options={{
+              perPage: 4,
+              gap: "10px",
+              pagination: true,
+              arrows: true,
+            }}
+            ref={splideRef}
+          >
+            {categories.map((val) => (
+              <SplideSlide key={val.index}>
+                <a href={`/list/${val.path}`}>
+                  <button
+                    className={`index-slider-items ${
+                      currentIndex === val.index ? "active" : ""
+                    }
+                  ${
+                    currentIndex === 0
+                      ? "pad-left"
+                      : currentIndex === 9
+                      ? "pad-right"
+                      : ""
+                  }`}
+                  >
+                    <label>{val.name}</label>
+                    <img
+                      src={`/assets/images/categories/${val.image}.png`}
+                      alt={val.name}
+                    />
+                  </button>
+                </a>
+              </SplideSlide>
+            ))}
+          </Splide>
         </div>
       </div>
     </>

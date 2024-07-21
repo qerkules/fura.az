@@ -1,6 +1,6 @@
 "use client";
 import DefaultCoMaCreate from "@/components/elements/DefaultCoMa";
-import useIsMobile from "@/components/elements/UseIsMobile";
+import useIsMobile from "@/components/tools/UseIsMobile";
 import Layout from "@/components/layout/Layout";
 import React from "react";
 

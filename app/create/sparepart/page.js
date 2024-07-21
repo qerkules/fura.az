@@ -4,7 +4,7 @@ import DefaultFormMobile from "@/components/elements/DefaultFormMobile";
 import DefaultSPCreate from "@/components/elements/DefaultSPCreate";
 import DefaultSTTruckCreate from "@/components/elements/DefaultSTTruck";
 import DefaultTruckCreate from "@/components/elements/DefaultTruckCreate";
-import useIsMobile from "@/components/elements/UseIsMobile";
+import useIsMobile from "@/components/tools/UseIsMobile";
 import Layout from "@/components/layout/Layout";
 import React from "react";
 

@@ -10239,6 +10239,13 @@ a.mapboxgl-ctrl-logo {
     padding: 0px 15px;
     width: 100% !important;
   }
+
+  .pad-left{
+    padding-left: 15px;
+  }
+  .pad-right{
+    padding-right: 15px;
+  }
   .index-slider-items {
     height: 90px !important;
     display: flex;
@@ -11319,7 +11326,7 @@ ul[aria-label="Pagination"] {
   margin-bottom: 30px;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .cat-container a {

@@ -61,10 +61,6 @@ const DefaultTruckCreate = () => {
   const [images, setImages] = useState([]);
   const [description, setDescription] = useState("");
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
-    console.log(images);
-  };
 
   const handleSelected = (value) => {
     setSelectedArray((prevSelectedArray) =>

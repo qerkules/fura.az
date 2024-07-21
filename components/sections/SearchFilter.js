@@ -23,8 +23,6 @@ const SearchFilter = () => {
 
   const path = GetPath().last;
 
-  const features = GetFeatures(path);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -92,20 +90,6 @@ const SearchFilter = () => {
           <div className="search-filter-listing-car">
             <DefaultFormControl />
             {handleExtraControls()}
-          </div>
-          <div className="filter-button-container-title">Features:</div>
-          <div className="filter-button-container">
-            {features.map((value) => (
-              <div
-                key={value}
-                className={`filter-button-select ${
-                  isSelected(value) ? "selected" : ""
-                }`}
-                onClick={() => handleSelected(value)}
-              >
-                {value}
-              </div>
-            ))}
           </div>
           <div className="modal-close-btn" onClick={handleClose}>
             <CloseIcon />

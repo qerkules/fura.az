@@ -28,9 +28,6 @@ export default function CarList() {
     fetchData();
   }, [sttData.length]);
 
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentPageData = sttData.slice(offset, offset + ITEMS_PER_PAGE);
-
   return (
     <>
       <Layout headerStyle={1} footerStyle={1}>
@@ -149,7 +146,7 @@ export default function CarList() {
                         <img src="/assets/images/ads/ad-banner.jpg" />
                       </div>
                       <div className="car-list-item ">
-                        {currentPageData.map((val, index) => {
+                        {sttData.map((val, index) => {
                           return <AdCard key={index} data={val} />;
                         })}
                       </div>

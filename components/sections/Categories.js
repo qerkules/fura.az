@@ -37,7 +37,7 @@ const Categories = ({ currentIndex }) => {
           ref={splideRef}
         >
           {categories.map((val) => (
-            <SplideSlide>
+            <SplideSlide key={val.index}>
               <a href={`/list/${val.path}`}>
                 <button
                   className={`index-slider-items ${
@@ -58,7 +58,7 @@ const Categories = ({ currentIndex }) => {
       <div className="themesflat-container">
         <div className="cat-container mobile-hider ">
           {categories.map((val) => (
-            <a href={`/list-${val.path}`}>
+            <a href={`/list-${val.path}`} key={val.index}>
               <button
                 className={`index-slider-items ${
                   currentIndex === val.index ? "active" : ""

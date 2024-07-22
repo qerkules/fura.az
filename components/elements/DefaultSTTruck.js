@@ -48,6 +48,9 @@ const DefaultSTTruckCreate = () => {
   const [cyVolume, setCyVolume] = useState("");
   const [steering, setSteering] = useState("");
 
+  const [newModel, setNewModel] = useState("");
+  const [notModel, setNotModel] = useState("");
+
   const {
     gearboxes,
     aircotypes,
@@ -140,26 +143,26 @@ const DefaultSTTruckCreate = () => {
       });
 
       const formData = objectToFormData({
-        price: 100,
-        currency: "USD",
-        isNew: true,
-        adDetails: "Description of the ad",
-        rentType: "Monthly",
-        adImage: listImages,
-        categoryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        modelId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-        gearBox: "Automatic",
-        fuelType: "Petrol",
-        crashStatus: false,
-        year: 2022,
-        vinCode: "1HGCM82633A123456",
-        saleOrRent: "Sale",
-        distance: 15000,
-        distanceMeasurementUnit: "KM",
-        liftingCapacity: "500kg",
-        liftWeight: "200kg",
-        equipmentHeight: "3m",
-        hoursOfOperation: 120,
+        Price: 100,
+        Currency: 1,
+        IsNew: true,
+        AdDetails: "Description of the ad",
+        RentType: 1,
+        AdImage: listImages,
+        CategoryId: "B7F35174-3124-4082-85C8-01B2E8E8FC00",
+        ModelId: "8CFCD50B-9155-4694-B73F-997D2A941A0C",
+        GearBox: 1,
+        FuelType: 1,
+        CrashStatus: false,
+        Year: 2022,
+        VinCode: "1HGCM82633A123456",
+        SaleOrRent: "Sale",
+        Distance: 15000,
+        DistanceMeasurementUnit: 1,
+        LiftingCapacity: "500kg",
+        LiftWeight: "200kg",
+        EquipmentHeight: "3m",
+        HoursOfOperation: 120,
       });
 
       // const response = await axios.post(
@@ -167,14 +170,20 @@ const DefaultSTTruckCreate = () => {
       //   formData,
       //   { headers: { "Content-Type": "multipart/form-data" } }
       // );
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Access-Control-Allow-Credentials": "true",
+        },
+      };
 
       const response = await axios
         .post(
           "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
           formData,
-          {
-            "Content-Type": "multipart/formdata",
-          }
+          config
         )
         .then((response) => response.json())
         .then((data) => console.log(data))
@@ -253,25 +262,43 @@ const DefaultSTTruckCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="model-label">Model</InputLabel>
-              <Select
-                fullWidth
-                id="model-select"
-                labelId="model-label"
-                variant="outlined"
-                label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-              >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
-              </Select>
-            </FormControl>
+
+        {notModel ? (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth>
+                <InputLabel id="model-label">Model</InputLabel>
+                <Select
+                  fullWidth
+                  id="model-select"
+                  labelId="model-label"
+                  variant="outlined"
+                  label="Model"
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                >
+                  <MenuItem value={"R500"}>R 500</MenuItem>
+                  <MenuItem value={"DX470"}>DX 470</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth>
+                <TextField
+                  fullWidth
+                  id="model-input"
+                  variant="outlined"
+                  label="Model"
+                  value={newModel}
+                  onChange={(e) => setNewModel(e.target.value)}
+                />
+              </FormControl>
+            </div>
+          </div>
+        )}
         <ImageUpload
           maxNumber={maxNumber}
           images={images}

@@ -134,13 +134,18 @@ const DefaultSTTruckCreate = () => {
       //     // AdImage: images,
       //   })
       // );
+
+      const listImages = images.map((el) => {
+        return el.file;
+      });
+
       const formData = objectToFormData({
         price: 100,
         currency: "USD",
         isNew: true,
         adDetails: "Description of the ad",
         rentType: "Monthly",
-        adImage: [],
+        adImage: listImages,
         categoryId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
         modelId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
         gearBox: "Automatic",
@@ -166,7 +171,10 @@ const DefaultSTTruckCreate = () => {
       const response = await axios
         .post(
           "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
-          formData
+          formData,
+          {
+            "Content-Type": "multipart/formdata",
+          }
         )
         .then((response) => response.json())
         .then((data) => console.log(data))
@@ -712,7 +720,7 @@ const DefaultSTTruckCreate = () => {
         ))}
       </div>
 
-      <div onClick={() => handleSubmit()}>Submit </div>
+      <div onClick={() => handleSubmit()}>Submit STT</div>
     </div>
   );
 };

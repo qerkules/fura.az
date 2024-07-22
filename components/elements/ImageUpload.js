@@ -16,7 +16,7 @@ const ImageUpload = ({ maxNumber, images, setImages }) => {
         onChange={onUploadImage}
         maxNumber={maxNumber}
         dataURLKey="data_url"
-        acceptType={["jpg"]}
+        acceptType={["webp", "jpg", "png"]}
       >
         {({ onImageUpload, dragProps, onImageRemove, isDragging }) => (
           <>

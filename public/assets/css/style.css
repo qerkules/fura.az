@@ -12826,3 +12826,8 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover {
 .trailer-bg{
   background: url("/assets/images/page-list/trailer.webp");
 }
+
+.css-10o2lyd-MuiStack-root>.MuiTextField-root, 
+.css-10o2lyd-MuiStack-root>.MuiPickersTextField-root{
+  width: 100%;
+}

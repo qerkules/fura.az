@@ -19,9 +19,6 @@ jobs:
           chmod 600 /tmp/test_key
           cat /tmp/test_key
           ssh-add /tmp/test_key
-        uses: webfactory/ssh-agent@v0.5.4
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Debug SSH Key
         run: |

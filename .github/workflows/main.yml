@@ -18,6 +18,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Debug SSH Key
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/test_key
+          chmod 600 /tmp/test_key
+          ssh-add /tmp/test_key
+
       - name: Verify and add host key
         run: |
           ssh-keyscan -H 162.55.168.17 >> ~/.ssh/known_hosts || (echo "ssh-keyscan failed" && exit 1)

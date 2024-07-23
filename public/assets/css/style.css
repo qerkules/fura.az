@@ -12126,6 +12126,7 @@ input[type="number"] {
   background-color: var(--red);
   color: var(--text-wht-color);
   width: 100%;
+  cursor: pointer;
 }
 
 .login-button {
@@ -12830,4 +12831,17 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover {
 .css-10o2lyd-MuiStack-root>.MuiTextField-root, 
 .css-10o2lyd-MuiStack-root>.MuiPickersTextField-root{
   width: 100%;
+}
+
+.modal-ok-btn{
+  background-color: transparent;
+  color: red;
+
+}
+
+.modal-desc{
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: black;
 }

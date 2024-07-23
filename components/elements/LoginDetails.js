@@ -4,8 +4,55 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LockIcon from "@mui/icons-material/Lock";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import useIsMobile from "../tools/UseIsMobile";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import ModalAlert from "./ModalAlert";
+
 const LoginDetails = ({ setSignOption }) => {
+  const router = useRouter();
   const [currentLogin, setCurrentLogin] = useState("email");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleNavigation = (path) => {
+    router.push(path);
+  };
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
+  };
+  const handleSubmit = async () => {
+    try {
+      const userData = JSON.stringify({
+        UserNameOrEmail: userName,
+        Password: password,
+      });
+      const response = await axios
+        .post(`${process.env.NEXT_PUBLIC_API_LINK}/User/Login`, userData, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then((data) => {
+          modalOpener(true, "logged in");
+          console.log(data.data);
+          return data.data;
+        })
+        .catch((error) => {
+          modalOpener(false, "Email or password false");
+          return error;
+        });
+    } catch (error) {
+      modalOpener(false, "Email or password false");
+      console.log(error);
+    }
+  };
+
   const isMobile = useIsMobile();
   const mobileVersion = (
     <div className="sign-background">
@@ -40,23 +87,34 @@ const LoginDetails = ({ setSignOption }) => {
             <div className="sign-inputs">
               <div className="sign-input">
                 <MailOutlineIcon />
-                <input placeholder="Enter Your Email Address" />
+                <input
+                  placeholder="Enter Your Email Address"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
               </div>
               <div className="sign-input">
                 <LockIcon />
-                <input placeholder="Enter Your Password" />
+                <input
+                  placeholder="Enter Your Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="login-forgot-button">Forgot Password</div>
               <div className="login-buttons">
                 <div
                   className="register-suggest-button default-sign-button"
                   onClick={() => {
-                    setSignOption("register");
+                    handleNavigation("/sign-up/user");
                   }}
                 >
                   Register
                 </div>
-                <div className="login-button default-sign-button">Log in</div>
+                <div
+                  className="login-button default-sign-button"
+                  onClick={handleSubmit}
+                >
+                  Log in
+                </div>
               </div>
             </div>
           ) : (
@@ -116,23 +174,34 @@ const LoginDetails = ({ setSignOption }) => {
             <div className="sign-inputs">
               <div className="sign-input">
                 <MailOutlineIcon />
-                <input placeholder="Enter Your Email Address" />
+                <input
+                  placeholder="Enter Your Email Address"
+                  onChange={(e) => setUserName(e.target.value)}
+                />
               </div>
               <div className="sign-input">
                 <LockIcon />
-                <input placeholder="Enter Your Password" />
+                <input
+                  placeholder="Enter Your Password"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="login-forgot-button">Forgot Password</div>
               <div className="login-buttons">
                 <div
                   className="register-suggest-button default-sign-button"
                   onClick={() => {
-                    setSignOption("register");
+                    handleNavigation("/sign-up/user");
                   }}
                 >
                   Register
                 </div>
-                <div className="login-button default-sign-button">Log in</div>
+                <div
+                  className="login-button default-sign-button"
+                  onClick={handleSubmit}
+                >
+                  Log in
+                </div>
               </div>
             </div>
           ) : (
@@ -158,7 +227,12 @@ const LoginDetails = ({ setSignOption }) => {
       </div>
     </div>
   );
-  return <>{isMobile ? mobileVersion : desktopVersion}</>;
+  return (
+    <>
+      {isMobile ? mobileVersion : desktopVersion}
+      {modalOpen && ModalAlert(modalStatus, modalMessage, setModalOpen, router)}
+    </>
+  );
 };
 
 export default LoginDetails;

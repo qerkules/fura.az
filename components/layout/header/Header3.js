@@ -175,9 +175,6 @@ export default function Header3({ handleMobileMenu }) {
                           <li>
                             <Link href="/saloons">Saloons </Link>
                           </li>
-                          <li>
-                            <Link href="/contact-us">Services</Link>
-                          </li>
                         </ul>
                       </div>
                     </nav>

@@ -65,6 +65,7 @@ const DefaultSTTruckCreate = () => {
     brands,
   } = GetTypes();
   const maxNumber = 20;
+  let formImage;
 
   const [formData, setFormData] = useState({});
 
@@ -143,26 +144,35 @@ const DefaultSTTruckCreate = () => {
       });
 
       const formData = objectToFormData({
-        Price: 100,
-        Currency: 1,
-        IsNew: true,
-        AdDetails: "Description of the ad",
-        RentType: 1,
-        AdImage: listImages,
+        FrontHydraulics: "true",
+        FrontJack: "true",
+        Cabin: "true",
+        HoursOfOperation: "100",
+        AirConditioning: "1",
+        EmissionSticker: "1",
+        Abs: "true",
+        AuxiliaryHeating: "true",
+        FourWheelDrive: "true",
+        HydrolicWheel: "true",
+        EnginePowerHP: "12344",
+        EnginePowerKW: "1412",
         CategoryId: "B7F35174-3124-4082-85C8-01B2E8E8FC00",
         ModelId: "8CFCD50B-9155-4694-B73F-997D2A941A0C",
-        GearBox: 1,
-        FuelType: 1,
-        CrashStatus: false,
-        Year: 2022,
-        VinCode: "1HGCM82633A123456",
-        SaleOrRent: "Sale",
-        Distance: 15000,
-        DistanceMeasurementUnit: 1,
-        LiftingCapacity: "500kg",
-        LiftWeight: "200kg",
-        EquipmentHeight: "3m",
-        HoursOfOperation: 120,
+        GearBox: "1",
+        FuelType: "2",
+        CrashStatus: "true",
+        Year: "2000",
+        VinCode: "adfasdfasdf123123",
+        SaleOrRent: "sale",
+        Distance: "123123",
+        DistanceMeasurementUnit: "1",
+        Price: "1000",
+        Currency: "1",
+        IsNew: "true",
+        AdDetails: "Very good",
+        RentType: "2",
+        AdImage: listImages,
+        Description: "TEst",
       });
 
       // const response = await axios.post(
@@ -179,15 +189,73 @@ const DefaultSTTruckCreate = () => {
         },
       };
 
+      const token =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYzNWQ4ZjBhLTFkYjYtNDEwMi04NGY4LWJiMWIyZDVhZmQyZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im1haGFtbWFkQGdtYWlsLmNvbSIsIm5iZiI6MTcyMTcyNjEwOCwiZXhwIjoxNzIxODEyNTA4LCJpc3MiOiJ3d3cubXlhcGkuY29tIiwiYXVkIjoid3d3LmZ1cmFhei5jb20ifQ.9I7Obafc4t_ysZvJqV_xjzsB-yxHLbqInnYNnc2u4zE";
+
+      // await fetch(
+      //   "https://furaapi.aifdigital.com.tr/api/AgriculturalVehicle/CreateAgriculturalVehicleAd",
+      //   {
+      //     method: "POST",
+      //     body: formImage,
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }
+      // )
+      //   .then((res) => {
+      //     if (res.ok) {
+      //       res.json().then((data) => console.log(data));
+      //     } else {
+      //       console.log(res);
+      //       alert("Error processing image.");
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //     alert("An error ocurred while processing the image");
+      //   });
+
       const response = await axios
         .post(
-          "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
+          "https://furaapi.aifdigital.com.tr/api/AgriculturalVehicle/CreateAgriculturalVehicleAd",
           formData,
-          config
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
         )
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));
+
+      const userData = JSON.stringify({
+        NameSurname: "Maqa Serk",
+        UserName: "0232323",
+        Email: "assdadff@gmail.com",
+        Password: "maqamedov",
+        PasswordConfirm: "maqamedov",
+      });
+
+      // await axios
+      //   .post(
+      //     `${process.env.NEXT_PUBLIC_API_LINK}/User/RegisterMember`,
+      //     userData,
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //         Authorization: `Bearer ${token}`,
+      //       },
+      //     }
+      //   )
+      //   .then((response) => {
+      //     console.log(response.data);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error:", error);
+      //   });
     } catch (error) {
       console.log(error);
     }

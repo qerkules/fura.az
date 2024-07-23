@@ -22,6 +22,7 @@ jobs:
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/test_key
           chmod 600 /tmp/test_key
+          cat /tmp/test_key
           ssh-add /tmp/test_key
 
       - name: Verify and add host key

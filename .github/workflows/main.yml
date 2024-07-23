@@ -1,0 +1,67 @@
+name: FURA.AZ CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Verify and add host key
+        run: |
+          ssh-keyscan -H 162.55.168.17 >> ~/.ssh/known_hosts || (echo "ssh-keyscan failed" && exit 1)
+          cat ~/.ssh/known_hosts
+
+      - name: Test SSH Connection
+        run: |
+          ssh -v root@162.55.168.17 "echo 'SSH connection successful'" || (echo "SSH connection failed" && exit 1)
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
+          SSH_AGENT_PID: ${{ env.SSH_AGENT_PID }}
+
+      - name: Build
+        run: |
+          ssh root@162.55.168.17 "cd /root/fura_new_repo/fura.az && git pull" || (echo "Git pull failed" && exit 1)
+          ssh root@162.55.168.17 "cd /root/fura_repo && docker-compose build test-fura.front" || (echo "Docker-compose build failed" && exit 1)
+        shell: /usr/bin/bash -e {0}
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
+          SSH_AGENT_PID: ${{ env.SSH_AGENT_PID }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Verify and add host key
+        run: |
+          ssh-keyscan -H 162.55.168.17 >> ~/.ssh/known_hosts || (echo "ssh-keyscan failed" && exit 1)
+          cat ~/.ssh/known_hosts
+
+      - name: Deploy
+        run: |
+          ssh root@162.55.168.17 "cd /root/fura_repo && docker-compose up -d --force-recreate test-fura.front" || (echo "Docker-compose up failed" && exit 1)
+          ssh root@162.55.168.17 "docker container prune -f" || (echo "Docker container prune failed" && exit 1)
+          ssh root@162.55.168.17 "docker image prune -f" || (echo "Docker image prune failed" && exit 1)
+        env:
+          SSH_AUTH_SOCK: ${{ env.SSH_AUTH_SOCK }}
+          SSH_AGENT_PID: ${{ env.SSH_AGENT_PID }}

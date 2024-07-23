@@ -15,6 +15,11 @@ jobs:
 
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.4
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > /tmp/test_key
+          chmod 600 /tmp/test_key
+          cat /tmp/test_key
+          ssh-add /tmp/test_key
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 

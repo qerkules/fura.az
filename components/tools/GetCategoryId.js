@@ -1,14 +1,15 @@
 export const GetCategory = () => {
-  const trailerId = "502d9f06-4e81-44ee-aa2f-2e02ccbae6ef";
-  const sttId = "65c26fe7-95d3-49ec-ad05-6d68e6a3ac79";
-  const comaId = "b8730102-10fb-41f1-ac2e-6c21bdf8e567";
-  const truckId = "f9635b6a-4e5f-44ac-abd2-04996e213253";
-  const transportTruckId = "7a9a9646-1912-4f03-bd92-c1385be63379";
-  const avId = "128d1c75-f24e-4658-9b69-91402ebb5b2e";
-  const spId = "5bab4f96-c05b-419d-ad9e-d8c184a7a5a1";
-  const forkliftId = "ba57c90b-ceac-4019-a540-c2e7eec30b1d";
-  const busId = "f960d569-fd02-4b30-882d-6fcff8fc7ae1";
-  const serivceId = "c12cb8ca-e66a-4d0c-939b-0f922a2de794";
+
+  const trailerId = "e1e5807e-0081-4bf9-a96b-5152e3dcd3d0";
+  const sttId = "bbb92f73-12d2-4230-aa6b-e35416bd88e3";
+  const comaId = "55e97a79-0f08-4f20-90e7-5c9c4ccf9fca";
+  const truckId = "3ae42571-81f5-47da-9c6c-587f567a665e";
+  const transportTruckId = "582f0bff-02eb-400c-a463-53559e595551";
+  const avId = "0e33f996-b5cb-476b-9a99-c62c7ea6833d";
+  const spId = "607d688d-e632-4888-b9f1-639d52d7e6b4";
+  const forkliftId = "b2d4d70c-ee3c-4730-ac15-6bbe2a9e9cf6";
+  const busId = "4d13f211-5bd4-4c70-a49e-7fbb3e4c8c31";
+  const serivceId = "ecc6e50b-ea35-4ede-a750-fa32be2d3840";
 
   return {
     trailerId,

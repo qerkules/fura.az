@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const GetTypes = () => {
+export const GetTypes = (categoryId) => {
   const [gearboxes, setGearboxes] = useState([]);
   const [aircotypes, setAircotypes] = useState([]);
   const [currTypes, setCurrTypes] = useState([]);
@@ -14,7 +14,6 @@ export const GetTypes = () => {
   const [paints, setPaints] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  const categoryId = "65c26fe7-95d3-49ec-ad05-6d68e6a3ac79";
 
   useEffect(() => {
     const fetchData = async (path, setter) => {

@@ -43,14 +43,16 @@ const DefaultCoMaCreate = () => {
     setImages(imageList);
   };
 
-  const handleSelected = (value) => {
+  const handleSelected = (selectedItem) => {
     setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.includes(value)
-        ? prevSelectedArray.filter((item) => item !== value)
-        : [...prevSelectedArray, value]
+      prevSelectedArray.some((item) => item === selectedItem.id)
+        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
+        : [...prevSelectedArray, selectedItem]
     );
   };
-  const isSelected = (value) => selectedArray.includes(value);
+  
+  const isSelected = (value) => selectedArray.some((el) => value === el);
+
 
   return (
     <div>
@@ -271,13 +273,13 @@ const DefaultCoMaCreate = () => {
       <div className="filter-button-container">
         {features.map((value) => (
           <div
-            key={value}
+            key={value.id}
             className={`filter-button-select ${
-              isSelected(value) ? "selected" : ""
+              isSelected(value.id) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value)}
+            onClick={() => handleSelected(value.id)}
           >
-            {value}
+            {value.value}
           </div>
         ))}
       </div>

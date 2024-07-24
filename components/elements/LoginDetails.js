@@ -40,7 +40,7 @@ const LoginDetails = ({ setSignOption }) => {
         })
         .then((data) => {
           modalOpener(true, "logged in");
-          console.log(data.data);
+          localStorage.setItem("token", data.data.token.accessToken);
           return data.data;
         })
         .catch((error) => {

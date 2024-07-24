@@ -139,15 +139,13 @@ const DefaultSTTruckCreate = () => {
       //   })
       // );
 
-      const listImages = images.map((el) => {
-        return el.file;
-      });
+
 
       const formData = objectToFormData({
         FrontHydraulics: "true",
         FrontJack: "true",
         Cabin: "true",
-        HoursOfOperation: "100",
+        HoursOfOperation: "1000",
         AirConditioning: "1",
         EmissionSticker: "1",
         Abs: "true",
@@ -171,9 +169,14 @@ const DefaultSTTruckCreate = () => {
         IsNew: "true",
         AdDetails: "Very good",
         RentType: "2",
-        AdImage: listImages,
         Description: "TEst",
       });
+      
+      if (images) {
+        for (const file of images) {
+            formData.append("AdImage", file.file, file.file.name);
+        }
+    }
 
       // const response = await axios.post(
       //   "https://furaapi.aifdigital.com.tr/api/Forklift/CreateForkliftAd",
@@ -231,31 +234,6 @@ const DefaultSTTruckCreate = () => {
         .then((data) => console.log(data))
         .catch((error) => console.error("Error:", error));
 
-      const userData = JSON.stringify({
-        NameSurname: "Maqa Serk",
-        UserName: "0232323",
-        Email: "assdadff@gmail.com",
-        Password: "maqamedov",
-        PasswordConfirm: "maqamedov",
-      });
-
-      // await axios
-      //   .post(
-      //     `${process.env.NEXT_PUBLIC_API_LINK}/User/RegisterMember`,
-      //     userData,
-      //     {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      //         Authorization: `Bearer ${token}`,
-      //       },
-      //     }
-      //   )
-      //   .then((response) => {
-      //     console.log(response.data);
-      //   })
-      //   .catch((error) => {
-      //     console.error("Error:", error);
-      //   });
     } catch (error) {
       console.log(error);
     }
@@ -802,7 +780,7 @@ const DefaultSTTruckCreate = () => {
       </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
-        {features.map((value) => (
+        {/* {features.map((value) => (
           <div
             key={value}
             className={`filter-button-select ${
@@ -812,7 +790,7 @@ const DefaultSTTruckCreate = () => {
           >
             {value}
           </div>
-        ))}
+        ))} */}
       </div>
 
       <div onClick={() => handleSubmit()}>Submit STT</div>

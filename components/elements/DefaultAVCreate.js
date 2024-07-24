@@ -11,48 +11,90 @@ import {
 import React, { useState } from "react";
 import Textarea from "@mui/joy/Textarea";
 import ImageUpload from "./ImageUpload";
-
-const features = [
-  "Disc Brake",
-  "Air Suspension",
-  "ABS",
-  "EBS",
-  "New",
-  "Crashed vehicle",
-];
+import axios from "axios";
+import { GetFeatures } from "../tools/GetFeatures";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetPath } from "../tools/GetPath";
+import { GetTypes } from "../tools/GetTypes";
 
 const DefaultAVCreate = () => {
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [adType, setAdtype] = useState("");
-  const [year, setYear] = useState("");
-  const [opHours, setOpHours] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [vin, setVin] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [description, setDescription] = useState("");
+  const currentCategory = GetPath().last;
+  const currentCategoryId = GetCategory(currentCategory);
+  const features = GetFeatures(currentCategory);
+  const types = GetTypes(currentCategoryId);
+
+  const [brandId, setBrandId] = useState("");
+  const [models, setModels] = useState([]);
+
+  const [currency, setCurrency] = useState("AZN");
+  const [enginePowerType, setEnginePowerType] = useState("HP");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
-  };
 
-  const handleSelected = (value) => {
+  const handleSelected = (selectedItem) => {
     setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.includes(value)
-        ? prevSelectedArray.filter((item) => item !== value)
-        : [...prevSelectedArray, value]
+      prevSelectedArray.some((item) => item === selectedItem.id)
+        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
+        : [...prevSelectedArray, selectedItem]
     );
   };
-  const isSelected = (value) => selectedArray.includes(value);
+  
+  const isSelected = (value) => selectedArray.some((el) => value === el);
+
+  const getModels = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${brandId}`
+      );
+      setModels(response.data);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+
+    features.forEach((feature) => {
+      if (selectedArray.some((el) => feature.id !== el)) {
+        formData.append(feature, false);
+      }
+    });
+
+    selectedArray.forEach((value) => {
+      formData.append(value, true);
+    });
+
+    for (const file of images) {
+      formData.append("AdImage", file.file, file.file.name);
+    }
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_API_LINK}/Forklift/CreateForkliftAd`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((data) => data.data)
+        .catch((error) => console.error("Error:", error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div>
+    <form id="filter-list-car-side-bar" onSubmit={(e) => handleSubmit(e)}>
       <FormControl
         id="filter-list-car-side-bar"
         className="create-ad-template list-filter"
@@ -67,8 +109,7 @@ const DefaultAVCreate = () => {
                 labelId="adtype-label"
                 label="Ad Type"
                 variant="outlined"
-                value={adType}
-                onChange={(e) => setAdtype(e.target.value)}
+                name="SaleOrRent"
               >
                 <MenuItem value={"sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
@@ -86,13 +127,12 @@ const DefaultAVCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {types.categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -107,13 +147,16 @@ const DefaultAVCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {types.brands.map((val) => (
+                  <MenuItem
+                    value={val.id}
+                    key={val.id}
+                    onChange={(e) => getModels(e)}
+                  >
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -128,11 +171,12 @@ const DefaultAVCreate = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
               >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
+                {models.map((val) => {
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.modelName}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -154,9 +198,11 @@ const DefaultAVCreate = () => {
               value={currency}
               onChange={(e) => setCurrency(e.target.value)}
             >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+              {types.currTypes.map((val) => {
+                <MenuItem key={val.id} value={val.id}>
+                  {val}
+                </MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>
@@ -169,8 +215,6 @@ const DefaultAVCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -190,8 +234,6 @@ const DefaultAVCreate = () => {
                 id="opHours"
                 type="number"
                 placeholder="0"
-                value={opHours}
-                onChange={(e) => setOpHours(e.target.value)}
               />
             </FormControl>
           </div>
@@ -220,8 +262,6 @@ const DefaultAVCreate = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -244,8 +284,6 @@ const DefaultAVCreate = () => {
                 labelId="year-min-label"
                 variant="outlined"
                 label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
               >
                 <MenuItem value={"1999"}>1999</MenuItem>
                 <MenuItem value={"2000"}>2000</MenuItem>
@@ -266,8 +304,6 @@ const DefaultAVCreate = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
               >
                 <MenuItem value={"1none"}>1 (None)</MenuItem>
                 <MenuItem value={"2red"}>2 (Red)</MenuItem>
@@ -283,8 +319,6 @@ const DefaultAVCreate = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={vin}
-                onChange={(e) => setVin(e.target.value)}
               />
             </FormControl>
           </div>
@@ -295,12 +329,7 @@ const DefaultAVCreate = () => {
           <div className="group-select">
             <FormControl fullWidth>
               <FormLabel>Description:</FormLabel>
-              <Textarea
-                minRows={5}
-                placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              />
+              <Textarea minRows={5} placeholder="Type in here..." />
             </FormControl>
           </div>
         </div>
@@ -309,17 +338,17 @@ const DefaultAVCreate = () => {
       <div className="filter-button-container">
         {features.map((value) => (
           <div
-            key={value}
+            key={value.id}
             className={`filter-button-select ${
-              isSelected(value) ? "selected" : ""
+              isSelected(value.id) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value)}
+            onClick={() => handleSelected(value.id)}
           >
-            {value}
+            {value.value}
           </div>
         ))}
       </div>
-    </div>
+    </form>
   );
 };
 

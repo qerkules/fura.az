@@ -1,88 +1,101 @@
 import React from "react";
 
 export const GetFeatures = (category) => {
+  const abs = { id: "ABS", value: "ABS" };
+  const ebs = { id: "EBS", value: "EBS" };
+  const crane = { id: "Crane", value: "Crane" };
+  const newy = { id: "New", value: "New" };
+  const dmgV = { id: "DamagedVehicles", value: "Damaged Vehicles" };
+  const crshV = { id: "Crashed vehicle", value: "Crashed vehicle" };
+  const mttlc = { id: "Metallic", value: "Metallic" };
+
   const truck = [
-    "ABS",
-    "ESP",
-    "EBS",
-    "Auxiliary Heating",
-    "Compressor",
-    "Cruise Control",
-    "Adaptive Cruise Control",
-    "Four Wheel Drive",
-    "Particle Filter",
-    "Navigation System",
-    "Parking heater",
-    "Trailer Hitch Fixed",
-    "Damaged Vehicles",
-    "Metallic",
-    "New",
-    "Alloy wheels",
-    "Tailgate Load Platform",
-    "Crane",
-    "Retarder",
-    "Intarder",
+    abs,
+    { id: "FourWheelDrive", value: "Four Wheel Drive" },
+    { id: "AdaptiveCruiseControl", value: "Adaptive Cruise Control" },
+    { id: "CruiseControl", value: "Cruise Control" },
+    { id: "Compressor", value: "Compressor" },
+    { id: "AuxiliaryHeating", value: "Auxiliary Heating" },
+    ebs,
+    { id: "ESP", value: "ESP" },
+    { id: "Intarder", value: "Intarder" },
+    { id: "Retarder", value: "Retarder" },
+    crane,
+    { id: "TailgateLoadPlatform", value: "Tailgate Load Platform" },
+    { id: "AlloyWheels", value: "Alloy wheels" },
+    newy,
+    mttlc,
+    dmgV,
+    { id: "TrailerHitchFixed", value: "Trailer Hitch Fixed" },
+    { id: "ParkingHeater", value: "Parking heater" },
+    { id: "ParticleFilter", value: "Particle Filter" },
+    { id: "NavigationSystem", value: "Navigation System" },
   ];
 
   const forklift = [
-    "Trailer Hitch Fixed",
-    "Cabin",
-    "Hydrolic Wheel",
-    "Protection Ceiling",
-    "Damaged Vehicles",
-    "New",
+    { id: "TrailerHitchFixed", value: "Trailer Hitch Fixed" },
+    { id: "Cabin", value: "Cabin" },
+    { id: "HydrolicWheel", value: "Hydrolic Wheel" },
+    { id: "ProtectionCeiling", value: "Protection Ceiling" },
+    dmgV,
+    newy,
   ];
 
   const bus = [
-    "New",
-    "Metallic",
-    "Retarder",
-    "Intarder",
-    "ABS",
-    "ESP",
-    "Auxiliary Heating",
-    "Cruise Control",
-    "Adaptive Cruise Control",
-    "Trailer Hitch Fixed",
-    "Particle Filter",
-    "Navigation System",
-    "TV",
-    "Toilet",
-    "Driver Sleeping Compartment",
-    "Kitchen",
-    "Cold Storage",
-    "Sleeping Chairs",
-    "Damaged Vehicles",
+    dmgV,
+    newy,
+    mttlc,
+    { id: "Intarder", value: "Intarder" },
+    { id: "Retarder", value: "Retarder" },
+    abs,
+    { id: "ESP", value: "ESP" },
+    { id: "AuxiliaryHeating", value: "Auxiliary Heating" },
+    { id: "CruiseControl", value: "Cruise Control" },
+    { id: "AdaptiveCruiseControl", value: "Adaptive Cruise Control" },
+    { id: "TrailerHitchFixed", value: "Trailer Hitch Fixed" },
+    { id: "ParticleFilter", value: "Particle Filter" },
+    { id: "NavigationSystem", value: "Navigation System" },
+    { id: "TV", value: "TV" },
+    { id: "Toilet", value: "Toilet" },
+    { id: "DriverSleepingCompartment", value: "Driver Sleeping Compartment" },
+    { id: "Kitchen", value: "Kitchen" },
+    { id: "ColdStorage", value: "Cold Storage" },
+    { id: "Sleeping Chairs", value: "Sleeping Chairs" },
+    dmgV,
   ];
   const av = [
-    "New",
-    "Front Hydraulics",
-    "Front Jack",
-    "Cabin",
-    "ABS",
-    "Auxiliary Heating",
-    "Four Wheel Drive",
-    "Hydrolic Wheel",
-    "Damaged Vehicles",
+    newy,
+    { id: "FrontHydraulics", value: "Front Hydraulics" },
+    { id: "FrontJack", value: "Front Jack" },
+    { id: "Cabin", value: "Cabin" },
+    abs,
+    { id: "AuxiliaryHeating", value: "Auxiliary Heating" },
+    { id: "FourWheelDrive", value: "Four Wheel Drive" },
+    { id: "HydrolicWheel", value: "Hydrolic Wheel" },
+    dmgV,
   ];
 
   const coma = [
-    "ABS",
-    "Four Whee Drive",
-    "Particle Filter",
-    "Quick Change Part",
-    "BSS",
-    "New",
-    "Central lubricant application",
-    "Damaged Vehicles",
+    abs,
+    { id: "HydrolicWheel", value: "Hydrolic Wheel" },
+    { id: "FourWheelDrive", value: "Four Wheel Drive" },
+    { id: "ParticleFilter", value: "Particle Filter" },
+    { id: "QuickChangePart", value: "Quick Change Part" },
+    { id: "BSS", value: "BSS" },
+    {
+      id: "CentralLubricantApplication",
+      value: "Central lubricant application",
+    },
+    newy,
+    dmgV,
   ];
   const trailer = [
-    "Disc Brake",
-    "Air Suspension",
-    "ABS",
-    "New",
-    "EBS",
-    "Crashed vehicle",
+    { id: "DiscBrake", value: "Disc Brake" },
+    { id: "AirSuspension", value: "Air Suspension" },
+    abs,
+    newy,
+    ebs,
+    crshV,
   ];
 
   const trailerRefrigator = [
@@ -99,7 +112,7 @@ export const GetFeatures = (category) => {
     "Separation wall",
   ];
 
-  const sparepart = ["New"];
+  const sparepart = [newy];
 
   if (category === "av") return av;
 

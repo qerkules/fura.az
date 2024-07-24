@@ -1,6 +1,7 @@
 "use client";
 import {
   FormControl,
+  FormLabel,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -11,29 +12,18 @@ import React, { useState } from "react";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ImageUploading from "react-images-uploading";
 import ImageUpload from "./ImageUpload";
-const features = [
-  "ABS",
-  "ESP",
-  "EBS",
-  "Auxiliary Heating",
-  "Compressor",
-  "Cruise Control",
-  "Adaptive Cruise Control",
-  "Four Wheel Drive",
-  "Particle Filter",
-  "Navigation System",
-  "Parking heater",
-  "Trailer Hitch Fixed",
-  "Damaged Vehicles",
-  "Metallic",
-  "New",
-  "Alloy wheels",
-  "Tailgate Load Platform",
-  "Crane",
-  "Retarder",
-  "Intarder",
-];
+import { GetPath } from "../tools/GetPath";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetFeatures } from "../tools/GetFeatures";
+import { GetTypes } from "../tools/GetTypes";
+import { Textarea } from "@mui/joy";
 const DefaultTruckCreate = () => {
+
+  const currentCategory = GetPath().last;
+  const currentCategoryId = GetCategory(currentCategory);
+  const features = GetFeatures(currentCategory);
+  const types = GetTypes(currentCategoryId);
+
   const [category, setCategory] = useState("");
   const [price, setMinPrice] = useState("");
   const [rentType, setRentType] = useState("");
@@ -62,14 +52,16 @@ const DefaultTruckCreate = () => {
   const [description, setDescription] = useState("");
   const maxNumber = 20;
 
-  const handleSelected = (value) => {
+  const handleSelected = (selectedItem) => {
     setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.includes(value)
-        ? prevSelectedArray.filter((item) => item !== value)
-        : [...prevSelectedArray, value]
+      prevSelectedArray.some((item) => item === selectedItem.id)
+        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
+        : [...prevSelectedArray, selectedItem]
     );
   };
-  const isSelected = (value) => selectedArray.includes(value);
+  
+  const isSelected = (value) => selectedArray.some((el) => value === el);
+
 
   return (
     <div>
@@ -524,15 +516,15 @@ const DefaultTruckCreate = () => {
       </FormControl>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
-        {features.map((value) => (
+       {features.map((value) => (
           <div
-            key={value}
+            key={value.id}
             className={`filter-button-select ${
-              isSelected(value) ? "selected" : ""
+              isSelected(value.id) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value)}
+            onClick={() => handleSelected(value.id)}
           >
-            {value}
+            {value.value}
           </div>
         ))}
       </div>

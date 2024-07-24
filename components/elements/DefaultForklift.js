@@ -16,33 +16,23 @@ import ImageUpload from "./ImageUpload";
 import { GetTypes } from "../tools/GetTypes";
 import { GetCategory } from "../tools/GetCategoryId";
 import axios from "axios";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-const DefaultForkliftCreate = () => {
+const DefaultForkliftCreate = ({
+  setModalMessage,
+  setModalStatus,
+  setModalOpen,
+}) => {
   const currentCategory = GetPath().last;
   const currentCategoryId = GetCategory().forkliftId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
+  const [year, setYear] = useState();
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
-  const [formData, setFormData] = useState({
-    SaleOrRent: "",
-    CategoryId: "",
-    BrandId: "",
-    ModelId: "",
-    Price: "0",
-    LiftHeight: "",
-    LiftingCapacity: "",
-    Year: "",
-    FuelType: "",
-    Gearbox: "",
-    HoursOfOperation: "",
-    EquipmentHeight: "",
-    VinCode: "",
-    AdDetails: "",
-    Description: "",
-  });
 
   const maxNumber = 20;
 
@@ -68,21 +58,10 @@ const DefaultForkliftCreate = () => {
 
   const isSelected = (value) => selectedArray.some((el) => value === el);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submitData = new FormData();
-
-    Object.keys(formData).forEach((key) => {
-      submitData.append(key, formData[key]);
-    });
+    const submitData = new FormData(e.target);
+    submitData.append(year);
 
     features.forEach((feature) => {
       if (selectedArray.some((el) => feature.id !== el)) {
@@ -111,9 +90,20 @@ const DefaultForkliftCreate = () => {
             },
           }
         )
-        .then((data) => data.data)
-        .catch((error) => console.error("Error:", error));
+        .then((data) => {
+          modalOpener(true, "Succesfully Created");
+          return data.data;
+        })
+        .catch((error) => {
+          modalOpener(false, "Ad Cannot be Create");
+          return error;
+        });
+
+      setModalOpen(true);
+      setModalMessage();
+      setModalStatus();
     } catch (error) {
+      modalOpener(false, "Ad Cannot be Create");
       console.log(error);
     }
   };
@@ -132,8 +122,6 @@ const DefaultForkliftCreate = () => {
                 label="Ad Type"
                 variant="outlined"
                 name="SaleOrRent"
-                value={formData.SaleOrRent}
-                onChange={(e) => handleInputChange(e)}
               >
                 <MenuItem value={"Sale"}>Sale</MenuItem>
                 <MenuItem value={"Rent"}>Rent</MenuItem>
@@ -152,8 +140,6 @@ const DefaultForkliftCreate = () => {
                 label="Category"
                 variant="outlined"
                 name="CategoryId"
-                value={formData.CategoryId}
-                onChange={(e) => handleInputChange(e)}
               >
                 {types.categories.map((val) => (
                   <MenuItem value={val.id} key={val.id}>
@@ -175,9 +161,7 @@ const DefaultForkliftCreate = () => {
                 variant="outlined"
                 label="Brand"
                 name="BrandId"
-                value={formData.BrandId}
                 onChange={(e) => {
-                  handleInputChange(e);
                   getModels(e);
                 }}
               >
@@ -201,8 +185,6 @@ const DefaultForkliftCreate = () => {
                 variant="outlined"
                 label="Model"
                 name="ModelId"
-                value={formData.ModelId}
-                onChange={(e) => handleInputChange(e)}
               >
                 {models.length > 0 ? (
                   models.map((val) => (
@@ -233,8 +215,6 @@ const DefaultForkliftCreate = () => {
               labelId="currency-label"
               label="Currency"
               name="Currency"
-              value={formData.Currency}
-              onChange={(e) => handleInputChange(e)}
             >
               {types.currTypes.map((val, index) => (
                 <MenuItem key={index} value={val.index}>
@@ -254,13 +234,9 @@ const DefaultForkliftCreate = () => {
                 type="number"
                 placeholder="0"
                 name="Price"
-                value={formData.Price}
-                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {formData.Currency}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -276,8 +252,6 @@ const DefaultForkliftCreate = () => {
                 id="liheight"
                 type="number"
                 name="LiftHeight"
-                value={formData.LiftHeight}
-                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"mm"}</InputAdornment>
@@ -295,8 +269,6 @@ const DefaultForkliftCreate = () => {
                 id="eqheight"
                 type="number"
                 name="LiftingCapacity"
-                value={formData.LiftingCapacity}
-                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"kq"}</InputAdornment>
@@ -310,20 +282,14 @@ const DefaultForkliftCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Year"
-                name="Year"
-                value={formData.Year}
-                onChange={(e) => handleInputChange(e)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => setYear(e.target.value)}
+                />
+              </LocalizationProvider>
             </FormControl>
           </div>
         </div>
@@ -339,8 +305,6 @@ const DefaultForkliftCreate = () => {
                 variant="outlined"
                 label="Fuel Type"
                 name="FuelType"
-                value={formData.FuelType}
-                onChange={(e) => handleInputChange(e)}
               >
                 {types.fuelTypes.map((val, index) => (
                   <MenuItem key={index} value={val.index}>
@@ -362,8 +326,6 @@ const DefaultForkliftCreate = () => {
                 variant="outlined"
                 label="Gearbox"
                 name="Gearbox"
-                value={formData.Gearbox}
-                onChange={(e) => handleInputChange(e)}
               >
                 {types.gearboxes.map((val, index) => (
                   <MenuItem key={index} value={val.index}>
@@ -383,8 +345,6 @@ const DefaultForkliftCreate = () => {
                 id="operation"
                 type="number"
                 name="HoursOfOperation"
-                value={formData.HoursOfOperation}
-                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>
@@ -397,8 +357,6 @@ const DefaultForkliftCreate = () => {
                 id="eqheight"
                 type="number"
                 name="EquipmentHeight"
-                value={formData.EquipmentHeight}
-                onChange={(e) => handleInputChange(e)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"mm"}</InputAdornment>
@@ -417,8 +375,6 @@ const DefaultForkliftCreate = () => {
                 type="number"
                 placeholder="0"
                 name="VinCode"
-                value={formData.VinCode}
-                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>
@@ -433,8 +389,6 @@ const DefaultForkliftCreate = () => {
                 minRows={5}
                 placeholder="Type in here..."
                 name="adDetails"
-                value={formData.adDetails}
-                onChange={(e) => handleInputChange(e)}
               />
             </FormControl>
           </div>

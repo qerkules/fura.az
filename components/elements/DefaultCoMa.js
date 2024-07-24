@@ -9,39 +9,28 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
 import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
-const features = [
-  "ABS",
-  "Four Whee Drive",
-  "Particle Filter",
-  "Quick Change Part",
-  "BSS",
-  "NEW",
-  "Central lubricant application",
-  "Damaged Vehicles",
-];
+import { GetFeatures } from "../tools/GetFeatures";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetPath } from "../tools/GetPath";
+import { GetTypes } from "../tools/GetTypes";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import axios from "axios";
+
 const DefaultCoMaCreate = () => {
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [rentType, setRentType] = useState("");
-  const [adType, setAdtype] = useState("");
-  const [operation, setOperation] = useState("");
-  const [year, setYear] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [vin, setVin] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [emissionSticker, setEmissionSticker] = useState("");
+  const today = new Date();
+  const currentCategory = GetPath().last;
+  const currentCategoryId = GetCategory().comaId;
+  const features = GetFeatures(currentCategory);
+  const types = GetTypes(currentCategoryId);
+
+  const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
-  const [description, setDescription] = useState("");
+
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
-  };
 
   const handleSelected = (selectedItem) => {
     setSelectedArray((prevSelectedArray) =>
@@ -50,12 +39,61 @@ const DefaultCoMaCreate = () => {
         : [...prevSelectedArray, selectedItem]
     );
   };
-  
+
+  const getModels = async (e) => {
+    try {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${e.target.value}`
+      );
+      setModels(response.data.$values);
+      return response.data.$values;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const isSelected = (value) => selectedArray.some((el) => value === el);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const submitData = new FormData(e.target);
+
+    features.forEach((feature) => {
+      if (selectedArray.some((el) => feature.id !== el)) {
+        submitData.append(feature.id, false);
+      }
+    });
+
+    selectedArray.forEach((value) => {
+      submitData.append(value, true);
+    });
+
+    for (const file of images) {
+      submitData.append("AdImage", file.file, file.file.name);
+    }
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_API_LINK}/ConstructonMachinery/CreateConstructonMachineryAd`,
+          submitData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((data) => data.data)
+        .catch((error) => console.error("Error:", error));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <FormControl
         id="filter-list-car-side-bar"
         className="create-ad-template list-filter"
@@ -70,8 +108,7 @@ const DefaultCoMaCreate = () => {
                 labelId="adtype-label"
                 label="Ad Type"
                 variant="outlined"
-                value={adType}
-                onChange={(e) => setAdtype(e.target.value)}
+                name="SaleOrRent"
               >
                 <MenuItem value={"sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
@@ -89,13 +126,13 @@ const DefaultCoMaCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="CategoryId"
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {types.categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -110,13 +147,16 @@ const DefaultCoMaCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                name="BrandId"
+                onChange={(e) => {
+                  getModels(e);
+                }}
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {types.brands.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -131,11 +171,19 @@ const DefaultCoMaCreate = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                name="ModelId"
               >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
+                {models.length > 0 ? (
+                  models.map((val) => (
+                    <MenuItem value={val.id} key={val.id}>
+                      {val.modelName}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value={"none"} disabled>
+                    -
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>
@@ -148,19 +196,9 @@ const DefaultCoMaCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker label={"Year"} views={["year"]} name="Year" />
+              </LocalizationProvider>
             </FormControl>
           </div>
         </div>
@@ -172,12 +210,13 @@ const DefaultCoMaCreate = () => {
               id="currency-select"
               labelId="currency-label"
               label="Currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
+              name="Currency"
             >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+              {types.currTypes.map((val, index) => (
+                <MenuItem key={index} value={val.index}>
+                  {val.value}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -190,13 +229,9 @@ const DefaultCoMaCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -210,9 +245,8 @@ const DefaultCoMaCreate = () => {
               <TextField
                 label="Hours of Operation"
                 id="operation"
-                value={operation}
                 type="number"
-                onChange={(e) => setOperation(e.target.value)}
+                name="OperationHours"
               />
             </FormControl>
           </div>
@@ -221,13 +255,7 @@ const DefaultCoMaCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField
-                label="Vin"
-                id="vin"
-                value={vin}
-                type="number"
-                onChange={(e) => setVin(e.target.value)}
-              />
+              <TextField label="Vin" id="vin" type="number" name="VinCode" />
             </FormControl>
           </div>
         </div>
@@ -244,11 +272,13 @@ const DefaultCoMaCreate = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                name="EmissionSticker"
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {types.emissionstickers.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -262,8 +292,7 @@ const DefaultCoMaCreate = () => {
               <Textarea
                 minRows={5}
                 placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="AdDetails"
               />
             </FormControl>
           </div>
@@ -283,7 +312,8 @@ const DefaultCoMaCreate = () => {
           </div>
         ))}
       </div>
-    </div>
+      <input type="submit" placeholder="submit" />
+    </form>
   );
 };
 

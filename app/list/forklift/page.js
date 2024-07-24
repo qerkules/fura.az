@@ -6,12 +6,14 @@ import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
 import { Pagination, Stack } from "@mui/material";
 import { sttData } from "@/components/data/data";
+import axios from "axios";
 
 export default function CarList() {
   const ITEMS_PER_PAGE = 10;
   const [activeIndex, setActiveIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(0);
   const [pageCount, setPageCount] = useState(1);
+  const [data, setData] = useState([]);
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
@@ -20,18 +22,19 @@ export default function CarList() {
   const onPageclick = (event) => {
     setCurrentPage(event.selected);
   };
+  const fetchData = async () => {
+    const response = await axios.get(
+      `${
+        process.env.NEXT_PUBLIC_API_LINK
+      }/Forklift/GetAllForkliftAds?CurrentPage=${1}&PageSize=${10}`
+    );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // Replace `data` with the actual data fetching logic
-      // For example, if using `axios`: const result = await axios.get('/api/data');
-      // const data = result.data;
-      setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
-    };
+    setData(response.data.forkliftsList.results.$values);
+    // console.log(response.data.forkliftsList.results.$values);
+    setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
+  };
 
-    fetchData();
-  }, [sttData.length]);
-
+  fetchData();
   const offset = currentPage * ITEMS_PER_PAGE;
   const currentPageData = sttData.slice(offset, offset + ITEMS_PER_PAGE);
 
@@ -140,7 +143,7 @@ export default function CarList() {
                           : "tab-pane fade"
                       }
                     >
-                      <div className="divider-header ">Premium Ads</div>
+                      {/* <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
                         <AdCard data={sttData[0]} />
                         <AdCard data={sttData[0]} />
@@ -151,9 +154,9 @@ export default function CarList() {
                       </div>
                       <div className="ad-banner">
                         <img src="/assets/images/ads/ad-banner.jpg" />
-                      </div>
+                      </div> */}
                       <div className="car-list-item ">
-                        {currentPageData.map((val, index) => {
+                        {data.map((val, index) => {
                           return <AdCard key={index} data={val} />;
                         })}
                       </div>

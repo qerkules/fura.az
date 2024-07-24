@@ -43,12 +43,6 @@ export default function Header3({ handleMobileMenu }) {
                       <p>Hot Line: +1 800 123 456 789</p>
                     </Link>
                   </li>
-                  <li>
-                    <Link href="/#">
-                      <i className="icon-Group3" />
-                      <p>Mail Us: your_protect@mail.com</p>
-                    </Link>
-                  </li>
                 </ul>
               </div>
               <div className="col-md-4 flex flex-end">

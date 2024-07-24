@@ -17,6 +17,7 @@ const ModalAlert = (status, message, setModalOpen, router) => {
   const handleClose = () => {
     setModalOpen(false);
     status && router.push("/");
+    
   };
   return (
     <Modal

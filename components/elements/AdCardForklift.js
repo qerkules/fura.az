@@ -65,7 +65,7 @@ export default function AdCardForklift({ data }) {
           )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">{(data.priceCurrency, data.price)}</span>
+          <span className="ad-price">{(data.price)}</span>
           {data.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
@@ -79,7 +79,7 @@ export default function AdCardForklift({ data }) {
               >
                 <div className="images">
                   <img
-                    src={data.images[0]}
+                    src={data.images.$values[0].filePath}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -88,7 +88,7 @@ export default function AdCardForklift({ data }) {
               <div className={`listing-item`} title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={data.images[1]}
+                    src={data.images.$values[1] && data.images.$values[1].filePath}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -97,7 +97,7 @@ export default function AdCardForklift({ data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={data.images[2]}
+                    src={data.images.$values[2] && data.images.$values[2].filePath}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -144,7 +144,7 @@ export default function AdCardForklift({ data }) {
           <ul>
             <li className="listing-information transmission">
               <div className="inner">
-                {/* <div className="information-icon">
+                {/*<div className="information-icon">
                   <CalendarMonthIcon />
                 </div> */}
                 <span>Year</span>

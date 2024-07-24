@@ -29,8 +29,8 @@ const LoginDetails = ({ setSignOption }) => {
   const handleSubmit = async () => {
     try {
       const userData = JSON.stringify({
-        UserNameOrEmail: userName,
-        Password: password,
+        userNameOrEmail: userName,
+        password: password,
       });
       const response = await axios
         .post(`${process.env.NEXT_PUBLIC_API_LINK}/User/Login`, userData, {

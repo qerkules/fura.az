@@ -46,11 +46,12 @@ const RegisterDetails = ({ currentRegister }) => {
   const handleSubmit = async () => {
     try {
       const userData = JSON.stringify({
-        NameSurname: `${name} ${surname}`,
-        UserName: number,
-        Email: email,
-        Password: password,
-        PasswordConfirm: password,
+        name: name,
+        surname: surname,
+        phoneNumber: number,
+        email: email,
+        password: password,
+        passwordConfirm: password,
       });
       const response = await axios
         .post(

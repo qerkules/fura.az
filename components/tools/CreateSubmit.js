@@ -6,7 +6,8 @@ export const submitForm = async (
   selectedArray,
   images,
   path,
-  modalOpener
+  modalOpener,
+  year
 ) => {
   e.preventDefault();
   const formData = new FormData(e.target);
@@ -20,7 +21,7 @@ export const submitForm = async (
   selectedArray.forEach((value) => {
     formData.append(value, true);
   });
-  formData.append("Year", year);
+  year && formData.append("Year", year);
 
   for (const file of images) {
     formData.append("AdImage", file.file, file.file.name);

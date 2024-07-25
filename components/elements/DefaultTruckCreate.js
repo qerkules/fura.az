@@ -9,62 +9,50 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
+import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
+import { GetTypes } from "../tools/GetTypes";
+import { GetFeatures } from "../tools/GetFeatures";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { getModels } from "../tools/GetModels";
 import { GetPath } from "../tools/GetPath";
 import { GetCategory } from "../tools/GetCategoryId";
-import { GetFeatures } from "../tools/GetFeatures";
-import { GetTypes } from "../tools/GetTypes";
-import { Textarea } from "@mui/joy";
-const DefaultTruckCreate = () => {
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
 
+const DefaultTruckCreate = ({
+  setModalMessage,
+  setModalStatus,
+  setModalOpen,
+}) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory(currentCategory);
+  const currentCategoryId = GetCategory().truckId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [rentType, setRentType] = useState("");
-  const [adType, setAdtype] = useState("");
-  const [dist, setDist] = useState("");
-  const [year, setYear] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [distanceType, setDistanceType] = useState("km");
-  const [emissionClass, setEmissionClass] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [fuelType, setFuelType] = useState("");
-  const [paint, setPaint] = useState("");
-  const [gearbox, setGearbox] = useState("");
-  const [wheelFormula, setWheelFormula] = useState("");
-  const [drivingCabin, setDrivingCabin] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [vehicleWeight, setVehicleWeight] = useState("");
-  const [axles, setAxles] = useState("");
-  const [airCond, setAirCond] = useState("");
-  const [hydrEqui, setHydrEqui] = useState("");
+  const [notModel, setNotModel] = useState(true);
+  const [newModel, setNewModel] = useState(false);
+  const [models, setModels] = useState([]);
+
+  const [currency, setCurrency] = useState("AZN");
+  const [enginePowerType, setEnginePowerType] = useState("HP");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
-  const [description, setDescription] = useState("");
   const maxNumber = 20;
 
-  const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
-  
-  const isSelected = (value) => selectedArray.some((el) => value === el);
 
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    submitForm(e, features, selectedArray, images, "Truck", modalOpener);
+  };
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <FormControl
         id="filter-list-car-side-bar"
         className="create-ad-template list-filter"
@@ -79,10 +67,9 @@ const DefaultTruckCreate = () => {
                 labelId="adtype-label"
                 label="Ad Type"
                 variant="outlined"
-                value={adType}
-                onChange={(e) => setAdtype(e.target.value)}
+                name="SaleOrRent"
               >
-                <MenuItem value={"sale"}>sale</MenuItem>
+                <MenuItem value={"Sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
               </Select>
             </FormControl>
@@ -98,13 +85,13 @@ const DefaultTruckCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="CategoryId"
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {types.categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -119,36 +106,63 @@ const DefaultTruckCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                name="BrandId"
+                onChange={(e) => getModels(e, setModels)}
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {types.brands.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="model-label">Model</InputLabel>
-              <Select
-                fullWidth
-                id="model-select"
-                labelId="model-label"
-                variant="outlined"
-                label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-              >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
-              </Select>
-            </FormControl>
+
+        {notModel ? (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth>
+                <InputLabel id="model-label">Model</InputLabel>
+                <Select
+                  fullWidth
+                  id="model-select"
+                  labelId="model-label"
+                  variant="outlined"
+                  label="Model"
+                  name="ModelId"
+                >
+                  {models.length > 0 ? (
+                    models.map((val) => (
+                      <MenuItem value={val.id} key={val.id}>
+                        {val.modelName}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value={"none"} disabled>
+                      -
+                    </MenuItem>
+                  )}
+                </Select>
+              </FormControl>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth>
+                <TextField
+                  fullWidth
+                  id="model-input"
+                  variant="outlined"
+                  label="Model"
+                  value={newModel}
+                  onChange={(e) => setNewModel(e.target.value)}
+                />
+              </FormControl>
+            </div>
+          </div>
+        )}
         <ImageUpload
           maxNumber={maxNumber}
           images={images}
@@ -163,12 +177,13 @@ const DefaultTruckCreate = () => {
               id="currency-select"
               labelId="currency-label"
               label="Currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
+              name="Currency"
             >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+              {types.currTypes.map((val, index) => (
+                <MenuItem key={index} value={val.index}>
+                  {val.value}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -181,13 +196,10 @@ const DefaultTruckCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
+                name="Price"
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -203,11 +215,13 @@ const DefaultTruckCreate = () => {
               id="distance-type-select"
               labelId="distance-type-label"
               label="Km/Miles"
-              value={distanceType}
-              onChange={(e) => setDistanceType(e.target.value)}
+              name="DistanceMeasurementUnit"
             >
-              <MenuItem value={"km"}>Km</MenuItem>
-              <MenuItem value={"miles"}>Miles</MenuItem>
+              {types.distanceunittypes.map((val, index) => (
+                <MenuItem key={index} value={val.index}>
+                  {val.value}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </div>
@@ -217,9 +231,8 @@ const DefaultTruckCreate = () => {
               <TextField
                 label="Distance"
                 id="distance"
-                value={dist}
                 type="number"
-                onChange={(e) => setDist(e.target.value)}
+                name="Distance"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">{"km"}</InputAdornment>
@@ -252,8 +265,7 @@ const DefaultTruckCreate = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
+                name="EnginePowerHP"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -269,19 +281,16 @@ const DefaultTruckCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
+                />
+              </LocalizationProvider>
             </FormControl>
           </div>
         </div>
@@ -296,11 +305,13 @@ const DefaultTruckCreate = () => {
                 labelId="emission-class-label"
                 variant="outlined"
                 label="Emission Class"
-                value={emissionClass}
-                onChange={(e) => setEmissionClass(e.target.value)}
+                name="EmissionClass"
               >
-                <MenuItem value={"euro1"}>EURO 1</MenuItem>
-                <MenuItem value={"euro2"}>EURO 2</MenuItem>
+                {types.emissionclasses.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -317,11 +328,13 @@ const DefaultTruckCreate = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                name="EmissionSticker"
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {types.emissionstickers.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -336,11 +349,13 @@ const DefaultTruckCreate = () => {
                 labelId="fuel-type-label"
                 variant="outlined"
                 label="Fuel Type"
-                value={fuelType}
-                onChange={(e) => setFuelType(e.target.value)}
+                name="FuelType"
               >
-                <MenuItem value={"petrol"}>Petrol</MenuItem>
-                <MenuItem value={"diesel"}>Diesel</MenuItem>
+                {types.fuelTypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -355,11 +370,13 @@ const DefaultTruckCreate = () => {
                 labelId="gearbox-label"
                 variant="outlined"
                 label="Gearbox"
-                value={gearbox}
-                onChange={(e) => setGearbox(e.target.value)}
+                name="Gearbox"
               >
-                <MenuItem value={"automatic"}>Automatic</MenuItem>
-                <MenuItem value={"manual"}>Manual</MenuItem>
+                {types.gearboxes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -374,11 +391,13 @@ const DefaultTruckCreate = () => {
                 labelId="paint-label"
                 variant="outlined"
                 label="Paint"
-                value={paint}
-                onChange={(e) => setPaint(e.target.value)}
+                name="Paint"
               >
-                <MenuItem value={"red"}>Red</MenuItem>
-                <MenuItem value={"blue"}>Blue</MenuItem>
+                {types.paints.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -393,11 +412,13 @@ const DefaultTruckCreate = () => {
                 labelId="wheel-formula-label"
                 variant="outlined"
                 label="Wheel Formula"
-                value={wheelFormula}
-                onChange={(e) => setWheelFormula(e.target.value)}
+                name="WheelFormula"
               >
-                <MenuItem value={"4x2"}>4x2</MenuItem>
-                <MenuItem value={"4x4"}>4x4</MenuItem>
+                {types.wheelTypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -412,8 +433,7 @@ const DefaultTruckCreate = () => {
                 labelId="driving-cabin-label"
                 variant="outlined"
                 label="Driving Cabin"
-                value={drivingCabin}
-                onChange={(e) => setDrivingCabin(e.target.value)}
+                name="DrivingCabin"
               >
                 <MenuItem value={"Long road"}>Long Road</MenuItem>
                 <MenuItem value={"Local"}>Local</MenuItem>
@@ -432,8 +452,7 @@ const DefaultTruckCreate = () => {
                 labelId="vehicle-weight-label"
                 variant="outlined"
                 label="Vehicle Weight"
-                value={vehicleWeight}
-                onChange={(e) => setVehicleWeight(e.target.value)}
+                name="VehicleWeight"
               >
                 <MenuItem value={"0-7.5"}>0t - 7.5t</MenuItem>
                 <MenuItem value={"7.5-15"}>7.5t - 15t</MenuItem>
@@ -451,8 +470,7 @@ const DefaultTruckCreate = () => {
                 labelId="axles-label"
                 variant="outlined"
                 label="Axles"
-                value={axles}
-                onChange={(e) => setAxles(e.target.value)}
+                name="Axles"
               >
                 <MenuItem value={"0-5"}>0 - 5</MenuItem>
                 <MenuItem value={"5-10"}>5 - 10</MenuItem>
@@ -470,11 +488,13 @@ const DefaultTruckCreate = () => {
                 labelId="air-cond-label"
                 variant="outlined"
                 label="Air Condition"
-                value={airCond}
-                onChange={(e) => setAirCond(e.target.value)}
+                name="AirConditioning"
               >
-                <MenuItem value={"no-air"}>No Air</MenuItem>
-                <MenuItem value={"manual-air"}>Manual Air</MenuItem>
+                {types.aircotypes.map((val, index) => (
+                  <MenuItem key={index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -489,8 +509,7 @@ const DefaultTruckCreate = () => {
                 labelId="hydr-equi-label"
                 variant="outlined"
                 label="Hydraulic Equipment"
-                value={hydrEqui}
-                onChange={(e) => setHydrEqui(e.target.value)}
+                name="HydraulicEquipment"
               >
                 <MenuItem value={"Tipper-hydr"}>Tipper Hydraulic</MenuItem>
                 <MenuItem value={"push-floor-hydr"}>
@@ -500,35 +519,71 @@ const DefaultTruckCreate = () => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group prefix-input">
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField label="Vin" id="vin" name="VinCode" />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Cylinder Volume"
+                id="cyVolume"
+                type="number"
+                placeholder="0"
+                name="CylinderVolume"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Steering"
+                id="steering"
+                placeholder="0"
+                name="Steering"
+              />
+            </FormControl>
+          </div>
+        </div>
+      </FormControl>
+
+      <div className="create-description">
+        <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
               <FormLabel>Description:</FormLabel>
               <Textarea
                 minRows={5}
                 placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="AdDetails"
               />
             </FormControl>
           </div>
         </div>
-      </FormControl>
+      </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
-       {features.map((value) => (
+        {features.map((value) => (
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>
         ))}
       </div>
-    </div>
+
+      <input type="submit" placeholder="submit" />
+    </form>
   );
 };
 

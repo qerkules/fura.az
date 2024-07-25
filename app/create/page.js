@@ -52,7 +52,7 @@ const page = () => {
                 <img src="/assets/images/categories/n7.png" alt="" />
               </button>
             </a>
-            <a href="/create/sp">
+            <a href="/create/sparepart">
               <button className="index-slider-items" id="sp">
                 <label htmlFor="sp">Spare parts</label>
                 <img src="/assets/images/categories/n8.png" alt="" />

@@ -9,89 +9,46 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import ImageUploading from "react-images-uploading";
 import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
 import { GetCategory } from "../tools/GetCategoryId";
 import { GetFeatures } from "../tools/GetFeatures";
 import { GetTypes } from "../tools/GetTypes";
 import { GetPath } from "../tools/GetPath";
+import { getModels } from "../tools/GetModels";
+import InputElement from "./InputElement";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
+import { submitForm } from "../tools/CreateSubmit";
 
-const DefaultBusCreate = () => {
+const DefaultBusCreate = ({
+  setModalMessage,
+  setModalStatus,
+  setModalOpen,
+}) => {
   const currentCategory = GetPath().last;
   const currentCategoryId = GetCategory().busId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
-  const [brandId, setBrandId] = useState("");
+  const [enginePowerType, setEnginePowerType] = useState("");
+  const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
-
-  const [currency, setCurrency] = useState("AZN");
-  const [enginePowerType, setEnginePowerType] = useState("HP");
-
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
+
   const maxNumber = 20;
 
-  const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
-  };
-
-  const isSelected = (value) => selectedArray.some((el) => value === el);
-
-  const getModels = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${brandId}`
-      );
-      setModels(response.data);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-
-    features.forEach((feature) => {
-      if (selectedArray.some((el) => feature.id !== el)) {
-        formData.append(feature, false);
-      }
-    });
-
-    selectedArray.forEach((value) => {
-      formData.append(value, true);
-    });
-
-    for (const file of images) {
-      formData.append("AdImage", file.file, file.file.name);
-    }
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_API_LINK}/Forklift/CreateForkliftAd`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((data) => data.data)
-        .catch((error) => console.error("Error:", error));
-    } catch (error) {
-      console.log(error);
-    }
+    submitForm(e, features, selectedArray, images, "Bus", modalOpener, year);
   };
 
   return (
@@ -112,8 +69,8 @@ const DefaultBusCreate = () => {
                 variant="outlined"
                 name="SaleOrRent"
               >
-                <MenuItem value={"sale"}>sale</MenuItem>
-                <MenuItem value={"Rent"}>rent</MenuItem>
+                <MenuItem value={"Sale"}>Sale</MenuItem>
+                <MenuItem value={"Rent"}>Rent</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -150,12 +107,12 @@ const DefaultBusCreate = () => {
                 variant="outlined"
                 label="Brand"
                 name="BrandId"
+                onChange={(e) => getModels(e, setModels)}
               >
                 {types.brands.map((val) => (
                   <MenuItem
                     value={val.id}
                     key={val.id}
-                    onChange={(e) => getModels(e)}
                   >
                     {val.brandName}
                   </MenuItem>
@@ -176,11 +133,17 @@ const DefaultBusCreate = () => {
                 label="Model"
                 name="ModelId"
               >
-                {models.map((val) => {
-                  <MenuItem value={val.id} key={val.id}>
-                    {val.modelName}
-                  </MenuItem>;
-                })}
+                {models.length > 0 ? (
+                  models.map((val) => (
+                    <MenuItem value={val.id} key={val.id}>
+                      {val.modelName}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value={"none"} disabled>
+                    -
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>
@@ -192,22 +155,7 @@ const DefaultBusCreate = () => {
         />
 
         <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="currency-label">Currency</InputLabel>
-            <Select
-              variant="outlined"
-              id="currency-select"
-              labelId="currency-label"
-              label="Currency"
-              name="Currency"
-            >
-              {types.currTypes.map((val) => {
-                <MenuItem key={val.index} value={val.index}>
-                  {val.value}
-                </MenuItem>;
-              })}
-            </Select>
-          </FormControl>
+          <InputElement inputName={"Currency"} types={types} />
         </div>
 
         <div className="form-group prefix-input">
@@ -221,9 +169,7 @@ const DefaultBusCreate = () => {
                 name="Price"
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {"$"}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -232,22 +178,7 @@ const DefaultBusCreate = () => {
         </div>
 
         <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="distance-type-label">Km/Miles</InputLabel>
-            <Select
-              variant="outlined"
-              id="distance-type-select"
-              labelId="distance-type-label"
-              label="Km/Miles"
-              name="DistanceMeasurementUnit"
-            >
-              {types.distanceunittypes.map((val) => {
-                <MenuItem key={val.index} value={val.index}>
-                  {val.value}
-                </MenuItem>;
-              })}
-            </Select>
-          </FormControl>
+          <InputElement inputName={"Distance"} types={types} />
         </div>
         <div className="form-group prefix-input">
           <div className="group-select">
@@ -304,149 +235,47 @@ const DefaultBusCreate = () => {
 
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label={"Year"}
+                views={["year"]}
                 name="Year"
->
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
-            </FormControl>
+                onChange={(e) => {
+                  setYear(e.$y);
+                }}
+              />
+            </LocalizationProvider>
           </div>
         </div>
 
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="emission-class-label">Emission Class</InputLabel>
-              <Select
-                fullWidth
-                id="emission-class-select"
-                labelId="emission-class-label"
-                variant="outlined"
-                label="Emission Class"
-                name="EmissionClass"
-              >
-                {types.emissionclasses.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"EmissionClass"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="emission-sticker-label">
-                Emission Sticker
-              </InputLabel>
-              <Select
-                fullWidth
-                id="emission-sticker-select"
-                labelId="emission-sticker-label"
-                variant="outlined"
-                label="Emission Sticker"
-                name="EmissionStickers"
-              >
-                {types.emissionstickers.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"EmissionStickers"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="fuel-type-label">Fuel Type</InputLabel>
-              <Select
-                fullWidth
-                id="fuel-type-select"
-                labelId="fuel-type-label"
-                variant="outlined"
-                label="Fuel Type"
-                name="FuelType"
-              >
-                {types.fuelTypes.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"FuelTypes"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="gearbox-label">Gearbox</InputLabel>
-              <Select
-                fullWidth
-                id="gearbox-select"
-                labelId="gearbox-label"
-                variant="outlined"
-                label="Gearbox"
-                name="Gearbox"
-              >
-                {types.gearboxes.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"Gearboxes"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="paint-label">Paint</InputLabel>
-              <Select
-                fullWidth
-                id="paint-select"
-                labelId="paint-label"
-                variant="outlined"
-                label="Paint"
-                name="Paint"
-              >
-                {types.paints.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"Paints"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="wheel-formula-label">Wheel Formula</InputLabel>
-              <Select
-                fullWidth
-                id="wheel-formula-select"
-                labelId="wheel-formula-label"
-                variant="outlined"
-                label="Wheel Formula"
-                name="WheelFormula"
-              >
-                {types.wheelTypes.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"WheelTypes"} types={types} />
           </div>
         </div>
         <div className="form-group">
@@ -506,23 +335,7 @@ const DefaultBusCreate = () => {
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="air-cond-label">Air Condition</InputLabel>
-              <Select
-                fullWidth
-                id="air-cond-select"
-                labelId="air-cond-label"
-                variant="outlined"
-                label="Air Condition"
-                name="AirConditioning"
-              >
-                {types.aircotypes.map((val) => {
-                  <MenuItem value={val.index} key={val.index}>
-                    {val.value}
-                  </MenuItem>;
-                })}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"AirCondition"} types={types} />
           </div>
         </div>
         <div className="form-group">
@@ -551,9 +364,20 @@ const DefaultBusCreate = () => {
               <TextField
                 label="Vin"
                 id="vin"
-                type="number"
                 placeholder="0"
                 name="VinCode"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Number of Seats"
+                id="seats"
+                placeholder="0"
+                name="NumberOfSeats"
               />
             </FormControl>
           </div>
@@ -579,14 +403,15 @@ const DefaultBusCreate = () => {
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>
         ))}
       </div>
+      <input type="submit" />
     </form>
   );
 };

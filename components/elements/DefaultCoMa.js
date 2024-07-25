@@ -17,79 +17,45 @@ import { GetPath } from "../tools/GetPath";
 import { GetTypes } from "../tools/GetTypes";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import axios from "axios";
+import { submitForm } from "../tools/CreateSubmit";
+import { getModels } from "../tools/GetModels";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
 
-const DefaultCoMaCreate = () => {
-  const today = new Date();
+const DefaultCoMaCreate = ({
+  setModalMessage,
+  setModalStatus,
+  setModalOpen,
+}) => {
   const currentCategory = GetPath().last;
   const currentCategoryId = GetCategory().comaId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
+  const [enginePowerType, setEnginePowerType] = useState("");
+  const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
 
   const maxNumber = 20;
 
-  const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
-
-  const getModels = async (e) => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${e.target.value}`
-      );
-      setModels(response.data.$values);
-      return response.data.$values;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const isSelected = (value) => selectedArray.some((el) => value === el);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submitData = new FormData(e.target);
-
-    features.forEach((feature) => {
-      if (selectedArray.some((el) => feature.id !== el)) {
-        submitData.append(feature.id, false);
-      }
-    });
-
-    selectedArray.forEach((value) => {
-      submitData.append(value, true);
-    });
-
-    for (const file of images) {
-      submitData.append("AdImage", file.file, file.file.name);
-    }
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_API_LINK}/ConstructonMachinery/CreateConstructonMachineryAd`,
-          submitData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((data) => data.data)
-        .catch((error) => console.error("Error:", error));
-    } catch (error) {
-      console.log(error);
-    }
+    submitForm(
+      e,
+      features,
+      selectedArray,
+      images,
+      "ConstructionMachinery",
+      modalOpener,
+      year
+    );
   };
 
   return (
@@ -148,9 +114,7 @@ const DefaultCoMaCreate = () => {
                 variant="outlined"
                 label="Brand"
                 name="BrandId"
-                onChange={(e) => {
-                  getModels(e);
-                }}
+                onChange={(e) => getModels(e, setModels)}
               >
                 {types.brands.map((val) => (
                   <MenuItem value={val.id} key={val.id}>
@@ -197,7 +161,14 @@ const DefaultCoMaCreate = () => {
           <div className="group-select">
             <FormControl fullWidth>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label={"Year"} views={["year"]} name="Year" />
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
+                />
               </LocalizationProvider>
             </FormControl>
           </div>
@@ -255,7 +226,7 @@ const DefaultCoMaCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField label="Vin" id="vin" type="number" name="VinCode" />
+              <TextField label="Vin" id="vin" name="VinCode" />
             </FormControl>
           </div>
         </div>
@@ -304,9 +275,9 @@ const DefaultCoMaCreate = () => {
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>

@@ -24,8 +24,8 @@ const InputElement = ({ types, inputName }) => {
   if (inputName === "Gearboxes") {
     return InputReturner("Gearboxes", "Gearboxes", types.gearboxes);
   }
-  if (inputName === "AirContidition") {
-    return InputReturner("Gearboxes", "Gearboxes", types.aircotypes);
+  if (inputName === "AirCondition") {
+    return InputReturner("Air Condition", "AirConditioning", types.aircotypes);
   }
   if (inputName === "Currency") {
     return InputReturner("Currency", "Currency", types.currTypes);
@@ -34,19 +34,31 @@ const InputElement = ({ types, inputName }) => {
     return InputReturner("Fuel Type", "FuelType", types.fuelTypes);
   }
   if (inputName === "WheelTypes") {
-    return InputReturner("Gearboxes", "Gearboxes", types.wheelTypes);
+    return InputReturner("Wheel Formula", "WheelTypes", types.wheelTypes);
   }
   if (inputName === "DistanceUnit") {
-    return InputReturner("Gearboxes", "Gearboxes", types.distanceunittypes);
+    return InputReturner(
+      "Distance Unit",
+      "DistanceUnitMeasurement",
+      types.distanceunittypes
+    );
   }
   if (inputName === "EmissionClass") {
-    return InputReturner("Gearboxes", "Gearboxes", types.emissionclasses);
+    return InputReturner(
+      "Emission Class",
+      "EmissionClass",
+      types.emissionclasses
+    );
   }
   if (inputName === "EmissionSticker") {
-    return InputReturner("Emission Sticker", "EmissionSticker", types.emissionstickers);
+    return InputReturner(
+      "Emission Sticker",
+      "EmissionSticker",
+      types.emissionstickers
+    );
   }
   if (inputName === "Paints") {
-    return InputReturner("Gearboxes", "Gearboxes", types.paints);
+    return InputReturner("Paints", "Paint", types.paints);
   }
 };
 

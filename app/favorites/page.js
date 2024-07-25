@@ -14,8 +14,8 @@ const page = () => {
             <div className="themesflat-container">
               <div className="divider-header">Favorite Ads</div>
               <div className="car-list-item ">
-                <AdCard path={"/listing-details"} data={sttData[0]} />
-                <AdCard path={"/listing-details"} data={sttData[0]} />
+                {/* <AdCard path={"/listing-details"} data={sttData[0]} />
+                <AdCard path={"/listing-details"} data={sttData[0]} /> */}
               </div>
             </div>
           </div>

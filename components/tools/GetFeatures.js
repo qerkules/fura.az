@@ -61,7 +61,6 @@ export const GetFeatures = (category) => {
     { id: "Kitchen", value: "Kitchen" },
     { id: "ColdStorage", value: "Cold Storage" },
     { id: "Sleeping Chairs", value: "Sleeping Chairs" },
-    dmgV,
   ];
   const av = [
     newy,

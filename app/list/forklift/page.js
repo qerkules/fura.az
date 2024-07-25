@@ -156,9 +156,9 @@ export default function CarList() {
                         <img src="/assets/images/ads/ad-banner.jpg" />
                       </div> */}
                       <div className="car-list-item ">
-                        {data.map((val, index) => {
+                        {/* {data.map((val, index) => {
                           return <AdCard key={index} data={val} />;
-                        })}
+                        })} */}
                       </div>
                     </div>
                   </div>

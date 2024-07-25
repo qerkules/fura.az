@@ -1,10 +1,10 @@
 "use client";
-import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdCard from "../layout/AdCard";
 import AdCardSparepart from "../layout/AdCardSparepart";
 import AdCardTrailer from "../layout/AdCardTrailer";
 import Categories from "../sections/Categories";
+import { getAllAds } from "../tools/GetAds";
 
 export default function PopularMakesTab3() {
   const [activeIndex, setActiveIndex] = useState(1);
@@ -47,6 +47,9 @@ export default function PopularMakesTab3() {
     createDate: "6/30/2024 3:09:24 PM<",
   };
 
+  const getdata = getAllAds(1, 8);
+  const values = getdata?.ads?.results?.$values;
+
   return (
     <>
       <div className="widget-tf-slider ">
@@ -66,10 +69,10 @@ export default function PopularMakesTab3() {
               <div className="themesflat-container">
                 <div className="divider-header ">Premium Ads</div>
                 <div className="car-list-item ">
-                  <AdCard path={"/listing-details"} data={data} />
+                  {/* <AdCard path={"/listing-details"} data={data} /> */}
                   <AdCardSparepart premium={true} />
                   <AdCardTrailer premium={true} />
-                  <AdCard path={"/listing-details"} data={data} />
+                  {/* <AdCard path={"/listing-details"} data={data} /> */}
                 </div>
               </div>
             </div>
@@ -79,10 +82,16 @@ export default function PopularMakesTab3() {
               </div>
               <div className="divider-header">Todays Ads Exclusive</div>
               <div className="car-list-item">
-                <AdCard path={"/listing-details"} data={data2} />
-                <AdCard path={"/listing-details"} data={data} />
-                <AdCard path={"/listing-details"} data={data} />
-                <AdCard path={"/listing-details"} data={data} />
+                {values &&
+                  values.map((val) => {
+                    return (
+                      <AdCard
+                        key={val.id}
+                        path={"/listing-details"}
+                        data={val}
+                      />
+                    );
+                  })}
                 <button>See All Ads</button>
               </div>
               <div className="ad-banner">

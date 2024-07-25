@@ -1,14 +1,28 @@
 "use client";
 import DefaultSTTruckCreate from "@/components/elements/DefaultSTTruck";
+import ModalAlert from "@/components/elements/ModalAlert";
 import Layout from "@/components/layout/Layout";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+
 
 const page = () => {
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
+  const path = "/user/ads";
   return (
     <Layout>
       <div className="themesflat-container create-ad-container ">
-        <DefaultSTTruckCreate />
+        <DefaultSTTruckCreate
+          setModalMessage={setModalMessage}
+          setModalStatus={setModalStatus}
+          setModalOpen={setModalOpen}
+        />
       </div>
+      {modalOpen &&
+        ModalAlert(modalStatus, modalMessage, setModalOpen, router, path)}
     </Layout>
   );
 };

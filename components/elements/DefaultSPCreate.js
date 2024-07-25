@@ -11,33 +11,38 @@ import {
 import React, { useState } from "react";
 import ImageUpload from "./ImageUpload";
 import { Textarea } from "@mui/joy";
-const features = ["New"];
-const DefaultSPCreate = () => {
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [brand, setBrand] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [productCode, setProductCode] = useState("");
-  const [productName, setProductName] = useState("");
-  const [description, setDescription] = useState("");
+import InputElement from "./InputElement";
+import { submitForm } from "../tools/CreateSubmit";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetFeatures } from "../tools/GetFeatures";
+import { GetTypes } from "../tools/GetTypes";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
+import { GetPath } from "../tools/GetPath";
+
+const DefaultSPCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
+  const currentCategory = GetPath().last;
+  const currentCategoryId = GetCategory().spId;
+  const features = GetFeatures(currentCategory);
+  const types = GetTypes(currentCategoryId);
 
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
+
   const maxNumber = 20;
 
- const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
-  
-  const isSelected = (value) => selectedArray.some((el) => value === el);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    submitForm(e, features, selectedArray, images, "SparePart", modalOpener);
+  };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit}>
       <FormControl
         id="filter-list-car-side-bar"
         className="create-ad-template list-filter"
@@ -52,13 +57,13 @@ const DefaultSPCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="CategoryId"
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {types.categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -73,13 +78,13 @@ const DefaultSPCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                name="BrandId"
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {types.brands.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -90,10 +95,9 @@ const DefaultSPCreate = () => {
             <FormControl fullWidth>
               <TextField
                 label="Product Name"
-                id="liheight"
-                value={productName}
+                id="productName"
                 type="number"
-                onChange={(e) => setProductName(e.target.value)}
+                name="ProductName"
               />
             </FormControl>
           </div>
@@ -106,21 +110,7 @@ const DefaultSPCreate = () => {
         />
 
         <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="currency-label">Currency</InputLabel>
-            <Select
-              variant="outlined"
-              id="currency-select"
-              labelId="currency-label"
-              label="Currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-            >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
-            </Select>
-          </FormControl>
+          <InputElement inputName={"Currency"} types={types} />
         </div>
 
         <div className="form-group prefix-input">
@@ -131,13 +121,10 @@ const DefaultSPCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
+                name="Price"
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -150,10 +137,8 @@ const DefaultSPCreate = () => {
             <FormControl fullWidth>
               <TextField
                 label="Product Code"
-                id="liheight"
-                value={productCode}
-                type="number"
-                onChange={(e) => setProductCode(e.target.value)}
+                id="productCode"
+                name="ProductCode"
               />
             </FormControl>
           </div>
@@ -167,8 +152,7 @@ const DefaultSPCreate = () => {
               <Textarea
                 minRows={5}
                 placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="AdDetails"
               />
             </FormControl>
           </div>
@@ -180,15 +164,16 @@ const DefaultSPCreate = () => {
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>
         ))}
       </div>
-    </div>
+      <input type="submit" placeholder="submit" />
+    </form>
   );
 };
 

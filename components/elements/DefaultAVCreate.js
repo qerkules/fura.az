@@ -19,20 +19,21 @@ import InputElement from "./InputElement";
 import { getModels } from "../tools/GetModels";
 import { submitForm } from "../tools/CreateSubmit";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().avId;
+  const currentCategoryId = GetCategory().forkliftId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
+  const [enginePowerType, setEnginePowerType] = useState("");
+  const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
-
-  const [currency, setCurrency] = useState("AZN");
-  const [enginePowerType, setEnginePowerType] = useState("HP");
-
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
+
   const maxNumber = 20;
 
   const modalOpener = (status, message) => {
@@ -40,6 +41,7 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
     setModalStatus(status);
     setModalOpen(true);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     submitForm(
@@ -48,7 +50,8 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
       selectedArray,
       images,
       "AgriculturalVehicle",
-      modalOpener
+      modalOpener,
+      year
     );
   };
 
@@ -227,18 +230,16 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                name="Year"
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
+                />
+              </LocalizationProvider>
             </FormControl>
           </div>
         </div>

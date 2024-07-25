@@ -1,17 +1,27 @@
 "use client";
 import DefaultAVCreate from "@/components/elements/DefaultAVCreate";
-import useIsMobile from "@/components/tools/UseIsMobile";
+import ModalAlert from "@/components/elements/ModalAlert";
 import Layout from "@/components/layout/Layout";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const page = () => {
-  const isMobile = useIsMobile();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const router = useRouter();
+  const path = "/user/ads";
   return (
     <Layout>
       <div className="themesflat-container create-ad-container ">
-        {/* {isMobile ? <DefaultFormMobile /> : <DefaultTruckCreate />} */}
-        <DefaultAVCreate />
+        <DefaultAVCreate
+          setModalMessage={setModalMessage}
+          setModalStatus={setModalStatus}
+          setModalOpen={setModalOpen}
+        />
       </div>
+      {modalOpen &&
+        ModalAlert(modalStatus, modalMessage, setModalOpen, router, path)}
     </Layout>
   );
 };

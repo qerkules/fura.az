@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-export default function AdCard({  data }) {
+export default function AdCard({ data }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
@@ -49,6 +49,7 @@ export default function AdCard({  data }) {
     }
     setFavouriteClicked(!isFavouriteClicked);
   };
+
   return (
     <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
       <div className="image" onClick={() => handleClick(data.path)}>
@@ -56,7 +57,7 @@ export default function AdCard({  data }) {
           <div className="feature">
             <span>NEW</span>
           </div>
-          {data.saleOrRent === "rent" && (
+          {data.saleOrRent === "Rent" && (
             <div className="bottom-btn-wrap">
               <div className="btn-group">
                 <div className="rent-button">RENT</div>
@@ -65,7 +66,7 @@ export default function AdCard({  data }) {
           )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">{(data.priceCurrency, data.price)}</span>
+          <span className="ad-price">{(data.currency, data.price)}</span>
           {data.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
@@ -79,16 +80,16 @@ export default function AdCard({  data }) {
               >
                 <div className="images">
                   <img
-                    src={data.images[0]}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.ad?.image?.$values[0].filePath}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
                 </div>
               </div>
-              <div className={`listing-item`} title="Lexus LC Hybrid 2024">
+              {/* <div className={`listing-item`} title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={data.images[1]}
+                    src={data.image.$values[1]}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -97,7 +98,7 @@ export default function AdCard({  data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={data.images[2]}
+                    src={data.image.$values[2]}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -110,7 +111,7 @@ export default function AdCard({  data }) {
                     <p>2 more photos</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="bullet-hover-listing">
                 <div className="bl-item active" />
                 <div className="bl-item" />
@@ -134,10 +135,10 @@ export default function AdCard({  data }) {
           </a>
         </div>
         <h6 className="title" onClick={() => handleClick(data.path)}>
-          {`${data.brand} ${data.model}`}
+          {`${data.model.brand.brandName} ${data.model.modelName}`}
         </h6>
         <span className="sub-title" onClick={() => handleClick(data.path)}>
-          {data.category}
+          {data.category.categoryName}
         </span>
 
         <div className="description" onClick={() => handleClick(data.path)}>
@@ -167,7 +168,7 @@ export default function AdCard({  data }) {
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
-          <span>{data.createDate}</span>
+          <span>{data.adDate}</span>
         </div>
       </div>
     </div>

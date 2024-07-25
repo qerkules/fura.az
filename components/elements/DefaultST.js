@@ -11,61 +11,46 @@ import {
 import React, { useState } from "react";
 import Textarea from "@mui/joy/Textarea";
 import ImageUpload from "./ImageUpload";
-const features = [
-  "Cabin",
-  "Front Jack",
-  "Front Hydraulics",
-  "New",
-  "ABS",
-  "Auxiliary Heating",
-  "Four Wheel Drive",
-  "Hydrolic Wheel",
-  "Damaged Vehicles",
-];
-const DefaultSTCreate = () => {
-  const [category, setCategory] = useState("");
-  const [price, setMinPrice] = useState("");
-  const [adType, setAdtype] = useState("");
-  const [year, setYear] = useState("");
-  const [opHours, setOpHours] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [currency, setCurrency] = useState("₼AZN");
-  const [vin, setVin] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [description, setDescription] = useState("");
-  const [gvw, setGVW] = useState("");
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
-  const [loadCapacity, setLoadCapacity] = useState("");
-  const [volume, setVolume] = useState("");
-  const [length, setLength] = useState("");
-  const [loadWidth, setLoadWith] = useState("");
-  const [loadHeight, setLoadHeight] = useState("");
-  const [axles, setAxles] = useState("");
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetPath } from "../tools/GetPath";
+import { GetFeatures } from "../tools/GetFeatures";
+import { GetTypes } from "../tools/GetTypes";
+import { getModels } from "../tools/GetModels";
+import InputElement from "./InputElement";
+import { submitForm } from "../tools/CreateSubmit";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
+
+const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
+  const currentCategory = GetPath().last;
+  const currentCategoryId = GetCategory().trailerId;
+  const features = GetFeatures(currentCategory);
+  const types = GetTypes(currentCategoryId);
+
+  const [brandId, setBrandId] = useState("");
+  const [models, setModels] = useState([]);
+
+  const [currency, setCurrency] = useState("AZN");
+  const [enginePowerType, setEnginePowerType] = useState("HP");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
-  const onUploadImage = (imageList) => {
-    setImages(imageList);
+
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
- const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    submitForm(e, features, selectedArray, images, "SemiTrailer", modalOpener);
   };
-  
-  const isSelected = (value) => selectedArray.some((el) => value === el);
-
-
-
 
   return (
-    <div>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <FormControl
         id="filter-list-car-side-bar"
         className="create-ad-template list-filter"
@@ -80,10 +65,9 @@ const DefaultSTCreate = () => {
                 labelId="adtype-label"
                 label="Ad Type"
                 variant="outlined"
-                value={adType}
-                onChange={(e) => setAdtype(e.target.value)}
+                name="SaleOrRent"
               >
-                <MenuItem value={"sale"}>sale</MenuItem>
+                <MenuItem value={"Sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
               </Select>
             </FormControl>
@@ -99,13 +83,13 @@ const DefaultSTCreate = () => {
                 labelId="category-label"
                 label="Category"
                 variant="outlined"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                name="CategoryId"
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                {types.categories.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.categoryName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -120,13 +104,14 @@ const DefaultSTCreate = () => {
                 labelId="brand-label"
                 variant="outlined"
                 label="Brand"
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
+                name="BrandId"
+                onChange={(e) => getModels(e, setModels)}
               >
-                <MenuItem value={"DAF"}>
-                  <span>Daf</span>
-                </MenuItem>
-                <MenuItem value={"SCANIA"}>Scania</MenuItem>
+                {types.brands.map((val) => (
+                  <MenuItem value={val.id} key={val.id}>
+                    {val.brandName}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -141,11 +126,19 @@ const DefaultSTCreate = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                name="ModelId"
               >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
+                {models.length > 0 ? (
+                  models.map((val) => (
+                    <MenuItem value={val.id} key={val.id}>
+                      {val.modelName}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value={"none"} disabled>
+                    -
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>
@@ -157,21 +150,7 @@ const DefaultSTCreate = () => {
         />
 
         <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="currency-label">Currency</InputLabel>
-            <Select
-              variant="outlined"
-              id="currency-select"
-              labelId="currency-label"
-              label="Currency"
-              value={currency}
-              onChange={(e) => setCurrency(e.target.value)}
-            >
-              <MenuItem value={"$USD"}>$ USD</MenuItem>
-              <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-              <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
-            </Select>
-          </FormControl>
+          <InputElement inputName={"Currency"} types={types} />
         </div>
 
         <div className="form-group prefix-input">
@@ -182,13 +161,10 @@ const DefaultSTCreate = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={price}
-                onChange={(e) => setMinPrice(e.target.value)}
+                name="price"
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
+                    <InputAdornment position="start">{"$"}</InputAdornment>
                   ),
                 }}
               />
@@ -205,13 +181,10 @@ const DefaultSTCreate = () => {
                 labelId="axles-label"
                 label="Axles"
                 variant="outlined"
-                value={axles}
-                onChange={(e) => setAxles(e.target.value)}
+                name="Axles"
               >
-                <MenuItem value={"standart-tractor"}>
-                  Standart Tractor (5)
-                </MenuItem>
-                <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+                <MenuItem value={"0-5"}>0-5</MenuItem>
+                <MenuItem value={"5-10"}>5-10</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -224,8 +197,7 @@ const DefaultSTCreate = () => {
                 id="opHours"
                 type="number"
                 placeholder="0"
-                value={opHours}
-                onChange={(e) => setOpHours(e.target.value)}
+                name="HoursOfOperation"
               />
             </FormControl>
           </div>
@@ -238,8 +210,7 @@ const DefaultSTCreate = () => {
                 id="gvw"
                 type="number"
                 placeholder="0"
-                value={gvw}
-                onChange={(e) => setGVW(e.target.value)}
+                name="Gvw"
               />
             </FormControl>
           </div>
@@ -252,8 +223,7 @@ const DefaultSTCreate = () => {
                 id="loadCapacity"
                 type="number"
                 placeholder="0"
-                value={loadCapacity}
-                onChange={(e) => setLoadCapacity(e.target.value)}
+                name="LoadCapacity"
               />
             </FormControl>
           </div>
@@ -266,8 +236,7 @@ const DefaultSTCreate = () => {
                 id="width"
                 type="number"
                 placeholder="0"
-                value={width}
-                onChange={(e) => setWidth(e.target.value)}
+                name="VehicleWidth"
               />
             </FormControl>
           </div>
@@ -280,8 +249,7 @@ const DefaultSTCreate = () => {
                 id="height"
                 type="number"
                 placeholder="0"
-                value={height}
-                onChange={(e) => setHeight(e.target.value)}
+                name="VehicleHeight"
               />
             </FormControl>
           </div>
@@ -294,8 +262,7 @@ const DefaultSTCreate = () => {
                 id="volume"
                 type="number"
                 placeholder="0"
-                value={volume}
-                onChange={(e) => setVolume(e.target.value)}
+                name="LoadingAreaVolume"
               />
             </FormControl>
           </div>
@@ -308,8 +275,7 @@ const DefaultSTCreate = () => {
                 id="length"
                 type="number"
                 placeholder="0"
-                value={length}
-                onChange={(e) => setLength(e.target.value)}
+                name="LoadingSpaceLength"
               />
             </FormControl>
           </div>
@@ -322,8 +288,7 @@ const DefaultSTCreate = () => {
                 id="load-width"
                 type="number"
                 placeholder="0"
-                value={loadWidth}
-                onChange={(e) => setLoadWith(e.target.value)}
+                name="LoadingAreaWidth"
               />
             </FormControl>
           </div>
@@ -336,8 +301,7 @@ const DefaultSTCreate = () => {
                 id="load-height"
                 type="number"
                 placeholder="0"
-                value={loadHeight}
-                onChange={(e) => setLoadHeight(e.target.value)}
+                name="LoadingAreaHeight"
               />
             </FormControl>
           </div>
@@ -366,8 +330,7 @@ const DefaultSTCreate = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
+                name="EnginePowerHP"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -383,42 +346,23 @@ const DefaultSTCreate = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="year-min-label">Year</InputLabel>
-              <Select
-                fullWidth
-                id="year-min-select"
-                labelId="year-min-label"
-                variant="outlined"
-                label="Min"
-                value={year}
-                onChange={(e) => setYear(e.target.value)}
-              >
-                <MenuItem value={"1999"}>1999</MenuItem>
-                <MenuItem value={"2000"}>2000</MenuItem>
-              </Select>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
+                />
+              </LocalizationProvider>
             </FormControl>
           </div>
         </div>
 
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="emission-sticker-label">
-                Emission Sticker
-              </InputLabel>
-              <Select
-                fullWidth
-                id="emission-sticker-select"
-                labelId="emission-sticker-label"
-                variant="outlined"
-                label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
-              >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
-              </Select>
-            </FormControl>
+            <InputElement inputName={"EmissionSticker"} types={types} />
           </div>
         </div>
         <div className="form-group">
@@ -427,10 +371,8 @@ const DefaultSTCreate = () => {
               <TextField
                 label="Vin"
                 id="engine-power-min"
-                type="number"
-                placeholder="0"
-                value={vin}
-                onChange={(e) => setVin(e.target.value)}
+                placeholder="AE46FKAFFNKJSAD"
+                name="VinCode"
               />
             </FormControl>
           </div>
@@ -442,8 +384,7 @@ const DefaultSTCreate = () => {
               <Textarea
                 minRows={5}
                 placeholder="Type in here..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                name="AdDetails"
               />
             </FormControl>
           </div>
@@ -451,19 +392,20 @@ const DefaultSTCreate = () => {
       </FormControl>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
-       {features.map((value) => (
+        {features.map((value) => (
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>
         ))}
       </div>
-    </div>
+      <input type="submit" placeholder="submit" />
+    </form>
   );
 };
 

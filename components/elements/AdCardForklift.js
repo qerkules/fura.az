@@ -140,26 +140,6 @@ export default function AdCardForklift({ data }) {
           {data.category}
         </span>
 
-        <div className="description" onClick={() => handleClick(data.path)}>
-          <ul>
-            <li className="listing-information transmission">
-              <div className="inner">
-                {/*<div className="information-icon">
-                  <CalendarMonthIcon />
-                </div> */}
-                <span>Year</span>
-                <p>{data.year}</p>
-              </div>
-            </li>
-            <li className="listing-information fuel">
-              <div className="inner">
-                <span>Gearbox</span>
-                <p>{data.gearbox}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
           <span>{data.createDate}</span>
         </div>

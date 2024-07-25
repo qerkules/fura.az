@@ -135,20 +135,20 @@ export default function CarList() {
                     >
                       <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
+                        {/* <AdCard data={sttData[0]} />
                         <AdCard data={sttData[0]} />
                         <AdCard data={sttData[0]} />
                         <AdCard data={sttData[0]} />
                         <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
+                        <AdCard data={sttData[0]} /> */}
                       </div>
                       <div className="ad-banner">
                         <img src="/assets/images/ads/ad-banner.jpg" />
                       </div>
                       <div className="car-list-item ">
-                        {sttData.map((val, index) => {
+                        {/* {sttData.map((val, index) => {
                           return <AdCard key={index} data={val} />;
-                        })}
+                        })} */}
                       </div>
                     </div>
                   </div>

@@ -290,7 +290,7 @@ export default function ListingDetails() {
             <div className="themesflat-container">
               <div className="related-single-listing swiper">
                 <Swiper {...swiperOptions} className="swiper-wrapper">
-                  <SwiperSlide className="listing-grid-item swiper-slide">
+                  {/* <SwiperSlide className="listing-grid-item swiper-slide">
                     <AdCard data={data} />
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
@@ -304,7 +304,7 @@ export default function ListingDetails() {
                   </SwiperSlide>
                   <SwiperSlide className="listing-grid-item swiper-slide">
                     <AdCard data={data} />
-                  </SwiperSlide>
+                  </SwiperSlide> */}
                 </Swiper>
                 <div className="swiper-pagination" />
               </div>

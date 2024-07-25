@@ -75,10 +75,10 @@ const page = () => {
         </div>
         <div className="tab-content" id="nav-listing-car">
           <div className="car-list-item ">
+            {/* <AdCard data={data} />
             <AdCard data={data} />
             <AdCard data={data} />
-            <AdCard data={data} />
-            <AdCard data={data} />
+            <AdCard data={data} /> */}
           </div>
         </div>
       </div>

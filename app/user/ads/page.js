@@ -1,9 +1,11 @@
 "use client";
-import AdCardForklift from "@/components/elements/AdCardForklift";
+import { Suspense, lazy } from "react";
 import Layout from "@/components/layout/Layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+const AdCardForklift = lazy(() =>
+  import("@/components/elements/AdCardForklift")
+);
 const page = () => {
   const [data, setData] = useState([]);
 
@@ -36,11 +38,13 @@ const page = () => {
           <div className={"tab-pane fade show active"}>
             <div className="themesflat-container">
               <div className="divider-header">Your Ads</div>
-              <div className="car-list-item">
-                {data.map((val) => {
-                  return <AdCardForklift data={val} />;
-                })}
-              </div>
+              <Suspense fallback={<p>Loading feed...</p>}>
+                <div className="car-list-item">
+                  {data.map((val) => {
+                    return <AdCardForklift key={val.id} data={val} />;
+                  })}
+                </div>
+              </Suspense>
               <div className="ad-banner">
                 <img src="/assets/images/ads/ad-banner.jpg" />
               </div>

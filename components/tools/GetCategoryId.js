@@ -1,5 +1,4 @@
 export const GetCategory = () => {
-
   const trailerId = "e1e5807e-0081-4bf9-a96b-5152e3dcd3d0";
   const sttId = "bbb92f73-12d2-4230-aa6b-e35416bd88e3";
   const comaId = "55e97a79-0f08-4f20-90e7-5c9c4ccf9fca";

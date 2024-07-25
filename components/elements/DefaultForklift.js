@@ -15,9 +15,11 @@ import { GetPath } from "../tools/GetPath";
 import ImageUpload from "./ImageUpload";
 import { GetTypes } from "../tools/GetTypes";
 import { GetCategory } from "../tools/GetCategoryId";
-import axios from "axios";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import InputElement from "./InputElement";
+import { handleSelected, isSelected } from "../tools/HandleSelected";
+import { getModels } from "../tools/GetModels";
 
 const DefaultForkliftCreate = ({
   setModalMessage,
@@ -29,83 +31,30 @@ const DefaultForkliftCreate = ({
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
-  const [year, setYear] = useState();
+  const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
 
   const maxNumber = 20;
 
-  const handleSelected = (selectedItem) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.some((item) => item === selectedItem.id)
-        ? prevSelectedArray.filter((item) => item !== selectedItem.id)
-        : [...prevSelectedArray, selectedItem]
-    );
+  const modalOpener = (status, message) => {
+    setModalMessage(message);
+    setModalStatus(status);
+    setModalOpen(true);
   };
-
-  const getModels = async (e) => {
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${e.target.value}`
-      );
-      setModels(response.data.$values);
-      return response.data.$values;
-    } catch (error) {
-      throw error;
-    }
-  };
-
-  const isSelected = (value) => selectedArray.some((el) => value === el);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const submitData = new FormData(e.target);
-    submitData.append(year);
-
-    features.forEach((feature) => {
-      if (selectedArray.some((el) => feature.id !== el)) {
-        submitData.append(feature.id, false);
-      }
-    });
-
-    selectedArray.forEach((value) => {
-      submitData.append(value, true);
-    });
-
-    for (const file of images) {
-      submitData.append("AdImage", file.file, file.file.name);
-    }
-    try {
-      const token = localStorage.getItem("token");
-
-      const response = await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_API_LINK}/Forklift/CreateForkliftAd`,
-          submitData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((data) => {
-          modalOpener(true, "Succesfully Created");
-          return data.data;
-        })
-        .catch((error) => {
-          modalOpener(false, "Ad Cannot be Create");
-          return error;
-        });
-
-      setModalOpen(true);
-      setModalMessage();
-      setModalStatus();
-    } catch (error) {
-      modalOpener(false, "Ad Cannot be Create");
-      console.log(error);
-    }
+    submitForm(
+      e,
+      features,
+      selectedArray,
+      images,
+      "Forklift",
+      modalOpener,
+      year
+    );
   };
 
   return (
@@ -161,9 +110,7 @@ const DefaultForkliftCreate = ({
                 variant="outlined"
                 label="Brand"
                 name="BrandId"
-                onChange={(e) => {
-                  getModels(e);
-                }}
+                onChange={(e) => getModels(e, setModels)}
               >
                 {types.brands.map((val) => (
                   <MenuItem value={val.id} key={val.id}>
@@ -186,7 +133,7 @@ const DefaultForkliftCreate = ({
                 label="Model"
                 name="ModelId"
               >
-                {models.length > 0 ? (
+                {models && models.length > 0 ? (
                   models.map((val) => (
                     <MenuItem value={val.id} key={val.id}>
                       {val.modelName}
@@ -207,22 +154,7 @@ const DefaultForkliftCreate = ({
           setImages={setImages}
         />
         <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="currency-label">Currency</InputLabel>
-            <Select
-              variant="outlined"
-              id="currency-select"
-              labelId="currency-label"
-              label="Currency"
-              name="Currency"
-            >
-              {types.currTypes.map((val, index) => (
-                <MenuItem key={index} value={val.index}>
-                  {val.value}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
+          <InputElement inputName={"Currency"} types={types} />
         </div>
 
         <div className="form-group prefix-input">
@@ -287,7 +219,9 @@ const DefaultForkliftCreate = ({
                   label={"Year"}
                   views={["year"]}
                   name="Year"
-                  onChange={(e) => setYear(e.target.value)}
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
                 />
               </LocalizationProvider>
             </FormControl>
@@ -296,44 +230,12 @@ const DefaultForkliftCreate = ({
 
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="fuel-type-label">Fuel Type</InputLabel>
-              <Select
-                fullWidth
-                id="fuel-type-select"
-                labelId="fuel-type-label"
-                variant="outlined"
-                label="Fuel Type"
-                name="FuelType"
-              >
-                {types.fuelTypes.map((val, index) => (
-                  <MenuItem key={index} value={val.index}>
-                    {val.value}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"FuelTypes"} types={types} />
           </div>
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="gearbox-label">Gearbox</InputLabel>
-              <Select
-                fullWidth
-                id="gearbox-select"
-                labelId="gearbox-label"
-                variant="outlined"
-                label="Gearbox"
-                name="Gearbox"
-              >
-                {types.gearboxes.map((val, index) => (
-                  <MenuItem key={index} value={val.index}>
-                    {val.value}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <InputElement inputName={"Gearboxes"} types={types} />
           </div>
         </div>
 
@@ -400,9 +302,9 @@ const DefaultForkliftCreate = ({
           <div
             key={value.id}
             className={`filter-button-select ${
-              isSelected(value.id) ? "selected" : ""
+              isSelected(value.id, selectedArray) ? "selected" : ""
             }`}
-            onClick={() => handleSelected(value.id)}
+            onClick={() => handleSelected(value.id, setSelectedArray)}
           >
             {value.value}
           </div>

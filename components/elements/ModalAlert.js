@@ -13,11 +13,14 @@ const style = {
   p: 4,
 };
 
-const ModalAlert = (status, message, setModalOpen, router) => {
+const ModalAlert = (status, message, setModalOpen, router, path) => {
   const handleClose = () => {
     setModalOpen(false);
-    status && router.push("/");
-    
+    if (path && status) {
+      router.push(path);
+    } else if (!path && status) {
+      status && router.push("/");
+    }
   };
   return (
     <Modal
@@ -27,10 +30,10 @@ const ModalAlert = (status, message, setModalOpen, router) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <p className="modal-desc" >
-          {message}
-        </p>
-        <button className="modal-ok-btn" onClick={handleClose}>OK</button>
+        <p className="modal-desc">{message}</p>
+        <button className="modal-ok-btn" onClick={handleClose}>
+          OK
+        </button>
       </Box>
     </Modal>
   );

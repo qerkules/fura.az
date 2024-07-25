@@ -60,48 +60,6 @@ export default function PopularMakesTab3() {
       </div>
       <div className="widget-car-service">
         <Categories currentIndex={false} />
-        {/* <div className="header-section tab-car-service">
-        <div className="heading-section">
-          <span className="sub-title mb-6 wow fadeInUp">
-            Trusted Car DeAler Service
-          </span>
-          <h2 className="title wow fadeInUp">Explore all Vehicles</h2>
-        </div>
-        <ul
-          className="nav nav-pills justify-content-end"
-          id="pills-tab-service"
-          role="tablist"
-        >
-          <li className="nav-item" onClick={() => handleOnClick(1)}>
-            <button
-              className={activeIndex == 1 ? "nav-link active" : "nav-link"}
-            >
-              All Status
-            </button>
-          </li>
-          <li className="nav-item" onClick={() => handleOnClick(2)}>
-            <button
-              className={activeIndex == 2 ? "nav-link active" : "nav-link"}
-            >
-              New Cars
-            </button>
-          </li>
-          <li className="nav-item" onClick={() => handleOnClick(3)}>
-            <button
-              className={activeIndex == 3 ? "nav-link active" : "nav-link"}
-            >
-              Used Cars
-            </button>
-          </li>
-        </ul>
-      </div> */}
-        {/* <div className="tab-content-header">
-        <span className="tab-content-title">Todays Ads</span>
-        <span className="tab-content-title">
-          Filtirleme <ExpandMoreIcon />
-        </span>
-      </div> */}
-
         <div className="tab-content" id="pills-tabContent">
           <div className={"tab-pane fade show active"}>
             <div className="full-background">

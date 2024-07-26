@@ -21,14 +21,13 @@ export default function CarList() {
     setCurrentPage(event.selected);
   };
 
+  const fetchData = async () => {
+    // Replace `data` with the actual data fetching logic
+    // For example, if using `axios`: const result = await axios.get('/api/data');
+    // const data = result.data;
+    setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      // Replace `data` with the actual data fetching logic
-      // For example, if using `axios`: const result = await axios.get('/api/data');
-      // const data = result.data;
-      setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
-    };
-
     fetchData();
   }, [sttData.length]);
 

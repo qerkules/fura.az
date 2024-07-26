@@ -14,22 +14,18 @@ export const getAllAds = (currentPage, pageSize) => {
     );
     setValues(response.data);
   };
-  
-  useEffect(() => {
 
-    if (path === "av")
-      return fetchData("/AgriculturalVehicle/GetAllAgriculturalAds");
-    if (path === "bus") return fetchData("/Bus/GetAllBusAds");
-    if (path === "co-ma")
-      return fetchData("/ConstructonMachinery/GetAllConstructonMachineryAds");
-    if (path === "forklift") return fetchData("/Forklift/GetAllForkliftAds");
-    if (path === "semi-truck")
-      return fetchData("/SemiTrailerTruck/GetAllSemiTrailerTruckAds");
-    if (path === "trailer") return fetchData("/Forklift/GetAllForkliftAds");
-    if (path === "truck") return fetchData("/Truck/GetAllTruckAds");
-    if (path === "truck-under") return fetchData("/Forklift/GetAllForkliftAds");
-    return fetchData("/Ad/GetAllAds");
-  }, []);
+  if (path === "av") fetchData("/AgriculturalVehicle/GetAllAgriculturalAds");
+  if (path === "bus") fetchData("/Bus/GetAllBusAds");
+  if (path === "co-ma")
+    fetchData("/ConstructonMachinery/GetAllConstructonMachineryAds");
+  if (path === "forklift") fetchData("/Forklift/GetAllForkliftAds");
+  if (path === "semi-truck")
+    fetchData("/SemiTrailerTruck/GetAllSemiTrailerTruckAds");
+  if (path === "trailer") fetchData("/Forklift/GetAllForkliftAds");
+  if (path === "truck") fetchData("/Truck/GetAllTruckAds");
+  if (path === "truck-under") fetchData("/Forklift/GetAllForkliftAds");
+  fetchData("/Ad/GetAllAds");
 
   return values;
 };

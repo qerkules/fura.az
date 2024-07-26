@@ -49,7 +49,7 @@ export const GetTypes = (categoryId) => {
     fetchData("emissionclasstypes", setEmissionClasses);
     fetchData("emissionstickertypes", setEmissionStickers);
     fetchData("painttypes", setPaints);
-  });
+  }, []);
 
   return {
     gearboxes,

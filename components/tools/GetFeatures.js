@@ -123,14 +123,11 @@ export const GetFeatures = (category) => {
 
   if (category === "forklift") return forklift;
 
-  if (
-    category === "semi-truck" ||
-    category === "truck" ||
-    category === "transporter-truck"
-  ) {
+  if (category === "semi-truck" || category === "truck") {
     return truck;
   }
 
+  if (category === "transporter-truck") return truck;
   if (category === "trailer") return trailer;
 
   if (category === "trailer-refrigator") return trailerRefrigator;

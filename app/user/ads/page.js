@@ -4,7 +4,7 @@ import Layout from "@/components/layout/Layout";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 const AdCardForklift = lazy(() =>
-  import("@/components/elements/AdCardForklift")
+  import("@/components/layout/AdCard")
 );
 const page = () => {
   const [data, setData] = useState([]);
@@ -22,7 +22,7 @@ const page = () => {
           },
         }
       );
-      setData(response.data.adsList.results.$values);
+      setData(response?.data?.adsList?.$values);
     } catch (error) {
       console.log(error);
     }

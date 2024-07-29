@@ -5,50 +5,24 @@ import AdCardSparepart from "../layout/AdCardSparepart";
 import AdCardTrailer from "../layout/AdCardTrailer";
 import Categories from "../sections/Categories";
 import { getAllAds } from "../tools/GetAds";
+import { GetPath } from "../tools/GetPath";
 
 export default function PopularMakesTab3() {
+  const path = GetPath().last;
   const [activeIndex, setActiveIndex] = useState(1);
-  const data = {
-    id: 1,
-    saleOrRent: "sale",
-    price: "50.000",
-    priceCurrency: "$",
-    isPremium: true,
-    images: [
-      "/assets/images/car-list/car1.webp",
-      "/assets/images/car-list/car11.webp",
-      "/assets/images/car-list/car12.webp",
-    ],
-    brand: "Scania",
-    model: "R500",
-    category: "Standart Tractor",
-    year: 2020,
-    horsePower: "500 hp",
-    distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
-  };
-  const data2 = {
-    id: 2,
-    saleOrRent: "sale",
-    price: "20.000",
-    priceCurrency: "$",
-    isPremium: true,
-    images: [
-      "/assets/images/car-list/car1.webp",
-      "/assets/images/car-list/car11.webp",
-      "/assets/images/car-list/car12.webp",
-    ],
-    brand: "DAF",
-    model: "DX470",
-    category: "Standart Tractor",
-    year: 2000,
-    horsePower: "500 hp",
-    distance: "200500km",
-    createDate: "6/30/2024 3:09:24 PM<",
-  };
+  const [values, setValues] = useState([]);
 
-  const getdata = getAllAds(1, 8);
-  const values = getdata?.ads?.results?.$values;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllAds(1, 8, path);
+        setValues(data?.ads?.$values || []);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <>

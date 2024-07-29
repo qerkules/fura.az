@@ -126,7 +126,7 @@ export const GetFeatures = (category) => {
   if (
     category === "semi-truck" ||
     category === "truck" ||
-    category === "truck-under"
+    category === "transporter-truck"
   ) {
     return truck;
   }

@@ -1,6 +1,9 @@
 "use client";
 import {
+  Checkbox,
   FormControl,
+  FormControlLabel,
+  FormGroup,
   FormLabel,
   InputAdornment,
   InputLabel,
@@ -21,6 +24,7 @@ import InputElement from "./InputElement";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
 import { getModels } from "../tools/GetModels";
 import { submitForm } from "../tools/CreateSubmit";
+import RentForm from "./RentForm";
 
 const DefaultForkliftCreate = ({
   setModalMessage,
@@ -32,6 +36,9 @@ const DefaultForkliftCreate = ({
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
+  const [saleOrRent, setSaleOrRent] = useState("");
+  const [notModel, setNotModel] = useState(false);
+  const [newModel, setNewModel] = useState("");
   const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
@@ -63,7 +70,7 @@ const DefaultForkliftCreate = ({
       <div className="create-ad-template list-filter">
         <div className="form-group">
           <div className="input-search-list">
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <InputLabel id="adtype-label">Ad Type</InputLabel>
               <Select
                 fullWidth
@@ -72,6 +79,8 @@ const DefaultForkliftCreate = ({
                 label="Ad Type"
                 variant="outlined"
                 name="SaleOrRent"
+                value={saleOrRent}
+                onChange={(e) => setSaleOrRent(e.target.value)}
               >
                 <MenuItem value={"Sale"}>Sale</MenuItem>
                 <MenuItem value={"Rent"}>Rent</MenuItem>
@@ -81,7 +90,7 @@ const DefaultForkliftCreate = ({
         </div>
         <div className="form-group">
           <div className="input-search-list">
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <InputLabel id="category-label">Category</InputLabel>
               <Select
                 fullWidth
@@ -102,7 +111,7 @@ const DefaultForkliftCreate = ({
         </div>
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <InputLabel id="brand-label">Brand</InputLabel>
               <Select
                 fullWidth
@@ -122,61 +131,72 @@ const DefaultForkliftCreate = ({
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="model-label">Model</InputLabel>
-              <Select
-                fullWidth
-                id="model-select"
-                labelId="model-label"
-                variant="outlined"
-                label="Model"
-                name="ModelId"
-              >
-                {models && models.length > 0 ? (
-                  models.map((val) => (
-                    <MenuItem value={val.id} key={val.id}>
-                      {val.modelName}
+        {!notModel ? (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth required>
+                <InputLabel id="model-label">Model</InputLabel>
+                <Select
+                  fullWidth
+                  id="model-select"
+                  labelId="model-label"
+                  variant="outlined"
+                  label="Model"
+                  name="ModelId"
+                >
+                  {models.length > 0 ? (
+                    models.map((val) => (
+                      <MenuItem value={val.id} key={val.id}>
+                        {val.modelName}
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem value={"none"} disabled>
+                      -
                     </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem value={"none"} disabled>
-                    -
-                  </MenuItem>
-                )}
-              </Select>
-            </FormControl>
+                  )}
+                </Select>
+              </FormControl>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="form-group">
+            <div className="group-select">
+              <FormControl fullWidth>
+                <TextField
+                  fullWidth
+                  required
+                  id="model-input"
+                  variant="outlined"
+                  label="Enter Model Name"
+                  name="ModelName"
+                  value={newModel}
+                  onChange={(e) => setNewModel(e.target.value)}
+                />
+              </FormControl>
+            </div>
+          </div>
+        )}
+        
+        <FormControlLabel
+          className="model-checkbox"
+          control={
+            <Checkbox
+              checked={notModel}
+              onChange={(e) => setNotModel(e.target.checked)}
+            />
+          }
+          label="My Model is not on list"
+        />
+
         <ImageUpload
           maxNumber={maxNumber}
           images={images}
           setImages={setImages}
         />
-        <div className="form-group prefix-select">
-          <InputElement inputName={"Currency"} types={types} />
-        </div>
 
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Price"
-                id="price-min"
-                type="number"
-                placeholder="0"
-                name="Price"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">{"$"}</InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
-
+        <RentForm saleOrRent={saleOrRent} types={types} />
+        
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -214,7 +234,7 @@ const DefaultForkliftCreate = ({
 
         <div className="form-group">
           <div className="group-select">
-            <FormControl fullWidth>
+            <FormControl fullWidth required>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   label={"Year"}
@@ -275,8 +295,7 @@ const DefaultForkliftCreate = ({
               <TextField
                 label="Vin"
                 id="vin"
-                type="number"
-                placeholder="0"
+                placeholder="0TYKWN847KWXN"
                 name="VinCode"
               />
             </FormControl>

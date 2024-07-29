@@ -58,6 +58,18 @@ const page = () => {
                 <img src="/assets/images/categories/n8.png" alt="" />
               </button>
             </a>
+            <a href="/create/transporter-truck">
+              <button className="index-slider-items" id="sp">
+                <label htmlFor="sp">Transporter Truck</label>
+                <img src="/assets/images/categories/n1.png" alt="" />
+              </button>
+            </a>
+            <a href="/create/services">
+              <button className="index-slider-items" id="sp">
+                <label htmlFor="sp">Services</label>
+                <img src="/assets/images/categories/n1.png" alt="" />
+              </button>
+            </a>
           </div>
         </div>
       </div>

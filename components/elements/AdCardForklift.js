@@ -5,6 +5,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useRouter } from "next/navigation";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import Image from "next/image";
 
 export default function AdCardForklift({ data }) {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function AdCardForklift({ data }) {
 
   const handleClick = (path) => {
     if (isClient) {
-      router.push(path);
+      // router.push(path);
     }
   };
 
@@ -65,7 +66,7 @@ export default function AdCardForklift({ data }) {
           )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">{(data.price)}</span>
+          <span className="ad-price">{data.price}</span>
           {data.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
@@ -74,12 +75,12 @@ export default function AdCardForklift({ data }) {
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div
-                className={`listing-item active"}`}
+                className={`listing-item active`}
                 title="Lexus LC Hybrid 2024"
               >
                 <div className="images">
                   <img
-                    src={data.images.$values[0].filePath}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -88,7 +89,7 @@ export default function AdCardForklift({ data }) {
               <div className={`listing-item`} title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={data.images.$values[1] && data.images.$values[1].filePath}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -97,7 +98,7 @@ export default function AdCardForklift({ data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={data.images.$values[2] && data.images.$values[2].filePath}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[2].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />

@@ -1,33 +1,24 @@
-"use client";
+import React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { GetPath } from "./GetPath";
+import { useGetPath } from "./GetPath";
 
-export const getAllAds = (currentPage, pageSize) => {
-  const [values, setValues] = useState([]);
+export const getAllAds = async (currentPage, pageSize, path) => {
+  let apiPath = "/Ad/GetAllAds";
 
-  const path = GetPath().last;
+  if (path === "av") apiPath = "/AgriculturalVehicle/GetAllAgriculturalAds";
+  if (path === "bus") apiPath = "/Bus/GetAllBusAds";
+  if (path === "co-ma")
+    apiPath = "/ConstructonMachinery/GetAllConstructonMachineryAds";
+  if (path === "forklift") apiPath = "/Forklift/GetAllForkliftAds";
+  if (path === "semi-truck")
+    apiPath = "/SemiTrailerTruck/GetAllSemiTrailerTruckAds";
+  if (path === "trailer") apiPath = "/Forklift/GetAllForkliftAds";
+  if (path === "truck") apiPath = "/Truck/GetAllTruckAds";
+  if (path === "truck-under") apiPath = "/Forklift/GetAllForkliftAds";
+  apiPath = "/Ad/GetAllAds";
 
-  const fetchData = async (path) => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_LINK}${path}?CurrentPage=${currentPage}&PageSize=${pageSize}`
-    );
-    setValues(response.data);
-  };
-
-  useEffect(() => {
-    if (path === "av") fetchData("/AgriculturalVehicle/GetAllAgriculturalAds");
-    if (path === "bus") fetchData("/Bus/GetAllBusAds");
-    if (path === "co-ma")
-      fetchData("/ConstructonMachinery/GetAllConstructonMachineryAds");
-    if (path === "forklift") fetchData("/Forklift/GetAllForkliftAds");
-    if (path === "semi-truck")
-      fetchData("/SemiTrailerTruck/GetAllSemiTrailerTruckAds");
-    if (path === "trailer") fetchData("/Forklift/GetAllForkliftAds");
-    if (path === "truck") fetchData("/Truck/GetAllTruckAds");
-    if (path === "truck-under") fetchData("/Forklift/GetAllForkliftAds");
-    fetchData("/Ad/GetAllAds");
-  }, []);
-
-  return values;
+  const response = await axios.get(
+    `${process.env.NEXT_PUBLIC_API_LINK}${apiPath}?CurrentPage=${currentPage}&PageSize=${pageSize}`
+  );
+  return response.data;
 };

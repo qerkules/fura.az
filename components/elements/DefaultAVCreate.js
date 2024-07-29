@@ -254,9 +254,8 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
             <FormControl fullWidth>
               <TextField
                 label="Vin"
-                id="engine-power-min"
-                type="number"
-                placeholder="0"
+                id="vin"
+                placeholder="0TYKWN847KWXN"
                 name="VinCode"
               />
             </FormControl>

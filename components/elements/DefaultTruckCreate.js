@@ -522,7 +522,7 @@ const DefaultTruckCreate = ({
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField label="Vin" id="vin" name="VinCode" />
+              <TextField label="Vin" id="vin" name="VinCode" placeholder="0TYKWN847KWXN"/>
             </FormControl>
           </div>
         </div>

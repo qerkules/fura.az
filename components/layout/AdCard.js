@@ -20,7 +20,7 @@ export default function AdCard({ data }) {
 
   const handleClick = (path) => {
     if (isClient) {
-      router.push(path);
+      // router.push(path);
     }
   };
 
@@ -75,21 +75,21 @@ export default function AdCard({ data }) {
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
               <div
-                className={`listing-item active"}`}
+                className={`listing-item active`}
                 title="Lexus LC Hybrid 2024"
               >
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.ad?.image?.$values[0].filePath}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
                 </div>
               </div>
-              {/* <div className={`listing-item`} title="Lexus LC Hybrid 2024">
+              <div className={`listing-item`} title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={data.image.$values[1]}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -98,7 +98,7 @@ export default function AdCard({ data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={data.image.$values[2]}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[2]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -111,7 +111,7 @@ export default function AdCard({ data }) {
                     <p>2 more photos</p>
                   </div>
                 </div>
-              </div> */}
+              </div>{" "}
               <div className="bullet-hover-listing">
                 <div className="bl-item active" />
                 <div className="bl-item" />
@@ -135,7 +135,7 @@ export default function AdCard({ data }) {
           </a>
         </div>
         <h6 className="title" onClick={() => handleClick(data.path)}>
-          {`${data.model.brand.brandName} ${data.model.modelName}`}
+          {`${data.brand.brandName} ${data.model.modelName}`}
         </h6>
         <span className="sub-title" onClick={() => handleClick(data.path)}>
           {data.category.categoryName}
@@ -155,7 +155,7 @@ export default function AdCard({ data }) {
             <li className="listing-information fuel">
               <div className="inner">
                 <span>HorsePower</span>
-                <p>{data.horsePower}</p>
+                <p>{data.enginePowerHp}</p>
               </div>
             </li>
             <li className="listing-information size-engine">

@@ -24,6 +24,10 @@ const InputElement = ({ types, inputName }) => {
   if (inputName === "Gearboxes") {
     return InputReturner("Gearboxes", "Gearboxes", types.gearboxes);
   }
+
+  if (inputName === "Renttypes") {
+    return InputReturner("Renttypes", "RentType", types.renttypes);
+  }
   if (inputName === "AirCondition") {
     return InputReturner("Air Condition", "AirConditioning", types.aircotypes);
   }

@@ -110,10 +110,7 @@ const DefaultBusCreate = ({
                 onChange={(e) => getModels(e, setModels)}
               >
                 {types.brands.map((val) => (
-                  <MenuItem
-                    value={val.id}
-                    key={val.id}
-                  >
+                  <MenuItem value={val.id} key={val.id}>
                     {val.brandName}
                   </MenuItem>
                 ))}
@@ -364,7 +361,7 @@ const DefaultBusCreate = ({
               <TextField
                 label="Vin"
                 id="vin"
-                placeholder="0"
+                placeholder="0TYKWN847KWXN"
                 name="VinCode"
               />
             </FormControl>

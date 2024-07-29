@@ -11,8 +11,6 @@ import {
 import React, { useState } from "react";
 import { Textarea } from "@mui/joy";
 import ImageUpload from "./ImageUpload";
-import axios from "axios";
-import { objectToFormData } from "../tools/ObjectToForm";
 import { GetTypes } from "../tools/GetTypes";
 import { GetFeatures } from "../tools/GetFeatures";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -22,18 +20,18 @@ import { GetCategory } from "../tools/GetCategoryId";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 
-const DefaultSTTruckCreate = ({
+const DefaultTransporterTruckCreate = ({
   setModalMessage,
   setModalStatus,
   setModalOpen,
 }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().sttId;
+  const currentCategoryId = GetCategory().transportTruckId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
   const [notModel, setNotModel] = useState(true);
-  const [newModel, setNewModel] = useState("");
+  const [newModel, setNewModel] = useState(false);
   const [brandId, setBrandId] = useState("");
   const [models, setModels] = useState([]);
 
@@ -532,7 +530,12 @@ const DefaultSTTruckCreate = ({
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField label="Vin" id="vin" name="VinCode" placeholder="0TYKWN847KWXN"/>
+              <TextField
+                label="Vin"
+                id="vin"
+                name="VinCode"
+                placeholder="0TYKWN847KWXN"
+              />
             </FormControl>
           </div>
         </div>
@@ -597,4 +600,4 @@ const DefaultSTTruckCreate = ({
   );
 };
 
-export default DefaultSTTruckCreate;
+export default DefaultTransporterTruckCreate;

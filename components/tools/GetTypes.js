@@ -14,28 +14,28 @@ export const GetTypes = (categoryId) => {
   const [paints, setPaints] = useState([]);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-
-  const fetchData = async (path, setter) => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_LINK}/GetOptions/${path}`
-    );
-    setter(response.data.$values);
-  };
-
-  const fetchCategories = async () => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_LINK}/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
-    );
-    setCategories(response.data.categories.$values);
-  };
-  const fetchBrands = async () => {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_LINK}/Brand/GetBrandsByProductTypeId?ProductTypeId=${categoryId}`
-    );
-    setBrands(response.data.brands.$values);
-  };
+  const [renttypes, setRentTypes] = useState([]);
 
   useEffect(() => {
+    const fetchData = async (path, setter) => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_LINK}/GetOptions/${path}`
+      );
+      setter(response.data.$values);
+    };
+
+    const fetchCategories = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_LINK}/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
+      );
+      setCategories(response.data.categories.$values);
+    };
+    const fetchBrands = async () => {
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_LINK}/Brand/GetBrandsByProductTypeId?ProductTypeId=${categoryId}`
+      );
+      setBrands(response.data.brands.$values);
+    };
     fetchBrands();
 
     fetchCategories();
@@ -49,6 +49,7 @@ export const GetTypes = (categoryId) => {
     fetchData("emissionclasstypes", setEmissionClasses);
     fetchData("emissionstickertypes", setEmissionStickers);
     fetchData("painttypes", setPaints);
+    fetchData("renttypes", setRentTypes);
   }, []);
 
   return {
@@ -63,5 +64,6 @@ export const GetTypes = (categoryId) => {
     paints,
     categories,
     brands,
+    renttypes,
   };
 };

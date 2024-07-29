@@ -1,42 +1,37 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
 import { Pagination, Stack } from "@mui/material";
-import { sttData } from "@/components/data/data";
-import axios from "axios";
+import { getAllAds } from "@/components/tools/GetAds";
+import { GetPath } from "@/components/tools/GetPath";
 
 export default function CarList() {
-  const ITEMS_PER_PAGE = 10;
+  const path = GetPath().last;
+  const perPageCount = 20;
   const [activeIndex, setActiveIndex] = useState(1);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
-  const [data, setData] = useState([]);
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllAds(currentPage, perPageCount, path);
+        setPageCount(data?.pageResponse?.totalPages || 1);
+        setValues(data?.forkliftsList?.results?.$values || []);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
   };
-
-  const onPageclick = (event) => {
-    setCurrentPage(event.selected);
-  };
-  const fetchData = async () => {
-    const response = await axios.get(
-      `${
-        process.env.NEXT_PUBLIC_API_LINK
-      }/Forklift/GetAllForkliftAds?CurrentPage=${1}&PageSize=${10}`
-    );
-
-    setData(response.data.forkliftsList.results.$values);
-    // console.log(response.data.forkliftsList.results.$values);
-    setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
-  };
-
-  fetchData();
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentPageData = sttData.slice(offset, offset + ITEMS_PER_PAGE);
 
   return (
     <>
@@ -143,34 +138,28 @@ export default function CarList() {
                           : "tab-pane fade"
                       }
                     >
-                      {/* <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                      </div>
-                      <div className="ad-banner">
-                        <img src="/assets/images/ads/ad-banner.jpg" />
-                      </div> */}
-                      <div className="car-list-item ">
-                        {/* {data.map((val, index) => {
-                          return <AdCard key={index} data={val} />;
-                        })} */}
+                        {values &&
+                          values.map((val) => {
+                            return (
+                              <AdCard
+                                key={val.id}
+                                path={"/listing-details"}
+                                data={val}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* <Pagination pageCount={pageCount} onPageChange={onPageclick} /> */}
             <Stack spacing={2} alignItems="center" mt={2}>
               <Pagination
                 count={pageCount} // Set the total number of pages
-                page={currentPage + 1} // MUI Pagination uses 1-based index, so add 1 to `currentPage`
-                onChange={(event, page) => setCurrentPage(page - 1)} // Subtract 1 to get 0-based index
+                page={currentPage} // MUI Pagination uses 1-based index, so add 1 to `currentPage`
+                onChange={(event, page) => setCurrentPage(page)} // Subtract 1 to get 0-based index
                 variant="outlined"
                 shape="rounded"
               />

@@ -12,7 +12,7 @@ export const submitForm = async (
   e.preventDefault();
   const formData = new FormData(e.target);
 
-  features.forEach((feature) => {
+  features && features.forEach((feature) => {
     if (selectedArray.some((el) => feature.id !== el)) {
       formData.append(feature.id, false);
     }
@@ -22,6 +22,8 @@ export const submitForm = async (
     formData.append(value, true);
   });
   year && formData.append("Year", year);
+  
+
 
   for (const file of images) {
     formData.append("AdImage", file.file, file.file.name);

@@ -370,7 +370,7 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
             <FormControl fullWidth>
               <TextField
                 label="Vin"
-                id="engine-power-min"
+                id="vin"
                 placeholder="AE46FKAFFNKJSAD"
                 name="VinCode"
               />

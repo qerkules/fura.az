@@ -774,11 +774,7 @@
     }
 }
 
-.mobile-menu .navigation li.dropdown2> {
-
-    // a {
-    // 	border-bottom: 1px solid $color-5;
-    // }
+.mobile-menu .navigation li.dropdown2 > {
     ul li a {
         border-bottom: unset;
     }
@@ -839,8 +835,7 @@
 .mobile-menu .navigation li.current>a {
     color: $primary;
 }
-
-// 
+ 
 .main-header .sticky-header .navbar-header {
     display: none;
 }

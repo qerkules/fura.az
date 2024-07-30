@@ -619,7 +619,7 @@ const RegisterDetails = ({ currentRegister }) => {
   return (
     <>
       {isMobile ? mobileVersion : desktopVersion}
-      {modalOpen && ModalAlert(modalMessage, modalStatus, setModalOpen, router)}
+      {modalOpen && ModalAlert(modalMessage, modalStatus, setModalOpen, router, "/sign-in")}
     </>
   );
 };

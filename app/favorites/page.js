@@ -5,6 +5,7 @@ import React from "react";
 import { sttData } from "@/components/data/data";
 
 const page = () => {
+  
   return (
     <>
       <Layout headerStyle={1} footerStyle={1}>

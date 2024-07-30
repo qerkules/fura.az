@@ -12771,6 +12771,9 @@ input[type="number"] {
   .salon-card {
     min-height: 170px;
   }
+  .create-description{
+    width: 100%;
+  }
 }
 
 nav[aria-label="pagination navigation"] > ul {

@@ -175,7 +175,7 @@ const DefaultBusCreate = ({
         </div>
 
         <div className="form-group prefix-select">
-          <InputElement inputName={"Distance"} types={types} />
+          <InputElement inputName={"DistanceUnit"} types={types} />
         </div>
         <div className="form-group prefix-input">
           <div className="group-select">
@@ -232,16 +232,18 @@ const DefaultBusCreate = ({
 
         <div className="form-group">
           <div className="group-select">
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label={"Year"}
-                views={["year"]}
-                name="Year"
-                onChange={(e) => {
-                  setYear(e.$y);
-                }}
-              />
-            </LocalizationProvider>
+            <FormControl fullWidth>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label={"Year"}
+                  views={["year"]}
+                  name="Year"
+                  onChange={(e) => {
+                    setYear(e.$y);
+                  }}
+                />
+              </LocalizationProvider>
+            </FormControl>
           </div>
         </div>
 
@@ -252,7 +254,7 @@ const DefaultBusCreate = ({
         </div>
         <div className="form-group">
           <div className="group-select">
-            <InputElement inputName={"EmissionStickers"} types={types} />
+            <InputElement inputName={"EmissionSticker"} types={types} />
           </div>
         </div>
         <div className="form-group">
@@ -272,64 +274,23 @@ const DefaultBusCreate = ({
         </div>
         <div className="form-group">
           <div className="group-select">
-            <InputElement inputName={"WheelTypes"} types={types} />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="driving-cabin-label">Driving Cabin</InputLabel>
+              <InputLabel id="driving-cabin-label">Steering</InputLabel>
               <Select
                 fullWidth
                 id="driving-cabin-select"
                 labelId="driving-cabin-label"
                 variant="outlined"
-                label="Driving Cabin"
-                name="DrivingCabin"
+                label="Steering"
+                name="Steering"
               >
-                <MenuItem value={"Long road"}>Long Road</MenuItem>
-                <MenuItem value={"Local"}>Local</MenuItem>
+                <MenuItem value={"Long road"}>Left</MenuItem>
+                <MenuItem value={"Local"}>Right</MenuItem>
               </Select>
             </FormControl>
           </div>
         </div>
 
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="vehicle-weight-label">Vehicle Weight</InputLabel>
-              <Select
-                fullWidth
-                id="vehicle-weight-select"
-                labelId="vehicle-weight-label"
-                variant="outlined"
-                label="Vehicle Weight"
-                name="VehicleWeight"
-              >
-                <MenuItem value={"0-7.5"}>0t - 7.5t</MenuItem>
-                <MenuItem value={"7.5-15"}>7.5t - 15t</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="axles-label">Axles</InputLabel>
-              <Select
-                fullWidth
-                id="axles-select"
-                labelId="axles-label"
-                variant="outlined"
-                label="Axles"
-                name="Axles"
-              >
-                <MenuItem value={"0-5"}>0 - 5</MenuItem>
-                <MenuItem value={"5-10"}>5 - 10</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
         <div className="form-group">
           <div className="group-select">
             <InputElement inputName={"AirCondition"} types={types} />
@@ -338,19 +299,20 @@ const DefaultBusCreate = ({
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="hydr-equi-label">Hydraulic Equipment</InputLabel>
+              <InputLabel id="driving-cabin-label">Cylinder Volume</InputLabel>
               <Select
                 fullWidth
-                id="hydr-equi-select"
-                labelId="hydr-equi-label"
+                id="cylinder-select"
+                labelId="cylinder-label"
                 variant="outlined"
-                label="Hydraulic Equipment"
-                name="HydraulicEquipment"
+                label="Cylinder Volume"
+                name="CylinderVolume"
               >
-                <MenuItem value={"Tipper-hydr"}>Tipper Hydraulic</MenuItem>
-                <MenuItem value={"push-floor-hydr"}>
-                  Push Floor Hydraulic
-                </MenuItem>
+                <MenuItem value={"100"}>100 cc</MenuItem>
+                <MenuItem value={"200"}>200 cc</MenuItem>
+                <MenuItem value={"300"}>300 cc</MenuItem>
+                <MenuItem value={"400"}>400 cc</MenuItem>
+                <MenuItem value={"500"}>500 cc</MenuItem>
               </Select>
             </FormControl>
           </div>

@@ -19,7 +19,9 @@ const ModalAlert = (status, message, setModalOpen, router, path) => {
     if (path && status) {
       router.push(path);
     } else if (!path && status) {
-      status && router.push("/");
+      router.push("/");
+    } else if (path === "/sign-in" && status) {
+      router.push(path);
     }
   };
   return (

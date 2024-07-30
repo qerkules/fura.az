@@ -24,7 +24,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().forkliftId;
+  const currentCategoryId = GetCategory().avId;
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

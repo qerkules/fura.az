@@ -1,48 +1,55 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AdCard from "@/components/layout/AdCard";
 import Layout from "@/components/layout/Layout";
 import Categories from "@/components/sections/Categories";
 import SearchFilter from "@/components/sections/SearchFilter";
 import { Pagination, Stack } from "@mui/material";
-import { sttData } from "@/components/data/data";
+import { getAllAds } from "@/components/tools/GetAds";
+import { GetPath } from "@/components/tools/GetPath";
 
 export default function CarList() {
-  const ITEMS_PER_PAGE = 10;
+  const path = GetPath().last;
+  const perPageCount = 15;
   const [activeIndex, setActiveIndex] = useState(1);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const [totalAdCount, setTotalAdCount] = useState(0);
+  const [values, setValues] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getAllAds(currentPage, perPageCount, path);
+        setPageCount(data?.pageResponse?.totalPages || 1);
+        setTotalAdCount(data?.pageResponse.totalCount);
+        setValues(data?.trucksList?.$values || []);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    window.scrollTo({
+      top: 400,
+      left: 0,
+      behavior: "smooth",
+    });
+
+    fetchData();
+  }, [currentPage]);
 
   const handleOnClick = (index) => {
     setActiveIndex(index);
   };
 
-  const onPageclick = (event) => {
-    setCurrentPage(event.selected);
-  };
-
-  const fetchData = async () => {
-    // Replace `data` with the actual data fetching logic
-    // For example, if using `axios`: const result = await axios.get('/api/data');
-    // const data = result.data;
-    setPageCount(Math.ceil(sttData.length / ITEMS_PER_PAGE));
-  };
-  useEffect(() => {
-
-    fetchData();
-  }, [sttData.length]);
-
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentPageData = sttData.slice(offset, offset + ITEMS_PER_PAGE);
-
   return (
     <>
       <Layout headerStyle={1} footerStyle={1}>
         <div>
-          <div className="widget-banner-car-listing banner-car-listing-list truck-bg">
+          <div className="widget-banner-car-listing banner-car-listing-list forklift-bg">
             <div className="themesflat-container full">
               <div className="banner-car-listing">
-                <h1 className="title text-white">Truck</h1>
+                <h1 className="title text-white">Trucks</h1>
               </div>
             </div>
           </div>
@@ -59,8 +66,8 @@ export default function CarList() {
                     <div className="row">
                       <div className="col-md-6">
                         <p className="showing">
-                          Showing 1–12 of <span className="text-red">54</span>{" "}
-                          results
+                          Total count{" "}
+                          <span className="text-red">{totalAdCount}</span>{" "}
                         </p>
                       </div>
                       <div className="col-md-6 toolbar-search-list">
@@ -140,34 +147,28 @@ export default function CarList() {
                           : "tab-pane fade"
                       }
                     >
-                      <div className="divider-header ">Premium Ads</div>
                       <div className="car-list-item ">
-                        {/* <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} />
-                        <AdCard data={sttData[0]} /> */}
-                      </div>
-                      <div className="ad-banner">
-                        <img src="/assets/images/ads/ad-banner.jpg" />
-                      </div>
-                      <div className="car-list-item ">
-                        {/* {currentPageData.map((val, index) => {
-                          return <AdCard key={index} data={val} />;
-                        })} */}
+                        {values &&
+                          values.map((val) => {
+                            return (
+                              <AdCard
+                                key={val.id}
+                                path={"/listing-details"}
+                                data={val}
+                              />
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            {/* <Pagination pageCount={pageCount} onPageChange={onPageclick} /> */}
             <Stack spacing={2} alignItems="center" mt={2}>
               <Pagination
-                count={pageCount} // Set the total number of pages
-                page={currentPage + 1} // MUI Pagination uses 1-based index, so add 1 to `currentPage`
-                onChange={(event, page) => setCurrentPage(page - 1)} // Subtract 1 to get 0-based index
+                count={pageCount}
+                page={currentPage}
+                onChange={(event, page) => setCurrentPage(page)}
                 variant="outlined"
                 shape="rounded"
               />

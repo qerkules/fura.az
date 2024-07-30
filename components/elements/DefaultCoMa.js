@@ -52,7 +52,7 @@ const DefaultCoMaCreate = ({
       features,
       selectedArray,
       images,
-      "ConstructionMachinery",
+      "ConstructonMachinery",
       modalOpener,
       year
     );

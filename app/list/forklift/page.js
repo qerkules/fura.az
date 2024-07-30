@@ -10,10 +10,11 @@ import { GetPath } from "@/components/tools/GetPath";
 
 export default function CarList() {
   const path = GetPath().last;
-  const perPageCount = 20;
+  const perPageCount = 15;
   const [activeIndex, setActiveIndex] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
+  const [totalAdCount, setTotalAdCount] = useState(0);
   const [values, setValues] = useState([]);
 
   useEffect(() => {
@@ -21,11 +22,19 @@ export default function CarList() {
       try {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
-        setValues(data?.forkliftsList?.results?.$values || []);
+        setTotalAdCount(data?.pageResponse.totalCount);
+        setValues(data?.ads?.$values || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
+
+    window.scrollTo({
+      top: 400,
+      left: 0,
+      behavior: "smooth",
+    });
+
     fetchData();
   }, [currentPage]);
 
@@ -57,8 +66,8 @@ export default function CarList() {
                     <div className="row">
                       <div className="col-md-6">
                         <p className="showing">
-                          Showing 1–12 of <span className="text-red">54</span>{" "}
-                          results
+                          Total count{" "}
+                          <span className="text-red">{totalAdCount}</span>{" "}
                         </p>
                       </div>
                       <div className="col-md-6 toolbar-search-list">
@@ -157,9 +166,9 @@ export default function CarList() {
             </div>
             <Stack spacing={2} alignItems="center" mt={2}>
               <Pagination
-                count={pageCount} // Set the total number of pages
-                page={currentPage} // MUI Pagination uses 1-based index, so add 1 to `currentPage`
-                onChange={(event, page) => setCurrentPage(page)} // Subtract 1 to get 0-based index
+                count={pageCount}
+                page={currentPage}
+                onChange={(event, page) => setCurrentPage(page)}
                 variant="outlined"
                 shape="rounded"
               />

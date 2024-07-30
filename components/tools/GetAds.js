@@ -6,16 +6,16 @@ export const getAllAds = async (currentPage, pageSize, path) => {
   let apiPath = "/Ad/GetAllAds";
 
   if (path === "av") apiPath = "/AgriculturalVehicle/GetAllAgriculturalAds";
-  if (path === "bus") apiPath = "/Bus/GetAllBusAds";
+  if (path === "services") apiPath = "/Service/GetAllServices";
+  if (path === "bus") apiPath = "/Bus/GetAllBus";
   if (path === "co-ma")
-    apiPath = "/ConstructonMachinery/GetAllConstructonMachineryAds";
+    apiPath = "/ConstructonMachinery/GetAllConstructionMachineryAd";
   if (path === "forklift") apiPath = "/Forklift/GetAllForkliftAds";
   if (path === "semi-truck")
     apiPath = "/SemiTrailerTruck/GetAllSemiTrailerTruckAds";
-  if (path === "trailer") apiPath = "/Forklift/GetAllForkliftAds";
-  if (path === "truck") apiPath = "/Truck/GetAllTruckAds";
-  if (path === "truck-under") apiPath = "/Forklift/GetAllForkliftAds";
-  apiPath = "/Ad/GetAllAds";
+  if (path === "trailer") apiPath = "/SemiTrailer/GetAllSemiTrailer";
+  if (path === "truck") apiPath = "/TruckOver/GetAllTruckOverAds";
+  if (path === "truck-under") apiPath = "/TrucUnder/GetAllTruckUnderAds";
 
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_API_LINK}${apiPath}?CurrentPage=${currentPage}&PageSize=${pageSize}`

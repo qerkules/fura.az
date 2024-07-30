@@ -22,10 +22,7 @@ const LoginDetails = ({ setSignOption }) => {
 
   const [showPassword, setShowPassword] = React.useState(false);
 
-
   const [isValidEmail, setIsValidEmail] = useState(true);
-
- 
 
   const [currentLogin, setCurrentLogin] = useState("email");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -42,8 +39,8 @@ const LoginDetails = ({ setSignOption }) => {
     event.preventDefault();
   };
 
-   // Email validation function
-   const validateEmail = (email) => {
+  // Email validation function
+  const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
@@ -121,7 +118,7 @@ const LoginDetails = ({ setSignOption }) => {
         <div className="sign-details">
           {currentLogin === "email" ? (
             <div className="sign-inputs">
-              <FormControl fullWidth sx={{marginBottom: 2}}>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
                   id="standard-adornment-email"
                   type={"text"}
@@ -231,20 +228,43 @@ const LoginDetails = ({ setSignOption }) => {
           </div>
           {currentLogin === "email" ? (
             <div className="sign-inputs">
-              <div className="sign-input">
-                <MailOutlineIcon />
-                <input
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email"
+                  type={"text"}
                   placeholder="Enter Your Email Address"
-                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  onChange={(e) => handleEmailChange(e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <LockIcon />
-                <input
-                  placeholder="Enter Your Password"
+              </FormControl>
+              <FormControl fullWidth>
+                <OutlinedInput
+                  id="standard-adornment-password"
+                  type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
-              </div>
+              </FormControl>
               <div className="login-forgot-button">Forgot Password</div>
               <div className="login-buttons">
                 <div

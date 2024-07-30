@@ -7,13 +7,12 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HoverListing from "../tools/HoverListing";
 
-export default function AdCard({ data }) {
+export default function AdCardUser({ data }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
 
   useEffect(() => {
-    // Check if window is defined
     if (typeof window !== "undefined") {
       setIsClient(true);
     }
@@ -31,6 +30,7 @@ export default function AdCard({ data }) {
     if (cookieValues && cookieValues.includes(data.id)) {
       setFavouriteClicked(true);
     }
+
   }, []);
 
   const updateFavourite = () => {
@@ -54,7 +54,6 @@ export default function AdCard({ data }) {
   return (
     <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
       <HoverListing />
-
       <div className="image" onClick={() => handleClick(data.path)}>
         <div className="stm-badge-top">
           <div className="feature">
@@ -77,7 +76,10 @@ export default function AdCard({ data }) {
           )}
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
-              <div className="listing-item active" title="Lexus LC Hybrid 2024">
+              <div
+                className={`listing-item active`}
+                title="Lexus LC Hybrid 2024"
+              >
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
@@ -86,11 +88,11 @@ export default function AdCard({ data }) {
                   />
                 </div>
               </div>
-              <div className="listing-item" title="Lexus LC Hybrid 2024">
+              <div className={`listing-item`} title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1]?.path}`}
-                    className="swiper-image lazy tfcl-light-gallery"
+                    className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
                 </div>
@@ -135,10 +137,10 @@ export default function AdCard({ data }) {
           </a>
         </div>
         <h6 className="title" onClick={() => handleClick(data.path)}>
-          {`${data.brand.brandName} ${data.model.modelName}`}
+          {`${data.brand} ${data.model}`}
         </h6>
         <span className="sub-title" onClick={() => handleClick(data.path)}>
-          {data.category.categoryName}
+          {data.category}
         </span>
 
         <div className="description" onClick={() => handleClick(data.path)}>

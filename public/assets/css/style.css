@@ -11385,6 +11385,9 @@ ul[aria-label="Pagination"] {
   }
 }
 
+.splide__slide{
+  cursor: pointer;
+}
 #header-mobile-bottom:after {
   right: 0;
   z-index: 1;

@@ -19,6 +19,8 @@ import { GetPath } from "../tools/GetPath";
 import { GetCategory } from "../tools/GetCategoryId";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
+import EnginePowerInput from "./EnginePowerInput";
+import { submitForm } from "../tools/CreateSubmit";
 
 const DefaultTruckCreate = ({
   setModalMessage,
@@ -37,6 +39,8 @@ const DefaultTruckCreate = ({
   const [currency, setCurrency] = useState("AZN");
   const [enginePowerType, setEnginePowerType] = useState("HP");
 
+  const [year, setYear] = useState("");
+
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
   const maxNumber = 20;
@@ -49,7 +53,7 @@ const DefaultTruckCreate = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitForm(e, features, selectedArray, images, "Truck", modalOpener);
+    submitForm(e, features, selectedArray, images, "TruckOver", modalOpener);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -242,42 +246,7 @@ const DefaultTruckCreate = ({
             </FormControl>
           </div>
         </div>
-        <div className="prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="hp/kw">Hp/Kw</InputLabel>
-            <Select
-              id="hp/kw-select"
-              labelId="hp/kw-label"
-              label="hp/kw"
-              value={enginePowerType}
-              onChange={(e) => setEnginePowerType(e.target.value)}
-            >
-              <MenuItem value={"hp"}>HP</MenuItem>
-              <MenuItem value={"kw"}>KW</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Engine Power"
-                id="engine-power-min"
-                type="number"
-                placeholder="0"
-                name="EnginePowerHP"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
-
+        <EnginePowerInput />
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -357,6 +326,20 @@ const DefaultTruckCreate = ({
                   </MenuItem>
                 ))}
               </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                fullWidth
+                id="fuel-type-select"
+                variant="outlined"
+                label="Fuel Tank (L)"
+                name="FuelTank"
+                type="number"
+              />
             </FormControl>
           </div>
         </div>
@@ -445,18 +428,14 @@ const DefaultTruckCreate = ({
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="vehicle-weight-label">Vehicle Weight</InputLabel>
-              <Select
+              <TextField
                 fullWidth
                 id="vehicle-weight-select"
-                labelId="vehicle-weight-label"
                 variant="outlined"
-                label="Vehicle Weight"
-                name="VehicleWeight"
-              >
-                <MenuItem value={"0-7.5"}>0t - 7.5t</MenuItem>
-                <MenuItem value={"7.5-15"}>7.5t - 15t</MenuItem>
-              </Select>
+                type="number"
+                label="Permissible Gross Weight"
+                name="LicencedWeight"
+              />
             </FormControl>
           </div>
         </div>
@@ -472,8 +451,8 @@ const DefaultTruckCreate = ({
                 label="Axles"
                 name="Axles"
               >
-                <MenuItem value={"0-5"}>0 - 5</MenuItem>
-                <MenuItem value={"5-10"}>5 - 10</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -522,7 +501,49 @@ const DefaultTruckCreate = ({
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField label="Vin" id="vin" name="VinCode" placeholder="0TYKWN847KWXN"/>
+              <TextField
+                label="Vin"
+                id="vin"
+                name="VinCode"
+                placeholder="0TYKWN847KWXN"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="cylinder-label">Cylinder Volume</InputLabel>
+              <Select
+                fullWidth
+                id="cylinder-select"
+                labelId="cylinder-label"
+                variant="outlined"
+                label="Cylinder Volume"
+                name="CylinderVolume"
+              >
+                <MenuItem value={100}>100</MenuItem>
+                <MenuItem value={200}>200</MenuItem>
+                <MenuItem value={300}>300</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="steering-label">Steering</InputLabel>
+              <Select
+                fullWidth
+                id="steering-select"
+                labelId="steering-label"
+                variant="outlined"
+                label="Steering"
+                name="Steering"
+              >
+                <MenuItem value={"Left"}>Left</MenuItem>
+                <MenuItem value={"Right"}>Right</MenuItem>
+              </Select>
             </FormControl>
           </div>
         </div>
@@ -530,11 +551,11 @@ const DefaultTruckCreate = ({
           <div className="group-select">
             <FormControl fullWidth>
               <TextField
-                label="Cylinder Volume"
-                id="cyVolume"
+                label="Vehicle Width (mm)"
+                id="width"
                 type="number"
                 placeholder="0"
-                name="CylinderVolume"
+                name="VehicleWidth"
               />
             </FormControl>
           </div>
@@ -543,10 +564,63 @@ const DefaultTruckCreate = ({
           <div className="group-select">
             <FormControl fullWidth>
               <TextField
-                label="Steering"
-                id="steering"
+                label="Vehicle Height (mm)"
+                id="height"
+                type="number"
                 placeholder="0"
-                name="Steering"
+                name="VehicleHeight"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Internal Volume (m³)"
+                id="volume"
+                type="number"
+                placeholder="0"
+                name="LoadingAreaVolume"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Loading Space Length (mm)"
+                id="length"
+                type="number"
+                placeholder="0"
+                name="LoadingSpaceLength"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Loading Area Width (mm)"
+                id="load-width"
+                type="number"
+                placeholder="0"
+                name="LoadingAreaWidth"
+              />
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <TextField
+                label="Loading Area Height (mm)"
+                id="load-height"
+                type="number"
+                placeholder="0"
+                name="LoadingAreaHeight"
               />
             </FormControl>
           </div>

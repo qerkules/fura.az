@@ -4,7 +4,7 @@ export const GetCategory = (category) => {
   const comaId = "55e97a79-0f08-4f20-90e7-5c9c4ccf9fca";
   const truckId = "3ae42571-81f5-47da-9c6c-587f567a665e";
   const transportTruckId = "582f0bff-02eb-400c-a463-53559e595551";
-  const avId = "4d13f211-5bd4-4c70-a49e-7fbb3e4c8c31";
+  const avId = "0e33f996-b5cb-476b-9a99-c62c7ea6833d";
   const spId = "607d688d-e632-4888-b9f1-639d52d7e6b4";
   const forkliftId = "b2d4d70c-ee3c-4730-ac15-6bbe2a9e9cf6";
   const busId = "4d13f211-5bd4-4c70-a49e-7fbb3e4c8c31";

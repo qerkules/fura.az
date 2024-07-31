@@ -88,7 +88,7 @@ const DefaultFormMobile = ({ handleUpdateSearchParams }) => {
               >
                 {models.length > 0 ? (
                   models.map((val) => (
-                    <MenuItem value={val.id} key={val.modelName}>
+                    <MenuItem key={val.id} value={val.modelName}>
                       {val.modelName}
                     </MenuItem>
                   ))

@@ -59,7 +59,7 @@ export default function CarList() {
             <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
-                  <SearchFilter />
+                  <SearchFilter setValues={setValues} />
                 </div>
                 <div className="col-md-12 col-lg-9 listing-list-car-wrap">
                   <form action="/" className="tf-my-listing-search">
@@ -150,12 +150,7 @@ export default function CarList() {
                       <div className="car-list-item ">
                         {values &&
                           values.map((val) => {
-                            return (
-                              <AdCard
-                                key={val.id}
-                                data={val}
-                              />
-                            );
+                            return <AdCard key={val.id} data={val} />;
                           })}
                       </div>
                     </div>

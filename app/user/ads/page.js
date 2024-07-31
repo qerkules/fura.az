@@ -23,7 +23,7 @@ const page = () => {
     try {
       const token = localStorage.getItem("token");
       const data = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_LINK}/Ad/GetAllAdsByUser?CurrentPage=${currentPage}&PageSize=${perPageCount}`,
+        `${process.env.NEXT_PUBLIC_API_LINK}/Vehicle/GetAllAdsByUser?CurrentPage=${currentPage}&PageSize=${perPageCount}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

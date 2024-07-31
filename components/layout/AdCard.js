@@ -77,7 +77,10 @@ export default function AdCard({ data }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0]?.path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images?.$values[0]?.path ||
+                      data?.ad?.image?.$values[0]?.filePath
+                    }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -86,7 +89,10 @@ export default function AdCard({ data }) {
               <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1]?.path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images?.$values[1]?.path ||
+                      data?.ad?.image?.$values[1]?.filePath
+                    }`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
                   />
@@ -95,7 +101,10 @@ export default function AdCard({ data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[2]?.path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images?.$values[2]?.path ||
+                      data?.ad?.image?.$values[2]?.filePath
+                    }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -132,7 +141,9 @@ export default function AdCard({ data }) {
           </a>
         </div>
         <h6 className="title" onClick={() => handleClick(data.path)}>
-          {`${data.brand.brandName} ${data.model.modelName}`}
+          {`${data.brand?.brandName || data.model?.brand?.brandName} ${
+            data.model.modelName
+          }`}
         </h6>
         <span className="sub-title" onClick={() => handleClick(data.path)}>
           {data.category.categoryName}

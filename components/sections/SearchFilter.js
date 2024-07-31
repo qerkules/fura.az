@@ -18,7 +18,7 @@ import ServicesControl from "./search-controls/ServicesControl";
 import axios from "axios";
 import { GetCategory } from "../tools/GetCategoryId";
 
-const SearchFilter = () => {
+const SearchFilter = ({ setValues }) => {
   const [open, setOpen] = useState(false);
   const [searchParams, setSearchParams] = useState({});
   const path = GetPath().last;
@@ -61,7 +61,9 @@ const SearchFilter = () => {
     const url = `${process.env.NEXT_PUBLIC_API_LINK}/Search/${mypath}Search`;
     try {
       const response = await axios.get(url, { params: filteredParams });
-      console.log("Search Results:", response.data);
+      setValues(
+        response.data?.searchList?.results?.$values?.map((data) => data.vehicle)
+      );
     } catch (error) {
       console.error("Error:", error);
     }

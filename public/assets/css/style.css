@@ -11385,7 +11385,7 @@ ul[aria-label="Pagination"] {
   }
 }
 
-.splide__slide{
+.splide__slide {
   cursor: pointer;
 }
 #header-mobile-bottom:after {
@@ -11847,12 +11847,12 @@ input[type="number"] {
 }
 
 .modal-finish-btn {
-  width: 30%!important;
-  background-color: var(--red)!important;
-  color: white!important;
-  text-align: center!important;
-  padding: 10px!important;
-  border-radius: 15px!important;
+  width: 30% !important;
+  background-color: var(--red) !important;
+  color: white !important;
+  text-align: center !important;
+  padding: 10px !important;
+  border-radius: 15px !important;
 }
 
 .filter-button-container-title {
@@ -12771,7 +12771,7 @@ input[type="number"] {
   .salon-card {
     min-height: 170px;
   }
-  .create-description{
+  .create-description {
     width: 100%;
   }
 }
@@ -12865,23 +12865,31 @@ nav[aria-label="pagination navigation"] > ul > li > button.Mui-selected:hover {
   grid-template-columns: 1fr 3fr;
 }
 
-label.model-checkbox{
+label.model-checkbox {
   justify-content: center;
-  margin-bottom: 0px!important;
+  margin-bottom: 0px !important;
   color: #86898e;
   margin-left: 0px;
 }
 
-.sign-inputs .MuiOutlinedInput-root{
-  border-radius: 10px!important;
+.sign-inputs .MuiOutlinedInput-root {
+  border-radius: 10px !important;
 }
 
-.form-group-engine-power{
+.form-group-engine-power {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
 }
 
-.refrigator{
+.refrigator {
   margin-bottom: 20px;
+}
+
+h6.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }

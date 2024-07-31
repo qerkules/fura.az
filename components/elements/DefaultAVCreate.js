@@ -21,6 +21,8 @@ import { submitForm } from "../tools/CreateSubmit";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import NewModel from "./NewModel";
+import RentForm from "./RentForm";
 
 const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
@@ -28,6 +30,7 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
+  const [saleOrRent, setSaleOrRent] = useState("");
   const [enginePowerType, setEnginePowerType] = useState("");
   const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
@@ -72,6 +75,8 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
                 label="Ad Type"
                 variant="outlined"
                 name="SaleOrRent"
+                value={saleOrRent}
+                onChange={(e) => setSaleOrRent(e.target.value)}
               >
                 <MenuItem value={"Sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
@@ -122,61 +127,16 @@ const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="model-label">Model</InputLabel>
-              <Select
-                fullWidth
-                id="model-select"
-                labelId="model-label"
-                variant="outlined"
-                label="Model"
-                name="ModelId"
-              >
-                {models.length > 0 ? (
-                  models.map((val) => (
-                    <MenuItem value={val.id} key={val.id}>
-                      {val.modelName}
-                    </MenuItem>
-                  ))
-                ) : (
-                  <MenuItem value={"none"} disabled>
-                    -
-                  </MenuItem>
-                )}
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        <NewModel models={models} />
+        
         <ImageUpload
           maxNumber={maxNumber}
           images={images}
           setImages={setImages}
         />
 
-        <div className="form-group prefix-select">
-          <InputElement inputName={"Currency"} types={types} />
-        </div>
+        <RentForm saleOrRent={saleOrRent} types={types} />
 
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Price"
-                id="price-min"
-                type="number"
-                name="Price"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">{""}</InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
         <div className="form-group prefix-input">
           <div className="group-select">
             <FormControl fullWidth>

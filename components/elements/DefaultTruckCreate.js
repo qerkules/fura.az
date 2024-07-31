@@ -21,6 +21,8 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
 import EnginePowerInput from "./EnginePowerInput";
 import { submitForm } from "../tools/CreateSubmit";
+import RentForm from "./RentForm";
+import NewModel from "./NewModel";
 
 const DefaultTruckCreate = ({
   setModalMessage,
@@ -32,12 +34,10 @@ const DefaultTruckCreate = ({
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 
-  const [notModel, setNotModel] = useState(true);
-  const [newModel, setNewModel] = useState(false);
   const [models, setModels] = useState([]);
 
   const [currency, setCurrency] = useState("AZN");
-  const [enginePowerType, setEnginePowerType] = useState("HP");
+  const [saleOrRent, setSaleOrRent] = useState("");
 
   const [year, setYear] = useState("");
 
@@ -53,7 +53,15 @@ const DefaultTruckCreate = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitForm(e, features, selectedArray, images, "TruckOver", modalOpener);
+    submitForm(
+      e,
+      features,
+      selectedArray,
+      images,
+      "TruckOver",
+      modalOpener,
+      year
+    );
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -72,6 +80,8 @@ const DefaultTruckCreate = ({
                 label="Ad Type"
                 variant="outlined"
                 name="SaleOrRent"
+                value={saleOrRent}
+                onChange={(e) => setSaleOrRent(e.target.value)}
               >
                 <MenuItem value={"Sale"}>sale</MenuItem>
                 <MenuItem value={"Rent"}>rent</MenuItem>
@@ -123,93 +133,14 @@ const DefaultTruckCreate = ({
           </div>
         </div>
 
-        {notModel ? (
-          <div className="form-group">
-            <div className="group-select">
-              <FormControl fullWidth>
-                <InputLabel id="model-label">Model</InputLabel>
-                <Select
-                  fullWidth
-                  id="model-select"
-                  labelId="model-label"
-                  variant="outlined"
-                  label="Model"
-                  name="ModelId"
-                >
-                  {models.length > 0 ? (
-                    models.map((val) => (
-                      <MenuItem value={val.id} key={val.id}>
-                        {val.modelName}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem value={"none"} disabled>
-                      -
-                    </MenuItem>
-                  )}
-                </Select>
-              </FormControl>
-            </div>
-          </div>
-        ) : (
-          <div className="form-group">
-            <div className="group-select">
-              <FormControl fullWidth>
-                <TextField
-                  fullWidth
-                  id="model-input"
-                  variant="outlined"
-                  label="Model"
-                  value={newModel}
-                  onChange={(e) => setNewModel(e.target.value)}
-                />
-              </FormControl>
-            </div>
-          </div>
-        )}
+        <NewModel models={models} />
         <ImageUpload
           maxNumber={maxNumber}
           images={images}
           setImages={setImages}
         />
 
-        <div className="form-group prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="currency-label">Currency</InputLabel>
-            <Select
-              variant="outlined"
-              id="currency-select"
-              labelId="currency-label"
-              label="Currency"
-              name="Currency"
-            >
-              {types.currTypes.map((val, index) => (
-                <MenuItem key={index} value={val.index}>
-                  {val.value}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Price"
-                id="price-min"
-                type="number"
-                placeholder="0"
-                name="Price"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">{"$"}</InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
+        <RentForm saleOrRent={saleOrRent} types={types} />
 
         <div className="form-group prefix-select">
           <FormControl fullWidth>

@@ -30,7 +30,7 @@ const DefaultTransporterTruckCreate = ({
   setModalOpen,
 }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().transportTruckId;
+  const currentCategoryId =GetCategory(currentCategory)
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

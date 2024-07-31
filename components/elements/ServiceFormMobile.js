@@ -2,7 +2,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 
-const ServiceFormMobile = () => {
+const ServiceFormMobile = ({handleUpdateSearchParams}) => {
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [weight, setWeight] = useState("");

@@ -11847,12 +11847,12 @@ input[type="number"] {
 }
 
 .modal-finish-btn {
-  width: 100%;
-  background-color: var(--red);
-  color: white;
-  text-align: center;
-  padding: 10px;
-  border-radius: 15px;
+  width: 30%!important;
+  background-color: var(--red)!important;
+  color: white!important;
+  text-align: center!important;
+  padding: 10px!important;
+  border-radius: 15px!important;
 }
 
 .filter-button-container-title {

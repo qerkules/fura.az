@@ -1,4 +1,6 @@
-"use client";
+import { GetCategory } from "@/components/tools/GetCategoryId";
+import { GetPath } from "@/components/tools/GetPath";
+import { GetTypes } from "@/components/tools/GetTypes";
 import {
   FormControl,
   InputAdornment,
@@ -7,15 +9,12 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
-const AvControl = () => {
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [maxEnginePower, setMaxEnginePower] = useState("");
-  const [airCond, setAirCond] = useState("");
-
+const AvControl = ({ handleUpdateSearchParams }) => {
+  const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
+  const types = GetTypes(currentCategoryId);
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
       <div className="form-group-wrap">
@@ -31,31 +30,20 @@ const AvControl = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("EmissionStickerType", e.target.value)
+                }
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {types.emissionstickers.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
         </div>
       </div>
-      <span className="input-title mb-15">
-        Engine Power:
-        <FormControl variant="standard">
-          <Select
-            id="engine-power-select"
-            labelId="engine-power-label"
-            value={enginePowerType}
-            onChange={(e) => setEnginePowerType(e.target.value)}
-            sx={{ width: 100, color: "" }}
-          >
-            <MenuItem value={"hp"}>HP</MenuItem>
-            <MenuItem value={"kw"}>KW</MenuItem>
-          </Select>
-        </FormControl>
-      </span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
@@ -65,15 +53,9 @@ const AvControl = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
+                onChange={(e) =>
+                  handleUpdateSearchParams("minHp", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -84,43 +66,40 @@ const AvControl = () => {
               <TextField
                 variant="outlined"
                 placeholder="10000"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
                 label="Max"
                 type="number"
                 id="engine-power-max"
-                value={maxEnginePower}
-                onChange={(e) => setMaxEnginePower(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("maxHp", e.target.value)
+                }
               />
             </FormControl>
           </div>
         </div>
       </div>
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="air-cond-label">Air Condition</InputLabel>
-              <Select
-                fullWidth
-                id="air-cond-select"
-                labelId="air-cond-label"
-                variant="outlined"
-                label="Air Condition"
-                value={airCond}
-                onChange={(e) => setAirCond(e.target.value)}
-              >
-                <MenuItem value={"no-air"}>No Air</MenuItem>
-                <MenuItem value={"manual-air"}>Manual Air</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+      <div className="form-group">
+        <div className="group-select">
+          <FormControl fullWidth>
+            <InputLabel id="air-cond-label">Air Condition</InputLabel>
+            <Select
+              fullWidth
+              id="air-cond-select"
+              labelId="air-cond-label"
+              variant="outlined"
+              label="Air Condition"
+              onChange={(e) =>
+                handleUpdateSearchParams("AirConditioningType", e.target.value)
+              }
+            >
+              {types.aircotypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
+            </Select>
+          </FormControl>
         </div>
-      
+      </div>
     </FormControl>
   );
 };

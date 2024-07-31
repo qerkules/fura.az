@@ -26,7 +26,7 @@ import RentForm from "./RentForm";
 
 const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().trailerId;
+  const currentCategoryId = GetCategory(currentCategory)
   const features = GetFeatures(currentCategory);
   const refrigatorFeatures = GetFeatures("trailer-refrigator");
   const types = GetTypes(currentCategoryId);

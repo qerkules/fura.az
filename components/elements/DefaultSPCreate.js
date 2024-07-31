@@ -21,7 +21,7 @@ import { GetPath } from "../tools/GetPath";
 
 const DefaultSPCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().spId;
+  const currentCategoryId = GetCategory(currentCategory)
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

@@ -9,25 +9,19 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { GetPath } from "../tools/GetPath";
+import { GetTypes } from "../tools/GetTypes";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { getModels } from "../tools/GetModels";
+import { GetCategory } from "../tools/GetCategoryId";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-const DefaultFormControl = () => {
-  const currentCategory = GetPath().last;
+const DefaultFormControl = ({ handleUpdateSearchParams }) => {
+  const category = GetPath().last;
+  const [models, setModels] = useState([]);
 
-  const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [product, setProduct] = useState("");
-
-  const [currency, setCurrency] = useState("₼AZN");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-
-  const [minDist, setMinDist] = useState("");
-  const [maxDist, setMaxDist] = useState("");
-
-  const [minYear, setMinYear] = useState("");
-  const [maxYear, setMaxYear] = useState("");
-
+  const currentCategoryId = GetCategory(category);
+  console.log(currentCategoryId);
+  const types = GetTypes(currentCategoryId);
   const [isToggled, setToggled] = useState(true);
 
   useEffect(() => {
@@ -58,13 +52,18 @@ const DefaultFormControl = () => {
               labelId="category-label"
               label="Category"
               variant="outlined"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              name="CategoryName"
+              onChange={(e) =>
+                handleUpdateSearchParams("CategoryName", e.target.value)
+              }
             >
-              <MenuItem value={"standart-tractor"}>
-                Standart Tractor (5)
-              </MenuItem>
-              <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+              {types.categories.map((val) => {
+                return (
+                  <MenuItem key={val.id} value={val.categoryName}>
+                    {val.categoryName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
@@ -79,18 +78,24 @@ const DefaultFormControl = () => {
               labelId="brand-label"
               variant="outlined"
               label="Brand"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              name="BrandId"
+              onChange={(e) => {
+                handleUpdateSearchParams("BrandName", e.target.value);
+                getModels(e, setModels);
+              }}
             >
-              <MenuItem value={"DAF"}>
-                <span>Daf</span>
-              </MenuItem>
-              <MenuItem value={"SCANIA"}>Scania</MenuItem>
+              {types.brands.map((val) => {
+                return (
+                  <MenuItem key={val.id} value={val.brandName}>
+                    {val.brandName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
       </div>
-      {currentCategory !== "sparepart" ? (
+      {category !== "sparepart" ? (
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -101,35 +106,28 @@ const DefaultFormControl = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                name="ModelId"
+                onChange={(e) =>
+                  handleUpdateSearchParams("ModelName", e.target.value)
+                }
               >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
+                {models.length > 0 ? (
+                  models.map((val) => (
+                    <MenuItem value={val.id} key={val.modelName}>
+                      {val.modelName}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value={"none"} disabled>
+                    -
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>
         </div>
       ) : (
-        <div className="form-group">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <InputLabel id="product-label">Product Name (Code)</InputLabel>
-              <Select
-                fullWidth
-                id="product-select"
-                labelId="product-label"
-                variant="outlined"
-                label="Product"
-                value={product}
-                onChange={(e) => setProduct(e.target.value)}
-              >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        <></>
       )}
       <span className="input-title mb-15">
         Currency:
@@ -137,13 +135,19 @@ const DefaultFormControl = () => {
           <Select
             id="currency-select"
             labelId="currency-label"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            sx={{ width: 100, color: "" }}
+            name="Currency"
+            sx={{ width: 100 }}
+            onChange={(e) =>
+              handleUpdateSearchParams("Currency", e.target.value)
+            }
           >
-            <MenuItem value={"$USD"}>$ USD</MenuItem>
-            <MenuItem value={"€EURO"}>€ EURO</MenuItem>
-            <MenuItem value={"₼AZN"}>₼ AZN</MenuItem>
+            {types.currTypes.map((val) => {
+              return (
+                <MenuItem value={val.id} key={val.id}>
+                  {val.modelName}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </span>
@@ -156,15 +160,10 @@ const DefaultFormControl = () => {
                 id="price-min"
                 type="number"
                 placeholder="0"
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
-                  ),
-                }}
+                name="MinPrice"
+                onChange={(e) =>
+                  handleUpdateSearchParams("MinPrice", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -175,62 +174,51 @@ const DefaultFormControl = () => {
               <TextField
                 variant="outlined"
                 placeholder="1000000"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {currency[0]}
-                    </InputAdornment>
-                  ),
-                }}
+                name="MaxPrice"
                 label="Max"
                 type="number"
                 id="price-max"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("MaxPrice", e.target.value)
+                }
               />
             </FormControl>
           </div>
         </div>
       </div>
-      {currentCategory !== "sparepart" ? (
+      {category !== "sparepart" ? (
         <>
           <span className="input-title">Year:</span>
           <div className="form-group-wrap">
             <div className="form-group">
               <div className="group-select">
                 <FormControl fullWidth>
-                  <InputLabel id="year-min-label">Min</InputLabel>
-                  <Select
-                    fullWidth
-                    id="year-min-select"
-                    labelId="year-min-label"
-                    variant="outlined"
-                    label="Min"
-                    value={minYear}
-                    onChange={(e) => setMinYear(e.target.value)}
-                  >
-                    <MenuItem value={"1999"}>1999</MenuItem>
-                    <MenuItem value={"2000"}>2000</MenuItem>
-                  </Select>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label={"Min Year"}
+                      views={["year"]}
+                      name="MinYear"
+                      onChange={(date) =>
+                        handleUpdateSearchParams("MinYear", date)
+                      }
+                    />
+                  </LocalizationProvider>
                 </FormControl>
               </div>
             </div>
             <div className="form-group">
               <div className="group-select">
                 <FormControl fullWidth>
-                  <InputLabel id="year-max-label">Max</InputLabel>
-                  <Select
-                    fullWidth
-                    id="year-max-select"
-                    labelId="year-max-label"
-                    variant="outlined"
-                    label="Max"
-                    value={maxYear}
-                    onChange={(e) => setMaxYear(e.target.value)}
-                  >
-                    <MenuItem value={"1999"}>1999</MenuItem>
-                    <MenuItem value={"2000"}>2000</MenuItem>
-                  </Select>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                      label={"Max Year"}
+                      views={["year"]}
+                      name="MaxYear"
+                      onChange={(date) =>
+                        handleUpdateSearchParams("MaxYear", date)
+                      }
+                    />
+                  </LocalizationProvider>
                 </FormControl>
               </div>
             </div>
@@ -239,10 +227,9 @@ const DefaultFormControl = () => {
       ) : (
         ""
       )}
-      {currentCategory === "truck" ||
-      currentCategory === "semi-truck" ||
-      currentCategory === "semi-truck" ||
-      currentCategory === "bus" ? (
+      {category === "truck" ||
+      category === "semi-truck" ||
+      category === "bus" ? (
         <>
           <span className="input-title">Distance:</span>
           <div className="form-group-wrap">
@@ -252,14 +239,16 @@ const DefaultFormControl = () => {
                   <TextField
                     label="Min"
                     id="distance-min"
-                    value={minDist}
                     type="number"
-                    onChange={(e) => setMinDist(e.target.value)}
+                    name="MinDistance"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">{"km"}</InputAdornment>
                       ),
                     }}
+                    onChange={(e) =>
+                      handleUpdateSearchParams("MinDistance", e.target.value)
+                    }
                   />
                 </FormControl>
               </div>
@@ -270,14 +259,16 @@ const DefaultFormControl = () => {
                   <TextField
                     label="Max"
                     id="distance-max"
-                    value={maxDist}
-                    onChange={(e) => setMaxDist(e.target.value)}
                     type="number"
+                    name="MaxDistance"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">{"km"}</InputAdornment>
                       ),
                     }}
+                    onChange={(e) =>
+                      handleUpdateSearchParams("MaxDistance", e.target.value)
+                    }
                   />
                 </FormControl>
               </div>

@@ -8,23 +8,14 @@ import {
   TextField,
 } from "@mui/material";
 import React, { useState } from "react";
+import { GetPath } from "../tools/GetPath";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetTypes } from "../tools/GetTypes";
 
-const ExtraFormControl = () => {
-  const [emissionClass, setEmissionClass] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [fuelType, setFuelType] = useState("");
-  const [paint, setPaint] = useState("");
-  const [gearbox, setGearbox] = useState("");
-  const [wheelFormula, setWheelFormula] = useState("");
-  const [drivingCabin, setDrivingCabin] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [maxEnginePower, setMaxEnginePower] = useState("");
-  const [vehicleWeight, setVehicleWeight] = useState("");
-  const [axles, setAxles] = useState("");
-  const [airCond, setAirCond] = useState("");
-  const [hydrEqui, setHydrEqui] = useState("");
-
+const ExtraFormControl = ({ handleUpdateSearchParams }) => {
+  const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
+  const types = GetTypes(currentCategoryId);
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
       <div className="form-group-wrap">
@@ -38,11 +29,15 @@ const ExtraFormControl = () => {
                 labelId="emission-class-label"
                 variant="outlined"
                 label="Emission Class"
-                value={emissionClass}
-                onChange={(e) => setEmissionClass(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("EmissionClassType", e.target.value)
+                }
               >
-                <MenuItem value={"euro1"}>EURO 1</MenuItem>
-                <MenuItem value={"euro2"}>EURO 2</MenuItem>
+                {types.emissionclasses.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -59,11 +54,18 @@ const ExtraFormControl = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams(
+                    "EmissionStickerType",
+                    e.target.value
+                  )
+                }
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {types.emissionstickers.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -80,11 +82,15 @@ const ExtraFormControl = () => {
                 labelId="fuel-type-label"
                 variant="outlined"
                 label="Fuel Type"
-                value={fuelType}
-                onChange={(e) => setFuelType(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("FuelType", e.target.value)
+                }
               >
-                <MenuItem value={"petrol"}>Petrol</MenuItem>
-                <MenuItem value={"diesel"}>Diesel</MenuItem>
+                {types.fuelTypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -99,11 +105,15 @@ const ExtraFormControl = () => {
                 labelId="gearbox-label"
                 variant="outlined"
                 label="Gearbox"
-                value={gearbox}
-                onChange={(e) => setGearbox(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("GearBoxType", e.target.value)
+                }
               >
-                <MenuItem value={"automatic"}>Automatic</MenuItem>
-                <MenuItem value={"manual"}>Manual</MenuItem>
+                {types.gearboxes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -118,11 +128,15 @@ const ExtraFormControl = () => {
                 labelId="paint-label"
                 variant="outlined"
                 label="Paint"
-                value={paint}
-                onChange={(e) => setPaint(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("PaintType", e.target.value)
+                }
               >
-                <MenuItem value={"red"}>Red</MenuItem>
-                <MenuItem value={"blue"}>Blue</MenuItem>
+                {types.paints.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -139,11 +153,15 @@ const ExtraFormControl = () => {
                 labelId="wheel-formula-label"
                 variant="outlined"
                 label="Wheel Formula"
-                value={wheelFormula}
-                onChange={(e) => setWheelFormula(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("WheelFormulaType", e.target.value)
+                }
               >
-                <MenuItem value={"4x2"}>4x2</MenuItem>
-                <MenuItem value={"4x4"}>4x4</MenuItem>
+                {types.wheelTypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -158,8 +176,9 @@ const ExtraFormControl = () => {
                 labelId="driving-cabin-label"
                 variant="outlined"
                 label="Driving Cabin"
-                value={drivingCabin}
-                onChange={(e) => setDrivingCabin(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("DrivingCabin", e.target.value)
+                }
               >
                 <MenuItem value={"Long road"}>Long Road</MenuItem>
                 <MenuItem value={"Local"}>Local</MenuItem>
@@ -168,21 +187,6 @@ const ExtraFormControl = () => {
           </div>
         </div>
       </div>
-      <span className="input-title mb-15">
-        Engine Power:
-        <FormControl variant="standard">
-          <Select
-            id="engine-power-select"
-            labelId="engine-power-label"
-            value={enginePowerType}
-            onChange={(e) => setEnginePowerType(e.target.value)}
-            sx={{ width: 100, color: "" }}
-          >
-            <MenuItem value={"hp"}>HP</MenuItem>
-            <MenuItem value={"kw"}>KW</MenuItem>
-          </Select>
-        </FormControl>
-      </span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
@@ -192,15 +196,9 @@ const ExtraFormControl = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
+                onChange={(e) =>
+                  handleUpdateSearchParams("minHp", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -211,18 +209,12 @@ const ExtraFormControl = () => {
               <TextField
                 variant="outlined"
                 placeholder="10000"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
                 label="Max"
                 type="number"
                 id="engine-power-max"
-                value={maxEnginePower}
-                onChange={(e) => setMaxEnginePower(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("maxHp", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -232,18 +224,25 @@ const ExtraFormControl = () => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <InputLabel id="vehicle-weight-label">Vehicle Weight</InputLabel>
+              <InputLabel id="vehicle-weight-label">
+                Permissible Gross Vehicle Weight (GVW)
+              </InputLabel>
               <Select
                 fullWidth
                 id="vehicle-weight-select"
                 labelId="vehicle-weight-label"
                 variant="outlined"
-                label="Vehicle Weight"
-                value={vehicleWeight}
-                onChange={(e) => setVehicleWeight(e.target.value)}
+                label="Permissible Gross Vehicle Weight (GVW)"
+                onChange={(e) =>
+                  handleUpdateSearchParams("VehicleWeight", e.target.value)
+                }
               >
                 <MenuItem value={"0-7.5"}>0t - 7.5t</MenuItem>
-                <MenuItem value={"7.5-15"}>7.5t - 15t</MenuItem>
+                <MenuItem value={"7.5-12"}>7.5t - 12t</MenuItem>
+                <MenuItem value={"12-18"}>12t - 18t</MenuItem>
+                <MenuItem value={"18-26"}>18t - 26t</MenuItem>
+                <MenuItem value={"26-32"}>26t - 32t</MenuItem>
+                <MenuItem value={"32+"}>32t+</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -258,11 +257,14 @@ const ExtraFormControl = () => {
                 labelId="axles-label"
                 variant="outlined"
                 label="Axles"
-                value={axles}
-                onChange={(e) => setAxles(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("Axles", e.target.value)
+                }
               >
                 <MenuItem value={"0-5"}>0 - 5</MenuItem>
                 <MenuItem value={"5-10"}>5 - 10</MenuItem>
+                <MenuItem value={"10-15"}>10 - 15</MenuItem>
+                <MenuItem value={"5-10"}>15 - 20</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -279,16 +281,23 @@ const ExtraFormControl = () => {
                 labelId="air-cond-label"
                 variant="outlined"
                 label="Air Condition"
-                value={airCond}
-                onChange={(e) => setAirCond(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams(
+                    "AirConditioningType",
+                    e.target.value
+                  )
+                }
               >
-                <MenuItem value={"no-air"}>No Air</MenuItem>
-                <MenuItem value={"manual-air"}>Manual Air</MenuItem>
+                {types.aircotypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
         </div>
-        <div className="form-group">
+        {/* <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
               <InputLabel id="hydr-equi-label">Hydraulic Equipment</InputLabel>
@@ -298,17 +307,23 @@ const ExtraFormControl = () => {
                 labelId="hydr-equi-label"
                 variant="outlined"
                 label="Hydraulic Equipment"
-                value={hydrEqui}
-                onChange={(e) => setHydrEqui(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams(
+                    "HydraulicEquipment",
+                    e.target.value
+                  )
+                }
               >
-                <MenuItem value={"Tipper-hydr"}>Tipper Hydraulic</MenuItem>
+                <MenuItem value={"Tipper-hydr"}>
+                  Tipper Hydraulic Installation
+                </MenuItem>
                 <MenuItem value={"push-floor-hydr"}>
-                  Push Floor Hydraulic
+                  Push Floor Hydraulic Installation
                 </MenuItem>
               </Select>
             </FormControl>
           </div>
-        </div>
+        </div> */}
       </div>
     </FormControl>
   );

@@ -29,7 +29,7 @@ const DefaultCoMaCreate = ({
   setModalOpen,
 }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().comaId;
+  const currentCategoryId = GetCategory(currentCategory);
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

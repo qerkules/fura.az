@@ -1,4 +1,7 @@
 "use client";
+import { GetCategory } from "@/components/tools/GetCategoryId";
+import { GetPath } from "@/components/tools/GetPath";
+import { GetTypes } from "@/components/tools/GetTypes";
 import {
   FormControl,
   InputAdornment,
@@ -9,21 +12,10 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-const BusControl = () => {
-  const [emissionClass, setEmissionClass] = useState("");
-  const [emissionSticker, setEmissionSticker] = useState("");
-  const [fuelType, setFuelType] = useState("");
-  const [paint, setPaint] = useState("");
-  const [gearbox, setGearbox] = useState("");
-  const [minSeats, setMinSeats] = useState("");
-  const [maxSeats, setMaxSeats] = useState("");
-  const [enginePowerType, setEnginePowerType] = useState("hp");
-  const [minEnginePower, setMinEnginePower] = useState("");
-  const [maxEnginePower, setMaxEnginePower] = useState("");
-  const [vehicleWeight, setVehicleWeight] = useState("");
-  const [axles, setAxles] = useState("");
-  const [airCond, setAirCond] = useState("");
-  const [hydrEqui, setHydrEqui] = useState("");
+const BusControl = ({ handleUpdateSearchParams }) => {
+  const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
+  const types = GetTypes(currentCategoryId);
 
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
@@ -38,11 +30,15 @@ const BusControl = () => {
                 labelId="emission-class-label"
                 variant="outlined"
                 label="Emission Class"
-                value={emissionClass}
-                onChange={(e) => setEmissionClass(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("EmissionClassType", e.target.value)
+                }
               >
-                <MenuItem value={"euro1"}>EURO 1</MenuItem>
-                <MenuItem value={"euro2"}>EURO 2</MenuItem>
+                {types.emissionclasses.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -59,11 +55,18 @@ const BusControl = () => {
                 labelId="emission-sticker-label"
                 variant="outlined"
                 label="Emission Sticker"
-                value={emissionSticker}
-                onChange={(e) => setEmissionSticker(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams(
+                    "EmissionStickerType",
+                    e.target.value
+                  )
+                }
               >
-                <MenuItem value={"1none"}>1 (None)</MenuItem>
-                <MenuItem value={"2red"}>2 (Red)</MenuItem>
+                {types.emissionstickers.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -80,11 +83,15 @@ const BusControl = () => {
                 labelId="fuel-type-label"
                 variant="outlined"
                 label="Fuel Type"
-                value={fuelType}
-                onChange={(e) => setFuelType(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("FuelType", e.target.value)
+                }
               >
-                <MenuItem value={"petrol"}>Petrol</MenuItem>
-                <MenuItem value={"diesel"}>Diesel</MenuItem>
+                {types.fuelTypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -99,11 +106,15 @@ const BusControl = () => {
                 labelId="gearbox-label"
                 variant="outlined"
                 label="Gearbox"
-                value={gearbox}
-                onChange={(e) => setGearbox(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("GearBoxType", e.target.value)
+                }
               >
-                <MenuItem value={"automatic"}>Automatic</MenuItem>
-                <MenuItem value={"manual"}>Manual</MenuItem>
+                {types.gearboxes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -118,11 +129,15 @@ const BusControl = () => {
                 labelId="paint-label"
                 variant="outlined"
                 label="Paint"
-                value={paint}
-                onChange={(e) => setPaint(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("PaintType", e.target.value)
+                }
               >
-                <MenuItem value={"red"}>Red</MenuItem>
-                <MenuItem value={"blue"}>Blue</MenuItem>
+                {types.paints.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -138,8 +153,9 @@ const BusControl = () => {
                 id="number-seats-min"
                 type="number"
                 placeholder="0"
-                value={minSeats}
-                onChange={(e) => setMinSeats(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("NumberofSeatsMin", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -153,28 +169,14 @@ const BusControl = () => {
                 label="Max"
                 type="number"
                 id="number-seats-max"
-                value={maxSeats}
-                onChange={(e) => setMaxSeats(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("NumberofSeatsMax", e.target.value)
+                }
               />
             </FormControl>
           </div>
         </div>
       </div>
-      <span className="input-title mb-15">
-        Engine Power:
-        <FormControl variant="standard">
-          <Select
-            id="engine-power-select"
-            labelId="engine-power-label"
-            value={enginePowerType}
-            onChange={(e) => setEnginePowerType(e.target.value)}
-            sx={{ width: 100, color: "" }}
-          >
-            <MenuItem value={"hp"}>HP</MenuItem>
-            <MenuItem value={"kw"}>KW</MenuItem>
-          </Select>
-        </FormControl>
-      </span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
@@ -184,15 +186,9 @@ const BusControl = () => {
                 id="engine-power-min"
                 type="number"
                 placeholder="0"
-                value={minEnginePower}
-                onChange={(e) => setMinEnginePower(e.target.value)}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
+                onChange={(e) =>
+                  handleUpdateSearchParams("minHp", e.target.value)
+                }
               />
             </FormControl>
           </div>
@@ -203,24 +199,18 @@ const BusControl = () => {
               <TextField
                 variant="outlined"
                 placeholder="10000"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
+                onChange={(e) =>
+                  handleUpdateSearchParams("maxHp", e.target.value)
+                }
                 label="Max"
                 type="number"
                 id="engine-power-max"
-                value={maxEnginePower}
-                onChange={(e) => setMaxEnginePower(e.target.value)}
               />
             </FormControl>
           </div>
         </div>
       </div>
-      <div className="form-group-wrap">
+      {/* <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -259,7 +249,7 @@ const BusControl = () => {
             </FormControl>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
@@ -271,11 +261,18 @@ const BusControl = () => {
                 labelId="air-cond-label"
                 variant="outlined"
                 label="Air Condition"
-                value={airCond}
-                onChange={(e) => setAirCond(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams(
+                    "AirConditioningType",
+                    e.target.value
+                  )
+                }
               >
-                <MenuItem value={"no-air"}>No Air</MenuItem>
-                <MenuItem value={"manual-air"}>Manual Air</MenuItem>
+                {types.aircotypes.map((val) => {
+                  <MenuItem key={val.id} value={val.id}>
+                    {val.value}
+                  </MenuItem>;
+                })}
               </Select>
             </FormControl>
           </div>
@@ -290,8 +287,9 @@ const BusControl = () => {
                 labelId="hydr-equi-label"
                 variant="outlined"
                 label="Hydraulic Equipment"
-                value={hydrEqui}
-                onChange={(e) => setHydrEqui(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("HydraulicEquipment", e.target.value)
+                }
               >
                 <MenuItem value={"Tipper-hydr"}>Tipper Hydraulic</MenuItem>
                 <MenuItem value={"push-floor-hydr"}>

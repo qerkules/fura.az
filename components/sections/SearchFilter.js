@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -8,7 +8,6 @@ import TruckFormControl from "../elements/TruckFormControl";
 import useIsMobile from "../tools/UseIsMobile";
 import DefaultFormMobile from "../elements/DefaultFormMobile";
 import { GetPath } from "../tools/GetPath";
-import { GetFeatures } from "../tools/GetFeatures";
 import AvControl from "./search-controls/AvControl";
 import TrailerControl from "./search-controls/TrailerControl";
 import ForkliftControl from "./search-controls/ForkliftControl";
@@ -16,54 +15,115 @@ import ComaControl from "./search-controls/ComaControl";
 import BusControl from "./search-controls/BusControl";
 import ServiceFormMobile from "../elements/ServiceFormMobile";
 import ServicesControl from "./search-controls/ServicesControl";
+import axios from "axios";
+import { GetCategory } from "../tools/GetCategoryId";
 
 const SearchFilter = () => {
   const [open, setOpen] = useState(false);
-  const [selectedArray, setSelectedArray] = useState([]);
-
+  const [searchParams, setSearchParams] = useState({});
   const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleSelected = (value) => {
-    setSelectedArray((prevSelectedArray) =>
-      prevSelectedArray.includes(value)
-        ? prevSelectedArray.filter((item) => item !== value)
-        : [...prevSelectedArray, value]
-    );
+  const handleUpdateSearchParams = (param, value) => {
+    setSearchParams((prevState) => ({
+      ...prevState,
+      [param]: value,
+    }));
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    let mypath;
+    if (path === "av") mypath = "AgriculturalVehicle";
+    if (path === "sparepart") mypath = "Sparepart";
+    if (path === "bus") mypath = "Bus";
+    if (path === "co-ma") mypath = "ConstructionMachinery";
+    if (path === "forklift") mypath = "Forklift";
+    if (path === "semi-truck") mypath = "SemiTrailerTruck";
+    if (path === "trailer") mypath = "SemiTrailer";
+    if (path === "truck") mypath = "Truck";
+
+    const filteredParams = Object.entries(searchParams).reduce(
+      (acc, [key, value]) => {
+        if (value) {
+          acc[key] = value;
+        }
+        return acc;
+      },
+      {}
+    );
+
+    filteredParams.ProductTypeId = currentCategoryId;
+
+    const url = `${process.env.NEXT_PUBLIC_API_LINK}/Search/${mypath}Search`;
+    try {
+      const response = await axios.get(url, { params: filteredParams });
+      console.log("Search Results:", response.data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const isMobile = useIsMobile();
-  const isSelected = (value) => selectedArray.includes(value);
+
   const handleCurrentForm = () => {
     if (path === "services") {
-      if (isMobile) {
-        return <ServiceFormMobile />;
-      } else {
-        return <ServicesControl />;
-      }
+      return isMobile ? (
+        <ServiceFormMobile
+          handleUpdateSearchParams={handleUpdateSearchParams}
+        />
+      ) : (
+        <ServicesControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
     } else {
-      if (isMobile) {
-        return <DefaultFormMobile />;
-      } else {
-        return <DefaultFormControl />;
-      }
+      return isMobile ? (
+        <DefaultFormMobile
+          handleUpdateSearchParams={handleUpdateSearchParams}
+        />
+      ) : (
+        <DefaultFormControl
+          handleUpdateSearchParams={handleUpdateSearchParams}
+        />
+      );
     }
   };
 
   const handleExtraControls = () => {
-    if (path === "av") return <AvControl />;
-    if (path === "bus") return <BusControl />;
-    if (path === "co-ma") return <ComaControl />;
-    if (path === "forklift") return <ForkliftControl />;
-    if (path === "semi-truck") return <TruckFormControl />;
-    if (path === "trailer") return <TrailerControl />;
-    if (path === "truck") return <TruckFormControl />;
-    if (path === "truck-under") return <TruckFormControl />;
+    if (path === "av")
+      return <AvControl handleUpdateSearchParams={handleUpdateSearchParams} />;
+    if (path === "bus")
+      return <BusControl handleUpdateSearchParams={handleUpdateSearchParams} />;
+    if (path === "co-ma")
+      return (
+        <ComaControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
+    if (path === "forklift")
+      return (
+        <ForkliftControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
+    if (path === "semi-truck")
+      return (
+        <TruckFormControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
+    if (path === "trailer")
+      return (
+        <TrailerControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
+    if (path === "truck")
+      return (
+        <TruckFormControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
+    if (path === "truck-under")
+      return (
+        <TruckFormControl handleUpdateSearchParams={handleUpdateSearchParams} />
+      );
   };
 
   return (
-    <div className="search-filter-listing-car">
+    <form className="search-filter-listing-car" onSubmit={handleSubmit}>
       <div className="filter-header-list">
         <h6 className="title-filter">Search by Filter</h6>
         <div className="btn-filter">
@@ -71,12 +131,11 @@ const SearchFilter = () => {
         </div>
       </div>
       {handleCurrentForm()}
-
       <div className="filter-extra-btns">
         <div className="expand-more-btn" onClick={handleOpen}>
           Expand more <ArrowRightIcon />
         </div>
-        <div className="filter-form-finish-btn">Search</div>
+        <input type="submit" className="modal-finish-btn" value="Search" />
       </div>
       <Modal
         open={open}
@@ -88,18 +147,22 @@ const SearchFilter = () => {
         <Box className="expanded-search-box">
           <div className="modal-title">Expanded Search</div>
           <div className="search-filter-listing-car">
-            <DefaultFormControl />
+            <DefaultFormControl
+              handleUpdateSearchParams={handleUpdateSearchParams}
+            />
             {handleExtraControls()}
           </div>
           <div className="modal-close-btn" onClick={handleClose}>
             <CloseIcon />
           </div>
-          <div className="modal-finish-btn" onClick={handleClose}>
-            Search
-          </div>
+          <input
+            type="submit"
+            className="modal-finish-btn"
+            placeholder="Search"
+          />
         </Box>
       </Modal>
-    </div>
+    </form>
   );
 };
 

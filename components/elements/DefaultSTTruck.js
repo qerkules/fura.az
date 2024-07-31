@@ -26,7 +26,7 @@ import NewModel from "./NewModel";
 
 const DefaultSTTruck = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().sttId;
+  const currentCategoryId =GetCategory(currentCategory)
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

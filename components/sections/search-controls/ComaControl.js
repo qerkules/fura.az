@@ -1,17 +1,14 @@
 "use client";
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
-import React, { useState } from "react";
+import { GetCategory } from "@/components/tools/GetCategoryId";
+import { GetPath } from "@/components/tools/GetPath";
+import { GetTypes } from "@/components/tools/GetTypes";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import React from "react";
 
-const ComaControl = () => {
-  const [emissionSticker, setEmissionSticker] = useState("");
-
+const ComaControl = ({handleUpdateSearchParams}) => {
+  const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
+  const types = GetTypes(currentCategoryId);
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
       <div className="form-group">
@@ -26,11 +23,15 @@ const ComaControl = () => {
               labelId="emission-sticker-label"
               variant="outlined"
               label="Emission Sticker"
-              value={emissionSticker}
-              onChange={(e) => setEmissionSticker(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("EmissionStickersType", e.target.value)
+              }
             >
-              <MenuItem value={"1none"}>1 (None)</MenuItem>
-              <MenuItem value={"2red"}>2 (Red)</MenuItem>
+              {types.emissionstickers.map((val) => {
+                <MenuItem key={val.id} value={val.id}>
+                  {val.value}
+                </MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>

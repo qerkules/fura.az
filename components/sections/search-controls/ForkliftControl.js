@@ -1,20 +1,14 @@
 "use client";
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
-import React, { useState } from "react";
+import { GetCategory } from "@/components/tools/GetCategoryId";
+import { GetPath } from "@/components/tools/GetPath";
+import { GetTypes } from "@/components/tools/GetTypes";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import React from "react";
 
-const ForkliftControl = () => {
-  const [fuelType, setFuelType] = useState("");
-  const [gearbox, setGearbox] = useState("");
-  const [liftCapacity, setLiftCapacity] = useState("");
-  const [eqHeight, setEqHeight] = useState("");
-  const [liftHeight, setLiftHeight] = useState("");
+const ForkliftControl = ({ handleUpdateSearchParams }) => {
+  const path = GetPath().last;
+  const currentCategoryId = GetCategory(path);
+  const types = GetTypes(currentCategoryId);
 
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
@@ -28,11 +22,15 @@ const ForkliftControl = () => {
               labelId="fuel-type-label"
               variant="outlined"
               label="Fuel Type"
-              value={fuelType}
-              onChange={(e) => setFuelType(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("FuelType", e.target.value)
+              }
             >
-              <MenuItem value={"petrol"}>Petrol</MenuItem>
-              <MenuItem value={"diesel"}>Diesel</MenuItem>
+              {types.fuelTypes.map((val) => {
+                <MenuItem key={val.id} value={val.id}>
+                  {val.value}
+                </MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>
@@ -47,11 +45,15 @@ const ForkliftControl = () => {
               labelId="gearbox-label"
               variant="outlined"
               label="Gearbox"
-              value={gearbox}
-              onChange={(e) => setGearbox(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("GearBoxType", e.target.value)
+              }
             >
-              <MenuItem value={"automatic"}>Automatic</MenuItem>
-              <MenuItem value={"manual"}>Manual</MenuItem>
+              {types.gearboxes.map((val) => {
+                <MenuItem key={val.id} value={val.id}>
+                  {val.value}
+                </MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>
@@ -66,11 +68,15 @@ const ForkliftControl = () => {
               labelId="lift-cap-label"
               variant="outlined"
               label="Lifting Capacity"
-              value={liftCapacity}
-              onChange={(e) => setLiftCapacity(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("LiftingCapacity", e.target.value)
+              }
             >
-              <MenuItem value={"automatic"}>Automatic</MenuItem>
-              <MenuItem value={"manual"}>Manual</MenuItem>
+              <MenuItem value={"1-200"}>1-200 kg</MenuItem>
+              <MenuItem value={"201-1000"}>201-1000 kg</MenuItem>
+              <MenuItem value={"1001-5000+"}>1001-5000 kg</MenuItem>
+              <MenuItem value={"5001-10000+"}>5001-10000 kg</MenuItem>
+              <MenuItem value={"10001+"}>10001+ kg</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -85,11 +91,13 @@ const ForkliftControl = () => {
               labelId="eqheight-label"
               variant="outlined"
               label="Equipment Height"
-              value={eqHeight}
-              onChange={(e) => setEqHeight(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("ExuipmentHeight", e.target.value)
+              }
             >
-              <MenuItem value={"automatic"}>Automatic</MenuItem>
-              <MenuItem value={"manual"}>Manual</MenuItem>
+              <MenuItem value={"1-2000"}>1-2000 mm</MenuItem>
+              <MenuItem value={"2001-5000"}>2001-5000 mm</MenuItem>
+              <MenuItem value={"5001+"}>5001+ mm</MenuItem>
             </Select>
           </FormControl>
         </div>
@@ -104,11 +112,13 @@ const ForkliftControl = () => {
               labelId="lift-height-label"
               variant="outlined"
               label="Lift Weight"
-              value={liftHeight}
-              onChange={(e) => setLiftHeight(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("LiftHeight", e.target.value)
+              }
             >
-              <MenuItem value={"automatic"}>Automatic</MenuItem>
-              <MenuItem value={"manual"}>Manual</MenuItem>
+              <MenuItem value={"1-2000"}>1-2000 mm</MenuItem>
+              <MenuItem value={"2001-5000"}>2001-5000 mm</MenuItem>
+              <MenuItem value={"5001+"}>5001+ mm</MenuItem>
             </Select>
           </FormControl>
         </div>

@@ -26,7 +26,7 @@ import RentForm from "./RentForm";
 
 const DefaultAVCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().avId;
+  const currentCategoryId = GetCategory(currentCategory);
   const features = GetFeatures(currentCategory);
   const types = GetTypes(currentCategoryId);
 

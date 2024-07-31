@@ -27,7 +27,7 @@ const DefaultServicesCreate = ({
   setModalOpen,
 }) => {
   const currentCategory = GetPath().last;
-  const currentCategoryId = GetCategory().serivceId;
+  const currentCategoryId = GetCategory(currentCategory)
   const types = GetTypes(currentCategoryId);
 
   const [selectedArray, setSelectedArray] = useState([]);

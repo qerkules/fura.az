@@ -2,13 +2,17 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { useState } from "react";
 import { GetPath } from "../tools/GetPath";
+import { GetCategory } from "../tools/GetCategoryId";
+import { GetTypes } from "../tools/GetTypes";
+import { getModels } from "../tools/GetModels";
 
-const DefaultFormMobile = () => {
-  const currentCategory = GetPath().last;
+const DefaultFormMobile = ({ handleUpdateSearchParams }) => {
+  const category = GetPath().last;
+  const [models, setModels] = useState([]);
 
-  const [category, setCategory] = useState("");
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
+  const currentCategoryId = GetCategory(currentCategory);
+
+  const types = GetTypes(currentCategoryId);
 
   return (
     <FormControl
@@ -25,13 +29,17 @@ const DefaultFormMobile = () => {
               labelId="category-label"
               label="Category"
               variant="outlined"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) =>
+                handleUpdateSearchParams("CategoryName", e.target.value)
+              }
             >
-              <MenuItem value={"standart-tractor"}>
-                Standart Tractor (5)
-              </MenuItem>
-              <MenuItem value={"hazardous-load"}>Hazardous Load (7)</MenuItem>
+              {types.categories.map((val) => {
+                return (
+                  <MenuItem key={val.id} value={val.categoryName}>
+                    {val.categoryName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
@@ -46,18 +54,24 @@ const DefaultFormMobile = () => {
               labelId="brand-label"
               variant="outlined"
               label="Brand"
-              value={brand}
-              onChange={(e) => setBrand(e.target.value)}
+              name="BrandId"
+              onChange={(e) => {
+                handleUpdateSearchParams("BrandName", e.target.value);
+                getModels(e, setModels);
+              }}
             >
-              <MenuItem value={"DAF"}>
-                <span>Daf</span>
-              </MenuItem>
-              <MenuItem value={"SCANIA"}>Scania</MenuItem>
+              {types.brands.map((val) => {
+                return (
+                  <MenuItem key={val.id} value={val.brandName}>
+                    {val.brandName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
         </div>
       </div>
-      {currentCategory !== "spare-part" ? (
+      {category !== "spare-part" ? (
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -68,11 +82,21 @@ const DefaultFormMobile = () => {
                 labelId="model-label"
                 variant="outlined"
                 label="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
+                onChange={(e) =>
+                  handleUpdateSearchParams("ModelName", e.target.value)
+                }
               >
-                <MenuItem value={"R500"}>R 500</MenuItem>
-                <MenuItem value={"DX470"}>DX 470</MenuItem>
+                {models.length > 0 ? (
+                  models.map((val) => (
+                    <MenuItem value={val.id} key={val.modelName}>
+                      {val.modelName}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value={"none"} disabled>
+                    -
+                  </MenuItem>
+                )}
               </Select>
             </FormControl>
           </div>

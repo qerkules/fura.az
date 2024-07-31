@@ -158,7 +158,10 @@ const SearchFilter = ({ setValues }) => {
             <CloseIcon />
           </div>
           <input
-            onClick={(e) => handleSubmit(e)}
+            onClick={(e) => {
+              handleClose();
+              handleSubmit(e);
+            }}
             type="submit"
             className="modal-finish-btn"
             value="Search"

@@ -143,8 +143,8 @@ const DefaultFormControl = ({ handleUpdateSearchParams }) => {
           >
             {types.currTypes.map((val) => {
               return (
-                <MenuItem value={val.id} key={val.id}>
-                  {val.modelName}
+                 <MenuItem key={val.index} value={val.index}>
+                  {val.value}
                 </MenuItem>
               );
             })}

@@ -38,7 +38,30 @@ const AvControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.emissionstickers.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
+                    {val.value}
+                  </MenuItem>;
+                })}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="group-select">
+            <FormControl fullWidth>
+              <InputLabel id="gearbox-sticker-label">Gearbox</InputLabel>
+              <Select
+                fullWidth
+                id="gearbox-sticker-select"
+                labelId="gearbox-sticker-label"
+                variant="outlined"
+                label="Gearbox"
+                onChange={(e) =>
+                  handleUpdateSearchParams("GearBoxType", e.target.value)
+                }
+              >
+                {types.gearboxes.map((val) => {
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -96,7 +119,7 @@ const AvControl = ({ handleUpdateSearchParams }) => {
               }
             >
               {types.aircotypes.map((val) => {
-                <MenuItem key={val.id} value={val.id}>
+                <MenuItem key={val.index} value={val.index}>
                   {val.value}
                 </MenuItem>;
               })}

@@ -27,7 +27,7 @@ const ForkliftControl = ({ handleUpdateSearchParams }) => {
               }
             >
               {types.fuelTypes.map((val) => {
-                <MenuItem key={val.id} value={val.id}>
+                <MenuItem key={val.index} value={val.index}>
                   {val.value}
                 </MenuItem>;
               })}
@@ -50,7 +50,7 @@ const ForkliftControl = ({ handleUpdateSearchParams }) => {
               }
             >
               {types.gearboxes.map((val) => {
-                <MenuItem key={val.id} value={val.id}>
+                <MenuItem key={val.index} value={val.index}>
                   {val.value}
                 </MenuItem>;
               })}

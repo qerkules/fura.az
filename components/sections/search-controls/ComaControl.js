@@ -28,7 +28,7 @@ const ComaControl = ({handleUpdateSearchParams}) => {
               }
             >
               {types.emissionstickers.map((val) => {
-                <MenuItem key={val.id} value={val.id}>
+                <MenuItem key={val.index} value={val.index}>
                   {val.value}
                 </MenuItem>;
               })}

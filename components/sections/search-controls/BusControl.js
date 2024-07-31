@@ -35,7 +35,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.emissionclasses.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -63,7 +63,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.emissionstickers.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -88,7 +88,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.fuelTypes.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -111,7 +111,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.gearboxes.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -134,7 +134,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.paints.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}
@@ -270,7 +270,7 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.aircotypes.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
+                  <MenuItem key={val.index} value={val.index}>
                     {val.value}
                   </MenuItem>;
                 })}

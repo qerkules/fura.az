@@ -10,7 +10,7 @@ const DefaultFormMobile = ({ handleUpdateSearchParams }) => {
   const category = GetPath().last;
   const [models, setModels] = useState([]);
 
-  const currentCategoryId = GetCategory(currentCategory);
+  const currentCategoryId = GetCategory(category);
 
   const types = GetTypes(currentCategoryId);
 

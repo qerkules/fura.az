@@ -187,6 +187,7 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
           </div>
         </div>
       </div>
+      <span className="input-title mb-15">Engine Power:</span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">

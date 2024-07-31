@@ -31,7 +31,10 @@ const AvControl = ({ handleUpdateSearchParams }) => {
                 variant="outlined"
                 label="Emission Sticker"
                 onChange={(e) =>
-                  handleUpdateSearchParams("EmissionStickerType", e.target.value)
+                  handleUpdateSearchParams(
+                    "EmissionStickerType",
+                    e.target.value
+                  )
                 }
               >
                 {types.emissionstickers.map((val) => {
@@ -44,6 +47,7 @@ const AvControl = ({ handleUpdateSearchParams }) => {
           </div>
         </div>
       </div>
+      <span className="input-title mb-15">Engine Power:</span>
       <div className="form-group-wrap">
         <div className="form-group">
           <div className="group-select">
@@ -92,10 +96,10 @@ const AvControl = ({ handleUpdateSearchParams }) => {
               }
             >
               {types.aircotypes.map((val) => {
-                  <MenuItem key={val.id} value={val.id}>
-                    {val.value}
-                  </MenuItem>;
-                })}
+                <MenuItem key={val.id} value={val.id}>
+                  {val.value}
+                </MenuItem>;
+              })}
             </Select>
           </FormControl>
         </div>

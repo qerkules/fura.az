@@ -71,7 +71,7 @@ const DefaultFormMobile = ({ handleUpdateSearchParams }) => {
           </FormControl>
         </div>
       </div>
-      {category !== "spare-part" ? (
+      {category !== "sparepart" ? (
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>

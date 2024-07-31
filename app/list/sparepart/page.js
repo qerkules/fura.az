@@ -7,6 +7,7 @@ import SearchFilter from "@/components/sections/SearchFilter";
 import { Pagination, Stack } from "@mui/material";
 import { getAllAds } from "@/components/tools/GetAds";
 import { GetPath } from "@/components/tools/GetPath";
+import AdCardSparepart from "@/components/layout/AdCardSparepart";
 
 export default function CarList() {
   const path = GetPath().last;
@@ -23,7 +24,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.constructionMachineryList?.$values || []);
+        setValues(data?.sparePartsList?.$values || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -151,7 +152,7 @@ export default function CarList() {
                         {values &&
                           values.map((val) => {
                             return (
-                              <AdCard
+                              <AdCardSparepart
                                 key={val.id}
                                 path={"/listing-details"}
                                 data={val}

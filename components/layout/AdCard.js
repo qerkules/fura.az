@@ -57,9 +57,6 @@ export default function AdCard({ data }) {
 
       <div className="image" onClick={() => handleClick(data.path)}>
         <div className="stm-badge-top">
-          <div className="feature">
-            <span>NEW</span>
-          </div>
           {data.saleOrRent === "Rent" && (
             <div className="bottom-btn-wrap">
               <div className="btn-group">
@@ -80,7 +77,7 @@ export default function AdCard({ data }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />

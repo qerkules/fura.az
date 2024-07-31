@@ -20,39 +20,6 @@ const ImageUpload = ({ maxNumber, images, setImages }) => {
       >
         {({ onImageUpload, dragProps, onImageRemove, isDragging }) => (
           <>
-            {/* <div
-            className={`form-image-input-box ${
-              images.length > 0 ? "display-none" : "flex"
-            }`}
-            onClick={onImageUpload}
-            {...dragProps}
-          >
-            <div className="first-icon-image">
-              <img src="/assets/images/icon-box/truck-front.png" />
-            </div>
-            <p>* Upload Front Image</p>
-          </div>
-          <div
-            onClick={onImageUpload}
-            {...dragProps}
-            className={`form-image-input-box ${
-              images.length > 0 ? "display-none" : "flex"
-            }`}
-          >
-            <img src="/assets/images/icon-box/truck-back.svg" />
-            <p>* Upload Back Image</p>
-          </div> 
-          <div
-            onClick={onImageUpload}
-            {...dragProps}
-            className={`form-image-input-box ${
-              images.length > 0 ? "display-none" : "flex"
-            }`}
-          >
-            <img src="/assets/images/icon-box/truck-interior.svg" />
-
-            <p>* Upload interior Image</p>
-          </div>*/}
             {images.map((image, index) => (
               <div key={index} className="image-item">
                 <img src={image.data_url} alt="" width="100" />

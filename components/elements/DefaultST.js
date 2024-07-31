@@ -28,11 +28,14 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
   const currentCategoryId = GetCategory().trailerId;
   const features = GetFeatures(currentCategory);
+  const refrigatorFeatures = GetFeatures("trailer-refrigator");
   const types = GetTypes(currentCategoryId);
 
   const [saleOrRent, setSaleOrRent] = useState("");
   const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
+
+  const [category, setCategory] = useState("");
 
   const [currency, setCurrency] = useState("AZN");
 
@@ -96,6 +99,8 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
                 label="Category"
                 variant="outlined"
                 name="CategoryId"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
               >
                 {types.categories.map((val) => (
                   <MenuItem value={val.id} key={val.id}>
@@ -327,6 +332,63 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
           </div>
         </div>
       </FormControl>
+
+      {category === "d5e29989-0d63-41d7-861b-d9f50d3684a8" && (
+        <>
+          <div className="filter-button-container-title mt-15">
+            Referee Equipment:
+          </div>
+          <div className="create-ad-template list-filter refrigator">
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <TextField
+                    label="Cooling Unit"
+                    id="co"
+                    name="RefrigeratorRequest.CoolingUnit"
+                  />
+                </FormControl>
+              </div>
+            </div>{" "}
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <TextField
+                    label="Cooling Unit Model"
+                    id="com"
+                    name="RefrigeratorRequest.CoolingUnitModel"
+                  />
+                </FormControl>
+              </div>
+            </div>{" "}
+            <div className="form-group">
+              <div className="group-select">
+                <FormControl fullWidth>
+                  <TextField
+                    label="Engine Working Hours"
+                    id="enh"
+                    type="number"
+                    name="RefrigeratorRequest.EngineWorkingHours"
+                  />
+                </FormControl>
+              </div>
+            </div>
+          </div>
+          <div className="filter-button-container">
+            {refrigatorFeatures.map((value) => (
+              <div
+                key={value.id}
+                className={`filter-button-select ${
+                  isSelected(value.id, selectedArray) ? "selected" : ""
+                }`}
+                onClick={() => handleSelected(value.id, setSelectedArray)}
+              >
+                {value.value}
+              </div>
+            ))}
+          </div>
+        </>
+      )}
       <div className="create-description">
         <div className="form-group ">
           <div className="group-select">

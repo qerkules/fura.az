@@ -23,7 +23,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.ads?.$values || []);
+        setValues(data?.forkliftsList?.$values || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }

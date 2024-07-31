@@ -82,7 +82,7 @@ export default function AdCardUser({ data }) {
               >
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />

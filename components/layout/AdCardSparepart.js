@@ -1,25 +1,69 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useEffect, useState } from "react";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { useRouter } from "next/navigation";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HoverListing from "../tools/HoverListing";
 
-export default function AdCardSparepart({ premium }) {
+export default function AdCardSparePart({ data }) {
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+  const [isFavouriteClicked, setFavouriteClicked] = useState(false);
+
+  useEffect(() => {
+    // Check if window is defined
+    if (typeof window !== "undefined") {
+      setIsClient(true);
+    }
+  }, []);
+
+  const handleClick = (path) => {
+    if (isClient) {
+      // router.push(path);
+    }
+  };
+
+  useEffect(() => {
+    let cookieValues =
+      hasCookie("favorites") && JSON.parse(getCookie("favorites"));
+    if (cookieValues && cookieValues.includes(data?.id)) {
+      setFavouriteClicked(true);
+    }
+  }, []);
+
+  const updateFavourite = () => {
+    let cookieValues = hasCookie("favorites")
+      ? JSON.parse(getCookie("favorites"))
+      : [];
+    if (isFavouriteClicked) {
+      cookieValues = cookieValues.filter((i) => i != data?.id);
+      setCookie("favorites", JSON.stringify(cookieValues));
+      localStorage.setItem("favorites", JSON.stringify(cookieValues));
+      window.dispatchEvent(new CustomEvent("cookie-change"));
+    } else {
+      cookieValues.push(data?.id);
+      setCookie("favorites", JSON.stringify(cookieValues));
+      localStorage.setItem("favorites", JSON.stringify(cookieValues));
+      window.dispatchEvent(new CustomEvent("cookie-change"));
+    }
+    setFavouriteClicked(!isFavouriteClicked);
+  };
+
   return (
-    <div className={`tf-car-service ${premium ? "premium" : ""}`}>
-      <div className="image">
+    <div className={`tf-car-service ${data?.isPremium ? "premium" : ""}`}>
+      <HoverListing />
+
+      <div className="image" onClick={() => handleClick(data?.path)}>
         <div className="stm-badge-top">
           <div className="feature">
             <span>NEW</span>
           </div>
-          <div className="bottom-btn-wrap">
-            <div className="btn-group">
-              <div className="rent-button">RENT</div>
-            </div>
-          </div>
         </div>
         <div className="listing-images">
-          <span className="ad-price">$50,000</span>
-          {premium && (
+          <span className="ad-price">{(data?.currency, data?.price)}</span>
+          {data?.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
             </span>
@@ -29,7 +73,7 @@ export default function AdCardSparepart({ premium }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/sparepart.webp"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -38,19 +82,16 @@ export default function AdCardSparepart({ premium }) {
               <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/sparepart.webp"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1]?.path}`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
                   />
                 </div>
               </div>
-              <div
-                className="listing-item view-gallery"
-                title="Lexus LC Hybrid 2024"
-              >
+              <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/sparepart.webp"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[2]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -63,7 +104,7 @@ export default function AdCardSparepart({ premium }) {
                     <p>2 more photos</p>
                   </div>
                 </div>
-              </div>
+              </div>{" "}
               <div className="bullet-hover-listing">
                 <div className="bl-item active" />
                 <div className="bl-item" />
@@ -76,18 +117,25 @@ export default function AdCardSparepart({ premium }) {
       <div className="content">
         <div className="icon-group">
           <a href="#" className="icon-service">
-            <FavoriteBorderIcon className="image-icon" />
+            <BalanceIcon className="image-icon" />
+          </a>
+          <a className="icon-service" onClick={() => updateFavourite()}>
+            {isFavouriteClicked ? (
+              <FavoriteIcon className="image-icon active" />
+            ) : (
+              <FavoriteBorderIcon className="image-icon" />
+            )}
           </a>
         </div>
-        <h6 className="title">Bosch</h6>
-        <span className="sub-title">Crane Arm Support</span>
-
-        <div className="description">
-          <p>Scania R500...</p>
-        </div>
-        {/* <a className="more-link" href="/listing-details"> </a>*/}
+        <h6 className="title" onClick={() => handleClick(data?.path)}>
+          {`${data?.brand?.brandName} `}
+        </h6>
+        <span className="sub-title" onClick={() => handleClick(data.path)}>
+          {data?.category?.categoryName}
+        </span>
+        <div className="description">{data?.adDetails}</div>
         <div className="bottom-btn-wrap">
-          <span>6/30/2024 3:09:24 PM</span>
+          <span>{data?.adDate}</span>
         </div>
       </div>
     </div>

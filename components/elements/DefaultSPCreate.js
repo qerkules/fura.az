@@ -96,7 +96,6 @@ const DefaultSPCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
               <TextField
                 label="Product Name"
                 id="productName"
-                type="number"
                 name="ProductName"
               />
             </FormControl>

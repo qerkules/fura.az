@@ -22,6 +22,7 @@ export const submitForm = async (
   selectedArray.forEach((value) => {
     formData.append(value, true);
   });
+
   year && formData.append("Year", year);
 
   for (const file of images) {
@@ -30,13 +31,16 @@ export const submitForm = async (
   try {
     const token = localStorage.getItem("token");
 
-    let url;
+    let url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/Create${path}Ad`;
 
-    path === "SemiTrailer" && formData.append("RefrigeratorRequest", false);
-    path === "ConstructonMachinery"
-      ? (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateConstructionMachineryAd`)
-      : (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/Create${path}Ad`);
+    // path === "SemiTrailer" && formData.append("RefrigeratorRequest", false);
 
+    path === "ConstructonMachinery" &&
+      (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateConstructionMachineryAd`);
+
+    path === "TrucUnder" &&
+      (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateTruckUnderAd`);
+      
     await axios
       .post(url, formData, {
         headers: {

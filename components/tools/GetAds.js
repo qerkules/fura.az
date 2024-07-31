@@ -16,6 +16,7 @@ export const getAllAds = async (currentPage, pageSize, path) => {
   if (path === "trailer") apiPath = "/SemiTrailer/GetAllSemiTrailer";
   if (path === "truck") apiPath = "/TruckOver/GetAllTruckOverAds";
   if (path === "truck-under") apiPath = "/TrucUnder/GetAllTruckUnderAds";
+  if (path === "sparepart") apiPath = "/SparePart";
 
   const response = await axios.get(
     `${process.env.NEXT_PUBLIC_API_LINK}${apiPath}?CurrentPage=${currentPage}&PageSize=${pageSize}`

@@ -12772,7 +12772,7 @@ input[type="number"] {
     min-height: 170px;
   }
   .create-description {
-    width: 100%;
+    width: 100%!important;
   }
 }
 

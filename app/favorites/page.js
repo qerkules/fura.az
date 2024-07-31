@@ -7,21 +7,21 @@ import axios from "axios";
 const page = () => {
   const favorites = [];
   
-  let cookieValues = hasCookie("favorites")
-    ? JSON.parse(getCookie("favorites"))
-    : [];
+  // let cookieValues = hasCookie("favorites")
+  //   ? JSON.parse(getCookie("favorites"))
+  //   : [];
 
-  cookieValues.length > 0 && cookieValues.map((i) => addToPage(i));
+  // cookieValues.length > 0 && cookieValues.map((i) => addToPage(i));
 
-  const addToPage = async (id) => {
-    try {
-      // axios.get(`${process.env.NEXT_PUBLIC_API_LINK}/`);
-    } catch (err) {}
-  };
+  // const addToPage = async (id) => {
+  //   try {
+  //     // axios.get(`${process.env.NEXT_PUBLIC_API_LINK}/`);
+  //   } catch (err) {}
+  // };
 
-  useEffect(() => {
-    const fetchdata = async () => {};
-  }, []);
+  // useEffect(() => {
+  //   const fetchdata = async () => {};
+  // }, []);
 
   return (
     <>

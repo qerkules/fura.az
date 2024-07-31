@@ -32,6 +32,7 @@ export const submitForm = async (
 
     let url;
 
+    path === "SemiTrailer" && formData.append("RefrigeratorRequest", false);
     path === "ConstructonMachinery"
       ? (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateConstructionMachineryAd`)
       : (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/Create${path}Ad`);

@@ -76,7 +76,6 @@ export const GetFeatures = (category) => {
 
   const coma = [
     abs,
-    { id: "HydrolicWheel", value: "Hydrolic Wheel" },
     { id: "FourWheelDrive", value: "Four Wheel Drive" },
     { id: "ParticleFilter", value: "Particle Filter" },
     { id: "QuickChangePart", value: "Quick Change Part" },
@@ -111,6 +110,33 @@ export const GetFeatures = (category) => {
     "Separation wall",
   ];
 
+  const transporterTruck = [
+    "New",
+    "Metallic",
+    "ABS",
+    "ESP",
+    "TailgateLoadPlatform",
+    "Crane",
+    "NavigationSystem",
+    "AuxiliaryHeating",
+    "CruiseControl",
+    "AdaptiveCruiseControl",
+    "Divider",
+    "FourWheelDrive",
+    "ParticleFilter",
+    "HydrolicWheel",
+    "CentralLocking",
+    "TrailerHitchFixed",
+    "Retarder",
+    "Intarder",
+    "ParkingHeater",
+    "ParkingHeater",
+    "CrashStatus",
+    "SlidingDoorBothSide",
+    "SlidingDoorRight",
+    "SlidingDoorLeft",
+  ];
+
   const sparepart = [newy];
 
   if (category === "av") return av;
@@ -127,7 +153,7 @@ export const GetFeatures = (category) => {
     return truck;
   }
 
-  if (category === "transporter-truck") return truck;
+  if (category === "transporter-truck") return transporterTruck;
   if (category === "trailer") return trailer;
 
   if (category === "trailer-refrigator") return trailerRefrigator;

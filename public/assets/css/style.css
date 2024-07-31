@@ -12875,3 +12875,9 @@ label.model-checkbox{
 .sign-inputs .MuiOutlinedInput-root{
   border-radius: 10px!important;
 }
+
+.form-group-engine-power{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}

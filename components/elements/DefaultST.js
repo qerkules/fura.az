@@ -29,10 +29,10 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const types = GetTypes(currentCategoryId);
 
   const [brandId, setBrandId] = useState("");
+  const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
 
   const [currency, setCurrency] = useState("AZN");
-  const [enginePowerType, setEnginePowerType] = useState("HP");
 
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
@@ -46,7 +46,15 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitForm(e, features, selectedArray, images, "SemiTrailer", modalOpener);
+    submitForm(
+      e,
+      features,
+      selectedArray,
+      images,
+      "SemiTrailer",
+      modalOpener,
+      year
+    );
   };
 
   return (
@@ -183,8 +191,26 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
                 variant="outlined"
                 name="Axles"
               >
-                <MenuItem value={"0-5"}>0-5</MenuItem>
-                <MenuItem value={"5-10"}>5-10</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+        <div className="form-group">
+          <div className="input-search-list">
+            <FormControl fullWidth>
+              <InputLabel id="axles-label">Door locks</InputLabel>
+              <Select
+                fullWidth
+                id="door-select"
+                labelId="door-label"
+                label="Door locks"
+                variant="outlined"
+                name="DoorLocks"
+              >
+                <MenuItem value={"2"}>2</MenuItem>
+                <MenuItem value={"4"}>4</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -192,16 +218,24 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
-              <TextField
-                label="Operation Hours"
-                id="opHours"
-                type="number"
-                placeholder="0"
-                name="HoursOfOperation"
-              />
+              <InputLabel id="hydr-equi-label">Hydraulic Equipment</InputLabel>
+              <Select
+                fullWidth
+                id="hydr-equi-select"
+                labelId="hydr-equi-label"
+                variant="outlined"
+                label="Hydraulic Equipment"
+                name="HydraulicEquipment"
+              >
+                <MenuItem value={"Tipper-hydr"}>Tipper Hydraulic</MenuItem>
+                <MenuItem value={"push-floor-hydr"}>
+                  Push Floor Hydraulic
+                </MenuItem>
+              </Select>
             </FormControl>
           </div>
         </div>
+
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -210,7 +244,7 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
                 id="gvw"
                 type="number"
                 placeholder="0"
-                name="Gvw"
+                // name="Gvw"
               />
             </FormControl>
           </div>
@@ -307,42 +341,6 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
           </div>
         </div>
 
-        <div className="prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="hp/kw">Hp/Kw</InputLabel>
-            <Select
-              id="hp/kw-select"
-              labelId="hp/kw-label"
-              label="hp/kw"
-              value={enginePowerType}
-              onChange={(e) => setEnginePowerType(e.target.value)}
-            >
-              <MenuItem value={"hp"}>HP</MenuItem>
-              <MenuItem value={"kw"}>KW</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Engine Power"
-                id="engine-power-min"
-                type="number"
-                placeholder="0"
-                name="EnginePowerHP"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
-
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>
@@ -362,11 +360,6 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
 
         <div className="form-group">
           <div className="group-select">
-            <InputElement inputName={"EmissionSticker"} types={types} />
-          </div>
-        </div>
-        <div className="form-group">
-          <div className="group-select">
             <FormControl fullWidth>
               <TextField
                 label="Vin"
@@ -377,6 +370,8 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
             </FormControl>
           </div>
         </div>
+      </FormControl>
+      <div className="create-description">
         <div className="form-group ">
           <div className="group-select">
             <FormControl fullWidth>
@@ -389,7 +384,7 @@ const DefaultSTCreate = ({ setModalMessage, setModalStatus, setModalOpen }) => {
             </FormControl>
           </div>
         </div>
-      </FormControl>
+      </div>
       <div className="filter-button-container-title mt-15">Features:</div>
       <div className="filter-button-container">
         {features.map((value) => (

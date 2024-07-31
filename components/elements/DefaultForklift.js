@@ -25,6 +25,7 @@ import { handleSelected, isSelected } from "../tools/HandleSelected";
 import { getModels } from "../tools/GetModels";
 import { submitForm } from "../tools/CreateSubmit";
 import RentForm from "./RentForm";
+import NewModel from "./NewModel";
 
 const DefaultForkliftCreate = ({
   setModalMessage,
@@ -38,7 +39,7 @@ const DefaultForkliftCreate = ({
 
   const [saleOrRent, setSaleOrRent] = useState("");
   const [notModel, setNotModel] = useState(false);
-  const [newModel, setNewModel] = useState("");
+
   const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
@@ -73,6 +74,7 @@ const DefaultForkliftCreate = ({
             <FormControl fullWidth required>
               <InputLabel id="adtype-label">Ad Type</InputLabel>
               <Select
+                required
                 fullWidth
                 id="adtype-select"
                 labelId="adtype-label"
@@ -93,6 +95,7 @@ const DefaultForkliftCreate = ({
             <FormControl fullWidth required>
               <InputLabel id="category-label">Category</InputLabel>
               <Select
+              required
                 fullWidth
                 id="category-select"
                 labelId="category-label"
@@ -114,6 +117,7 @@ const DefaultForkliftCreate = ({
             <FormControl fullWidth required>
               <InputLabel id="brand-label">Brand</InputLabel>
               <Select
+              required
                 fullWidth
                 id="brand-select"
                 labelId="brand-label"
@@ -131,63 +135,8 @@ const DefaultForkliftCreate = ({
             </FormControl>
           </div>
         </div>
-        {!notModel ? (
-          <div className="form-group">
-            <div className="group-select">
-              <FormControl fullWidth required>
-                <InputLabel id="model-label">Model</InputLabel>
-                <Select
-                  fullWidth
-                  id="model-select"
-                  labelId="model-label"
-                  variant="outlined"
-                  label="Model"
-                  name="ModelId"
-                >
-                  {models.length > 0 ? (
-                    models.map((val) => (
-                      <MenuItem value={val.id} key={val.id}>
-                        {val.modelName}
-                      </MenuItem>
-                    ))
-                  ) : (
-                    <MenuItem value={"none"} disabled>
-                      -
-                    </MenuItem>
-                  )}
-                </Select>
-              </FormControl>
-            </div>
-          </div>
-        ) : (
-          <div className="form-group">
-            <div className="group-select">
-              <FormControl fullWidth>
-                <TextField
-                  fullWidth
-                  required
-                  id="model-input"
-                  variant="outlined"
-                  label="Enter Model Name"
-                  name="ModelName"
-                  value={newModel}
-                  onChange={(e) => setNewModel(e.target.value)}
-                />
-              </FormControl>
-            </div>
-          </div>
-        )}
-        
-        <FormControlLabel
-          className="model-checkbox"
-          control={
-            <Checkbox
-              checked={notModel}
-              onChange={(e) => setNotModel(e.target.checked)}
-            />
-          }
-          label="My Model is not on list"
-        />
+
+        <NewModel models={models} />
 
         <ImageUpload
           maxNumber={maxNumber}
@@ -196,7 +145,7 @@ const DefaultForkliftCreate = ({
         />
 
         <RentForm saleOrRent={saleOrRent} types={types} />
-        
+
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>

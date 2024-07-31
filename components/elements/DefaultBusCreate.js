@@ -21,6 +21,7 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { handleSelected, isSelected } from "../tools/HandleSelected";
 import { submitForm } from "../tools/CreateSubmit";
+import EnginePowerInput from "./EnginePowerInput";
 
 const DefaultBusCreate = ({
   setModalMessage,
@@ -33,13 +34,13 @@ const DefaultBusCreate = ({
   const types = GetTypes(currentCategoryId);
 
   const [enginePowerType, setEnginePowerType] = useState("");
+
   const [year, setYear] = useState("");
   const [models, setModels] = useState([]);
   const [selectedArray, setSelectedArray] = useState([]);
   const [images, setImages] = useState([]);
 
   const maxNumber = 20;
-
   const modalOpener = (status, message) => {
     setModalMessage(message);
     setModalStatus(status);
@@ -194,42 +195,7 @@ const DefaultBusCreate = ({
             </FormControl>
           </div>
         </div>
-        <div className="prefix-select">
-          <FormControl fullWidth>
-            <InputLabel id="hp/kw">Hp/Kw</InputLabel>
-            <Select
-              id="hp/kw-select"
-              labelId="hp/kw-label"
-              label="hp/kw"
-              value={enginePowerType}
-              onChange={(e) => setEnginePowerType(e.target.value)}
-            >
-              <MenuItem value={"hp"}>HP</MenuItem>
-              <MenuItem value={"kw"}>KW</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-        <div className="form-group prefix-input">
-          <div className="group-select">
-            <FormControl fullWidth>
-              <TextField
-                label="Engine Power"
-                id="engine-power-min"
-                type="number"
-                placeholder="0"
-                name="EnginePowerHP"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      {enginePowerType}
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </FormControl>
-          </div>
-        </div>
-
+        <EnginePowerInput />
         <div className="form-group">
           <div className="group-select">
             <FormControl fullWidth>

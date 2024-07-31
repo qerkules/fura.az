@@ -13,6 +13,13 @@ const page = () => {
   const path = "/user/ads";
   return (
     <Layout>
+      <div className="widget-banner-car-listing banner-car-listing-list co-ma-bg">
+        <div className="themesflat-container full">
+          <div className="banner-car-listing">
+            <h1 className="title text-white">Create Construction Machinery</h1>
+          </div>
+        </div>
+      </div>
       <div className="themesflat-container create-ad-container ">
         <DefaultCoMaCreate
           setModalMessage={setModalMessage}

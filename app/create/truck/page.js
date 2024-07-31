@@ -14,6 +14,13 @@ const page = () => {
   const path = "/user/ads";
   return (
     <Layout>
+      <div className="widget-banner-car-listing banner-car-listing-list truck-bg">
+        <div className="themesflat-container full">
+          <div className="banner-car-listing">
+            <h1 className="title text-white">Create Truck</h1>
+          </div>
+        </div>
+      </div>
       <div className="themesflat-container create-ad-container ">
         <DefaultTruckCreate
           setModalMessage={setModalMessage}

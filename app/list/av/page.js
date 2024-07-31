@@ -46,7 +46,7 @@ export default function CarList() {
     <>
       <Layout headerStyle={1} footerStyle={1}>
         <div>
-          <div className="widget-banner-car-listing banner-car-listing-list forklift-bg">
+          <div className="widget-banner-car-listing banner-car-listing-list av-bg">
             <div className="themesflat-container full">
               <div className="banner-car-listing">
                 <h1 className="title text-white">Agricultural Vehicle</h1>

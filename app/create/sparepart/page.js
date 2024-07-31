@@ -13,6 +13,13 @@ const page = () => {
   const path = "/user/ads";
   return (
     <Layout>
+      <div className="widget-banner-car-listing banner-car-listing-list sp-bg">
+        <div className="themesflat-container full">
+          <div className="banner-car-listing">
+            <h1 className="title text-white">Create Sparepart</h1>
+          </div>
+        </div>
+      </div>
       <div className="themesflat-container create-ad-container ">
         <DefaultSPCreate
           setModalMessage={setModalMessage}

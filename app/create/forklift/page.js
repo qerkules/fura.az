@@ -10,9 +10,16 @@ const page = () => {
   const [modalStatus, setModalStatus] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const router = useRouter();
-  const path = "/user/ads"
+  const path = "/user/ads";
   return (
     <Layout>
+      <div className="widget-banner-car-listing banner-car-listing-list forklift-bg">
+        <div className="themesflat-container full">
+          <div className="banner-car-listing">
+            <h1 className="title text-white">Create Forklift</h1>
+          </div>
+        </div>
+      </div>
       <div className="themesflat-container create-ad-container ">
         <DefaultForkliftCreate
           setModalMessage={setModalMessage}
@@ -20,7 +27,8 @@ const page = () => {
           setModalOpen={setModalOpen}
         />
       </div>
-      {modalOpen && ModalAlert(modalStatus, modalMessage, setModalOpen, router, path)}
+      {modalOpen &&
+        ModalAlert(modalStatus, modalMessage, setModalOpen, router, path)}
     </Layout>
   );
 };

@@ -21,7 +21,7 @@ export default function AdCard({ data }) {
 
   const handleClick = (path) => {
     if (isClient) {
-      // router.push(path);
+      router.push(`/details/${""}|${data.id}`);
     }
   };
 
@@ -55,7 +55,7 @@ export default function AdCard({ data }) {
     <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
       <HoverListing />
 
-      <div className="image" onClick={() => handleClick(data.path)}>
+      <div className="image" onClick={() => handleClick()}>
         <div className="stm-badge-top">
           {data.saleOrRent === "Rent" && (
             <div className="bottom-btn-wrap">
@@ -140,16 +140,16 @@ export default function AdCard({ data }) {
             )}
           </a>
         </div>
-        <h6 className="title" onClick={() => handleClick(data.path)}>
+        <h6 className="title" onClick={() => handleClick()}>
           {`${data.brand?.brandName || data.model?.brand?.brandName} ${
             data.model.modelName
           }`}
         </h6>
-        <span className="sub-title" onClick={() => handleClick(data.path)}>
+        <span className="sub-title" onClick={() => handleClick()}>
           {data.category.categoryName}
         </span>
 
-        <div className="description" onClick={() => handleClick(data.path)}>
+        <div className="description" onClick={() => handleClick()}>
           <ul>
             <li className="listing-information transmission">
               <div className="inner">

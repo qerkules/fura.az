@@ -44,6 +44,9 @@ const DefaultFormMobile = ({ handleUpdateSearchParams }) => {
           </FormControl>
         </div>
       </div>
+      {/*  Brand make input
+      Distanceunittype
+      EnginePowerType */}
       <div className="form-group">
         <div className="group-select">
           <FormControl fullWidth>

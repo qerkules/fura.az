@@ -4,7 +4,7 @@ import "@splidejs/react-splide/css";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/css";
 
-const ThumbSlider = () => {
+const ThumbSlider = ({ images }) => {
   const mainRef = useRef();
   const thumbsRef = useRef();
 
@@ -16,6 +16,10 @@ const ThumbSlider = () => {
       mainSplide.sync(thumbsSplide);
     }
   }, []);
+
+  const handleFullScreen = () => {
+    
+  }
 
   return (
     <div>
@@ -30,21 +34,14 @@ const ThumbSlider = () => {
         ref={mainRef}
         className="main-slider"
       >
-        <SplideSlide className="main-slider-image">
-          <img src="/assets/images/car-list/car1.webp" alt="Image 1" />
-        </SplideSlide>
-        <SplideSlide className="main-slider-image">
-          <img src="/assets/images/car-list/car11.webp" alt="Image 2" />
-        </SplideSlide>
-        <SplideSlide className="main-slider-image">
-          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
-        </SplideSlide>
-        <SplideSlide className="main-slider-image">
-          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
-        </SplideSlide>
-        <SplideSlide className="main-slider-image">
-          <img src="/assets/images/car-list/car12.webp" alt="Image 3" />
-        </SplideSlide>
+        {images?.map((img) => (
+          <SplideSlide key={img.id} className="main-slider-image" onClick={handleFullScreen}>
+            <img
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${img.filePath}`}
+              alt={img.fileName}
+            />
+          </SplideSlide>
+        ))}
       </Splide>
 
       <Splide
@@ -64,21 +61,14 @@ const ThumbSlider = () => {
         }}
         ref={thumbsRef}
       >
-        <SplideSlide>
-          <img src="/assets/images/car-list/car1.webp" alt="Thumbnail 1" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src="/assets/images/car-list/car11.webp" alt="Thumbnail 2" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
-        </SplideSlide>
-        <SplideSlide>
-          <img src="/assets/images/car-list/car12.webp" alt="Thumbnail 3" />
-        </SplideSlide>
+        {images?.map((img) => (
+          <SplideSlide key={img.id} className="main-slider-image">
+            <img
+              src={`${process.env.NEXT_PUBLIC_API_URL}/${img.filePath}`}
+              alt={img.fileName}
+            />
+          </SplideSlide>
+        ))}
       </Splide>
     </div>
   );

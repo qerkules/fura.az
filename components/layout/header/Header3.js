@@ -5,13 +5,16 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
-import ReactCountryFlag from "react-country-flag";
 import { Badge } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
 import { useEffect, useState } from "react";
 import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
 import LanguageSwitcher from "@/components/elements/LanguageSwitcher";
+import LogoutIcon from "@mui/icons-material/Logout";
+import useUser from "@/components/hooks/useUser";
+
 export default function Header3({ handleMobileMenu }) {
+  const [username] = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   useEffect(() => {
     if (hasCookie("favorites")) {
@@ -28,6 +31,12 @@ export default function Header3({ handleMobileMenu }) {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
+  const logOut = (e) => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("username");
+  };
+
   return (
     <>
       <header id="header3" className="main-header header header-fixed ">
@@ -118,14 +127,26 @@ export default function Header3({ handleMobileMenu }) {
               <div className="col-md-2 flex-end">
                 <div className="register ml--18">
                   <div className="flex align-center">
-                    <a
-                      data-bs-toggle="modal"
-                      role="button"
-                      href="/sign-in"
-                      className="header-login-text"
-                    >
-                      &nbsp;Login
-                    </a>
+                    {username ? (
+                      <a
+                        onClick={logOut}
+                        data-bs-toggle="modal"
+                        role="button"
+                        href="/"
+                        className="header-login-text"
+                      >
+                        &nbsp;Log out
+                      </a>
+                    ) : (
+                      <a
+                        data-bs-toggle="modal"
+                        role="button"
+                        href="/sign-in"
+                        className="header-login-text"
+                      >
+                        &nbsp;Login
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -203,17 +224,31 @@ export default function Header3({ handleMobileMenu }) {
               {/* <div className="menu-outer">
                 <MobileMenu />
               </div> */}
-              <div className="help-bar-mobie login-box">
-                <a
-                  data-bs-toggle="modal"
-                  href="/sign-in"
-                  role="button"
-                  className="fw-7 category"
-                >
-                  <i className="icon-user" />
-                  Login
-                </a>
-              </div>
+              {username ? (
+                <div className="help-bar-mobie login-box">
+                  <a
+                    data-bs-toggle="modal"
+                    href="/sign-in"
+                    role="button"
+                    className="fw-7 category"
+                  >
+                    <i className="icon-user" />
+                    {username}
+                  </a>
+                </div>
+              ) : (
+                <div className="help-bar-mobie login-box">
+                  <a
+                    data-bs-toggle="modal"
+                    href="/sign-in"
+                    role="button"
+                    className="fw-7 category"
+                  >
+                    <i className="icon-user" />
+                    Login
+                  </a>
+                </div>
+              )}
               <div className="help-bar-mobie compare">
                 <Link href="/#" className="fw-7 font-2">
                   <BalanceIcon />
@@ -226,6 +261,14 @@ export default function Header3({ handleMobileMenu }) {
                   <span>Saloons</span>
                 </Link>
               </div>
+              {username && (
+                <div className="log-out">
+                  <Link href="/" className="fw-7 font-2" onClick={logOut}>
+                    <LogoutIcon />
+                    <span>Log out</span>
+                  </Link>
+                </div>
+              )}
             </div>
           </nav>
         </div>

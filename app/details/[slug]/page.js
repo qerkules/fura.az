@@ -181,12 +181,7 @@ export default function ListingDetails({ params }) {
                           <p className="price-sale">$ {product.price}</p>
                         </div>
                         <p className="converted-price mt-15">
-                          <h5 class="price-another-currency">
-                            <div class="second-currency-price">
-                              {" "}
-                              ≈ €40,000 &nbsp; ≈ ₼80,000
-                            </div>
-                          </h5>
+                          ≈ €40,000 &nbsp; ≈ ₼80,000
                         </p>
                         <div className="ad-details">
                           <div>

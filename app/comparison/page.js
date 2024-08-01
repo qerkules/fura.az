@@ -63,47 +63,12 @@ const featureDetails = [
 ];
 
 const page = () => {
+
+  
+
   return (
     <Layout headerStyle={1} footerStyle={1}>
       <div className="themesflat-container comparison-container">
-        <div className="comparison-parameters">
-          <ul>
-            <li className="comparison-li">
-              <div className="comparison-image"></div>
-            </li>
-            {mainDetails.map((value, index) => (
-              <li key={value}  className={`comparison-li title ${
-                (index + 1) % 2 !== 0 ? "back-gr" : ""
-              }"`}>
-                {value}
-              </li>
-            ))}
-
-            <li className="comparison-li title divider">Engine Details</li>
-            {engineDetails.map((value) => (
-              <li key={value} className="comparison-li title">
-                {value}
-              </li>
-            ))}
-            <li className="comparison-li title divider">Body details</li>
-            {sizes.map((value, index) => (
-              <li
-                key={value}
-                className={`comparison-li title ${
-                  (index + 1) % 2 !== 0 ? "back-gr" : ""
-                }"`}
-              >
-                {value}
-              </li>
-            ))}
-            <li className="comparison-li title divider">Main details</li>
-            {featureDetails.map((value) => (
-              <li key={value} className="comparison-li title">
-                {value}
-              </li>
-            ))}
-          </ul>
-        </div>
         <div className="ad-parameters">
           <ul>
             <li className="comparison-li flex align-center justify-center">

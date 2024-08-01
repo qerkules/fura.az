@@ -7988,7 +7988,6 @@ a.mapboxgl-ctrl-logo {
   .wrap-car-feature
   .tf-listing-info
   #tf-features
-  .features-item
   .listing-feature-wrap
   i {
   margin-right: 15px;
@@ -11712,9 +11711,6 @@ ul#navbar-mobile-bottom li {
   max-width: 100%;
   padding-top: 15px;
 }
-.divider-header {
-  margin-bottom: -1px;
-}
 
 .row .full-background {
   padding-left: 0px !important;
@@ -11931,7 +11927,7 @@ input[type="number"] {
 .price-sale {
   font-size: 24px;
   font-weight: 600;
-  color: #090a0b;
+  color: var(--red);
   text-align: start;
 }
 
@@ -12346,6 +12342,10 @@ input[type="number"] {
   color: white;
 }
 
+.header-login-text:hover{
+  color: white!important;
+}
+
 .css-zghsfl-MuiBadge-badge {
   min-width: 15px !important;
   width: 15px !important;
@@ -12385,7 +12385,8 @@ input[type="number"] {
 }
 
 .comparison-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .comparison-image {
@@ -12772,7 +12773,7 @@ input[type="number"] {
     min-height: 170px;
   }
   .create-description {
-    width: 100%!important;
+    width: 100% !important;
   }
 }
 
@@ -12892,4 +12893,22 @@ h6.title {
   -webkit-line-clamp: 1;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+}
+
+.log-out {
+  background-color: var(--red);
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 20px;
+  width: 92%;
+}
+
+.log-out a{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  color: white !important;
 }

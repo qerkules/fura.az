@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-const LoginDetails = ({ setSignOption }) => {
+const LoginDetails = () => {
   const router = useRouter();
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -74,6 +74,7 @@ const LoginDetails = ({ setSignOption }) => {
         .then((data) => {
           modalOpener(true, "logged in");
           localStorage.setItem("token", data.data.token.accessToken);
+          localStorage.setItem("username", "User");
           return data.data;
         })
         .catch((error) => {

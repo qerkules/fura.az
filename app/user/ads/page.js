@@ -32,7 +32,7 @@ const page = () => {
       );
       setPageCount(data?.pageResponse?.totalPages || 1);
       setTotalAdCount(data?.pageResponse?.totalCount);
-      setValues(data?.data?.adsList?.$values || []);
+      setValues(data?.data?.adsList || []);
     } catch (error) {
       console.log(error);
     }

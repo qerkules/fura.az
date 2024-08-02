@@ -23,7 +23,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.trucksUnderList?.$values || []);
+        setValues(data?.trucksUnderList || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -150,7 +150,13 @@ export default function CarList() {
                       <div className="car-list-item ">
                         {values &&
                           values.map((val) => {
-                            return <AdCard key={val.id} data={val} />;
+                            return (
+                              <AdCard
+                                path={`Truck Up 7.5t|${val.id}`}
+                                key={val.id}
+                                data={val}
+                              />
+                            );
                           })}
                       </div>
                     </div>

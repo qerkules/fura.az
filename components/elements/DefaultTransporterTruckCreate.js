@@ -58,7 +58,7 @@ const DefaultTransporterTruckCreate = ({
       features,
       selectedArray,
       images,
-      "TrucUnder",
+      "TruckUnder",
       modalOpener,
       year
     );

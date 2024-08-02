@@ -23,7 +23,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.servicesList?.$values || []);
+        setValues(data?.servicesList || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -153,7 +153,7 @@ export default function CarList() {
                             return (
                               <AdCard
                                 key={val.id}
-                                path={"/listing-details"}
+                                path={`${val.productTypeName}|${val.id}`}
                                 data={val}
                               />
                             );

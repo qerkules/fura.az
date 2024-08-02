@@ -3,7 +3,6 @@
 
 
 export const handleSelected = (selectedItem, setSelectedArray) => {
-    console.log(selectedItem)
   setSelectedArray((prevSelectedArray) =>
     prevSelectedArray.some((item) => item === selectedItem)
       ? prevSelectedArray.filter((item) => item !== selectedItem)

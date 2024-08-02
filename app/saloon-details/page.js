@@ -5,25 +5,6 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-const data = {
-  id: 1,
-  saleOrRent: "sale",
-  price: "50.000",
-  priceCurrency: "$",
-  isPremium: true,
-  images: [
-    "./assets/images/car-list/car1.webp",
-    "./assets/images/car-list/car11.webp",
-    "./assets/images/car-list/car12.webp",
-  ],
-  brand: "Scania",
-  model: "R500",
-  category: "Standart Tractor",
-  year: 2020,
-  horsePower: "500 hp",
-  distance: "200500km",
-  createDate: "6/30/2024 3:09:24 PM<",
-};
 const page = () => {
   return (
     <Layout>

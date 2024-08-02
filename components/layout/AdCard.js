@@ -7,21 +7,20 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HoverListing from "../tools/HoverListing";
 
-export default function AdCard({ data }) {
+export default function AdCard({ data, path }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
 
   useEffect(() => {
-    // Check if window is defined
     if (typeof window !== "undefined") {
       setIsClient(true);
     }
   }, []);
 
-  const handleClick = (path) => {
+  const handleClick = () => {
     if (isClient) {
-      router.push(`/details/${""}|${data.id}`);
+      router.push(`/details/${path}`);
     }
   };
 
@@ -78,8 +77,7 @@ export default function AdCard({ data }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images?.$values[0]?.path ||
-                      data?.ad?.image?.$values[0]?.filePath
+                      data?.images[0]?.path || data?.ad.image[0]?.filePath
                     }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
@@ -90,8 +88,7 @@ export default function AdCard({ data }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images?.$values[1]?.path ||
-                      data?.ad?.image?.$values[1]?.filePath
+                      data?.images[1]?.path || data?.ad?.image[1]?.filePath
                     }`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
@@ -102,8 +99,7 @@ export default function AdCard({ data }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images?.$values[2]?.path ||
-                      data?.ad?.image?.$values[2]?.filePath
+                      data?.images[2]?.path || data?.ad?.image[2]?.filePath
                     }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"

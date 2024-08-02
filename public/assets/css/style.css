@@ -7924,10 +7924,12 @@ a.mapboxgl-ctrl-logo {
   .item
   .listing-infor-box
   .content-listing-info {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: space-between;
+  grid-template-columns: 2fr 1fr;
   width: 100%;
+  gap: 20px;
 }
 .post-property
   .wrap-car-overview
@@ -12333,6 +12335,16 @@ input[type="number"] {
   .salon-template .sign-inputs {
     padding-bottom: 0px;
   }
+
+  .salon-template .sign-inputs {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .sign-input-image {
+    padding: 0px;
+  }
+
   .widget-tf-slider {
     top: 0px;
   }
@@ -12342,8 +12354,8 @@ input[type="number"] {
   color: white;
 }
 
-.header-login-text:hover{
-  color: white!important;
+.header-login-text:hover {
+  color: white !important;
 }
 
 .css-zghsfl-MuiBadge-badge {
@@ -12905,7 +12917,7 @@ h6.title {
   width: 92%;
 }
 
-.log-out a{
+.log-out a {
   display: flex;
   justify-content: center;
   gap: 10px;

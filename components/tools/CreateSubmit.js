@@ -33,14 +33,6 @@ export const submitForm = async (
 
     let url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/Create${path}Ad`;
 
-    // path === "SemiTrailer" && formData.append("RefrigeratorRequest", false);
-
-    path === "ConstructonMachinery" &&
-      (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateConstructionMachineryAd`);
-
-    path === "TrucUnder" &&
-      (url = `${process.env.NEXT_PUBLIC_API_LINK}/${path}/CreateTruckUnderAd`);
-      
     await axios
       .post(url, formData, {
         headers: {

@@ -1,13 +1,25 @@
 import React from "react";
 
 export const GetFeatures = (category) => {
-  const abs = { id: "ABS", value: "ABS" };
-  const ebs = { id: "EBS", value: "EBS" };
-  const crane = { id: "Crane", value: "Crane" };
-  const newy = { id: "New", value: "New" };
-  const dmgV = { id: "DamagedVehicles", value: "Damaged Vehicles" };
-  const crshV = { id: "Crashed vehicle", value: "Crashed vehicle" };
-  const mttlc = { id: "Metallic", value: "Metallic" };
+  const abs = { id: "ABS", value: "ABS", obj: "abs" };
+  const ebs = { id: "EBS", value: "EBS", obj: "ebs" };
+  const crane = { id: "Crane", value: "Crane", obj: "crane" };
+  const newy = { id: "New", value: "New", obj: "new" };
+  const dmgV = {
+    id: "DamagedVehicles",
+    value: "Damaged Vehicles",
+    obj: "damagedVehicles",
+  };
+  const crshV = {
+    id: "CrashedVehicle",
+    value: "Crashed vehicle",
+    obj: "Crashed vehicle",
+  };
+  const mttlc = {
+    id: "Metallic",
+    value: "Metallic",
+    obj: "metallic",
+  };
 
   const forklift = [
     { id: "TrailerHitchFixed", value: "Trailer Hitch Fixed" },
@@ -53,13 +65,18 @@ export const GetFeatures = (category) => {
 
   const coma = [
     abs,
-    { id: "FourWheelDrive", value: "Four Wheel Drive" },
-    { id: "ParticleFilter", value: "Particle Filter" },
-    { id: "QuickChangePart", value: "Quick Change Part" },
-    { id: "BSS", value: "BSS" },
+    { id: "FourWheelDrive", value: "Four Wheel Drive", obj: "fourWheelDrive" },
+    { id: "ParticleFilter", value: "Particle Filter", obj: "fourWheelDrive" },
+    {
+      id: "QuickChangePart",
+      value: "Quick Change Part",
+      obj: "fourWheelDrive",
+    },
+    { id: "BSS", value: "BSS", obj: "fourWheelDrive" },
     {
       id: "CentralLubricantApplication",
       value: "Central lubricant application",
+      obj: "fourWheelDrive",
     },
     newy,
     dmgV,
@@ -104,25 +121,45 @@ export const GetFeatures = (category) => {
 
   const truck = [
     abs,
-    { id: "FourWheelDrive", value: "Four Wheel Drive" },
-    { id: "AdaptiveCruiseControl", value: "Adaptive Cruise Control" },
-    { id: "CruiseControl", value: "Cruise Control" },
-    { id: "Compressor", value: "Compressor" },
-    { id: "AuxiliaryHeating", value: "Auxiliary Heating" },
+    { id: "FourWheelDrive", value: "Four Wheel Drive", obj: "fourWheelDrive" },
+    {
+      id: "AdaptiveCruiseControl",
+      value: "Adaptive Cruise Control",
+      obj: "adaptiveCruiseControl",
+    },
+    { id: "CruiseControl", value: "Cruise Control", obj: "cruiseControl" },
+    { id: "Compressor", value: "Compressor", obj: "compressor" },
+    {
+      id: "AuxiliaryHeating",
+      value: "Auxiliary Heating",
+      obj: "auxiliaryHeating",
+    },
     ebs,
-    { id: "ESP", value: "ESP" },
-    { id: "Intarder", value: "Intarder" },
-    { id: "Retarder", value: "Retarder" },
+    { id: "ESP", value: "ESP", obj: "esp" },
+    { id: "Intarder", value: "Intarder", obj: "intarder" },
+    { id: "Retarder", value: "Retarder", obj: "retarder" },
     crane,
-    { id: "TailgateLoadPlatform", value: "Tailgate Load Platform" },
-    { id: "AlloyWheels", value: "Alloy wheels" },
+    {
+      id: "TailgateLoadPlatform",
+      value: "Tailgate Load Platform",
+      obj: "tailgateLoadPlatform",
+    },
+    { id: "AlloyWheels", value: "Alloy wheels", obj: "alloyWheels" },
     newy,
     mttlc,
     dmgV,
-    { id: "TrailerHitchFixed", value: "Trailer Hitch Fixed" },
-    { id: "ParkingHeater", value: "Parking heater" },
-    { id: "ParticleFilter", value: "Particle Filter" },
-    { id: "NavigationSystem", value: "Navigation System" },
+    {
+      id: "TrailerHitchFixed",
+      value: "Trailer Hitch Fixed",
+      obj: "trailerHitchFixed",
+    },
+    { id: "ParkingHeater", value: "Parking heater", obj: "parkingHeater" },
+    { id: "ParticleFilter", value: "Particle Filter", obj: "particleFilter" },
+    {
+      id: "NavigationSystem",
+      value: "Navigation System",
+      obj: "navigationSystem",
+    },
   ];
   const transporterTruck = [
     newy,

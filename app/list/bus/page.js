@@ -23,7 +23,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.busesList?.$values || []);
+        setValues(data?.busesList || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -59,7 +59,7 @@ export default function CarList() {
             <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
-                  <SearchFilter setValues={setValues}/>
+                  <SearchFilter setValues={setValues} />
                 </div>
                 <div className="col-md-12 col-lg-9 listing-list-car-wrap">
                   <form action="/" className="tf-my-listing-search">
@@ -153,7 +153,7 @@ export default function CarList() {
                             return (
                               <AdCard
                                 key={val.id}
-                                path={"/listing-details"}
+                                path={`Bus|${val.id}`}
                                 data={val}
                               />
                             );

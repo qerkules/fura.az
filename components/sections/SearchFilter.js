@@ -62,7 +62,7 @@ const SearchFilter = ({ setValues }) => {
     try {
       const response = await axios.get(url, { params: filteredParams });
       setValues(
-        response.data?.searchList?.results?.$values?.map((data) => data.vehicle)
+        response.data?.searchList?.results?.map((data) => data.vehicle)
       );
     } catch (error) {
       console.error("Error:", error);

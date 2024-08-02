@@ -5,8 +5,8 @@ export const getModels = async (e, setModels) => {
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_API_LINK}/Model/GetModelByBrandId?BrandId=${e.target.value}`
     );
-    setModels(response.data.models.$values);
-    return response.data.models.$values;
+    setModels(response.data.models);
+    return response.data.models;
   } catch (error) {
     throw error;
   }

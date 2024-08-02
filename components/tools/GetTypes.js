@@ -21,20 +21,20 @@ export const GetTypes = (categoryId) => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_LINK}/GetOptions/${path}`
       );
-      setter(response.data.$values);
+      setter(response.data);
     };
 
     const fetchCategories = async () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_LINK}/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
       );
-      setCategories(response.data.categories.$values);
+      setCategories(response.data.categories);
     };
     const fetchBrands = async () => {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_API_LINK}/Brand/GetBrandsByProductTypeId?ProductTypeId=${categoryId}`
       );
-      setBrands(response.data.brands.$values);
+      setBrands(response.data.brands);
     };
     fetchBrands();
 

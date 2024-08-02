@@ -14,10 +14,22 @@ import useIsMobile from "../tools/UseIsMobile";
 import axios from "axios";
 import ModalAlert from "./ModalAlert";
 import { useRouter } from "next/navigation";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const RegisterDetails = ({ currentRegister }) => {
   const router = useRouter();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
   const [images, setImages] = React.useState([]);
+  const [logoImg, setLogoImg] = React.useState();
+  const [bannerImg, setBannerImg] = React.useState();
+
   const [name, setName] = useState("");
   const [surname, setSurName] = useState("");
   const [number, setNumber] = useState("");
@@ -35,6 +47,23 @@ const RegisterDetails = ({ currentRegister }) => {
 
   const [isUpdated, setIsUpdated] = useState(false);
 
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  // Email validation function
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+    setIsValidEmail(validateEmail(emailValue));
+  };
   const handleNavigation = (path) => {
     router.push(path);
   };
@@ -43,7 +72,8 @@ const RegisterDetails = ({ currentRegister }) => {
     setModalStatus(status);
     setModalOpen(true);
   };
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
       const userData = JSON.stringify({
         name: name,
@@ -88,7 +118,7 @@ const RegisterDetails = ({ currentRegister }) => {
   };
 
   let mobileVersion = (
-    <div className="sign-background">
+    <form className="sign-background" onSubmit={handleSubmit}>
       <div className="sign-background-image">
         <div className="sign-image-title">Register</div>
       </div>
@@ -115,56 +145,100 @@ const RegisterDetails = ({ currentRegister }) => {
           <div className="sign-details">
             <div className="sign-inputs">
               <div className="flex gp-15 ">
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
                     placeholder="Name"
-                    onChange={(e) => setName(e.target.value)}
+                    name="Name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
-                    placeholder="Lastname"
+                </FormControl>
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
+                    placeholder="Surname"
+                    name="Surname"
                     onChange={(e) => {
                       setSurName(e.target.value);
                     }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
+                </FormControl>
               </div>
-              <div className="sign-input">
-                <LocalPhoneIcon />
-                <input
-                  placeholder="Enter Your Mobile Number"
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-number"
+                  type={"text"}
+                  placeholder="Mobile Number"
+                  name="PhoneNumber"
                   onChange={(e) => setNumber(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LocalPhoneIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <MailOutlineIcon />
-                <input
+              </FormControl>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email"
+                  type={"text"}
                   placeholder="Enter Your Email Address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleEmailChange(e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <LockIcon />
-                <input
-                  placeholder="Enter Your Password"
-                  type="password"
+              </FormControl>
+              <FormControl fullWidth>
+                <OutlinedInput
+                  id="standard-adornment-password"
+                  type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
-              </div>
+              </FormControl>
               <div className="login-tip">
                 Already Have Account?
                 <a href="/sign-in"> Log in</a>
               </div>
               <div className="login-buttons">
-                <div
+                <input
+                  type="submit"
                   className="default-sign-button register-button"
-                  onClick={handleSubmit}
-                >
-                  Register
-                </div>
+                  value={"Register"}
+                />
               </div>
               <div className="terms-privacy-text">
                 I have read and accept the{" "}
@@ -199,82 +273,146 @@ const RegisterDetails = ({ currentRegister }) => {
             <div className="sign-salon-flex">
               <div className="sign-inputs">
                 <div className="flex gp-15 ">
-                  <div className="sign-input">
-                    <PersonIcon />
-                    <input
+                  <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number"
+                      type={"text"}
                       placeholder="Name"
-                      onChange={(e) => setName(e.target.value)}
+                      name="Name"
+                      onChange={(e) => {
+                        setName(e.target.value);
+                      }}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      }
                     />
-                  </div>
-                  <div className="sign-input">
-                    <PersonIcon />
-                    <input
-                      placeholder="Lastname"
-                      onChange={(e) => setSurName(e.target.value)}
+                  </FormControl>
+                  <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number"
+                      type={"text"}
+                      placeholder="Surname"
+                      name="Surname"
+                      onChange={(e) => {
+                        setSurName(e.target.value);
+                      }}
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      }
                     />
-                  </div>
+                  </FormControl>
                 </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
                     placeholder="Salon/Service Name"
-                    onChange={(e) => setSalonName(e.target.value)}
+                    name="SalonName"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
-                    placeholder="Promotion"
-                    onChange={(e) => setPromotion(e.target.value)}
+                </FormControl>
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
+                    placeholder="About"
+                    name="About"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
+                </FormControl>
               </div>
             </div>
-            <div className="sign-input-image">
-              <div className="sign-input">
-                <LocalPhoneIcon />
-                <input
-                  placeholder="Enter Your Mobile Number"
-                  onChange={(e) => setNumber(e.target.value)}
-                />
-              </div>
+            <div className="sign-input-image sign-inputs">
               <div className="flex gp-15 ">
-                <div className="sign-input">
-                  <PublicIcon />
-                  <input
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
                     placeholder="Country"
-                    onChange={(e) => setCountry(e.target.value)}
+                    name="Country"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PublicIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
-                <div className="sign-input">
-                  <LocationCityIcon />
-                  <input
+                </FormControl>
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number"
+                    type={"text"}
                     placeholder="City"
-                    onChange={(e) => setCity(e.target.value)}
+                    name="City"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LocationCityIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
+                </FormControl>
               </div>
-              <div className="sign-input">
-                <LocationOnIcon />
-                <input
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-number"
+                  type={"text"}
                   placeholder="Address"
-                  onChange={(e) => setAddress(e.target.value)}
+                  name="Address"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LocationOnIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <MailOutlineIcon />
-                <input
+              </FormControl>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email"
+                  type={"text"}
                   placeholder="Enter Your Email Address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => handleEmailChange(e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <LockIcon />
-                <input
-                  placeholder="Enter Your Password"
+              </FormControl>
+              <FormControl fullWidth>
+                <OutlinedInput
+                  id="standard-adornment-password"
+                  type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
-              </div>
+              </FormControl>
               <div className="flex space-around">
                 <ImageUploading
                   multiple
@@ -363,11 +501,11 @@ const RegisterDetails = ({ currentRegister }) => {
           </div>
         </div>
       )}
-    </div>
+    </form>
   );
 
   let desktopVersion = (
-    <div className="sign-background">
+    <form className="sign-background">
       {currentRegister === "user" && (
         <div className="sign-template">
           <div className="sign-details">
@@ -613,13 +751,14 @@ const RegisterDetails = ({ currentRegister }) => {
           </div>
         </div>
       )}
-    </div>
+    </form>
   );
 
   return (
     <>
       {isMobile ? mobileVersion : desktopVersion}
-      {modalOpen && ModalAlert(modalMessage, modalStatus, setModalOpen, router, "/sign-in")}
+      {modalOpen &&
+        ModalAlert(modalMessage, modalStatus, setModalOpen, router, "/sign-in")}
     </>
   );
 };

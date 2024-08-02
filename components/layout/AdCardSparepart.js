@@ -73,7 +73,7 @@ export default function AdCardSparePart({ data }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[0].path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[0].path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -82,7 +82,7 @@ export default function AdCardSparePart({ data }) {
               <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[1]?.path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[1]?.path}`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
                   />
@@ -91,7 +91,7 @@ export default function AdCardSparePart({ data }) {
               <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images?.$values[2]?.path}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[2]?.path}`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />

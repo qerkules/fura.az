@@ -15,8 +15,8 @@ export default function PopularMakesTab3() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getAllAds(1, 8, path);
-        setValues(data?.ads?.$values || []);
+        const data = await getAllAds(1, 12, path);
+        setValues(data?.ads || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -43,10 +43,8 @@ export default function PopularMakesTab3() {
               <div className="themesflat-container">
                 <div className="divider-header ">Premium Ads</div>
                 <div className="car-list-item ">
-                  {/* <AdCard path={"/listing-details"} data={data} /> */}
                   <AdCardSparepart premium={true} />
                   <AdCardTrailer premium={true} />
-                  {/* <AdCard path={"/listing-details"} data={data} /> */}
                 </div>
               </div>
             </div>
@@ -58,13 +56,15 @@ export default function PopularMakesTab3() {
               <div className="car-list-item">
                 {values &&
                   values.map((val) => {
-                    return (
-                      <AdCard
-                        key={val.id}
-                        path={"/listing-details"}
-                        data={val}
-                      />
-                    );
+                    if (val.productTypeName !== "Semi-Trailer") {
+                      return (
+                        <AdCard
+                          key={val.id}
+                          path={`${val.productTypeName}|${val.id}`}
+                          data={val}
+                        />
+                      );
+                    }
                   })}
                 <button>See All Ads</button>
               </div>

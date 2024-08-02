@@ -20,7 +20,6 @@ const DefaultFormControl = ({ handleUpdateSearchParams }) => {
   const [models, setModels] = useState([]);
 
   const currentCategoryId = GetCategory(category);
-  console.log(currentCategoryId);
   const types = GetTypes(currentCategoryId);
   const [isToggled, setToggled] = useState(true);
 

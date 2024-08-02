@@ -6,53 +6,41 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import AdCard from "@/components/layout/AdCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-
-const description =
-  " There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passa There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form look even by injected humour, or randomised There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised words which don't look even slight believable. If you are going to use a passa There are many variations of passages of Lorem Ipsum available, but majority have suffered teration in some form, by injected humour, or randomised many variations of passages of Lorem Ipsum available, but majority There are many variations of passages of";
-
-const overviewArray = [
-  { title: "Year", value: "2020" },
-  { title: "Permissible Weight", value: "7.5T" },
-  { title: "Distance", value: "200.000 km" },
-  { title: "Engine Power", value: "500 hp" },
-  { title: "FuelType", value: "Benzin" },
-  { title: "Paint", value: "Red" },
-  { title: "Retarder", value: "Not Available" },
-  { title: "Intrader", value: "Not Available" },
-  { title: "Damaged", value: "No Damage" },
-  { title: "Gearbox", value: "Manual" },
-  { title: "Cylinder Volume", value: "1500cc" },
-  { title: "Wheel Formula", value: "4x4" },
-  { title: "Driving Cabin", value: "Long Road" },
-  { title: "Steering", value: "Left" },
-  { title: "Axles", value: "2" },
-  { title: "Air Conditioning", value: "Automatic" },
-  { title: "Emission Class", value: "Euro 6" },
-  { title: "Emission Sticker", value: "1 (None)" },
-];
-const featuresArray1 = [
-  { value: "2020" },
-  { value: "Alloy wheels" },
-  { value: "Metallic color" },
-  { value: "Exterior trim" },
-  { value: "ABS" },
-];
+import { GetFeatures } from "@/components/tools/GetFeatures";
+import GetOverview from "@/components/tools/GetOverview";
+import GetProductTypes from "@/components/tools/GetProductTypes";
 
 export default function ListingDetails({ params }) {
+  const overview = GetOverview("semi-truck");
   const inputString = params.slug;
   const [product, setProduct] = useState({});
   const [relatedAds, setRelatedAds] = useState([]);
+  const [showFeature, setShowFeature] = useState([]);
+  const [overviewArray, setOverviewArray] = useState([]);
 
   const decodedString = decodeURIComponent(inputString);
-
   const parts = decodedString.split("|");
-
-  const adPath = parts[0];
-
+  const adPath = GetProductTypes(parts[0]);
   const adId = parts[1];
 
+  const features = useMemo(() => GetFeatures("semi-truck"), []);
+
+  const getCurrentField = (data) => {
+    if (adPath === "AgriculturalVehicle") return data?.agriculturalList;
+    if (adPath === "Bus") return data?.busesList;
+    if (adPath === "ConstructionMachineary")
+      return data?.constructionMachineryList;
+    if (adPath === "Forklift") return data?.forkliftsList;
+    if (adPath === "Semi-Trailer Truck") return data?.trucksList;
+    if (adPath === "Truck Over 7.5t") return data?.trucksList;
+    if (adPath === "Truck Up 7.5t") return data?.trucksUnderList;
+    // if (category === "Sparepart") return "Sparepart";
+    // if (category === "Semi-Trailer") return "SemiTrailer";
+  };
+
+  let url = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetAll${adPath}Ads?CurrentPage=1&PageSize=8`;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,17 +49,47 @@ export default function ListingDetails({ params }) {
         );
         setProduct(data?.data || {});
 
-        const datas = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetAll${adPath}Ads?CurrentPage=1&PageSize=8`
-        );
-        setRelatedAds(datas?.data?.trucksList?.$values || []);
+        if (adPath === "AgriculturalVehicle")
+          url = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetAllAgriculturalAds?CurrentPage=1&PageSize=8`;
+
+        const datas = await axios.get(url);
+        setRelatedAds(getCurrentField(datas?.data) || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [adPath, adId]);
+
+  useEffect(() => {
+    if (Object.keys(product).length > 0) {
+      const setFeature = features
+        .map((val) => {
+          if (product[val.obj] !== undefined) {
+            return { text: val.value, value: product[val.obj] };
+          }
+        })
+        .filter(Boolean);
+      setShowFeature(setFeature);
+    }
+  }, [product, features]);
+  useEffect(() => {
+    if (Object.keys(product).length > 0) {
+      const setFeature = overview.map((val) => {
+        if (
+          product[val.obj] !== undefined ||
+          product[val.obj] !== "" ||
+          product[val.obj] !== " " ||
+          product[val.obj] !== 0
+        ) {
+          return { text: val.text, value: product[val.obj] };
+        }
+      });
+      // Remove undefined values
+      setOverviewArray(setFeature);
+    }
+  }, [product, features]);
 
   return (
     <>
@@ -84,7 +102,7 @@ export default function ListingDetails({ params }) {
                   <Link className="home" href="/">
                     Home
                   </Link>
-                  <span>Semi Trailer Truck</span>
+                  <span>{adPath}</span>
                 </div>
               </div>
             </div>
@@ -128,7 +146,7 @@ export default function ListingDetails({ params }) {
               <div className="row">
                 <div className="col-lg-8">
                   <div className="gallary-property-details">
-                    <ThumbSlider images={product.images?.$values} />
+                    <ThumbSlider images={product.images} />
                   </div>
                   <div className="post-property">
                     <div className="wrap-car-overview wrap-style">
@@ -140,7 +158,7 @@ export default function ListingDetails({ params }) {
                               <div className="inner listing-infor-box">
                                 <div className="content-listing-info">
                                   <span className="listing-info-title">
-                                    {data.title}
+                                    {data.text}
                                   </span>
                                   <p className="listing-info-value">
                                     {data.value}
@@ -160,13 +178,17 @@ export default function ListingDetails({ params }) {
                       <h4 className="title">Features</h4>
                       <div className="tf-listing-info">
                         <div id="tf-features">
-                          {featuresArray1.map((data, index) => {
-                            return (
-                              <div key={index} className="listing-feature-wrap">
-                                <i className={` ${"icon-Vector-32"}`} />
-                                {data.value}
-                              </div>
-                            );
+                          {showFeature.map((data, index) => {
+                            if (data && data.value)
+                              return (
+                                <div
+                                  key={index}
+                                  className="listing-feature-wrap"
+                                >
+                                  <i className={` ${"icon-Vector-32"}`} />
+                                  {data.text}
+                                </div>
+                              );
                           })}
                         </div>
                       </div>
@@ -205,7 +227,7 @@ export default function ListingDetails({ params }) {
                         </div>
                       </div>
                       <div className="ad-owner-details">
-                        <p>Contact Details:</p>
+                        {/* <p>Contact Details:</p> */}
                         <div className="ad-owner-contact-number">
                           <i className=" icon-Group-14" /> +1900 67 xxx (show)
                         </div>

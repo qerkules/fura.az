@@ -21,25 +21,21 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import Phone from "@mui/icons-material/Phone";
 
 const RegisterDetails = ({ currentRegister }) => {
   const router = useRouter();
   const [showPassword, setShowPassword] = React.useState(false);
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [images, setImages] = React.useState([]);
-  const [logoImg, setLogoImg] = React.useState();
-  const [bannerImg, setBannerImg] = React.useState();
+  const [logoImg, setLogoImg] = React.useState([]);
+  const [bannerImg, setBannerImg] = React.useState([]);
 
   const [name, setName] = useState("");
   const [surname, setSurName] = useState("");
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [salonName, setSalonName] = useState("");
-  const [promotion, setPromotion] = useState("");
-  const [country, setCountry] = useState("");
-  const [city, setCity] = useState("");
-  const [address, setAddress] = useState("");
 
   const [modalMessage, setModalMessage] = useState("");
   const [modalStatus, setModalStatus] = useState(false);
@@ -72,8 +68,8 @@ const RegisterDetails = ({ currentRegister }) => {
     setModalStatus(status);
     setModalOpen(true);
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+
+  const userSubmit = async () => {
     try {
       const userData = JSON.stringify({
         name: name,
@@ -83,7 +79,7 @@ const RegisterDetails = ({ currentRegister }) => {
         password: password,
         passwordConfirm: password,
       });
-      const response = await axios
+      await axios
         .post(
           `${process.env.NEXT_PUBLIC_API_LINK}/User/RegisterMember`,
           userData,
@@ -106,15 +102,53 @@ const RegisterDetails = ({ currentRegister }) => {
     }
   };
 
+  const salonSubmit = async (e) => {
+    const formData = new FormData(e.target);
+
+    formData.append("Banner", bannerImg[0].file, bannerImg[0].file.fileName);
+    formData.append("Logo", logoImg[0].file, logoImg[0].file.fileName);
+    try {
+      await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_API_LINK}/User/RegisterSalon`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((data) => {
+          modalOpener(true, "Created");
+          return data.data;
+        })
+        .catch((error) => {
+          modalOpener(false, "Incorrect Details");
+          return error;
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (currentRegister === "user") userSubmit();
+    if (currentRegister === "salon") salonSubmit(e);
+  };
+
   useEffect(() => {
     setIsUpdated(true);
-  }, [images]);
+  }, [logoImg]);
 
   const maxNumber = 1;
   const isMobile = useIsMobile();
 
   const onChange = (imageList, addUpdateIndex) => {
-    setImages(imageList);
+    setLogoImg(imageList);
+  };
+  const onChangeBanner = (imageList, addUpdateIndex) => {
+    setBannerImg(imageList);
   };
 
   let mobileVersion = (
@@ -145,12 +179,12 @@ const RegisterDetails = ({ currentRegister }) => {
           <div className="sign-details">
             <div className="sign-inputs">
               <div className="flex gp-15 ">
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number1"
                     type={"text"}
                     placeholder="Name"
-                    name="Name"
+                    value={name}
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
@@ -161,12 +195,12 @@ const RegisterDetails = ({ currentRegister }) => {
                     }
                   />
                 </FormControl>
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number2"
                     type={"text"}
                     placeholder="Surname"
-                    name="Surname"
+                    value={surname}
                     onChange={(e) => {
                       setSurName(e.target.value);
                     }}
@@ -178,12 +212,12 @@ const RegisterDetails = ({ currentRegister }) => {
                   />
                 </FormControl>
               </div>
-              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-number"
+                  id="standard-adornment-number3"
                   type={"text"}
                   placeholder="Mobile Number"
-                  name="PhoneNumber"
+                  value={number}
                   onChange={(e) => setNumber(e.target.value)}
                   startAdornment={
                     <InputAdornment position="start">
@@ -192,11 +226,12 @@ const RegisterDetails = ({ currentRegister }) => {
                   }
                 />
               </FormControl>
-              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
                   id="standard-adornment-email"
                   type={"text"}
                   placeholder="Enter Your Email Address"
+                  value={email}
                   onChange={(e) => handleEmailChange(e)}
                   startAdornment={
                     <InputAdornment position="start">
@@ -205,12 +240,13 @@ const RegisterDetails = ({ currentRegister }) => {
                   }
                 />
               </FormControl>
-              <FormControl fullWidth>
+              <FormControl required fullWidth>
                 <OutlinedInput
                   id="standard-adornment-password"
                   type={showPassword ? "text" : "password"}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your Password"
+                  value={password}
                   startAdornment={
                     <InputAdornment position="start">
                       <LockIcon />
@@ -273,15 +309,12 @@ const RegisterDetails = ({ currentRegister }) => {
             <div className="sign-salon-flex">
               <div className="sign-inputs">
                 <div className="flex gp-15 ">
-                  <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number"
+                      id="standard-adornment-number5"
                       type={"text"}
                       placeholder="Name"
                       name="Name"
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
                       startAdornment={
                         <InputAdornment position="start">
                           <PersonIcon />
@@ -289,15 +322,12 @@ const RegisterDetails = ({ currentRegister }) => {
                       }
                     />
                   </FormControl>
-                  <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number"
+                      id="standard-adornment-number6"
                       type={"text"}
                       placeholder="Surname"
                       name="Surname"
-                      onChange={(e) => {
-                        setSurName(e.target.value);
-                      }}
                       startAdornment={
                         <InputAdornment position="start">
                           <PersonIcon />
@@ -306,9 +336,9 @@ const RegisterDetails = ({ currentRegister }) => {
                     />
                   </FormControl>
                 </div>
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number7"
                     type={"text"}
                     placeholder="Salon/Service Name"
                     name="SalonName"
@@ -319,9 +349,9 @@ const RegisterDetails = ({ currentRegister }) => {
                     }
                   />
                 </FormControl>
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number8"
                     type={"text"}
                     placeholder="About"
                     name="About"
@@ -336,9 +366,9 @@ const RegisterDetails = ({ currentRegister }) => {
             </div>
             <div className="sign-input-image sign-inputs">
               <div className="flex gp-15 ">
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number9"
                     type={"text"}
                     placeholder="Country"
                     name="Country"
@@ -349,9 +379,9 @@ const RegisterDetails = ({ currentRegister }) => {
                     }
                   />
                 </FormControl>
-                <FormControl fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number"
+                    id="standard-adornment-number10"
                     type={"text"}
                     placeholder="City"
                     name="City"
@@ -363,9 +393,9 @@ const RegisterDetails = ({ currentRegister }) => {
                   />
                 </FormControl>
               </div>
-              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-number"
+                  id="standard-adornment-number11"
                   type={"text"}
                   placeholder="Address"
                   name="Address"
@@ -376,11 +406,25 @@ const RegisterDetails = ({ currentRegister }) => {
                   }
                 />
               </FormControl>
-              <FormControl fullWidth sx={{ marginBottom: 2 }}>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-email"
+                  id="standard-adornment-number11"
+                  type={"text"}
+                  placeholder="Phone number"
+                  name="PhoneNumber"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <Phone />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email2"
                   type={"text"}
                   placeholder="Enter Your Email Address"
+                  name="Email"
                   onChange={(e) => handleEmailChange(e)}
                   startAdornment={
                     <InputAdornment position="start">
@@ -389,12 +433,37 @@ const RegisterDetails = ({ currentRegister }) => {
                   }
                 />
               </FormControl>
-              <FormControl fullWidth>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-password"
+                  id="standard-adornment-password2"
                   type={showPassword ? "text" : "password"}
-                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your Password"
+                  name="Password"
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-password3"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Your Password"
+                  name="PasswordConfirm"
                   startAdornment={
                     <InputAdornment position="start">
                       <LockIcon />
@@ -415,49 +484,7 @@ const RegisterDetails = ({ currentRegister }) => {
               </FormControl>
               <div className="flex space-around">
                 <ImageUploading
-                  multiple
-                  value={images}
-                  onChange={onChange}
-                  maxNumber={maxNumber}
-                  dataURLKey="data_url"
-                  acceptType={["jpg, png, webp"]}
-                >
-                  {({ onImageUpload, dragProps }) => (
-                    <div
-                      className="sign-input-logo-section"
-                      onClick={onImageUpload}
-                      {...dragProps}
-                    >
-                      {isUpdated ? (
-                        images.map((image, index) => (
-                          <div key={index} className="sign-input-logo">
-                            <img src={image.data_url} alt="" width="100" />
-                            <div className="uploaded-remove-btn">
-                              <div onClick={() => onImageRemove(index)}>X</div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="sign-input-logo">
-                          <PersonIcon />
-                        </div>
-                      )}
-
-                      <div className="sign-input-subtitle">
-                        <InfoIcon /> Infos About Banner
-                        <div className="extra-info">
-                          Logo size is 500x500 pixels (i.e. square), max file
-                          size 4.5mb, allowed formats: .png, .jpg, .jpeg, .svg,
-                          .webp.
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </ImageUploading>
-
-                <ImageUploading
-                  multiple
-                  value={images}
+                  value={logoImg}
                   onChange={onChange}
                   maxNumber={maxNumber}
                   dataURLKey="data_url"
@@ -469,9 +496,68 @@ const RegisterDetails = ({ currentRegister }) => {
                       onClick={onImageUpload}
                       {...dragProps}
                     >
-                      <div className="sign-input-logo">
-                        <WallpaperIcon />
+                      {logoImg.length > 0 ? (
+                        logoImg.map((image, index) => (
+                          <div key={index} className="sign-input-logo">
+                            <img
+                              src={image.data_url}
+                              alt="Logo Upload Image"
+                              height="100"
+                              style={{ height: "100%", width: "auto" }}
+                            />
+                            <div className="uploaded-remove-btn">
+                              <div onClick={() => onImageRemove(index)}>X</div>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="sign-input-logo">
+                          <PersonIcon />
+                        </div>
+                      )}
+                      <div className="sign-input-subtitle">
+                        <InfoIcon /> Infos About Banner
+                        <div className="extra-info">
+                          Logo size is 500x500 pixels (i.e. square), max file
+                          size 4.5mb, allowed formats: .png, .jpg, .jpeg, .svg,
+                          .webp.
+                        </div>
                       </div>
+                    </div>
+                  )}
+                </ImageUploading>
+                <ImageUploading
+                  value={bannerImg}
+                  onChange={onChangeBanner}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                  acceptType={["jpg"]}
+                >
+                  {({ onImageUpload, dragProps }) => (
+                    <div
+                      className="sign-input-logo-section"
+                      onClick={onImageUpload}
+                      {...dragProps}
+                    >
+                      {bannerImg.length > 0 ? (
+                        bannerImg.map((image, index) => (
+                          <div key={index} className="sign-input-logo">
+                            <img
+                              src={image.data_url}
+                              alt="Upload Brand Image"
+                              height="100"
+                              style={{ height: "100%", width: "auto" }}
+                            />
+                            <div className="uploaded-remove-btn">
+                              <div onClick={() => onImageRemove(index)}>X</div>
+                            </div>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="sign-input-logo">
+                          <WallpaperIcon />
+                        </div>
+                      )}
                       <div className="sign-input-subtitle">
                         <InfoIcon /> Infos About Banner
                         <div className="extra-info">
@@ -490,9 +576,11 @@ const RegisterDetails = ({ currentRegister }) => {
               <a href="/sign-in"> Log in</a>
             </div>
             <div className="login-buttons">
-              <div className="default-sign-button register-button">
-                Register
-              </div>
+              <input
+                type="submit"
+                value={"Register"}
+                className="default-sign-button register-button"
+              />
             </div>
             <div className="terms-privacy-text">
               I have read and accept the{" "}
@@ -505,7 +593,7 @@ const RegisterDetails = ({ currentRegister }) => {
   );
 
   let desktopVersion = (
-    <form className="sign-background">
+    <form className="sign-background" onSubmit={handleSubmit}>
       {currentRegister === "user" && (
         <div className="sign-template">
           <div className="sign-details">
@@ -533,52 +621,93 @@ const RegisterDetails = ({ currentRegister }) => {
             </div>
             <div className="sign-inputs">
               <div className="flex gp-15 ">
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number1"
+                    type={"text"}
                     placeholder="Name"
+                    value={name}
                     onChange={(e) => {
                       setName(e.target.value);
                     }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input
-                    placeholder="Lastname"
+                </FormControl>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number2"
+                    type={"text"}
+                    placeholder="Surname"
+                    value={surname}
                     onChange={(e) => {
                       setSurName(e.target.value);
                     }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
                   />
-                </div>
+                </FormControl>
               </div>
-              <div className="sign-input">
-                <LocalPhoneIcon />
-                <input
-                  placeholder="Enter Your Mobile Number"
-                  onChange={(e) => {
-                    setNumber(e.target.value);
-                  }}
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-number3"
+                  type={"text"}
+                  placeholder="Mobile Number"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LocalPhoneIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <MailOutlineIcon />
-                <input
+              </FormControl>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email"
+                  type={"text"}
                   placeholder="Enter Your Email Address"
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
+                  value={email}
+                  onChange={(e) => handleEmailChange(e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  }
                 />
-              </div>
-              <div className="sign-input">
-                <LockIcon />
-                <input
-                  placeholder="Enter Your Password"
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+              </FormControl>
+              <FormControl required fullWidth>
+                <OutlinedInput
+                  id="standard-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter your Password"
+                  value={password}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
-              </div>
+              </FormControl>
+
               <div className="login-tip">
                 Already Have Account?
                 <a href="/sign-in"> Log in</a>
@@ -628,32 +757,183 @@ const RegisterDetails = ({ currentRegister }) => {
             <div className="sign-salon-flex">
               <div className="sign-inputs">
                 <div className="flex gp-15 ">
-                  <div className="sign-input">
-                    <PersonIcon />
-                    <input placeholder="Name" />
-                  </div>
-                  <div className="sign-input">
-                    <PersonIcon />
-                    <input placeholder="Lastname" />
-                  </div>
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number5"
+                      type={"text"}
+                      placeholder="Name"
+                      name="Name"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number6"
+                      type={"text"}
+                      placeholder="Surname"
+                      name="Surname"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input placeholder="Salon/Service Name" />
-                </div>
-                <div className="sign-input">
-                  <PersonIcon />
-                  <input placeholder="Promotion" />
-                </div>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number8"
+                    type={"text"}
+                    placeholder="About"
+                    name="About"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
 
-                <div className="sign-input">
-                  <MailOutlineIcon />
-                  <input placeholder="Enter Your Email Address" />
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-email2"
+                    type={"text"}
+                    placeholder="Enter Your Email Address"
+                    name="Email"
+                    onChange={(e) => handleEmailChange(e)}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <MailOutlineIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-password2"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Enter your Password"
+                    name="Password"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    }
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-password3"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Confirm Your Password"
+                    name="PasswordConfirm"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    }
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
+              <div className="sign-input-image  sign-inputs">
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number7"
+                    type={"text"}
+                    placeholder="Salon/Service Name"
+                    name="SalonName"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number11"
+                    type={"text"}
+                    placeholder="Phone number"
+                    name="PhoneNumber"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <Phone />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <div className="flex gp-15 ">
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number9"
+                      type={"text"}
+                      placeholder="Country"
+                      name="Country"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <PublicIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
+                  <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                    <OutlinedInput
+                      id="standard-adornment-number10"
+                      type={"text"}
+                      placeholder="City"
+                      name="City"
+                      startAdornment={
+                        <InputAdornment position="start">
+                          <LocationCityIcon />
+                        </InputAdornment>
+                      }
+                    />
+                  </FormControl>
                 </div>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number11"
+                    type={"text"}
+                    placeholder="Address"
+                    name="Address"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LocationOnIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+
                 <div className="flex space-around">
                   <ImageUploading
-                    multiple
-                    value={images}
+                    value={logoImg}
                     onChange={onChange}
                     maxNumber={maxNumber}
                     dataURLKey="data_url"
@@ -665,9 +945,22 @@ const RegisterDetails = ({ currentRegister }) => {
                         onClick={onImageUpload}
                         {...dragProps}
                       >
-                        <div className="sign-input-logo">
-                          <PersonIcon />
-                        </div>
+                        {logoImg.length > 0 ? (
+                          logoImg.map((image, index) => (
+                            <div key={index} className="sign-input-logo">
+                              <img src={image.data_url} alt="" height="100" />
+                              <div className="uploaded-remove-btn">
+                                <div onClick={() => onImageRemove(index)}>
+                                  X
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="sign-input-logo">
+                            <PersonIcon />
+                          </div>
+                        )}
                         <div className="sign-input-subtitle">
                           <InfoIcon /> Infos About Banner
                           <div className="extra-info">
@@ -682,8 +975,8 @@ const RegisterDetails = ({ currentRegister }) => {
 
                   <ImageUploading
                     multiple
-                    value={images}
-                    onChange={onChange}
+                    value={bannerImg}
+                    onChange={onChangeBanner}
                     maxNumber={maxNumber}
                     dataURLKey="data_url"
                     acceptType={["jpg"]}
@@ -694,9 +987,22 @@ const RegisterDetails = ({ currentRegister }) => {
                         onClick={onImageUpload}
                         {...dragProps}
                       >
-                        <div className="sign-input-logo">
-                          <WallpaperIcon />
-                        </div>
+                        {bannerImg.length > 0 ? (
+                          bannerImg.map((image, index) => (
+                            <div key={index} className="sign-input-logo">
+                              <img src={image.data_url} alt="" height="100" />
+                              <div className="uploaded-remove-btn">
+                                <div onClick={() => onImageRemove(index)}>
+                                  X
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="sign-input-logo">
+                            <PersonIcon />
+                          </div>
+                        )}
                         <div className="sign-input-subtitle">
                           <InfoIcon /> Infos About Banner
                           <div className="extra-info">
@@ -708,30 +1014,6 @@ const RegisterDetails = ({ currentRegister }) => {
                       </div>
                     )}
                   </ImageUploading>
-                </div>
-              </div>
-              <div className="sign-input-image">
-                <div className="sign-input">
-                  <LocalPhoneIcon />
-                  <input placeholder="Enter Your Mobile Number" />
-                </div>
-                <div className="flex gp-15 ">
-                  <div className="sign-input">
-                    <PublicIcon />
-                    <input placeholder="Country" />
-                  </div>
-                  <div className="sign-input">
-                    <LocationCityIcon />
-                    <input placeholder="City" />
-                  </div>
-                </div>
-                <div className="sign-input">
-                  <LocationOnIcon />
-                  <input placeholder="Address" />
-                </div>
-                <div className="sign-input">
-                  <LockIcon />
-                  <input placeholder="Enter Your Password" />
                 </div>
               </div>
             </div>
@@ -740,9 +1022,11 @@ const RegisterDetails = ({ currentRegister }) => {
               <a href="/sign-in"> Log in</a>
             </div>
             <div className="login-buttons">
-              <div className="default-sign-button register-button">
-                Register
-              </div>
+              <input
+                type="submit"
+                value={"Register"}
+                className="default-sign-button register-button"
+              />
             </div>
             <div className="terms-privacy-text">
               I have read and accept the{" "}

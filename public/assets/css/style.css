@@ -10256,6 +10256,11 @@ a.mapboxgl-ctrl-logo {
     height: 90px !important;
     display: flex;
     justify-content: flex-start !important;
+
+  }
+
+  .index-slider-items label{
+    cursor: pointer!important;
   }
 
   .index-slider-items img {
@@ -12134,6 +12139,7 @@ input[type="number"] {
   width: 50%;
   background-color: var(--red);
   color: var(--text-wht-color);
+  cursor: pointer;
 }
 
 .login-forgot-button {
@@ -12141,6 +12147,7 @@ input[type="number"] {
   text-align: right;
   margin: 10px 10px 20px;
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .login-tip,
@@ -12218,6 +12225,11 @@ input[type="number"] {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.sign-input-logo img{
+  height: 100%;
+  width: auto;
+  border-radius: 10px;
 }
 
 .sign-input-logo svg {

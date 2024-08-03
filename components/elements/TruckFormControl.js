@@ -33,11 +33,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                   handleUpdateSearchParams("EmissionClassType", e.target.value)
                 }
               >
-                {types.emissionclasses.map((val) => {
+                {types.emissionclasses.map((val) => (
                   <MenuItem key={val.index} value={val.index}>
                     {val.value}
-                  </MenuItem>;
-                })}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -61,11 +61,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                   )
                 }
               >
-                {types.emissionstickers.map((val) => {
+                {types.emissionstickers.map((val) => (
                   <MenuItem key={val.index} value={val.index}>
                     {val.value}
-                  </MenuItem>;
-                })}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -86,11 +86,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                   handleUpdateSearchParams("FuelType", e.target.value)
                 }
               >
-                {types.fuelTypes.map((val) => {
+                {types.fuelTypes.map((val) => (
                   <MenuItem key={val.index} value={val.index}>
                     {val.value}
-                  </MenuItem>;
-                })}
+                  </MenuItem>
+                ))}
               </Select>
             </FormControl>
           </div>
@@ -110,9 +110,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.gearboxes.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -133,9 +135,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.paints.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -158,9 +162,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.wheelTypes.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -290,9 +296,11 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.aircotypes.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>

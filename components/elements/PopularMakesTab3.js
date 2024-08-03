@@ -11,12 +11,19 @@ export default function PopularMakesTab3() {
   const path = GetPath().last;
   const [activeIndex, setActiveIndex] = useState(1);
   const [values, setValues] = useState([]);
+  const [valuesSp, setValuesSp] = useState([]);
+  const [valuesSt, setValuesSt] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await getAllAds(1, 12, path);
+        const data = await getAllAds(1, 20, path);
+        const dataSt = await getAllAds(1, 8, "trailer");
+        const dataSp = await getAllAds(1, 8, "sparepart");
+
         setValues(data?.ads || []);
+        setValuesSt(dataSt?.semiTrailersList || []);
+        setValuesSp(dataSp?.sparePartsList || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -39,7 +46,7 @@ export default function PopularMakesTab3() {
         <Categories currentIndex={false} />
         <div className="tab-content" id="pills-tabContent">
           <div className={"tab-pane fade show active"}>
-            <div className="full-background">
+            {/* <div className="full-background">
               <div className="themesflat-container">
                 <div className="divider-header ">Premium Ads</div>
                 <div className="car-list-item ">
@@ -47,7 +54,7 @@ export default function PopularMakesTab3() {
                   <AdCardTrailer premium={true} />
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="themesflat-container">
               <div className="ad-banner">
                 <img src="/assets/images/ads/ad-banner.jpg" />
@@ -76,10 +83,16 @@ export default function PopularMakesTab3() {
               <div className="themesflat-container">
                 <div className="divider-header">Trailers Exclusive</div>
                 <div className="car-list-item">
-                  <AdCardTrailer />
-                  <AdCardTrailer />
-                  <AdCardTrailer />
-                  <AdCardTrailer />
+                  {valuesSt.length > 0 &&
+                    valuesSt.map((val) => {
+                      return (
+                        <AdCardTrailer
+                          path={`Semi-Trailer|${val.id}`}
+                          key={val.id}
+                          data={val}
+                        />
+                      );
+                    })}
                   <button>See All Ads</button>
                 </div>
               </div>
@@ -90,10 +103,10 @@ export default function PopularMakesTab3() {
               </div>
               <div className="divider-header">Spare Parts</div>
               <div className="car-list-item">
-                <AdCardSparepart />
-                <AdCardSparepart />
-                <AdCardSparepart />
-                <AdCardSparepart />
+                {valuesSp.length > 0 &&
+                  valuesSp.map((val) => {
+                    return <AdCardSparepart key={val.id} data={val} />;
+                  })}
                 <button>See All Ads</button>
               </div>
             </div>

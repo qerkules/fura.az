@@ -1,25 +1,39 @@
 import React from "react";
-import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { GetCurrency } from "../tools/GetValues";
+import HoverListing from "../tools/HoverListing";
 
-export default function AdCardTrailer({ premium }) {
+export default function AdCardTrailer({ data, path }) {
+  const currency = GetCurrency(data?.currency);
+
+  const handleClick = () => {
+    router.push(`/details/${path}`);
+  };
   return (
-    <div className={`tf-car-service ${premium ? "premium" : ""}`}>
+    <div className={`tf-car-service ${data?.isPremium ? "premium" : ""}`}>
+      <HoverListing />
       <div className="image">
         <div className="stm-badge-top">
-          <div className="feature">
-            <span>NEW</span>
-          </div>
-          <div className="bottom-btn-wrap">
-            <div className="btn-group">
-              <div className="rent-button">RENT</div>
+          {data?.isNew && (
+            <div className="feature">
+              <span>NEW</span>
             </div>
-          </div>
+          )}
+          {data?.saleOrRent === "Rent" && (
+            <div className="bottom-btn-wrap">
+              <div className="btn-group">
+                <div className="rent-button">RENT</div>
+              </div>
+            </div>
+          )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">$50,000</span>
-          {premium && (
+          <span className="ad-price">
+            {currency} &nbsp;
+            {data?.price}
+          </span>
+          {data?.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
             </span>
@@ -29,7 +43,9 @@ export default function AdCardTrailer({ premium }) {
               <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/trailer.jpg"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images[0]?.path || data?.ad.image[0]?.filePath
+                    }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -38,19 +54,20 @@ export default function AdCardTrailer({ premium }) {
               <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/trailer.jpg"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images[1]?.path || data?.ad?.image[1]?.filePath
+                    }`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
                   />
                 </div>
               </div>
-              <div
-                className="listing-item view-gallery"
-                title="Lexus LC Hybrid 2024"
-              >
+              <div className="listing-item view-gallery">
                 <div className="images">
                   <img
-                    src="/assets/images/car-list/trailer.jpg"
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/${
+                      data?.images[2]?.path || data?.ad?.image[2]?.filePath
+                    }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
                   />
@@ -63,7 +80,7 @@ export default function AdCardTrailer({ premium }) {
                     <p>2 more photos</p>
                   </div>
                 </div>
-              </div>
+              </div>{" "}
               <div className="bullet-hover-listing">
                 <div className="bl-item active" />
                 <div className="bl-item" />
@@ -82,29 +99,37 @@ export default function AdCardTrailer({ premium }) {
             <FavoriteBorderIcon className="image-icon" />
           </a>
         </div>
-        <h6 className="title">BNG M2</h6>
-        <span className="sub-title">Long material Transporter</span>
+        <h6 className="title">
+          {data?.brand?.brandName} {data?.model?.modelName}
+        </h6>
+        <span className="sub-title">{data?.category.categoryName}</span>
 
         <div className="description">
           <ul>
-            <li className="listing-information transmission">
-              <div className="inner">
-                <span>Year</span>
-                <p>2020</p>
-              </div>
-            </li>
-            <li className="listing-information fuel">
-              <div className="inner">
-                <span>Weight</span>
-                <p>5 T</p>
-              </div>
-            </li>
-            <li className="listing-information size-engine">
-              <div className="inner">
-                <span>Axles</span>
-                <p>3 Axles</p>
-              </div>
-            </li>
+            {data?.year && (
+              <li className="listing-information transmission">
+                <div className="inner">
+                  <span>Year</span>
+                  <p>{data?.year}</p>
+                </div>
+              </li>
+            )}
+            {data?.licensedWeight && (
+              <li className="listing-information fuel">
+                <div className="inner">
+                  <span>Weight</span>
+                  <p>{data?.licensedWeight} T</p>
+                </div>
+              </li>
+            )}
+            {data?.axles && (
+              <li className="listing-information size-engine">
+                <div className="inner">
+                  <span>Axles</span>
+                  <p>{data?.axles} Axles</p>
+                </div>
+              </li>
+            )}
           </ul>
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}

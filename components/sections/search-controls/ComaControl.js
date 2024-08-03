@@ -5,7 +5,7 @@ import { GetTypes } from "@/components/tools/GetTypes";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
 
-const ComaControl = ({handleUpdateSearchParams}) => {
+const ComaControl = ({ handleUpdateSearchParams }) => {
   const path = GetPath().last;
   const currentCategoryId = GetCategory(path);
   const types = GetTypes(currentCategoryId);
@@ -28,9 +28,11 @@ const ComaControl = ({handleUpdateSearchParams}) => {
               }
             >
               {types.emissionstickers.map((val) => {
-                <MenuItem key={val.index} value={val.index}>
-                  {val.value}
-                </MenuItem>;
+                return (
+                  <MenuItem key={val.index} value={val.index}>
+                    {val.value}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>

@@ -408,7 +408,7 @@ const RegisterDetails = ({ currentRegister }) => {
               </FormControl>
               <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-number11"
+                  id="standard-adornment-number12"
                   type={"text"}
                   placeholder="Phone number"
                   name="PhoneNumber"
@@ -623,7 +623,7 @@ const RegisterDetails = ({ currentRegister }) => {
               <div className="flex gp-15 ">
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number1"
+                    id="standard-adornment-number1t6"
                     type={"text"}
                     placeholder="Name"
                     value={name}
@@ -639,7 +639,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 </FormControl>
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number2"
+                    id="standard-adornment-number22"
                     type={"text"}
                     placeholder="Surname"
                     value={surname}
@@ -656,7 +656,7 @@ const RegisterDetails = ({ currentRegister }) => {
               </div>
               <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
-                  id="standard-adornment-number3"
+                  id="standard-adornment-number33"
                   type={"text"}
                   placeholder="Mobile Number"
                   value={number}
@@ -759,7 +759,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 <div className="flex gp-15 ">
                   <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number5"
+                      id="standard-adornment-number53"
                       type={"text"}
                       placeholder="Name"
                       name="Name"
@@ -772,7 +772,7 @@ const RegisterDetails = ({ currentRegister }) => {
                   </FormControl>
                   <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number6"
+                      id="standard-adornment-number63"
                       type={"text"}
                       placeholder="Surname"
                       name="Surname"
@@ -786,7 +786,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 </div>
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number8"
+                    id="standard-adornment-number38"
                     type={"text"}
                     placeholder="About"
                     name="About"
@@ -865,7 +865,7 @@ const RegisterDetails = ({ currentRegister }) => {
               <div className="sign-input-image  sign-inputs">
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number7"
+                    id="standard-adornment-number73"
                     type={"text"}
                     placeholder="Salon/Service Name"
                     name="SalonName"
@@ -878,7 +878,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 </FormControl>
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number11"
+                    id="standard-adornment-number113"
                     type={"text"}
                     placeholder="Phone number"
                     name="PhoneNumber"
@@ -892,7 +892,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 <div className="flex gp-15 ">
                   <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number9"
+                      id="standard-adornment-number93"
                       type={"text"}
                       placeholder="Country"
                       name="Country"
@@ -905,7 +905,7 @@ const RegisterDetails = ({ currentRegister }) => {
                   </FormControl>
                   <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                     <OutlinedInput
-                      id="standard-adornment-number10"
+                      id="standard-adornment-number103"
                       type={"text"}
                       placeholder="City"
                       name="City"
@@ -919,7 +919,7 @@ const RegisterDetails = ({ currentRegister }) => {
                 </div>
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
-                    id="standard-adornment-number11"
+                    id="standard-adornment-number1123"
                     type={"text"}
                     placeholder="Address"
                     name="Address"

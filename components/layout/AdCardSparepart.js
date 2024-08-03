@@ -6,23 +6,16 @@ import { useRouter } from "next/navigation";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HoverListing from "../tools/HoverListing";
+import { GetCurrency } from "../tools/GetValues";
 
 export default function AdCardSparePart({ data }) {
   const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
+  const currency = data?.currency !== null ? GetCurrency(data?.currency) : "$";
+
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
 
-  useEffect(() => {
-    // Check if window is defined
-    if (typeof window !== "undefined") {
-      setIsClient(true);
-    }
-  }, []);
-
   const handleClick = (path) => {
-    if (isClient) {
-      // router.push(path);
-    }
+    router.push(`/details/${path}`);
   };
 
   useEffect(() => {
@@ -57,12 +50,17 @@ export default function AdCardSparePart({ data }) {
 
       <div className="image" onClick={() => handleClick(data?.path)}>
         <div className="stm-badge-top">
-          <div className="feature">
-            <span>NEW</span>
-          </div>
+          {data?.isNew && (
+            <div className="feature">
+              <span>NEW</span>
+            </div>
+          )}
         </div>
         <div className="listing-images">
-          <span className="ad-price">{(data?.currency, data?.price)}</span>
+          <span className="ad-price">
+            {currency}&nbsp;
+            {data?.price}
+          </span>
           {data?.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />

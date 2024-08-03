@@ -252,7 +252,6 @@ export default function ListingDetails({ params }) {
                 relatedAds?.map((ad) => {
                   return <AdCard key={ad.id} data={ad} />;
                 })}
-              <button>See All Ads</button>
             </div>
             <div className="ad-banner">
               <img src="/assets/images/ads/ad-banner.jpg" />

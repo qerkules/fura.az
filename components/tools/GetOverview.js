@@ -4,7 +4,6 @@ const GetOverview = (category) => {
   const truck = [
     { text: "Year", obj: "year" },
     { text: "Distance", obj: "distance" },
-    { text: "Km/Miles", obj: "kmMiles" },
     { text: "Gearbox", obj: "gearBox" },
     { text: "Permissible Gross Vehicle Weight (GVW)", obj: "licencedWeight" },
     { text: "Axles", obj: "axles" },
@@ -21,6 +20,15 @@ const GetOverview = (category) => {
     { text: "Driving Cabin", obj: "drivingCabin" },
     { text: "Air Conditioning", obj: "airConditioning" },
   ];
+  const forklift = [
+    { text: "Year", obj: "year" },
+    { text: "Hours of Operation", obj: "hoursOfOperation" },
+    { text: "Gearbox", obj: "gearBox" },
+    { text: "Fuel Type", obj: "fuelType" },
+    { text: "Lifting Capacity (kg)", obj: "liftingCapacity" },
+    { text: "Lift Height (mm)", obj: "liftHeight" },
+    { text: "Equipment Height (mm)", obj: "equipmentHeight" },
+  ];
   const coMa = [
     { text: "Year", obj: "year" },
     { text: "Hours of Operation", obj: "hoursOfOperation" },
@@ -33,25 +41,39 @@ const GetOverview = (category) => {
     { text: "Air Conditioning", obj: "airConditioning" },
     { text: "Engine Power", obj: "enginePowerHP" },
   ];
+  const bus = [
+    { text: "Year", obj: "year" },
+    { text: "Distance", obj: "distance" },
+    { text: "Engine Power", obj: "enginePowerHP" },
+    { text: "Cylinder Volume (ccm)", obj: "cylinderVolume" },
+    { text: "Steering", obj: "steering" },
+    { text: "Gearbox", obj: "gearBox" },
+    { text: "Fuel Type", obj: "fuelType" },
+    { text: "Paint", obj: "paint" },
+    { text: "Number Of Seats", obj: "paint" },
+    { text: "Emissions Sticker", obj: "emissionSticker" },
+    { text: "Emission Class", obj: "emissionClass" },
+    { text: "Air Conditioning", obj: "airConditioning" },
+  ];
 
-//   if (category === "av") return av;
+  //   if (category === "av") return av;
 
-//   if (category === "sparepart") return sparepart;
+  //   if (category === "sparepart") return sparepart;
 
-//   if (category === "bus") return bus;
+  //   if (category === "bus") return bus;
 
-//   if (category === "co-ma") return coma;
+  //   if (category === "co-ma") return coma;
 
-//   if (category === "forklift") return forklift;
+  //   if (category === "forklift") return forklift;
 
   if (category === "semi-truck" || category === "truck") {
     return truck;
   }
 
-//   if (category === "transporter-truck") return transporterTruck;
-//   if (category === "trailer") return trailer;
+  //   if (category === "transporter-truck") return transporterTruck;
+  //   if (category === "trailer") return trailer;
 
-//   if (category === "trailer-refrigator") return trailerRefrigator;
+  //   if (category === "trailer-refrigator") return trailerRefrigator;
 };
 
 export default GetOverview;

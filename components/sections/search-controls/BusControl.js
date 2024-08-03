@@ -35,9 +35,11 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.emissionclasses.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -63,9 +65,11 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.emissionstickers.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -88,9 +92,11 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.fuelTypes.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -111,9 +117,11 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.gearboxes.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>
@@ -134,9 +142,11 @@ const BusControl = ({ handleUpdateSearchParams }) => {
                 }
               >
                 {types.paints.map((val) => {
-                  <MenuItem key={val.index} value={val.index}>
-                    {val.value}
-                  </MenuItem>;
+                  return (
+                    <MenuItem key={val.index} value={val.index}>
+                      {val.value}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>

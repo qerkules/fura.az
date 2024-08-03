@@ -12232,6 +12232,11 @@ input[type="number"] {
   border-radius: 10px;
 }
 
+.salon-location{
+  margin-left: 15px;
+  font-size: 12px;
+}
+
 .sign-input-logo svg {
   font-size: 80px;
 }

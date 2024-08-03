@@ -1,15 +1,15 @@
 import React from "react";
 import PhoneIcon from "@mui/icons-material/Phone";
 import CheckIcon from "@mui/icons-material/Check";
-const SaloonCard = () => {
+const SaloonCard = ({ data }) => {
   return (
     <div className="salon-card">
       <div className="salon-image">
-        <img src="/assets/images/logo/scania.jpg" />
+        <img src={`${process.env.NEXT_PUBLIC_API_LINK}/${data.logo}`} />
       </div>
       <div className="salon-details">
         <div className="salon-title">
-          Scania{" "}
+          {data.salonName}
           <span className="salon-official">
             <CheckIcon />
           </span>
@@ -25,6 +25,9 @@ const SaloonCard = () => {
         <a href="/saloon-details" className="salon-ad-count">
           10 Elan
         </a>
+        <span className="salon-location">
+          {data.country},{data.city}
+        </span>
       </div>
     </div>
   );

@@ -4,12 +4,10 @@ import { DarkModeProvider } from "@/components/layout/DarkModeContext";
 
 export default function Home() {
   return (
-    <>
-      <DarkModeProvider>
-        <Layout>
-          <TabCarService />
-        </Layout>
-      </DarkModeProvider>
-    </>
+    <DarkModeProvider>
+      <Layout>
+        <TabCarService />
+      </Layout>
+    </DarkModeProvider>
   );
 }

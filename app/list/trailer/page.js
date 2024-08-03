@@ -7,6 +7,7 @@ import SearchFilter from "@/components/sections/SearchFilter";
 import { Pagination, Stack } from "@mui/material";
 import { getAllAds } from "@/components/tools/GetAds";
 import { GetPath } from "@/components/tools/GetPath";
+import AdCardTrailer from "@/components/layout/AdCardTrailer";
 
 export default function CarList() {
   const path = GetPath().last;
@@ -23,7 +24,7 @@ export default function CarList() {
         const data = await getAllAds(currentPage, perPageCount, path);
         setPageCount(data?.pageResponse?.totalPages || 1);
         setTotalAdCount(data?.pageResponse.totalCount);
-        setValues(data?.trucksList || []);
+        setValues(data?.semiTrailersList || []);
       } catch (error) {
         console.error("Error fetching data: ", error);
       }
@@ -59,7 +60,7 @@ export default function CarList() {
             <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
-                  <SearchFilter   setValues={setValues}/>
+                  <SearchFilter setValues={setValues} />
                 </div>
                 <div className="col-md-12 col-lg-9 listing-list-car-wrap">
                   <form action="/" className="tf-my-listing-search">
@@ -151,7 +152,7 @@ export default function CarList() {
                         {values &&
                           values.map((val) => {
                             return (
-                              <AdCard
+                              <AdCardTrailer
                                 key={val.id}
                                 path={`Semi-Trailer|${val.id}`}
                                 data={val}

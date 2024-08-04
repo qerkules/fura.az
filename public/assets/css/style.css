@@ -13126,3 +13126,68 @@ h6.title {
   margin-top: 10px;
   color: #0a1426;
 }
+
+.balance-container{
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--feature-bg);
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+.balance-details{
+
+}
+
+.balance-title{
+
+  font-size: 10px;
+  color: var(--icon-color);
+  line-height: 12px;
+
+}
+
+.balance-amount{
+
+}
+
+.topup-balance{
+
+  border-radius: 10px;
+  padding: 5px 10px;
+  border: 1px solid;
+  background-color: var(--icon-color);
+  color: var(--text-wht-color);
+  font-size: 12px;
+display: flex;
+align-items: center;
+  gap: 5px;
+}
+.tipp-create-new-ad{
+  padding: 0px;
+  height: 20px;
+}
+.tipp-create-new-ad a{
+  color: var(--red);
+  font-size: 12px;
+  line-height: 14px;
+  text-decoration: underline;
+}
+.no-ads-message > p{
+  font-size: 10px;
+  color: var(--text-color);
+  line-height: 14px;
+
+}
+.no-ads-message{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 80px;
+  margin-top: 80px;
+}

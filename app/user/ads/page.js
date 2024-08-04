@@ -40,10 +40,16 @@ const page = () => {
       <div className="themesflat-container profile-container">
         <div className="myprofile-title"> My Ads</div>
 
-        {/* <div className="balance-container">
-          <div>Your Balance 15.00 $</div>
-          <div>Top up Balance</div>
-        </div> */}
+        <div className="balance-container">
+          <div className="balance-details">
+            <div className="balance-title">Your Balance</div>
+            <div className="balance-amount">15.00 $</div>
+          </div>
+
+          <div className="topup-balance">
+            Top up Balance <i className="icon-add-button-1" />{" "}
+          </div>
+        </div>
         <div className="my-ads-container">
           <div className="my-ads-category active">Vehicle Ads</div>
           <div className="my-ads-category">Semi-Trailer Ads</div>
@@ -53,15 +59,20 @@ const page = () => {
         <div className="widget-car-service" style={{ marginTop: "40px" }}>
           <div className="tab-content" id="pills-tabContent">
             <div className="tab-pane fade show active">
-              <div className="car-list-item">
-                {values.length > 0 ? (
-                  values.map((val) => {
+              {values.length > 0 ? (
+                <div className="car-list-item">
+                  {values.map((val) => {
                     return <AdCardUser key={val.id} data={val} />;
-                  })
-                ) : (
-                  <div>Create Ad</div>
-                )}
-              </div>
+                  })}
+                </div>
+              ) : (
+                <div className="no-ads-message">
+                  <p>You Dont have Ads..</p>
+                  <div className="tipp-create-new-ad">
+                    <a href="/create">Create New Ad</a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <Stack spacing={2} alignItems="center" mt={2}>

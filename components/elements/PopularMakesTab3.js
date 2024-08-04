@@ -6,8 +6,10 @@ import AdCardTrailer from "../layout/AdCardTrailer";
 import Categories from "../sections/Categories";
 import { getAllAds } from "../tools/GetAds";
 import { GetPath } from "../tools/GetPath";
+import { useRouter } from "next/navigation";
 
 export default function PopularMakesTab3() {
+  const router = useRouter();
   const path = GetPath().last;
   const [activeIndex, setActiveIndex] = useState(1);
   const [values, setValues] = useState([]);
@@ -73,7 +75,9 @@ export default function PopularMakesTab3() {
                       );
                     }
                   })}
-                <button>See All Ads</button>
+                <button onClick={() => router.push("/list")}>
+                  See All Ads
+                </button>
               </div>
               <div className="ad-banner">
                 <img src="/assets/images/ads/ad-banner.jpg" />
@@ -93,7 +97,9 @@ export default function PopularMakesTab3() {
                         />
                       );
                     })}
-                  <button>See All Ads</button>
+                  <button onClick={() => router.push("/list/trailer")}>
+                    See All Ads
+                  </button>
                 </div>
               </div>
             </div>
@@ -107,7 +113,9 @@ export default function PopularMakesTab3() {
                   valuesSp.map((val) => {
                     return <AdCardSparepart key={val.id} data={val} />;
                   })}
-                <button>See All Ads</button>
+                <button onClick={() => router.push("/list/sparepart")}>
+                  See All Ads
+                </button>
               </div>
             </div>
           </div>

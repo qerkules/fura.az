@@ -85,7 +85,7 @@ const DefaultFormControl = ({ handleUpdateSearchParams }) => {
             >
               {types.brands.map((val) => {
                 return (
-                  <MenuItem key={val.id} value={val.brandName}>
+                  <MenuItem key={val.id} value={val.id}>
                     {val.brandName}
                   </MenuItem>
                 );

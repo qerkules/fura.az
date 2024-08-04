@@ -5908,7 +5908,7 @@ ul.social-icon li a i:hover {
 /*------------ Widget car service ---------------- */
 .widget-car-service {
   margin-top: -85px;
-  padding-bottom: 137px;
+  padding-bottom: 10px;
 }
 .widget-car-service .header-section {
   display: flex;
@@ -12201,7 +12201,9 @@ input[type="number"] {
   justify-content: center;
   align-items: center;
 }
-
+.mt-110{
+  margin-top: 110px;
+}
 .sign-input-banner svg {
   font-size: 80px;
 }

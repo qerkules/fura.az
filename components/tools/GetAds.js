@@ -1,6 +1,4 @@
-import React from "react";
 import axios from "axios";
-import { useGetPath } from "./GetPath";
 
 export const getAllAds = async (currentPage, pageSize, path) => {
   let apiPath = "/Ad/GetAllAds";

@@ -16,6 +16,7 @@ const ExtraFormControl = ({ handleUpdateSearchParams }) => {
   const path = GetPath().last;
   const currentCategoryId = GetCategory(path);
   const types = GetTypes(currentCategoryId);
+  
   return (
     <FormControl id="filter-list-car-side-bar" className="list-filter">
       <div className="form-group-wrap">

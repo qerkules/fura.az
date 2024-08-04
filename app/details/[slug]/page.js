@@ -44,9 +44,10 @@ export default function ListingDetails({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetByAdId?adId=${adId}`
-        );
+        let adurl = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetByAdId?adId=${adId}`;
+        if (adPath === "TruckOver")
+          adurl = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetByTruckOverAdId?adId=${adId}`;
+        const data = await axios.get(adurl);
         setProduct(data?.data || {});
 
         if (adPath === "AgriculturalVehicle")
@@ -72,6 +73,7 @@ export default function ListingDetails({ params }) {
         })
         .filter(Boolean);
       setShowFeature(setFeature);
+      console.log(setFeature);
     }
   }, [product, features]);
   useEffect(() => {
@@ -174,25 +176,27 @@ export default function ListingDetails({ params }) {
                       <h4 className="title">Description</h4>
                       <p>{product.adDetails}</p>
                     </div>
-                    <div className="wrap-car-feature wrap-style">
-                      <h4 className="title">Features</h4>
-                      <div className="tf-listing-info">
-                        <div id="tf-features">
-                          {showFeature.map((data, index) => {
-                            if (data && data.value)
-                              return (
-                                <div
-                                  key={index}
-                                  className="listing-feature-wrap"
-                                >
-                                  <i className={` ${"icon-Vector-32"}`} />
-                                  {data.text}
-                                </div>
-                              );
-                          })}
+                    {showFeature.length > 0 && (
+                      <div className="wrap-car-feature wrap-style">
+                        <h4 className="title">Features</h4>
+                        <div className="tf-listing-info">
+                          <div id="tf-features">
+                            {showFeature.map((data, index) => {
+                              if (data && data.value)
+                                return (
+                                  <div
+                                    key={index}
+                                    className="listing-feature-wrap"
+                                  >
+                                    <i className={` ${"icon-Vector-32"}`} />
+                                    {data.text}
+                                  </div>
+                                );
+                            })}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 col-md-12">

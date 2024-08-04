@@ -11550,7 +11550,7 @@ ul#navbar-mobile-bottom li {
   left: -10px;
   display: block;
   background: #fff;
-  width: 140px;
+  width: 100px;
   padding-top: 0px;
   z-index: 1;
   border-radius: 5px;
@@ -11571,16 +11571,21 @@ ul#navbar-mobile-bottom li {
   align-items: center;
   gap: 2px;
 }
-.sl-nav li ul li span {
+.sl-nav li ul li a span {
   padding-left: 5px;
 }
-.sl-nav li ul li span:hover,
-.sl-nav li ul li span.active {
+.sl-nav li ul li a span:hover,
+.sl-nav li ul li a span.active {
   color: #146c78;
+}
+.sl-nav a {
+  color: #000;
 }
 .language-shower {
   margin-left: 5px;
 }
+
+
 .sl-flag {
   display: inline-block;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
@@ -11592,13 +11597,14 @@ ul#navbar-mobile-bottom li {
   top: 2px;
   overflow: hidden;
 }
-.upheader-item a {
+.upheader-item > a {
   display: flex;
   align-items: center;
   position: relative;
   text-decoration: none;
 }
-.upheader-item a::after {
+
+.upheader-item > a::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -11611,7 +11617,8 @@ ul#navbar-mobile-bottom li {
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
-.upheader-item a:hover::after {
+
+.upheader-item > a:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }

@@ -87,65 +87,35 @@ export default function Header3({ handleMobileMenu }) {
                 </div>
 
                 <div className="upheader-item">
-                  <div className="nav-wrapper">
-                    <div className="sl-nav">
-                      <LanguageIcon />
-                      <ul>
-                        <li>
-                          <b>Eng</b>{" "}
-                          <i
-                            className="fa fa-angle-down"
-                            aria-hidden="true"
-                          ></i>
-                          <div className="triangle"></div>
-                          <ul>
-                            <li>
-                              <i className="sl-flag flag-usa">
-                                <div id="germany"></div>
-                              </i>
-                              <span className="active">Eng</span>
-                            </li>
-                            <li>
-                              <i className="sl-flag flag-usa">
-                                <div id="germany"></div>
-                              </i>
-                              <span>Ru</span>
-                            </li>
-                            <li>
-                              <i className="sl-flag flag-usa">
-                                <div id="germany"></div>
-                              </i>
-                              <span>Az</span>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                  <LanguageSwitcher />
                 </div>
               </div>
               <div className="col-md-2 flex-end">
                 <div className="register ml--18">
                   <div className="flex align-center">
                     {username ? (
-                      <a
-                        onClick={logOut}
-                        data-bs-toggle="modal"
-                        role="button"
-                        href="/"
-                        className="header-login-text"
-                      >
-                        &nbsp;Log out
-                      </a>
+                      <div className="upheader-item">
+                        <a
+                          onClick={logOut}
+                          data-bs-toggle="modal"
+                          role="button"
+                          href="/"
+                          className="header-login-text"
+                        >
+                          &nbsp;Log out
+                        </a>
+                      </div>
                     ) : (
-                      <a
-                        data-bs-toggle="modal"
-                        role="button"
-                        href="/sign-in"
-                        className="header-login-text"
-                      >
-                        &nbsp;Login
-                      </a>
+                      <div className="upheader-item">
+                        <a
+                          data-bs-toggle="modal"
+                          role="button"
+                          href="/sign-in"
+                          className="header-login-text"
+                        >
+                          &nbsp;Login
+                        </a>
+                      </div>
                     )}
                   </div>
                 </div>

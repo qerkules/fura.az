@@ -32,12 +32,13 @@ export default function ListingDetails({ params }) {
   const features = useMemo(() => GetFeatures("semi-truck"), []);
 
   const getCurrentField = (data) => {
+    console.log(adPath, data)
     if (adPath === "AgriculturalVehicle") return data?.agriculturalList;
     if (adPath === "Bus") return data?.busesList;
     if (adPath === "ConstructionMachineary")
       return data?.constructionMachineryList;
     if (adPath === "Forklift") return data?.forkliftsList;
-    if (adPath === "Semi-Trailer Truck") return data?.trucksList;
+    if (adPath === "SemiTrailerTruck") return data?.trucksList;
     if (adPath === "Truck Over 7.5t") return data?.trucksList;
     if (adPath === "Truck Up 7.5t") return data?.trucksUnderList;
     // if (category === "Sparepart") return "Sparepart";

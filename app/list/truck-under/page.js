@@ -49,7 +49,7 @@ export default function CarList() {
           <div className="widget-banner-car-listing banner-car-listing-list truckUnder-bg">
             <div className="themesflat-container full">
               <div className="banner-car-listing">
-                <h1 className="title text-white">Transporter Trucks</h1>
+                <h1 className="title text-white">Truck up 7.5T</h1>
               </div>
             </div>
           </div>

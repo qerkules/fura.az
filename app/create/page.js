@@ -60,7 +60,7 @@ const page = () => {
             </a>
             <a href="/create/transporter-truck">
               <button className="index-slider-items" id="sp">
-                <label htmlFor="sp">Transporter Truck</label>
+                <label htmlFor="sp">Truck up 7.5T</label>
                 <img src="/assets/images/categories/n1.png" alt="" />
               </button>
             </a>

@@ -8,7 +8,7 @@ const Categories = ({ currentIndex }) => {
     { path: "trailer", index: 0, name: "Trailer", image: "n3" },
     { path: "truck", index: 1, name: "Truck", image: "n1" },
     { path: "semi-truck", index: 2, name: "Semi Trailer Truck", image: "n2" },
-    { path: "truck-under", index: 3, name: "Transporter Truck", image: "n1" },
+    { path: "truck-under", index: 3, name: "Truck up 7.5T", image: "n1" },
     { path: "av", index: 4, image: "n5", name: "Agriculture Machineary" },
     { path: "bus", index: 5, image: "n6", name: "Bus" },
     { path: "co-ma", index: 6, image: "n4", name: "Construction Machineary" },

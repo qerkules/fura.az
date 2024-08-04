@@ -29,7 +29,7 @@ const GetOverview = (category) => {
     { text: "Lift Height (mm)", obj: "liftHeight" },
     { text: "Equipment Height (mm)", obj: "equipmentHeight" },
   ];
-  const coMa = [
+  const coma = [
     { text: "Year", obj: "year" },
     { text: "Hours of Operation", obj: "hoursOfOperation" },
     { text: "Emissions Sticker", obj: "emissionSticker" },
@@ -56,19 +56,32 @@ const GetOverview = (category) => {
     { text: "Air Conditioning", obj: "airConditioning" },
   ];
 
-  //   if (category === "av") return av;
+  const trailer = [
+    { text: "Year", obj: "year" },
+    { text: "Permissible Gross Vehicle Weight (GVW)", obj: "licencedWeight" },
+    { text: "Vehicle Width (mm)", obj: "vehicleWidth" },
+    { text: "Vehicle Height (mm)", obj: "vehicleHeight" },
+    { text: "Load Capacity (kg)", obj: "loadCapacity" },
+    { text: "Loading Space Length (mm)", obj: "axles" },
+    { text: "Loading Area Width (mm)", obj: "loadCapacity" },
+    { text: "Loading Area Height (mm)", obj: "loadCapacity" },
+    { text: "Axles", obj: "axles" },
+    { text: "Door locks", obj: "doorLocks" },
+    { text: "Internal Volume (m³)", obj: "axles" },
+    { text: "Hydraulic Equipment", obj: "axles" },
+    { text: "Cooling unit", obj: "axles" },
+    { text: "Cooling unit model", obj: "axles" },
+    { text: "Engine working hours", obj: "axles" },
+  ];
 
-  //   if (category === "sparepart") return sparepart;
-
-  //   if (category === "bus") return bus;
-
-  //   if (category === "co-ma") return coma;
-
-  //   if (category === "forklift") return forklift;
-
-  if (category === "semi-truck" || category === "truck") {
-    return truck;
-  }
+  if (category === "Agricultural Vehicle") return av;
+  if (category === "Bus") return bus;
+  if (category === "Construction Machinery") return coma;
+  if (category === "Forklift") return forklift;
+  if (category === "Semi-Trailer Truck") return truck;
+  if (category === "Truck Over 7.5t") return truck;
+  if (category === "Truck Up 7.5t") return truck;
+  if (category === "Semi-Trailer") return trailer;
 
   //   if (category === "transporter-truck") return transporterTruck;
   //   if (category === "trailer") return trailer;

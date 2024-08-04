@@ -170,7 +170,7 @@ export default function AdCard({ data, path }) {
                 </div>
               </li>
             )}
-            {data.distance !== 0 && (
+            {data.distance && data.distance !== 0 && (
               <li className="listing-information size-engine">
                 <div className="inner">
                   <span>Mileage</span>

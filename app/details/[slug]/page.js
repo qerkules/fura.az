@@ -16,7 +16,6 @@ import EmojiFlagsIcon from "@mui/icons-material/EmojiFlags";
 import ModalComplain from "@/components/elements/ModalComplain";
 
 export default function ListingDetails({ params }) {
-  const overview = GetOverview("semi-truck");
   const inputString = params.slug;
   const [product, setProduct] = useState({});
   const [relatedAds, setRelatedAds] = useState([]);
@@ -26,16 +25,17 @@ export default function ListingDetails({ params }) {
 
   const decodedString = decodeURIComponent(inputString);
   const parts = decodedString.split("|");
+
   const adPath = GetProductTypes(parts[0]);
+  const overview = GetOverview(parts[0]);
   const adId = parts[1];
 
   const features = useMemo(() => GetFeatures("semi-truck"), []);
 
   const getCurrentField = (data) => {
-    console.log(adPath, data)
     if (adPath === "AgriculturalVehicle") return data?.agriculturalList;
     if (adPath === "Bus") return data?.busesList;
-    if (adPath === "ConstructionMachineary")
+    if (adPath === "ConstructionMachinery")
       return data?.constructionMachineryList;
     if (adPath === "Forklift") return data?.forkliftsList;
     if (adPath === "SemiTrailerTruck") return data?.trucksList;
@@ -57,6 +57,8 @@ export default function ListingDetails({ params }) {
 
         if (adPath === "AgriculturalVehicle")
           url = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetAllAgriculturalAds?CurrentPage=1&PageSize=8`;
+        if (adPath === "ConstructionMachinery")
+          url = `${process.env.NEXT_PUBLIC_API_LINK}/${adPath}/GetAll${adPath}Ad?CurrentPage=1&PageSize=8`;
 
         const datas = await axios.get(url);
         setRelatedAds(getCurrentField(datas?.data) || []);
@@ -82,17 +84,19 @@ export default function ListingDetails({ params }) {
   }, [product, features]);
   useEffect(() => {
     if (Object.keys(product).length > 0) {
-      const setFeature = overview.map((val) => {
-        if (
-          product[val.obj] !== undefined ||
-          product[val.obj] !== "" ||
-          product[val.obj] !== " " ||
-          product[val.obj] !== 0
-        ) {
-          return { text: val.text, value: product[val.obj] };
-        }
-      });
-      // Remove undefined values
+      const setFeature = overview
+        .map((val) => {
+          if (
+            product[val.obj] !== undefined &&
+            product[val.obj] !== null &&
+            product[val.obj] !== "" &&
+            product[val.obj] !== " " &&
+            product[val.obj] !== 0
+          ) {
+            return { text: val.text, value: product[val.obj] };
+          }
+        })
+        .filter(Boolean);
       setOverviewArray(setFeature);
     }
   }, [product, features]);

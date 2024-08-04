@@ -3,7 +3,6 @@ import Link from "next/link";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ContrastIcon from "@mui/icons-material/Contrast";
-import LanguageIcon from "@mui/icons-material/Language";
 import MobileNavbar from "../MobileNavbar";
 import { Badge } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
@@ -12,6 +11,7 @@ import EmojiTransportationIcon from "@mui/icons-material/EmojiTransportation";
 import LanguageSwitcher from "@/components/elements/LanguageSwitcher";
 import LogoutIcon from "@mui/icons-material/Logout";
 import useUser from "@/components/hooks/useUser";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export default function Header3({ handleMobileMenu }) {
   const [username] = useUser();
@@ -98,11 +98,12 @@ export default function Header3({ handleMobileMenu }) {
                         <a
                           onClick={logOut}
                           data-bs-toggle="modal"
+                          href="/user/profile"
                           role="button"
-                          href="/"
                           className="header-login-text"
                         >
-                          &nbsp;Log out
+                          <AccountCircleIcon />
+                          <span className="text">{username}</span>
                         </a>
                       </div>
                     ) : (

@@ -46,7 +46,7 @@ export default function CarList() {
     <>
       <Layout headerStyle={1} footerStyle={1}>
         <div>
-          <div className="widget-banner-car-listing banner-car-listing-list forklift-bg">
+          <div className="widget-banner-car-listing banner-car-listing-list co-ma-bg">
             <div className="themesflat-container full">
               <div className="banner-car-listing">
                 <h1 className="title text-white">Construction Machinery</h1>
@@ -57,11 +57,14 @@ export default function CarList() {
           <div className="widget-car-listing-list">
             <Categories currentIndex={6} />
             <div className="themesflat-container">
+              <div className="ad-banner">
+                <img src="/assets/images/ads/ad-banner.jpg" />
+              </div>
+            </div>
+            <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
-                  <SearchFilter
-                    setValues={setValues}
-                  />
+                  <SearchFilter setValues={setValues} />
                 </div>
                 <div className="col-md-12 col-lg-9 listing-list-car-wrap">
                   <form action="/" className="tf-my-listing-search">
@@ -175,6 +178,11 @@ export default function CarList() {
                 shape="rounded"
               />
             </Stack>
+            <div className="themesflat-container mt-15">
+              <div className="ad-banner">
+                <img src="/assets/images/ads/ad-banner.jpg" />
+              </div>
+            </div>
           </div>
         </div>
       </Layout>

@@ -17,7 +17,8 @@ export const GetCategory = (category) => {
   if (category === "forklift") return forkliftId;
   if (category === "truck") return truckId;
   if (category === "semi-truck") return sttId;
-  if (category === "transporter-truck") return transportTruckId;
+  if (category === "truck-under" || category === "transporter-truck")
+    return transportTruckId;
   if (category === "trailer") return trailerId;
   if (category === "services") return serivceId;
 };

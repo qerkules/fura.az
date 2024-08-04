@@ -57,6 +57,11 @@ export default function CarList() {
           <div className="widget-car-listing-list">
             <Categories currentIndex={5} />
             <div className="themesflat-container">
+              <div className="ad-banner">
+                <img src="/assets/images/ads/ad-banner.jpg" />
+              </div>
+            </div>
+            <div className="themesflat-container">
               <div className="row car-listing-list">
                 <div className="col-md-12 col-lg-3">
                   <SearchFilter setValues={setValues} />
@@ -173,6 +178,11 @@ export default function CarList() {
                 shape="rounded"
               />
             </Stack>
+            <div className="themesflat-container mt-15">
+              <div className="ad-banner">
+                <img src="/assets/images/ads/ad-banner.jpg" />
+              </div>
+            </div>
           </div>
         </div>
       </Layout>

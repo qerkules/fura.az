@@ -10250,9 +10250,9 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 767px) {
-.footer-bottom .bottom-bar-menu ul:first-child {
-  flex-direction: column;
-}
+  .footer-bottom .bottom-bar-menu ul:first-child {
+    flex-direction: column;
+  }
   .footer-bottom {
     grid-template-columns: 1fr;
     gap: 15px;
@@ -13005,4 +13005,31 @@ h6.title {
 .google-play-link {
   width: 25px;
   height: 25px;
+}
+.privacy-policy {
+  padding: 40px;
+}
+.privacy-policy h1 {
+  font-size: 32px;
+  line-height: 32px;
+}
+.privacy-policy h1,
+.privacy-policy h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.privacy-policy h2 {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.privacy-policy ul li .prefix-number {
+  color: var(--red);
+  font-weight: 600;
+  margin-right: 5px;
+}
+.privacy-policy ul li {
+  margin-bottom: 5px;
 }

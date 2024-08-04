@@ -27,7 +27,7 @@ export default function Footer1() {
                   <Link href="/#">Terms & Conditions</Link>
                 </li>
                 <li>
-                  <Link href="/#">Privacy &amp; Policy</Link>
+                  <Link href="/privacy-policy">Privacy &amp; Policy</Link>
                 </li>
               </ul>
               <ul className="social-icon">

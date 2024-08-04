@@ -11,6 +11,9 @@ import axios from "axios";
 import { GetFeatures } from "@/components/tools/GetFeatures";
 import GetOverview from "@/components/tools/GetOverview";
 import GetProductTypes from "@/components/tools/GetProductTypes";
+import Breadcrumb from "@/components/layout/Breadcrumb";
+import EmojiFlagsIcon from "@mui/icons-material/EmojiFlags";
+import ModalComplain from "@/components/elements/ModalComplain";
 
 export default function ListingDetails({ params }) {
   const overview = GetOverview("semi-truck");
@@ -19,6 +22,7 @@ export default function ListingDetails({ params }) {
   const [relatedAds, setRelatedAds] = useState([]);
   const [showFeature, setShowFeature] = useState([]);
   const [overviewArray, setOverviewArray] = useState([]);
+  const [isComplainClicked, setIsComplainClicked] = useState(false);
 
   const decodedString = decodeURIComponent(inputString);
   const parts = decodedString.split("|");
@@ -67,13 +71,12 @@ export default function ListingDetails({ params }) {
     if (Object.keys(product).length > 0) {
       const setFeature = features
         .map((val) => {
-          if (product[val.obj] !== undefined) {
+          if (product[val.obj] !== undefined && product[val.obj] === true) {
             return { text: val.value, value: product[val.obj] };
           }
         })
         .filter(Boolean);
       setShowFeature(setFeature);
-      console.log(setFeature);
     }
   }, [product, features]);
   useEffect(() => {
@@ -97,18 +100,7 @@ export default function ListingDetails({ params }) {
     <>
       <Layout headerStyle={1} footerStyle={1}>
         <div>
-          <div className="widget-breakcrumb">
-            <div className="themesflat-container">
-              <div className="breakcrumb">
-                <div className="title-breakcrumb">
-                  <Link className="home" href="/">
-                    Home
-                  </Link>
-                  <span>{adPath}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Breadcrumb category={adPath} product={product?.brand?.brandName} />
 
           <div className="widget-property-detail">
             <div className="themesflat-container">
@@ -139,6 +131,15 @@ export default function ListingDetails({ params }) {
                         <Link href="/#">
                           <i className="icon-shuffle-2-11" />
                           <span>Compare</span>
+                        </Link>
+                        <Link
+                          href=""
+                          onClick={() => {
+                            setIsComplainClicked(true);
+                          }}
+                        >
+                          <EmojiFlagsIcon />
+                          <span>Report</span>
                         </Link>
                       </div>
                     </div>
@@ -263,6 +264,7 @@ export default function ListingDetails({ params }) {
           </div>
         </div>
       </Layout>
+      {isComplainClicked && <ModalComplain setter={setIsComplainClicked} />}
     </>
   );
 }

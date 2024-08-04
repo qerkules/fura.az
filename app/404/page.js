@@ -5,8 +5,7 @@ export default function Home() {
 
     return (
         <>
-
-            <Layout breadcrumbTitle="404 Not Found">
+            <Layout>
                 <div className="widget-error-404">
                     <div className="themesflat-container">
                         <div className="error-404 t-al-center">

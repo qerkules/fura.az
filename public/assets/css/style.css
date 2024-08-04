@@ -7821,7 +7821,8 @@ a.mapboxgl-ctrl-logo {
 .icon-boxs > a:hover {
   color: #d01818;
 }
-.icon-boxs > a i {
+.icon-boxs > a i,
+.icon-boxs > a svg {
   color: #d01818;
   margin-right: 7px;
 }
@@ -11859,7 +11860,11 @@ input[type="number"] {
   width: 48%;
 }
 
+.modal-close-btn:hover svg {
+  color: var(--red);
+}
 .modal-close-btn {
+  cursor: pointer;
   position: fixed;
   right: 15px;
   top: 10px;
@@ -13032,4 +13037,26 @@ h6.title {
 }
 .privacy-policy ul li {
   margin-bottom: 5px;
+}
+
+.terms-conditions {
+  padding: 40px;
+}
+.terms-conditions span {
+  color: var(--red);
+}
+
+.icon-boxs > a i {
+  font-size: 22px;
+}
+.icon-boxs > a {
+  display: flex;
+  align-items: center;
+}
+
+.complain-title {
+  font-size: 22px;
+  color: black;
+  text-align: center;
+  margin-bottom: 15px;
 }

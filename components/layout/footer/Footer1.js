@@ -9,7 +9,7 @@ export default function Footer1() {
           <div className="flex footer-bottom">
             <div className="">
               <img
-                src="assets/images/logo/furalogodark.png"
+                src="/assets/images/logo/furalogodark.png"
                 alt="Truck Dealer Fura az Logo"
                 className="footer-logo"
               />
@@ -24,7 +24,7 @@ export default function Footer1() {
                   <Link href="/#">Support</Link>
                 </li>
                 <li>
-                  <Link href="/#">Terms & Conditions</Link>
+                  <Link href="/terms-conditions">Terms & Conditions</Link>
                 </li>
                 <li>
                   <Link href="/privacy-policy">Privacy &amp; Policy</Link>

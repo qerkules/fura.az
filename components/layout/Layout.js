@@ -2,10 +2,9 @@
 import { useEffect, useState } from "react";
 import HoverListing from "../tools/HoverListing";
 import TabList from "../elements/TabList";
-import Breadcrumb from "./Breadcrumb";
 import Footer1 from "./footer/Footer1";
 import Header3 from "./header/Header3";
-export default function Layout({ breadcrumbTitle, children }) {
+export default function Layout({ children }) {
   const [scroll, setScroll] = useState(0);
   // Moblile Menu
   const [isMobileMenu, setMobileMenu] = useState(false);
@@ -54,8 +53,6 @@ export default function Layout({ breadcrumbTitle, children }) {
             handleToggle3={handleToggle3}
             isToggled3={isToggled3}
           />
-
-          {breadcrumbTitle && <Breadcrumb breadcrumbTitle={breadcrumbTitle} />}
 
           {children}
           <Footer1 />

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from "react";
 import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useRouter } from "next/navigation";
-import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HoverListing from "../tools/HoverListing";
-
+import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from "@mui/icons-material/Close";
 export default function AdCardUser({ data }) {
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -18,68 +18,27 @@ export default function AdCardUser({ data }) {
     }
   }, []);
 
-  const handleClick = (path) => {
+  const handleClick = () => {
     if (isClient) {
       // router.push(path);
     }
   };
 
-  useEffect(() => {
-    let cookieValues =
-      hasCookie("favorites") && JSON.parse(getCookie("favorites"));
-    if (cookieValues && cookieValues.includes(data.id)) {
-      setFavouriteClicked(true);
-    }
-
-  }, []);
-
-  const updateFavourite = () => {
-    let cookieValues = hasCookie("favorites")
-      ? JSON.parse(getCookie("favorites"))
-      : [];
-    if (isFavouriteClicked) {
-      cookieValues = cookieValues.filter((i) => i != data.id);
-      setCookie("favorites", JSON.stringify(cookieValues));
-      localStorage.setItem("favorites", JSON.stringify(cookieValues));
-      window.dispatchEvent(new CustomEvent("cookie-change"));
-    } else {
-      cookieValues.push(data.id);
-      setCookie("favorites", JSON.stringify(cookieValues));
-      localStorage.setItem("favorites", JSON.stringify(cookieValues));
-      window.dispatchEvent(new CustomEvent("cookie-change"));
-    }
-    setFavouriteClicked(!isFavouriteClicked);
-  };
-
   return (
-    <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
+    <div className={`tf-car-service ${data?.isPremium ? "premium" : ""}`}>
       <HoverListing />
-      <div className="image" onClick={() => handleClick(data.path)}>
-        <div className="stm-badge-top">
-          <div className="feature">
-            <span>NEW</span>
-          </div>
-          {data.saleOrRent === "Rent" && (
-            <div className="bottom-btn-wrap">
-              <div className="btn-group">
-                <div className="rent-button">RENT</div>
-              </div>
-            </div>
-          )}
-        </div>
+      <div className="image" onClick={() => handleClick()}>
+        <div className="top-status">Active</div>
         <div className="listing-images">
-          <span className="ad-price">{(data.currency, data.price)}</span>
-          {data.isPremium && (
+          <span className="ad-price">{data?.price}</span>
+          {data?.isPremium && (
             <span className="ad-premium">
               <img src="/assets/images/icon-box/premium-icon.svg" />
             </span>
           )}
           <div className="hover-listing-image">
             <div className="wrap-hover-listing">
-              <div
-                className={`listing-item active`}
-                title="Lexus LC Hybrid 2024"
-              >
+              <div className="listing-item active" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[0]?.path}`}
@@ -88,7 +47,7 @@ export default function AdCardUser({ data }) {
                   />
                 </div>
               </div>
-              <div className={`listing-item`} title="Lexus LC Hybrid 2024">
+              <div className="listing-item" title="Lexus LC Hybrid 2024">
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${data?.images[1]?.path}`}
@@ -124,53 +83,27 @@ export default function AdCardUser({ data }) {
         </div>
       </div>
       <div className="content">
-        <div className="icon-group">
-          <a href="#" className="icon-service">
-            <BalanceIcon className="image-icon" />
-          </a>
-          <a className="icon-service" onClick={() => updateFavourite()}>
-            {isFavouriteClicked ? (
-              <FavoriteIcon className="image-icon active" />
-            ) : (
-              <FavoriteBorderIcon className="image-icon" />
-            )}
-          </a>
-        </div>
-        <h6 className="title" onClick={() => handleClick(data.path)}>
-          {`${data.brand} ${data.model}`}
+        <h6 className="title" onClick={() => handleClick()}>
+          {`${data?.brand.brandName} ${data?.model.modelName}`}
         </h6>
-        <span className="sub-title" onClick={() => handleClick(data.path)}>
-          {data.category}
+        <span className="sub-title" onClick={() => handleClick()}>
+          {data?.category.categoryName}
         </span>
 
-        <div className="description" onClick={() => handleClick(data.path)}>
-          <ul>
-            <li className="listing-information transmission">
-              <div className="inner">
-                {/* <div className="information-icon">
-                  <CalendarMonthIcon />
-                </div> */}
-                <span>Year</span>
-                <p>{data.year}</p>
-              </div>
-            </li>
-            <li className="listing-information fuel">
-              <div className="inner">
-                <span>HorsePower</span>
-                <p>{data.enginePowerHp}</p>
-              </div>
-            </li>
-            <li className="listing-information size-engine">
-              <div className="inner">
-                <span>Mileage</span>
-                <p>{data.distance}</p>
-              </div>
-            </li>
-          </ul>
+        <div className="description">
+          {" "}
+          <div className="edit-section">
+            <EditIcon />
+            <span>Edit Ad</span>
+          </div>
+          <div className="edit-section">
+            <CloseIcon />
+            <span>Delete Ad</span>
+          </div>
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
-          <span>{data.adDate}</span>
+          <span>{data?.adDate}</span>
         </div>
       </div>
     </div>

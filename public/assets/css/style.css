@@ -10586,6 +10586,9 @@ a.mapboxgl-ctrl-logo {
   }
 }
 @media only screen and (max-width: 600px) {
+  .my-ads-container {
+    grid-template-columns: 1fr 1fr!important;
+  }
   .tf-slider-v3 .slider-v3 h1 {
     line-height: 70px;
   }
@@ -11584,7 +11587,6 @@ ul#navbar-mobile-bottom li {
 .language-shower {
   margin-left: 5px;
 }
-
 
 .sl-flag {
   display: inline-block;
@@ -13066,4 +13068,61 @@ h6.title {
   color: black;
   text-align: center;
   margin-bottom: 15px;
+}
+
+.my-ads-category {
+  padding: 5px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  color: #08151f;
+}
+.my-ads-category.active {
+  background-color: var(--red);
+  color: white;
+}
+.top-status {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 999;
+  background-color: #081e2a;
+  color: white;
+  font-size: 12px;
+  padding: 0px;
+  line-height: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+
+.my-ads-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.myprofile-title {
+  text-align: center;
+  font-size: 24px;
+  color: #000;
+}
+.profile-container {
+  padding-top: 20px;
+}
+
+.edit-section svg {
+  font-size: 18px;
+}
+.edit-section {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid lightgray;
+  padding: 0px 10px;
+  font-size: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: #0a1426;
 }

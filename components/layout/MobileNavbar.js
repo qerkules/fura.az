@@ -7,8 +7,10 @@ import HomeIcon from "@mui/icons-material/Home";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Badge } from "@mui/material";
 import { getCookie, hasCookie } from "cookies-next";
-
+import useUser from "../hooks/useUser";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 export default function MobileNavbar({ handleMobileMenu }) {
+  const [username] = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   useEffect(() => {
     if (hasCookie("favorites")) {
@@ -73,10 +75,27 @@ export default function MobileNavbar({ handleMobileMenu }) {
             </a>
           </li>
           <li>
-            <a className="sc-menu-item" href="/sign-in">
-              <LoginIcon />
-              <span className="text">Sign in</span>
-            </a>
+            {username ? (
+              <a
+                data-bs-toggle="modal"
+                href="/user/profile"
+                role="button"
+                className="sc-menu-item"
+              >
+                <PermIdentityIcon />
+                <span className="text">{username}</span>
+              </a>
+            ) : (
+              <a
+                data-bs-toggle="modal"
+                href="/sign-in"
+                role="button"
+                className="sc-menu-item"
+              >
+                <PermIdentityIcon />
+                <span className="text">Login</span>
+              </a>
+            )}
           </li>
           <li id="barbottom">
             <a className="sc-menu-item">

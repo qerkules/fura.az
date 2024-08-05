@@ -10301,6 +10301,9 @@ a.mapboxgl-ctrl-logo {
   .desktop-hider {
     display: block !important;
   }
+  .image-desktop-hider {
+    display: flex !important;
+  }
   .mobile-hider {
     display: none !important;
   }
@@ -11670,6 +11673,10 @@ ul#navbar-mobile-bottom li {
   height: auto;
 }
 .desktop-hider {
+  display: none ;
+}
+
+.image-desktop-hider {
   display: none;
 }
 
@@ -13274,4 +13281,8 @@ h6.title {
 .top-profile-section > div:first-child {
   margin-right: 10px;
 }
-  
+.profil-images{
+display: flex;
+justify-content: center;
+gap: 20px;
+}

@@ -122,47 +122,98 @@ const page = () => {
 
           <div className="sign-salon-flex">
             <div className="sign-inputs">
-              <ImageUploading
-                value={logoImg}
-                onChange={onChange}
-                maxNumber={maxNumber}
-                dataURLKey="data_url"
-                acceptType={["jpg"]}
-              >
-                {({ onImageUpload, dragProps }) => (
-                  <div
-                    className="sign-input-logo-section"
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    {logoImg.length > 0 ? (
-                      logoImg.map((image, index) => (
-                        <div key={index} className="sign-input-logo">
-                          <img
-                            src={`${process.env.NEXT_PUBLIC_API_URL}/${image.path}`}
-                            alt=""
-                            height="100"
-                          />
-                          <div className="uploaded-remove-btn">
-                            <div onClick={() => onImageRemove(index)}>X</div>
+              <div className="profil-images">
+                <ImageUploading
+                  value={logoImg}
+                  onChange={onChange}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                  acceptType={["jpg"]}
+                >
+                  {({ onImageUpload, dragProps }) => (
+                    <div
+                      className="sign-input-logo-section"
+                      onClick={onImageUpload}
+                      {...dragProps}
+                    >
+                      {logoImg.length > 0 ? (
+                        logoImg.map((image, index) => (
+                          <div key={index} className="sign-input-logo">
+                            <img
+                              src={`${process.env.NEXT_PUBLIC_API_URL}/${image.path}`}
+                              alt=""
+                              height="100"
+                            />
+                            <div className="uploaded-remove-btn">
+                              <div onClick={() => onImageRemove(index)}>X</div>
+                            </div>
                           </div>
+                        ))
+                      ) : (
+                        <div className="sign-input-logo">
+                          <PersonIcon />
                         </div>
-                      ))
-                    ) : (
-                      <div className="sign-input-logo">
-                        <PersonIcon />
-                      </div>
-                    )}
-                    <div className="sign-input-subtitle">
-                      <InfoIcon /> Infos About Banner
-                      <div className="extra-info">
-                        Logo size is 500x500 pixels (i.e. square), max file size
-                        4.5mb, allowed formats: .png, .jpg, .jpeg, .svg, .webp.
+                      )}
+                      <div className="sign-input-subtitle">
+                        <InfoIcon /> Infos About Banner
+                        <div className="extra-info">
+                          Logo size is 500x500 pixels (i.e. square), max file
+                          size 4.5mb, allowed formats: .png, .jpg, .jpeg, .svg,
+                          .webp.
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
-              </ImageUploading>
+                  )}
+                </ImageUploading>
+                <ImageUploading
+                  multiple
+                  value={bannerImg}
+                  onChange={onChangeBanner}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                  acceptType={["jpg"]}
+                >
+                  {({ onImageUpload, dragProps }) => (
+                    <div className="image-desktop-hider">
+                      <div
+                        className="sign-input-logo-section "
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        {bannerImg.length > 0 ? (
+                          bannerImg.map((image, index) => (
+                            <div key={index} className="sign-input-logo">
+                              <img
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/${image.path}`}
+                                alt="Banner Image"
+                                height="100"
+                              />
+                              <div className="uploaded-remove-btn">
+                                <div onClick={() => onImageRemove(index)}>
+                                  X
+                                </div>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="sign-input-logo">
+                            <WallpaperIcon />
+                          </div>
+                        )}
+                        <div className="sign-input-subtitle">
+                          <InfoIcon /> Infos About Banner
+                          <div className="extra-info">
+                            Logo size is 500x500 pixels (i.e. square), max file
+                            size 4.5mb, allowed formats: .png, .jpg, .jpeg,
+                            .svg, .webp.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </ImageUploading>
+              </div>
+
               <div className="flex gp-15 ">
                 <FormControl required fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
@@ -323,7 +374,7 @@ const page = () => {
               >
                 {({ onImageUpload, dragProps }) => (
                   <div
-                    className="sign-input-logo-section"
+                    className=" mobile-hider-trailer sign-input-logo-section"
                     onClick={onImageUpload}
                     {...dragProps}
                   >

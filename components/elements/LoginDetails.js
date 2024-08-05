@@ -75,6 +75,7 @@ const LoginDetails = () => {
           modalOpener(true, "logged in");
           localStorage.setItem("token", data.data.token.accessToken);
           localStorage.setItem("username", "User");
+          localStorage.setItem("isBusiness", data?.data?.isBusiness);
           return data.data;
         })
         .catch((error) => {

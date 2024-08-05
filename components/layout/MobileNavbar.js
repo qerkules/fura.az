@@ -10,7 +10,7 @@ import { getCookie, hasCookie } from "cookies-next";
 import useUser from "../hooks/useUser";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 export default function MobileNavbar({ handleMobileMenu }) {
-  const [username] = useUser();
+  const { username, isBusiness } = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   const [isUserClicked, setIsUserClicked] = useState(false);
   useEffect(() => {
@@ -90,7 +90,14 @@ export default function MobileNavbar({ handleMobileMenu }) {
                 {isUserClicked && (
                   <div className="on-profile-section">
                     <div>
-                      <a data-bs-toggle="modal" href="/user/profile">
+                      <a
+                        data-bs-toggle="modal"
+                        href={
+                          isBusiness === "True"
+                            ? "/user/salon-profile"
+                            : "/user/profile"
+                        }
+                      >
                         <PermIdentityIcon />
                         <span className="text">Profile</span>
                       </a>

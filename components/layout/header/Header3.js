@@ -15,7 +15,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 export default function Header3({ handleMobileMenu }) {
-  const [username] = useUser();
+  const { username, isBusiness } = useUser();
+
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   const [isUserClicked, setIsUserClicked] = useState(false);
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function Header3({ handleMobileMenu }) {
   const logOut = (e) => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("isBusiness");
   };
 
   return (
@@ -102,7 +104,9 @@ export default function Header3({ handleMobileMenu }) {
                           data-bs-toggle="modal"
                           role="button"
                           className="header-login-text"
-                          onClick={() =>{ setIsUserClicked(!isUserClicked)}}
+                          onClick={() => {
+                            setIsUserClicked(!isUserClicked);
+                          }}
                         >
                           <AccountCircleIcon />
                           <span className="text">{username}</span>
@@ -134,7 +138,6 @@ export default function Header3({ handleMobileMenu }) {
                         >
                           &nbsp;Login
                         </a>
-                        
                       </div>
                     )}
                   </div>

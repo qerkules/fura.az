@@ -12,6 +12,7 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 export default function MobileNavbar({ handleMobileMenu }) {
   const [username] = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
+  const [isUserClicked, setIsUserClicked] = useState(false);
   useEffect(() => {
     if (hasCookie("favorites")) {
       setFavouriteCount(JSON.parse(getCookie("favorites")).length);
@@ -76,15 +77,33 @@ export default function MobileNavbar({ handleMobileMenu }) {
           </li>
           <li>
             {username ? (
-              <a
-                data-bs-toggle="modal"
-                href="/user/profile"
-                role="button"
-                className="sc-menu-item"
-              >
-                <PermIdentityIcon />
-                <span className="text">{username}</span>
-              </a>
+              <>
+                <a
+                  data-bs-toggle="modal"
+                  role="button"
+                  className="sc-menu-item"
+                  onClick={() => setIsUserClicked(!isUserClicked)}
+                >
+                  <PermIdentityIcon />
+                  <span className="text">{username}</span>
+                </a>
+                {isUserClicked && (
+                  <div className="on-profile-section">
+                    <div>
+                      <a data-bs-toggle="modal" href="/user/profile">
+                        <PermIdentityIcon />
+                        <span className="text">Profile</span>
+                      </a>
+                    </div>
+                    <div>
+                      <a data-bs-toggle="modal" href="/user/ads">
+                        <PermIdentityIcon />
+                        <span className="text">Ads</span>
+                      </a>
+                    </div>
+                  </div>
+                )}
+              </>
             ) : (
               <a
                 data-bs-toggle="modal"

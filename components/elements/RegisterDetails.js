@@ -137,10 +137,6 @@ const RegisterDetails = ({ currentRegister }) => {
     if (currentRegister === "salon") salonSubmit(e);
   };
 
-  useEffect(() => {
-    setIsUpdated(true);
-  }, [logoImg]);
-
   const maxNumber = 1;
   const isMobile = useIsMobile();
 
@@ -1000,7 +996,7 @@ const RegisterDetails = ({ currentRegister }) => {
                           ))
                         ) : (
                           <div className="sign-input-logo">
-                            <PersonIcon />
+                            <WallpaperIcon />
                           </div>
                         )}
                         <div className="sign-input-subtitle">

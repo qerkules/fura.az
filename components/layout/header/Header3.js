@@ -12,10 +12,12 @@ import LanguageSwitcher from "@/components/elements/LanguageSwitcher";
 import LogoutIcon from "@mui/icons-material/Logout";
 import useUser from "@/components/hooks/useUser";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 export default function Header3({ handleMobileMenu }) {
   const [username] = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
+  const [isUserClicked, setIsUserClicked] = useState(false);
   useEffect(() => {
     if (hasCookie("favorites")) {
       setFavouriteCount(JSON.parse(getCookie("favorites")).length);
@@ -43,8 +45,8 @@ export default function Header3({ handleMobileMenu }) {
         {/* Header Lower */}
         <div className="top-bar">
           <div className="themesflat-container">
-            <div className="row">
-              <div className="col-md-6">
+            <div className="header-navbar">
+              <div>
                 <ul className="list-infor-topbar">
                   <li>
                     <Link href="/#">
@@ -54,7 +56,7 @@ export default function Header3({ handleMobileMenu }) {
                   </li>
                 </ul>
               </div>
-              <div className="col-md-4 flex flex-end">
+              <div className="flex flex-end">
                 <div className="upheader-item">
                   <a
                     data-bs-toggle="modal"
@@ -90,21 +92,37 @@ export default function Header3({ handleMobileMenu }) {
                   <LanguageSwitcher />
                 </div>
               </div>
-              <div className="col-md-2 flex-end">
+              <div className="flex-end">
                 <div className="register ml--18">
                   <div className="flex align-center">
                     {username ? (
                       <div className="upheader-item">
                         <a
-                          onClick={logOut}
+                          // onClick={logOut}
                           data-bs-toggle="modal"
-                          href="/user/profile"
                           role="button"
                           className="header-login-text"
+                          onClick={() =>{ setIsUserClicked(!isUserClicked)}}
                         >
                           <AccountCircleIcon />
                           <span className="text">{username}</span>
                         </a>
+                        {isUserClicked && (
+                          <div className="top-profile-section">
+                            <div>
+                              <a data-bs-toggle="modal" href="/user/profile">
+                                <PermIdentityIcon />
+                                <span className="text">Profile</span>
+                              </a>
+                            </div>
+                            <div>
+                              <a data-bs-toggle="modal" href="/user/ads">
+                                <PermIdentityIcon />
+                                <span className="text">Ads</span>
+                              </a>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ) : (
                       <div className="upheader-item">
@@ -116,6 +134,7 @@ export default function Header3({ handleMobileMenu }) {
                         >
                           &nbsp;Login
                         </a>
+                        
                       </div>
                     )}
                   </div>
@@ -164,14 +183,13 @@ export default function Header3({ handleMobileMenu }) {
                         </ul>
                       </div>
                     </nav>
-                    {/* Main Menu End*/}
-
-                    <div className="flat-bt-top sc-btn-top ml--20 ">
+                    <div className=" sc-btn-top ml--20 ">
                       <Link className="btn-icon-list" href="/create">
                         <span>Create Ad</span>
                         <i className="icon-add-button-1" />
                       </Link>
                     </div>
+                    {/* Main Menu End*/}
                   </div>
                 </div>
               </div>

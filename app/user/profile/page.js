@@ -1,84 +1,208 @@
 "use client";
 import Layout from "@/components/layout/Layout";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import { Pagination, Stack } from "@mui/material";
+import {
+  FormControl,
+  IconButton,
+  InputAdornment,
+  OutlinedInput,
+} from "@mui/material";
 import axios from "axios";
-import AdCardUser from "@/components/layout/AdCardUser";
-
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import LockIcon from "@mui/icons-material/Lock";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import PersonIcon from "@mui/icons-material/Person";
+import AddIcon from "@mui/icons-material/Add";
 const page = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
   const [totalAdCount, setTotalAdCount] = useState(0);
   const [values, setValues] = useState([]);
+  const [name, setName] = useState("");
+  const [surname, setSurName] = useState("");
+  const [number, setNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isNewNumber, setIsNewNumber] = useState(false);
+  const [newNumber, setNewNumber] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        const data = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_LINK}/Vehicle/GetAllAdsByUser?CurrentPage=${currentPage}&PageSize=15`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setPageCount(data?.pageResponse?.totalPages || 1);
-        setTotalAdCount(data?.pageResponse?.totalCount);
-        setValues(data?.data?.ads || []);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-    fetchData();
-  }, [currentPage]);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  // Email validation function
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+    setIsValidEmail(validateEmail(emailValue));
+  };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const token = localStorage.getItem("token");
+  //       const data = await axios.get(
+  //         `${process.env.NEXT_PUBLIC_API_LINK}/Vehicle/GetAllAdsByUser?CurrentPage=${currentPage}&PageSize=15`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       );
+  //       setName(data?.data?.name)
+  //       setSurName(data?.data?.surname)
+  //       setNumber(data?.data?.phoneNumber)
+  //       setEmail(data?.data?.email)
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   return (
     <Layout>
       <div className="themesflat-container profile-container">
-        <div className="myprofile-title"> My Ads</div>
+        <div className="myprofile-title"> My Profile</div>
 
-        {/* <div className="balance-container">
-          <div>Your Balance 15.00 $</div>
-          <div>Top up Balance</div>
-        </div> */}
-        <div className="my-ads-container">
-          <div className="my-ads-category active">Vehicle Ads</div>
-          <div className="my-ads-category">Semi-Trailer Ads</div>
-          <div className="my-ads-category">Sparepart Ads</div>
-          <div className="my-ads-category">Services Ads</div>
-        </div>
-        <div className="widget-car-service" style={{ marginTop: "40px" }}>
-          <div className="tab-content" id="pills-tabContent">
-            <div className="tab-pane fade show active">
-              <div className="car-list-item">
-                {values.length > 0 ? (
-                  values.map((val) => {
-                    return <AdCardUser key={val.id} data={val} />;
-                  })
-                ) : (
-                  <div>Create Ad</div>
-                )}
+        <form>
+          <div className="sign-details">
+            <div className="sign-inputs">
+              <div className="flex gp-15 ">
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number1"
+                    type={"text"}
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                  <OutlinedInput
+                    id="standard-adornment-number2"
+                    type={"text"}
+                    placeholder="Surname"
+                    value={surname}
+                    onChange={(e) => {
+                      setSurName(e.target.value);
+                    }}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <PersonIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
+              <FormControl required fullWidth sx={{ marginBottom: 2 }} disabled>
+                <OutlinedInput
+                  id="standard-adornment-number3"
+                  type={"text"}
+                  placeholder="Mobile Number"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LocalPhoneIcon />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              {isNewNumber ? (
+                <FormControl
+                  required
+                  fullWidth
+                  sx={{ marginBottom: 2 }}
+                >
+                  <OutlinedInput
+                    id="standard-adornment-number3"
+                    type={"text"}
+                    placeholder="Second Mobile Number"
+                    value={newNumber}
+                    onChange={(e) => setNewNumber(e.target.value)}
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <LocalPhoneIcon />
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              ) : (
+                <div
+                  className="add-new-number"
+                  onClick={() => setIsNewNumber(true)}
+                >
+                  <AddIcon /> Add Another Number
+                </div>
+              )}
+              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <OutlinedInput
+                  id="standard-adornment-email"
+                  type={"text"}
+                  placeholder="Enter Your Email Address"
+                  value={email}
+                  onChange={(e) => handleEmailChange(e)}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <MailOutlineIcon />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              <FormControl required fullWidth>
+                <OutlinedInput
+                  id="standard-adornment-password"
+                  type={showPassword ? "text" : "password"}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Change your Password"
+                  value={password}
+                  startAdornment={
+                    <InputAdornment position="start">
+                      <LockIcon />
+                    </InputAdornment>
+                  }
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                        onMouseDown={handleMouseDownPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+              <div className="login-buttons">
+                <input
+                  type="submit"
+                  className="mt-15 default-sign-button register-button"
+                  value={"Update"}
+                />
               </div>
             </div>
           </div>
-          <Stack spacing={2} alignItems="center" mt={2}>
-            <Pagination
-              count={pageCount}
-              page={currentPage}
-              onChange={(event, page) => setCurrentPage(page)}
-              variant="outlined"
-              shape="rounded"
-            />
-          </Stack>
-          <div className="mt-15 themesflat-container">
-            <div className="ad-banner">
-              <img src="/assets/images/ads/ad-banner.jpg" />
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </Layout>
   );

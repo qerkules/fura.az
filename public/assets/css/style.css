@@ -13093,7 +13093,7 @@ h6.title {
   position: absolute;
   right: 0px;
   top: 0px;
-  z-index: 999;
+  z-index: 9;
   background-color: #081e2a;
   color: white;
   font-size: 12px;
@@ -13227,7 +13227,6 @@ h6.title {
   background-color: white;
   position: absolute;
   bottom: 70px;
-  padding: 5px;
   display: flex;
   border-radius: 10px;
   z-index: 99999;

@@ -1,9 +1,9 @@
 "use client";
-import DefaultBusCreate from "@/components/elements/DefaultBusCrea";
-import ModalAlert from "@/components/elements/ModalAlert";
+import DefaultCoMaCreate from "@/components/elements/DefaultCoMa";
 import Layout from "@/components/layout/Layout";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import ModalAlert from "@/components/elements/ModalAlert";
 
 const page = () => {
   const [modalMessage, setModalMessage] = useState("");
@@ -13,15 +13,15 @@ const page = () => {
   const path = "/user/ads";
   return (
     <Layout>
-      <div className="widget-banner-car-listing banner-car-listing-list bus-bg">
+      <div className="widget-banner-car-listing banner-car-listing-list co-ma-bg">
         <div className="themesflat-container full">
           <div className="banner-car-listing">
-            <h1 className="title text-white">Create Bus</h1>
+            <h1 className="title text-white">Create Construction Machinery</h1>
           </div>
         </div>
       </div>
       <div className="themesflat-container create-ad-container ">
-        <DefaultBusCreate
+        <DefaultCoMaCreate
           setModalMessage={setModalMessage}
           setModalStatus={setModalStatus}
           setModalOpen={setModalOpen}

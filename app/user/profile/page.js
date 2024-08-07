@@ -47,40 +47,69 @@ const page = () => {
     setEmail(emailValue);
     setIsValidEmail(validateEmail(emailValue));
   };
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const token = localStorage.getItem("token");
-  //       const data = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_API_LINK}/Vehicle/GetAllAdsByUser?CurrentPage=${currentPage}&PageSize=15`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       setName(data?.data?.name)
-  //       setSurName(data?.data?.surname)
-  //       setNumber(data?.data?.phoneNumber)
-  //       setEmail(data?.data?.email)
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, []);
+  const updateUserDetails = async (e) => {
+    e.preventDefault();
+    const userData = JSON.stringify({
+      name: name,
+      surname: surname,
+      phoneNumber: number,
+      email: email,
+      isBusiness: false,
+    });
+    try {
+      const token = localStorage.getItem("token");
+      const data = await axios.put(
+        `${process.env.NEXT_PUBLIC_API_LINK}/User/UpdateMember`,
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const data = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_LINK}/User/GetMyUserDetails`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data.data);
+        setName(data?.data?.name);
+        setSurName(data?.data?.surname);
+        setNumber(data?.data?.phoneNumber);
+        setEmail(data?.data?.email);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Layout>
       <div className="themesflat-container profile-container">
         <div className="myprofile-title"> My Profile</div>
 
-        <form>
+        <form onSubmit={updateUserDetails}>
           <div className="sign-details">
             <div className="sign-inputs">
               <div className="flex gp-15 ">
-                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
                     id="standard-adornment-number1"
                     type={"text"}
@@ -96,7 +125,7 @@ const page = () => {
                     }
                   />
                 </FormControl>
-                <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
                     id="standard-adornment-number2"
                     type={"text"}
@@ -113,7 +142,7 @@ const page = () => {
                   />
                 </FormControl>
               </div>
-              <FormControl required fullWidth sx={{ marginBottom: 2 }} disabled>
+              <FormControl fullWidth sx={{ marginBottom: 2 }} disabled>
                 <OutlinedInput
                   id="standard-adornment-number3"
                   type={"text"}
@@ -128,11 +157,7 @@ const page = () => {
                 />
               </FormControl>
               {isNewNumber ? (
-                <FormControl
-                  required
-                  fullWidth
-                  sx={{ marginBottom: 2 }}
-                >
+                <FormControl fullWidth sx={{ marginBottom: 2 }}>
                   <OutlinedInput
                     id="standard-adornment-number3"
                     type={"text"}
@@ -154,7 +179,7 @@ const page = () => {
                   <AddIcon /> Add Another Number
                 </div>
               )}
-              <FormControl required fullWidth sx={{ marginBottom: 2 }}>
+              <FormControl fullWidth sx={{ marginBottom: 2 }}>
                 <OutlinedInput
                   id="standard-adornment-email"
                   type={"text"}
@@ -168,7 +193,7 @@ const page = () => {
                   }
                 />
               </FormControl>
-              <FormControl required fullWidth>
+              <FormControl fullWidth>
                 <OutlinedInput
                   id="standard-adornment-password"
                   type={showPassword ? "text" : "password"}

@@ -3,6 +3,7 @@ import BalanceIcon from "@mui/icons-material/Balance";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { GetCurrency } from "../tools/GetValues";
 import HoverListing from "../tools/HoverListing";
+import { GetFormattedDate } from "../tools/GetDisplayDate";
 
 export default function AdCardTrailer({ data, path }) {
   const currency = GetCurrency(data?.currency);
@@ -134,7 +135,7 @@ export default function AdCardTrailer({ data, path }) {
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
-          <span>6/30/2024 3:09:24 PM</span>
+          <span>{GetFormattedDate(data.createdDate).formattedDate}, {GetFormattedDate(data.createdDate).formattedTime}</span>
         </div>
       </div>
     </div>

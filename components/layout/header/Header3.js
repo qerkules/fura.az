@@ -13,12 +13,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import useUser from "@/components/hooks/useUser";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import axios from "axios";
 
 export default function Header3({ handleMobileMenu }) {
-  const { username, isBusiness } = useUser();
+  const [username, isBusiness] = useUser();
 
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   const [isUserClicked, setIsUserClicked] = useState(false);
+
   useEffect(() => {
     if (hasCookie("favorites")) {
       setFavouriteCount(JSON.parse(getCookie("favorites")).length);
@@ -98,36 +100,59 @@ export default function Header3({ handleMobileMenu }) {
                 <div className="register ml--18">
                   <div className="flex align-center">
                     {username ? (
-                      <div className="upheader-item">
-                        <a
-                          // onClick={logOut}
-                          data-bs-toggle="modal"
-                          role="button"
-                          className="header-login-text"
-                          onClick={() => {
-                            setIsUserClicked(!isUserClicked);
-                          }}
-                        >
-                          <AccountCircleIcon />
-                          <span className="text">{username}</span>
-                        </a>
-                        {isUserClicked && (
-                          <div className="top-profile-section">
-                            <div>
-                              <a data-bs-toggle="modal" href="/user/profile">
-                                <PermIdentityIcon />
-                                <span className="text">Profile</span>
-                              </a>
-                            </div>
-                            <div>
-                              <a data-bs-toggle="modal" href="/user/ads">
-                                <PermIdentityIcon />
-                                <span className="text">Ads</span>
-                              </a>
-                            </div>
+                      <>
+                        <div className="upheader-item">
+                          <div>
+                            <a
+                              data-bs-toggle="modal"
+                              role="button"
+                              href="/"
+                              className="header-login-text"
+                              onClick={logOut}
+                            >
+                              <span>Log out</span>
+                            </a>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                        <div className="upheader-item">
+                          <a
+                            // onClick={logOut}
+                            data-bs-toggle="modal"
+                            role="button"
+                            className="header-login-text"
+                            onClick={() => {
+                              setIsUserClicked(!isUserClicked);
+                            }}
+                          >
+                            <AccountCircleIcon />
+                            <span className="text">{username}</span>
+                          </a>
+
+                          {isUserClicked && (
+                            <div className="top-profile-section">
+                              <div>
+                                <a
+                                  data-bs-toggle="modal"
+                                  href={`${
+                                    isBusiness === "True"
+                                      ? "/user/salon-profile"
+                                      : "/user/profile"
+                                  }`}
+                                >
+                                  <PermIdentityIcon />
+                                  <span className="text">Profile</span>
+                                </a>
+                              </div>
+                              <div>
+                                <a data-bs-toggle="modal" href="/user/ads">
+                                  <PermIdentityIcon />
+                                  <span className="text">Ads</span>
+                                </a>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </>
                     ) : (
                       <div className="upheader-item">
                         <a

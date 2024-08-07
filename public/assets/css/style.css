@@ -13256,7 +13256,7 @@ h6.title {
   position: absolute;
   bottom: -60px;
   background-color: var(--red);
-  right: 70px;
+  right: 15px;
   padding: 5px;
   display: flex;
   border-radius: 10px;
@@ -13285,4 +13285,11 @@ h6.title {
 display: flex;
 justify-content: center;
 gap: 20px;
+}
+
+.new-date-ad{
+}
+
+.header-login-text{
+  text-wrap: nowrap;
 }

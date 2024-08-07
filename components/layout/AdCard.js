@@ -7,49 +7,34 @@ import { getCookie, hasCookie, setCookie } from "cookies-next";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HoverListing from "../tools/HoverListing";
 import { GetCurrency } from "../tools/GetValues";
+import { GetFormattedDate } from "../tools/GetDisplayDate";
+import { GetPath } from "../tools/GetPath";
+import { SetFavourites } from "../tools/UpdateFavourites";
 
 export default function AdCard({ data, path }) {
   const currency = GetCurrency(data.currency);
+  const adPath = GetPath().last;
   const router = useRouter();
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsClient(true);
-    }
-  }, []);
 
   const handleClick = () => {
-    if (isClient) {
-      router.push(`/details/${path}`);
-    }
+    router.push(`/details/${path}`);
   };
 
   useEffect(() => {
     let cookieValues =
       hasCookie("favorites") && JSON.parse(getCookie("favorites"));
-    if (cookieValues && cookieValues.includes(data.id)) {
+    if (
+      cookieValues &&
+      cookieValues.some((selected) => selected.id === data.id)
+    ) {
       setFavouriteClicked(true);
     }
   }, []);
 
   const updateFavourite = () => {
-    let cookieValues = hasCookie("favorites")
-      ? JSON.parse(getCookie("favorites"))
-      : [];
-    if (isFavouriteClicked) {
-      cookieValues = cookieValues.filter((i) => i != data.id);
-      setCookie("favorites", JSON.stringify(cookieValues));
-      localStorage.setItem("favorites", JSON.stringify(cookieValues));
-      window.dispatchEvent(new CustomEvent("cookie-change"));
-    } else {
-      cookieValues.push(data.id);
-      setCookie("favorites", JSON.stringify(cookieValues));
-      localStorage.setItem("favorites", JSON.stringify(cookieValues));
-      window.dispatchEvent(new CustomEvent("cookie-change"));
-    }
-    setFavouriteClicked(!isFavouriteClicked);
+    const productName = data.productTypeName ? data.productTypeName : adPath;
+    SetFavourites(isFavouriteClicked, setFavouriteClicked, data, productName);
   };
 
   return (
@@ -68,7 +53,7 @@ export default function AdCard({ data, path }) {
         </div>
         <div className="listing-images">
           <span className="ad-price">
-            {currency}&nbsp;{data.price}
+            {currency}&nbsp;{data?.price.toLocaleString("de-DE")}
           </span>
           {data.isPremium && (
             <span className="ad-premium">
@@ -81,7 +66,7 @@ export default function AdCard({ data, path }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images[0]?.path || data?.ad.image[0]?.filePath
+                      data?.images[0]?.path || data?.images[0]?.filePath
                     }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
@@ -92,7 +77,7 @@ export default function AdCard({ data, path }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images[1]?.path || data?.ad?.image[1]?.filePath
+                      data?.images[1]?.path || data?.images[1]?.filePath
                     }`}
                     className="swiper-image lazy tfcl-light-gallery"
                     alt="images"
@@ -103,7 +88,7 @@ export default function AdCard({ data, path }) {
                 <div className="images">
                   <img
                     src={`${process.env.NEXT_PUBLIC_API_URL}/${
-                      data?.images[2]?.path || data?.ad?.image[2]?.filePath
+                      data?.images[2]?.path || data?.image[2]?.filePath
                     }`}
                     className="swiper-image tfcl-light-gallery"
                     alt="images"
@@ -164,7 +149,7 @@ export default function AdCard({ data, path }) {
                 <div className="inner">
                   <span>HorsePower</span>
                   <p>
-                    {data.enginePowerHp} &nbsp;Hp &nbsp;({data.enginePowerKw}{" "}
+                    {data.enginePowerHp} &nbsp;Hp &nbsp;({data.enginePowerKW}{" "}
                     &nbsp;Kw)
                   </p>
                 </div>
@@ -190,7 +175,11 @@ export default function AdCard({ data, path }) {
         </div>
         {/* <a className="more-link" href="/listing-details"> </a>*/}
         <div className="bottom-btn-wrap">
-          <span>{data.adDate}</span>
+          <span>
+            <span className="new-date-ad">New, &nbsp;</span>
+            {GetFormattedDate(data.createdDate).formattedDate},{" "}
+            {GetFormattedDate(data.createdDate).formattedTime}
+          </span>
         </div>
       </div>
     </div>

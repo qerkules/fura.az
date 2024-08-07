@@ -33,7 +33,7 @@ const page = () => {
   const [name, setName] = useState("");
   const [surname, setSurName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(""); 
   const [country, setCountry] = useState("");
   const [salonName, setSalonName] = useState("");
   const [city, setCity] = useState("");
@@ -48,8 +48,6 @@ const page = () => {
   const [newNumber2, setNewNumber2] = useState("");
   const [isNewNumber3, setIsNewNumber3] = useState(false);
   const [newNumber3, setNewNumber3] = useState("");
-  const [isNewNumber4, setIsNewNumber4] = useState(false);
-  const [newNumber4, setNewNumber4] = useState("");
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -104,6 +102,31 @@ const page = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const data = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_LINK}/User/GetMyUserDetails`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(data.data);
+        setName(data?.data?.name);
+        setSurName(data?.data?.surname);
+        setPhoneNumber(data?.data?.phoneNumber);
+        setEmail(data?.data?.email);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const maxNumber = 1;
 

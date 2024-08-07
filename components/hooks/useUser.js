@@ -11,5 +11,5 @@ export default function useUser() {
     setIsBusiness(localStorage.getItem("isBusiness"));
   }, []);
 
-  return { username, isBusiness };
+  return [ username, isBusiness];
 }

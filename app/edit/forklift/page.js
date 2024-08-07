@@ -1,5 +1,5 @@
 "use client";
-import DefaultBusCreate from "@/components/elements/DefaultBusCrea";
+import DefaultForkliftCreate from "@/components/elements/DefaultForklift";
 import ModalAlert from "@/components/elements/ModalAlert";
 import Layout from "@/components/layout/Layout";
 import { useRouter } from "next/navigation";
@@ -13,15 +13,15 @@ const page = () => {
   const path = "/user/ads";
   return (
     <Layout>
-      <div className="widget-banner-car-listing banner-car-listing-list bus-bg">
+      <div className="widget-banner-car-listing banner-car-listing-list forklift-bg">
         <div className="themesflat-container full">
           <div className="banner-car-listing">
-            <h1 className="title text-white">Create Bus</h1>
+            <h1 className="title text-white">Create Forklift</h1>
           </div>
         </div>
       </div>
       <div className="themesflat-container create-ad-container ">
-        <DefaultBusCreate
+        <DefaultForkliftCreate
           setModalMessage={setModalMessage}
           setModalStatus={setModalStatus}
           setModalOpen={setModalOpen}

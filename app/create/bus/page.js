@@ -1,5 +1,5 @@
 "use client";
-import DefaultBusCreate from "@/components/elements/DefaultBusCrea";
+import DefaultBusCreate from "@/components/elements/DefaultBusCreate";
 import ModalAlert from "@/components/elements/ModalAlert";
 import Layout from "@/components/layout/Layout";
 import { useRouter } from "next/navigation";

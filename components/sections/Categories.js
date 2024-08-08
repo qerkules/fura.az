@@ -25,10 +25,10 @@ const Categories = ({ currentIndex }) => {
 
   return (
     <>
-      <div className="cat-container desktop-hider">
+      {/* <div className="cat-container desktop-hider">
         <Splide
           options={{
-            perPage: 2,
+            perPage: 4,
             drag: "free",
             gap: "0px",
             pagination: true,
@@ -61,15 +61,30 @@ const Categories = ({ currentIndex }) => {
             </SplideSlide>
           ))}
         </Splide>
-      </div>
+      </div> */}
       <div className="themesflat-container">
-        <div className="cat-container mobile-hider-trailer">
+        <div className="cat-container ">
           <Splide
             options={{
-              perPage: 4,
+              perPage: 8,
               gap: "10px",
               pagination: true,
               arrows: true,
+              breakpoints: {
+                1200: {
+                  perPage: 6,
+                },
+                1024: {
+                  perPage: 4,
+                },
+                768: {
+                  perPage: 2,
+                  arrows: false,
+                },
+                480: {
+                  perPage: 2,
+                },
+              },
             }}
             ref={splideRef}
           >
@@ -80,6 +95,7 @@ const Categories = ({ currentIndex }) => {
                     className={`index-slider-items ${
                       currentIndex === val.index ? "active" : ""
                     }
+                    ${val.name === "Spare part" && "cat-sp"}
                   ${
                     currentIndex === 0
                       ? "pad-left"

@@ -10257,9 +10257,17 @@ a.mapboxgl-ctrl-logo {
     margin-top: 60px;
   }
 }
+
+.index-slider-items label {
+  cursor: pointer !important;
+}
 @media only screen and (max-width: 767px) {
   .footer-bottom .bottom-bar-menu ul:first-child {
     flex-direction: column;
+  }
+  .cat-container .splide__track{
+    margin-left: 0px!important;
+    margin-right: 0px!important;
   }
   .nav-outer {
     display: none;
@@ -10273,7 +10281,6 @@ a.mapboxgl-ctrl-logo {
   }
   .cat-container a {
     display: inline-block;
-    padding: 0px 15px;
     width: 100% !important;
   }
 
@@ -10283,15 +10290,7 @@ a.mapboxgl-ctrl-logo {
   .pad-right {
     padding-right: 15px;
   }
-  .index-slider-items {
-    height: 90px !important;
-    display: flex;
-    justify-content: flex-start !important;
-  }
-
-  .index-slider-items label {
-    cursor: pointer !important;
-  }
+  
 
   .index-slider-items img {
     height: 60% !important;
@@ -11366,11 +11365,8 @@ ul[aria-label="Pagination"] {
 }
 
 .cat-container {
-  display: flex;
   margin-bottom: 30px;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
+  display: block;
 }
 
 .cat-container a {
@@ -11381,20 +11377,32 @@ ul[aria-label="Pagination"] {
 .index-slider-items {
   box-sizing: border-box;
   width: 100%;
-  height: 75px;
+  height: 140px;
   border-radius: 20px;
   background-color: var(--feature-bg);
   padding: 0px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   object-fit: cover;
-  padding: 0px 10px;
+  padding:  10px;
 }
 
 .index-slider-items img {
-  height: 90%;
-  width: auto;
+  /* height: 90%;
+  width: auto; */
+  width: 90px;
+  height: auto;
+}
+
+.cat-container .splide__track{
+  margin-left: 60px;
+  margin-right: 60px;
+}
+
+.cat-sp img{
+  width: 60px ;
 }
 
 .cat-container label {
@@ -11402,7 +11410,13 @@ ul[aria-label="Pagination"] {
   font-size: 15px;
   text-align: center;
   width: 100%;
+  height: 50%;
   color: black;
+  padding: 10px;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #header-mobile-bottom {

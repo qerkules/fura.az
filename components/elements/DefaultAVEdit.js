@@ -24,7 +24,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import NewModel from "./NewModel";
 import RentForm from "./RentForm";
 
-const DefaultAVEdit = ({ setModalMessage, setModalStatus, setModalOpen, productId }) => {
+const DefaultAVEdit = ({ setModalMessage, setModalStatus, setModalOpen }) => {
   const currentCategory = GetPath().last;
   const currentCategoryId = GetCategory(currentCategory);
   const features = GetFeatures(currentCategory);
@@ -64,8 +64,11 @@ const DefaultAVEdit = ({ setModalMessage, setModalStatus, setModalOpen, productI
     );
   };
 
-  useEffect(() => {
+  
 
+
+
+  useEffect(() => {
     try{
       axios.get()
     }catch(err){

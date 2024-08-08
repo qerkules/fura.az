@@ -10,31 +10,65 @@ import { GetCurrency } from "../tools/GetValues";
 import { GetFormattedDate } from "../tools/GetDisplayDate";
 import { GetPath } from "../tools/GetPath";
 import { SetFavourites } from "../tools/UpdateFavourites";
+import { SetCompares } from "../tools/UpdateCompare";
 
 export default function AdCard({ data, path }) {
   const currency = GetCurrency(data.currency);
   const adPath = GetPath().last;
   const router = useRouter();
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
+  const [isCompareClicked, setCompareClicked] = useState(false);
 
   const handleClick = () => {
     router.push(`/details/${path}`);
   };
 
   useEffect(() => {
-    let cookieValues =
+    let compareValues =
+      hasCookie("compare") && JSON.parse(getCookie("compare"));
+
+    let favouriteValues =
       hasCookie("favorites") && JSON.parse(getCookie("favorites"));
     if (
-      cookieValues &&
-      cookieValues.some((selected) => selected.id === data.id)
+      favouriteValues &&
+      favouriteValues.some((selected) => selected.id === data.id)
     ) {
       setFavouriteClicked(true);
     }
+
+    if (
+      compareValues &&
+      compareValues.some((selected) => selected.id === data.id)
+    ) {
+      setCompareClicked(true);
+    }
   }, []);
+
+  useEffect(() => {
+    const handleCookieChange = () => {
+      const compareValues = hasCookie("compare")
+        ? JSON.parse(getCookie("compare"))
+        : [];
+      setCompareClicked(
+        compareValues.some((selected) => selected.id === data.id)
+      );
+    };
+
+    window.addEventListener("cookie-change", handleCookieChange);
+
+    // Clean up the event listener
+    return () =>
+      window.removeEventListener("cookie-change", handleCookieChange);
+  }, [data.id]);
 
   const updateFavourite = () => {
     const productName = data.productTypeName ? data.productTypeName : adPath;
     SetFavourites(isFavouriteClicked, setFavouriteClicked, data, productName);
+  };
+
+  const updateCompare = () => {
+    const productName = data.productTypeName ? data.productTypeName : adPath;
+    SetCompares(isCompareClicked, setCompareClicked, data.id, productName);
   };
 
   return (
@@ -114,8 +148,12 @@ export default function AdCard({ data, path }) {
       </div>
       <div className="content">
         <div className="icon-group">
-          <a href="#" className="icon-service">
-            <BalanceIcon className="image-icon" />
+          <a className="icon-service" onClick={() => updateCompare()}>
+            <BalanceIcon
+              className={`image-icon ${
+                isCompareClicked && "compare-icon-active"
+              }`}
+            />
           </a>
           <a className="icon-service" onClick={() => updateFavourite()}>
             {isFavouriteClicked ? (

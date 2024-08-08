@@ -189,22 +189,14 @@ export const GetFeatures = (category) => {
 
   const sparepart = [newy];
 
-  if (category === "av") return av;
-
-  if (category === "sparepart") return sparepart;
-
-  if (category === "bus") return bus;
-
-  if (category === "co-ma") return coma;
-
-  if (category === "forklift") return forklift;
-
-  if (category === "semi-truck" || category === "truck") {
-    return truck;
-  }
-
-  if (category === "transporter-truck") return transporterTruck;
-  if (category === "trailer") return trailer;
-
+  if (category === "Agricultural Vehicle" || category === "av") return av;
+  if (category === "Bus" || category === "bus" ) return bus;
+  if (category === "Construction Machinery" || category === "co-ma") return coma;
+  if (category === "Forklift" || category === "forklift") return forklift;
+  if (category === "Semi-Trailer Truck" || category === "semi-truck" ) return truck;
+  if (category === "Truck Over 7.5t" || category === "truck") return truck;
+  if (category === "Truck Up 7.5t" || category === "transporter-truck") return truck;
+  if (category === "Semi-Trailer" || category === "trailer") return trailer;
   if (category === "trailer-refrigator") return trailerRefrigator;
+  if (category === "Sparepart" || category === "sparepart") return sparepart;
 };

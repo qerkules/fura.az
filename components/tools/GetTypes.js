@@ -15,6 +15,7 @@ export const GetTypes = (categoryId) => {
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [renttypes, setRentTypes] = useState([]);
+  const languageKey = "en";
 
   useEffect(() => {
     const fetchData = async (path, setter) => {
@@ -23,10 +24,9 @@ export const GetTypes = (categoryId) => {
       );
       setter(response.data);
     };
-
     const fetchCategories = async () => {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_LINK}/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}`
+        `${process.env.NEXT_PUBLIC_API_LINK}/Category/GetCategoriesByProductTypeId?ProductTypeId=${categoryId}&LanguageKey=${languageKey}`
       );
       setCategories(response.data.categories);
     };

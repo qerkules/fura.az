@@ -80,8 +80,8 @@ const DefaultCoMaCreate = ({
                 value={saleOrRent}
                 onChange={(e) => setSaleOrRent(e.target.value)}
               >
-                <MenuItem value={"sale"}>sale</MenuItem>
-                <MenuItem value={"Rent"}>rent</MenuItem>
+                <MenuItem value={"Sale"}>Sale</MenuItem>
+                <MenuItem value={"Rent"}>Rent</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -99,7 +99,7 @@ const DefaultCoMaCreate = ({
                 name="CategoryId"
               >
                 {types.categories.map((val) => (
-                  <MenuItem value={val.id} key={val.id}>
+                  <MenuItem value={val.categoryId} key={val.id}>
                     {val.categoryName}
                   </MenuItem>
                 ))}

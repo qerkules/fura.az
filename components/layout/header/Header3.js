@@ -77,6 +77,7 @@ export default function Header3({ handleMobileMenu }) {
                   <a
                     data-bs-toggle="modal"
                     role="button"
+                    href="/comparison"
                     className="flex align-center"
                   >
                     <BalanceIcon />
@@ -267,20 +268,35 @@ export default function Header3({ handleMobileMenu }) {
                 </div>
               )}
               <div className="help-bar-mobie compare">
-                <Link href="/#" className="fw-7 font-2">
+                <Link
+                  href="/comparison"
+                  onClick={handleMobileMenu}
+                  className="fw-7 font-2"
+                >
                   <BalanceIcon />
                   <span> Compare</span>
                 </Link>
               </div>
               <div className="help-bar-mobie saloons">
-                <Link href="/saloons" className="fw-7 font-2">
+                <Link
+                  href="/saloons"
+                  onClick={handleMobileMenu}
+                  className="fw-7 font-2"
+                >
                   <EmojiTransportationIcon />
                   <span>Saloons</span>
                 </Link>
               </div>
               {username && (
                 <div className="log-out">
-                  <Link href="/" className="fw-7 font-2" onClick={logOut}>
+                  <Link
+                    href="/"
+                    className="fw-7 font-2"
+                    onClick={() => {
+                      logOut();
+                      handleMobileMenu();
+                    }}
+                  >
                     <LogoutIcon />
                     <span>Log out</span>
                   </Link>

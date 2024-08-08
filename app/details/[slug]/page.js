@@ -28,6 +28,7 @@ export default function ListingDetails({ params }) {
 
   const adPath = GetProductTypes(parts[0]);
   const overview = GetOverview(parts[0]);
+  
   const adId = parts[1];
 
   const features = useMemo(() => GetFeatures("semi-truck"), []);

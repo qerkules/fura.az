@@ -1,5 +1,5 @@
 "use client";
-import DefaultAVCreate from "@/components/elements/DefaultAVCreate";
+import DefaultAVEdit from "@/components/elements/DefaultAVEdit";
 import ModalAlert from "@/components/elements/ModalAlert";
 import Layout from "@/components/layout/Layout";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ const page = () => {
         </div>
       </div>
       <div className="themesflat-container create-ad-container ">
-        <DefaultAVCreate
+        <DefaultAVEdit
           setModalMessage={setModalMessage}
           setModalStatus={setModalStatus}
           setModalOpen={setModalOpen}

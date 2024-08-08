@@ -104,11 +104,11 @@ const Categories = ({ currentIndex }) => {
                       : ""
                   }`}
                   >
-                    <label>{val.name}</label>
                     <img
                       src={`/assets/images/categories/${val.image}.png`}
                       alt={val.name}
-                    />
+                      />
+                      <label>{val.name}</label>
                   </button>
                 </a>
               </SplideSlide>

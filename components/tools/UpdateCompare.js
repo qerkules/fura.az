@@ -12,8 +12,7 @@ export const SetCompares = (isClicked, setClicked, id, productName) => {
       const existingCategory = cookieValues[0].category;
 
       if (existingCategory !== productName) {
-        console.log("Different category! Cannot add to compare.");
-        return;
+        return true;
       }
     }
 

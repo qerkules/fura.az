@@ -11,6 +11,7 @@ import { GetFormattedDate } from "../tools/GetDisplayDate";
 import { GetPath } from "../tools/GetPath";
 import { SetFavourites } from "../tools/UpdateFavourites";
 import { SetCompares } from "../tools/UpdateCompare";
+import { Alert } from "@mui/material";
 
 export default function AdCard({ data, path }) {
   const currency = GetCurrency(data.currency);
@@ -18,6 +19,7 @@ export default function AdCard({ data, path }) {
   const router = useRouter();
   const [isFavouriteClicked, setFavouriteClicked] = useState(false);
   const [isCompareClicked, setCompareClicked] = useState(false);
+  const [isCompareAlert, setCompareAlert] = useState(false);
 
   const handleClick = () => {
     router.push(`/details/${path}`);
@@ -68,13 +70,26 @@ export default function AdCard({ data, path }) {
 
   const updateCompare = () => {
     const productName = data.productTypeName ? data.productTypeName : adPath;
-    SetCompares(isCompareClicked, setCompareClicked, data.id, productName);
+    let compareAlert = SetCompares(
+      isCompareClicked,
+      setCompareClicked,
+      data.id,
+      productName
+    );
+    setCompareAlert(compareAlert);
+    setTimeout(() => {
+      setCompareAlert(false);
+    }, 2000);
   };
 
   return (
     <div className={`tf-car-service ${data.isPremium ? "premium" : ""}`}>
       <HoverListing />
-
+      {isCompareAlert && (
+        <Alert className="compare-alert" severity="error">
+          You cannot add Compare from different category.
+        </Alert>
+      )}
       <div className="image" onClick={() => handleClick()}>
         <div className="stm-badge-top">
           {data.saleOrRent === "Rent" && (
@@ -148,7 +163,12 @@ export default function AdCard({ data, path }) {
       </div>
       <div className="content">
         <div className="icon-group">
-          <a className="icon-service" onClick={() => updateCompare()}>
+          <a
+            className="icon-service"
+            onClick={() => {
+              updateCompare();
+            }}
+          >
             <BalanceIcon
               className={`image-icon ${
                 isCompareClicked && "compare-icon-active"

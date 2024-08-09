@@ -13,13 +13,17 @@ export default function MobileNavbar({ handleMobileMenu }) {
   const { username, isBusiness } = useUser();
   const [favoriteCurrentCount, setFavouriteCount] = useState(0);
   const [isUserClicked, setIsUserClicked] = useState(false);
+
   useEffect(() => {
     if (hasCookie("favorites")) {
       setFavouriteCount(JSON.parse(getCookie("favorites")).length);
     }
 
     const handleStorageChange = (event) => {
-      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+      console.log(hasCookie("favorites"))
+      if (hasCookie("favorites") === true) {
+        setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+      }
     };
 
     window.addEventListener("cookie-change", handleStorageChange);
@@ -28,6 +32,7 @@ export default function MobileNavbar({ handleMobileMenu }) {
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
+
   return (
     <section id="header-mobile-bottom" className="mobile-nav-menu">
       {/* <div className="off-screen-menu">

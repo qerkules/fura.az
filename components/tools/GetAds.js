@@ -12,7 +12,7 @@ export const getAllAds = async (currentPage, pageSize, path) => {
   if (path === "forklift") apiPath = "/Forklift/GetAllForkliftAds";
   if (path === "semi-truck")
     apiPath = "/SemiTrailerTruck/GetAllSemiTrailerTruckAds";
-  if (path === "trailer") apiPath = "/SemiTrailer/GetAllSemiTrailer";
+  if (path === "trailer") apiPath = "/SemiTrailer/GetAllSemiTrailerAds";
   if (path === "truck") apiPath = "/TruckOver/GetAllTruckOverAds";
   if (path === "truck-under") apiPath = "/TruckUnder/GetAllTruckUnderAds";
   if (path === "sparepart") apiPath = "/SparePart";

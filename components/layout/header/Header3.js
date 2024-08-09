@@ -27,7 +27,9 @@ export default function Header3({ handleMobileMenu }) {
     }
 
     const handleStorageChange = (event) => {
-      setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+      if (hasCookie("favorites") === true) {
+        setFavouriteCount(JSON.parse(getCookie("favorites")).length);
+      }
     };
 
     window.addEventListener("cookie-change", handleStorageChange);

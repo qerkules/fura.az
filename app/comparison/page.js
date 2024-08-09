@@ -5,10 +5,11 @@ import GetOverview from "@/components/tools/GetOverview";
 import GetProductTypes from "@/components/tools/GetProductTypes";
 import { GetCurrency } from "@/components/tools/GetValues";
 import axios from "axios";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie, hasCookie, setCookie } from "cookies-next";
 import React, { useEffect, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Page = () => {
   const router = useRouter();
@@ -31,32 +32,43 @@ const Page = () => {
     router.push(pathForSecond);
   };
 
+  const deleteCompareItem = (type) => {
+    let compareValues = JSON.parse(getCookie("compare"));
+    if (type === "data1") {
+      compareValues.splice(1, 1);
+      setCookie("compare", JSON.stringify(compareValues));
+    }
+    if (type === "data2") {
+      compareValues.splice(0, 1);
+      setCookie("compare", JSON.stringify(compareValues));
+    }
+    window.location.reload();
+  };
+
   let compareValues = hasCookie("compare") && JSON.parse(getCookie("compare"));
-  useEffect(()=>{
+  useEffect(() => {
+    if (compareValues.length === 1) {
+      let category = compareValues[0].category;
+      let path = "/";
+      if (category === "Agricultural Vehicle" || category === "av")
+        path = "/list/av";
+      if (category === "Bus" || category === "bus") path = "/list/bus";
+      if (category === "Construction Machinery" || category === "co-ma")
+        path = "/list/co-ma";
+      if (category === "Forklift" || category === "forklift")
+        path = "/list/forklift";
+      if (category === "Semi-Trailer Truck" || category === "semi-truck")
+        path = "/list/semi-truck";
+      if (category === "Truck Over 7.5t" || category === "truck")
+        path = "/list/truck";
+      if (category === "Truck Up 7.5t" || category === "transporter-truck")
+        path = "/list/transporter-truck";
+      if (category === "Semi-Trailer" || category === "trailer")
+        path = "/list/trailer";
 
-
-  if (compareValues.length === 1) {
-    let category = compareValues[0].category;
-    let path = "/";
-    if (category === "Agricultural Vehicle" || category === "av")
-      path = "/list/av";
-    if (category === "Bus" || category === "bus") path = "/list/bus";
-    if (category === "Construction Machinery" || category === "co-ma")
-      path = "/list/co-ma";
-    if (category === "Forklift" || category === "forklift")
-      path = "/list/forklift";
-    if (category === "Semi-Trailer Truck" || category === "semi-truck")
-      path = "/list/semi-truck";
-    if (category === "Truck Over 7.5t" || category === "truck")
-      path = "/list/truck";
-    if (category === "Truck Up 7.5t" || category === "transporter-truck")
-      path = "/list/transporter-truck";
-    if (category === "Semi-Trailer" || category === "trailer")
-      path = "/list/trailer";
-
-    setPathForSecond(path);
-  }
-},[])
+      setPathForSecond(path);
+    }
+  }, []);
 
   useEffect(() => {
     if (compareValues.length > 0) {
@@ -139,6 +151,27 @@ const Page = () => {
                   }`}
                   alt="Comparison Image 2"
                 />
+              </div>
+            </div>
+            <div className="comparison-container">
+              <div className="comparison-li "></div>
+              <div className="comparison-li ">
+                <div
+                  className="delete-comparison"
+                  onClick={() => deleteCompareItem("data1")}
+                >
+                  <CloseIcon />
+                  <span>Delete</span>
+                </div>
+              </div>
+              <div className="comparison-li ">
+                <div
+                  className="delete-comparison"
+                  onClick={() => deleteCompareItem("data2")}
+                >
+                  <CloseIcon />
+                  <span>Delete</span>
+                </div>
               </div>
             </div>
             <div className="comparison-container">

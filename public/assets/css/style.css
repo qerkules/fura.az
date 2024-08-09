@@ -10261,7 +10261,35 @@ a.mapboxgl-ctrl-logo {
 .index-slider-items label {
   cursor: pointer !important;
 }
+
+.compare-alert{
+  position: fixed;
+  bottom: 100px;
+  z-index: 999;
+  width: 90%;
+  left: 5%;
+}
+.css-1ytlwq5-MuiAlert-icon{
+  align-items: center;
+}
+
+.delete-comparison svg{font-size: 20px;}
+.delete-comparison{
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: var(--red);
+  color: var(--text-wht-color);
+  text-align: center;
+}
 @media only screen and (max-width: 767px) {
+  .comparison-ad-new-box svg {
+    font-size: 20px!important;
+    color: var(--red);
+  }
+  .comparison-ad-new-box {
+    padding: 10px!important;
+    font-size: 14px!important;
+  }
   .footer-bottom .bottom-bar-menu ul:first-child {
     flex-direction: column;
   }
@@ -11430,6 +11458,7 @@ ul[aria-label="Pagination"] {
 }
 
 .comparison-container .comparison-li:first-child,
+.comparison-container-multiple .comparison-li:first-child,
 .comparison-features-title {
   font-size: 14px;
   color: #848790 !important;
@@ -12518,7 +12547,41 @@ input[type="number"] {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr;
 }
+.comparison-ad-new {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.comparison-ad-new-box svg {
+  font-size: 30px;
+  color: var(--red);
+}
+.comparison-ad-new-box {
+  color: var(--red);
+  border: 1px solid lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 25px;
+}
+.comparison-container-two {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
 
+.comparison-container-multiple:first-child .comparison-li:last-child {
+  display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.comparison-container-multiple {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.comparison-container-multiple .comparison-li,
 .comparison-container:not(:first-child) .comparison-li:not(:last-child) {
   border-right: 1px solid lightgray;
 }
@@ -12539,6 +12602,7 @@ input[type="number"] {
 .comparison-features-title {
   padding: 5px 10px;
   color: #000;
+  border-right: 1px solid lightgray;
 }
 
 .comparison-li:not(:first-child) {

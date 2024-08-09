@@ -35,11 +35,11 @@ const Page = () => {
   const deleteCompareItem = (type) => {
     let compareValues = JSON.parse(getCookie("compare"));
     if (type === "data1") {
-      compareValues.splice(1, 1);
+      compareValues.splice(0, 1);
       setCookie("compare", JSON.stringify(compareValues));
     }
     if (type === "data2") {
-      compareValues.splice(0, 1);
+      compareValues.splice(1, 1);
       setCookie("compare", JSON.stringify(compareValues));
     }
     window.location.reload();
@@ -240,6 +240,18 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="comparison-container-multiple">
+                  <div className="comparison-li "></div>
+                  <div className="comparison-li ">
+                    <div
+                      className="delete-comparison"
+                      onClick={() => deleteCompareItem("data1")}
+                    >
+                      <CloseIcon />
+                      <span>Delete</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="comparison-container-multiple">
                   <div className="comparison-li ">Price</div>
                   <div className="comparison-li">
                     {currency} &nbsp;{data1.price}
@@ -284,7 +296,20 @@ const Page = () => {
             </div>
           </>
         ) : (
-          <>Please Select two Ads to Compare</>
+          <>
+            {" "}
+            <div className="comparison-ad-new-single">
+              <a
+                className="comparison-ad-new-box"
+                onClick={handlePathForSecond}
+              >
+                <AddIcon />
+                <span>
+                  You dont have Vehicle to Compare Please add an Ad To Compare
+                </span>
+              </a>
+            </div>
+          </>
         )}
       </div>
     </Layout>

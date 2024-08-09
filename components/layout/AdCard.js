@@ -69,7 +69,37 @@ export default function AdCard({ data, path }) {
   };
 
   const updateCompare = () => {
-    const productName = data.productTypeName ? data.productTypeName : adPath;
+    let compareProductName = "";
+    if (!data.productTypeName) {
+      if (adPath === "co-ma") {
+        compareProductName = "Construction Machinery";
+      }
+      if (adPath === "av") {
+        compareProductName = "Agricultural Vehicle";
+      }
+      if (adPath === "bus") {
+        compareProductName = "Bus";
+      }
+      if (adPath === "forklift") {
+        compareProductName = "Forklift";
+      }
+      if (adPath === "semi-truck") {
+        compareProductName = "Semi-Trailer Truck";
+      }
+      if (adPath === "truck") {
+        compareProductName = "Truck Over 7.5t";
+      }
+      if (adPath === "transporter-truck") {
+        compareProductName = "Truck Up 7.5t";
+      }
+      if (adPath === "trailer") {
+        compareProductName = "Semi-Trailer";
+      }
+    }
+    const productName = data.productTypeName
+      ? data.productTypeName
+      : compareProductName;
+
     let compareAlert = SetCompares(
       isCompareClicked,
       setCompareClicked,
